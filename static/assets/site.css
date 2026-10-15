@@ -171,3 +171,4 @@ button.primary[disabled] { opacity: 0.6; cursor: progress; }
 @media (max-width: 720px) { .latest, .figs, .pillars { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 560px) { ol.timeline li { grid-template-columns: minmax(0, 1fr); } .sides, .two { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+.edition { margin-top: 12px; }

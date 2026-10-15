@@ -61,6 +61,7 @@ function page({ title, description, path, body, scripts = [], og = "/assets/og-d
   <nav class="site-nav" aria-label="Main">${nav}</nav>
 </header>
 <p class="tagline">News nobody owns. Told by the people who were there.</p>
+<p class="note edition" role="note">Early edition: we're still checking some entries. Spot an error? <a href="/submit/">Tell us</a>.</p>
 <main>
 ${body}
 </main>
