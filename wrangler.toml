@@ -2,3 +2,7 @@ name = "unowned"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-09-01"
 
+
+[[kv_namespaces]]
+binding = "SUBMISSIONS"
+id = "5082e3ebb28543bea4324579e69f6b54"
