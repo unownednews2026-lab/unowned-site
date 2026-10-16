@@ -11,7 +11,7 @@
  */
 
 const MAX = { url: 2000, details: 2000, item: 200 };
-const STORIES = new Set(["cockroach-movement", "other"]);
+const STORY_SLUG = /^[a-z0-9-]{1,60}$/; // any story slug, or "other"
 
 function json(status, body) {
   return new Response(JSON.stringify(body), {
@@ -69,7 +69,7 @@ export async function onRequestPost({ request, env }) {
   if (type !== "link" && type !== "correction") {
     return reply(request, 400, { error: "Unknown form. Reload the page and try again." });
   }
-  if (story && !STORIES.has(story)) {
+  if (story && !STORY_SLUG.test(story)) {
     return reply(request, 400, { error: "Pick a story from the list." });
   }
   if (type === "link" && !isPublicLink(url)) {
