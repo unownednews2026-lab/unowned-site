@@ -45,7 +45,11 @@
     { "date": "2026-10-13", "phase": "s2", "label": "confirmed", "text": "About a dozen people are detained after climbing barricades to enter Jantar Mantar, including CJP spokespeople Saurav Das and Ashutosh Ranka. Police accuse them of trespassing and defying prohibitory orders.", "sources": ["apOct14", "afpOct14"] },
     { "date": "2026-10-14", "phase": "s2", "label": "confirmed", "milestone": "Leaders jailed", "hot": true, "text": "A local court sends Das and Ranka to five days’ judicial custody. The CJP says they are being punished for raising the national flag at Jantar Mantar; police say the site is no longer an official protest venue.", "sources": ["apOct14", "afpOct14"] },
     { "date": "2026-10-15", "phase": "s2", "label": "confirmed", "text": "The civic authority closes Central Park in Connaught Place for two days, citing administrative reasons, after the CJP calls a flag-raising rally there. Delhi Police urge people not to join and offer to let a small group carry the flag at a suitable place.", "sources": ["ajOct16", "diOct16"] },
-    { "date": "2026-10-16", "phase": "s2", "label": "pending", "hot": true, "text": "Thousands of extra police and barricades are deployed in central Delhi ahead of the CJP’s 5 pm rally. Founder Abhijeet Dipke says supporters are ready to go to jail. Outcome still being checked.", "sources": ["ajOct16", "diOct16"] }
+    { "date": "2026-10-16", "phase": "s2", "label": "confirmed", "text": "Police bar gatherings around Connaught Place under Section 163 restrictions and serve founder Abhijeet Dipke a notice; police say waving the flag is not illegal but an unpermitted march is. More than 6,000 police are deployed, per a police briefing reported by ETV Bharat.", "sources": ["dawnOct16", "gulfOct16", "etvOct16"] },
+    { "date": "2026-10-16", "phase": "s2", "label": "confirmed", "milestone": "Founder detained", "hot": true, "text": "Police detain Dipke outside the house where he was staying, shortly before the rally; AISA president Neha Bohra is detained separately on her way. Dipke asks how he can be held when he has broken no law; police give no immediate comment.", "sources": ["dawnOct16", "ptiOct16", "gulfOct16"] },
+    { "date": "2026-10-16", "phase": "s2", "label": "confirmed", "text": "Hundreds gather in flash protests at Connaught Place and Mandi House, waving the national flag. Police say about 150 people have been detained and describe the situation as peaceful; no injuries are reported.", "sources": ["printOct16", "weekOct16", "tribuneOct16"] },
+    { "date": "2026-10-16", "phase": "s2", "label": "alleged", "text": "AISA says its president Neha Bohra was taken to an unknown location after her detention. Police have not responded to the claim.", "sources": ["weekOct16"] },
+    { "date": "2026-10-16", "phase": "s2", "label": "pending", "text": "Release of Dipke and others detained. Still being checked.", "sources": ["printOct16"] }
   ],
   "claims": [
     { "title": "What the Chief Justice meant", "label": "disputed", "a": "Reports and critics: he likened unemployed youth to cockroaches and parasites.", "aSrc": ["fpj"], "b": "The Chief Justice: he was misquoted and meant people entering professions with fake degrees.", "bSrc": ["quint"], "status": "Both accounts are on record." },
@@ -73,7 +77,10 @@
     { "date": "Oct 12", "action": "Jantar Mantar removed from the list of official protest sites", "by": "Delhi Police", "label": "confirmed" },
     { "date": "Oct 13", "action": "About a dozen detained at Jantar Mantar, including CJP spokespeople Das and Ranka", "by": "Delhi Police", "label": "confirmed" },
     { "date": "Oct 14", "action": "Das and Ranka sent to five days’ judicial custody", "by": "Local court, New Delhi", "label": "confirmed" },
-    { "date": "Oct 15", "action": "Central Park, Connaught Place, closed for two days before a CJP rally", "by": "Civic authority", "label": "confirmed" }
+    { "date": "Oct 15", "action": "Central Park, Connaught Place, closed for two days before a CJP rally", "by": "Civic authority", "label": "confirmed" },
+    { "date": "Oct 16", "action": "Gatherings barred around Connaught Place; notice served on Dipke", "by": "Delhi Police (Section 163, BNSS)", "label": "confirmed" },
+    { "date": "Oct 16", "action": "CJP founder Dipke and AISA president Neha Bohra detained before the rally", "by": "Delhi Police", "label": "confirmed" },
+    { "date": "Oct 16", "action": "About 150 people detained at flash protests in central Delhi", "by": "Delhi Police (figure from police)", "label": "confirmed" }
   ],
   "places": [
     { "name": "Delhi NCR", "lat": 28.61, "lon": 77.21, "desc": "Jantar Mantar sit-in Jun 6 to Jul 25; Jul 20 march; Oct 10 detentions; Gurugram, Oct 10", "r": 8, "anchor": "end", "dx": -12, "dy": 4 },
@@ -94,7 +101,7 @@
     "Official NEET re-exam date and outcome",
     "Number and status of cases against protesters",
     "Government and Election Commission statements in full",
-    "What happened at the October 16 Central Park rally"
+    "When those detained on October 16 are released"
   ],
   "corrections": [],
   "sourceGroups": [
@@ -103,7 +110,7 @@
     ["Launch and takedowns", ["outlookX", "excelsiorX", "mooknayakX", "ajWeb", "ktThreats", "altnews", "fpjInsta", "outlookInsta"]],
     ["Return and July protests", ["etvReturn", "mooknayakReturn", "reutersProfile", "kaumudiProfile", "ktJul19", "apJul20", "ajJul20", "apJul21", "cgfoe", "npr", "apJul25", "ajJul25"]],
     ["August and September", ["reutersParty", "ktSep5", "weekSep5", "sentinel", "kaumudiLatur", "awaaz"]],
-    ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16"]]
+    ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16", "dawnOct16", "gulfOct16", "ptiOct16", "etvOct16", "printOct16", "weekOct16", "tribuneOct16"]]
   ],
   "sources": {
     "newslaundry": ["Newslaundry", "https://www.newslaundry.com/amp/story/2026%2F05%2F12%2Fwhy-neet-ug-2026-has-been-cancelled"],
@@ -152,6 +159,13 @@
     "apOct14": ["AP (via WDIV)", "https://www.clickondetroit.com/news/world/2026/10/14/cockroach-movement-leaders-jailed-for-5-days-after-scaling-barricades-at-new-delhi-protest/"],
     "afpOct14": ["AFP (via Türkiye Today)", "https://www.turkiyetoday.com/world/cockroach-janta-party-leaders-sent-to-judicial-custody-over-alleged-trespassing-3230261"],
     "ajOct16": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/16/indian-police-launch-new-delhi-clampdown-for-cockroach-party-rally"],
-    "diOct16": ["The Diplomatic Insight", "https://thediplomaticinsight.com/delhi-shuts-central-park-cockroach-rally"]
+    "diOct16": ["The Diplomatic Insight", "https://thediplomaticinsight.com/delhi-shuts-central-park-cockroach-rally"],
+    "dawnOct16": ["Dawn (AFP, Reuters)", "https://dawn.com/news/2037555/indian-police-detain-cockroach-movement-founder-dipke-ahead-of-protest"],
+    "gulfOct16": ["Gulf News", "https://gulfnews.com/world/asia/india/cjp-founder-dipke-detained-ahead-of-delhi-flag-rally-1.500713139"],
+    "ptiOct16": ["Telangana Today (PTI)", "https://telanganatoday.com/delhi-police-detain-cjp-leader-dipke-aisa-chief-neha-bohra"],
+    "etvOct16": ["ETV Bharat live updates", "https://www.etvbharat.com/en/bharat/live-blog--delhi-protest-live-updates-cjp-lehra-do-tiranga-march-central-park-connaught-place-6000-police-personnel-deployed-abhijeet-dipke-cec-gyanesh-kumar-ndmc-traffic-restrictions-enn26101602215"],
+    "printOct16": ["ThePrint (PTI)", "https://theprint.in/india/abhijeet-dipke-neha-bora-among-over-150-detained-amid-lehra-do-tiranga-protests/3074067/"],
+    "weekOct16": ["The Week", "https://www.theweek.in/news/india/2026/10/16/150-protesters-detained-amid-delhi-police-crackdown-at-cjp-s-tiranga-march-neha-bora-taken-to-unknown-location.html"],
+    "tribuneOct16": ["The Tribune live updates", "https://www.tribuneindia.com/liveblog/delhi/cjp-lehra-do-tiranga-march-live-abhijeet-dipke-detained-by-delhi-police/"]
   }
 }
