@@ -171,7 +171,7 @@ ${keyStrip()}
 <nav class="secnav" aria-label="Jump to section"><div class="secnav-in">${overview.map(([id, name, , n]) => `<a href="#${id}">${esc(name)}${n != null ? ` <span class="n">${n}</span>` : ""}</a>`).join("")}<a href="/" class="home-link">All stories</a></div></nav>
 
 <section id="latest" aria-labelledby="h-latest">
-  <div class="section-head"><h2 id="h-latest"><span class="live-dot" aria-hidden="true"></span>Live updates</h2><p>Newest first. We check for new developments about every 30 minutes and publish each one once a person has reviewed it. This page tells you when something new arrives.</p></div>
+  <div class="section-head"><h2 id="h-latest"><span class="live-dot" aria-hidden="true"></span>Live updates</h2><p>Newest first. We check for new developments about every 30 minutes. Updates go up as soon as they pass our sourcing and fairness checks; sensitive items wait for a person. This page tells you when something new arrives.</p></div>
   <div class="latest" data-live-story="${st.slug}" data-newest="${newestAdded(st)}">${latestHtml}</div>
 </section>
 
@@ -230,7 +230,7 @@ ${keyStrip()}
 </section>
 
 <section id="method" aria-labelledby="h-method">
-  <div class="section-head"><h2 id="h-method">How this page is made</h2><p>Only published reporting and publicly posted material. AI helps gather and organize it; a person reviews every item before it is published. <a href="/how-we-work/">Our full standards</a>.</p></div>
+  <div class="section-head"><h2 id="h-method">How this page is made</h2><p>Only published reporting and publicly posted material. AI helps gather, check and organize it. Routine updates are published once they pass our sourcing and fairness checks; anything sensitive waits for a person to approve it, and a person reviews everything we publish. <a href="/how-we-work/">Our full standards</a>.</p></div>
   <div class="two">
     <div class="panel"><h3>Corrections</h3>${corrHtml}</div>
     <div class="panel"><h3>Still being checked</h3><ul>${gapsHtml}</ul></div>
@@ -376,7 +376,7 @@ function build() {
 <li>We don't name ordinary protesters or private individuals.</li>
 </ul>
 <h2>How AI is used</h2>
-<p>AI helps us find, translate, sort and draft. A person reviews and approves every item before it is published.</p>
+<p>AI helps us find, translate, sort, check and draft. Routine updates backed by published reporting are published as soon as they pass our checks, so stories stay current. Anything sensitive (an accusation against a named person, details that could identify a minor or a private individual, claims of deaths, or anything from a single unverified post) waits for a person to approve it. A person reviews everything we publish, and mistakes are corrected in public on the <a href="/corrections/">corrections page</a>.</p>
 <h2>Corrections</h2>
 <p>We correct mistakes quickly and in public. Every change made after publishing is listed with its date. <a href="/submit/">Report an error</a>.</p>
 </div>`);
