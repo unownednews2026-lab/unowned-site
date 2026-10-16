@@ -14,7 +14,14 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const short = (d) => `${MONTHS[Number(d.slice(5, 7)) - 1]} ${Number(d.slice(8, 10))}`;
 const long = (d) => `${MONTHS[Number(d.slice(5, 7)) - 1]} ${Number(d.slice(8, 10))}, ${d.slice(0, 4)}`;
-const itemId = (d) => `e-${d}`;
+const itemId = (e) => e.id;
+/* Give every event a unique anchor: e-YYYY-MM-DD for the first entry on a date (keeps old links working), then -2, -3... */
+function withIds(st) {
+  const seen = {};
+  st.events.forEach((e) => { seen[e.date] = (seen[e.date] || 0) + 1; e.id = seen[e.date] === 1 ? `e-${e.date}` : `e-${e.date}-${seen[e.date]}`; });
+  return st;
+}
+const added = (e) => e.added ? `<time class="ago" datetime="${e.added}">Added ${long(e.added.slice(0, 10))}</time>` : "";
 const stamp = (l) => `<span class="stamp s-${l}">${LABEL[l]}</span>`;
 
 function write(path, content) {
@@ -73,7 +80,7 @@ ${body}
   </nav>
 </footer>
 </div>
-${scripts.map((s) => `<script src="${s}" defer></script>`).join("\n")}
+${["/assets/time.js", ...scripts].map((s) => `<script src="${s}" defer></script>`).join("\n")}
 </body>
 </html>
 `;
@@ -89,21 +96,21 @@ function storyPage(st) {
   const S = st.sources;
   const path = `/${st.slug}/`;
   const nonPending = st.events.filter((e) => e.label !== "pending");
-  const latest = nonPending.slice(-3).reverse();
+  const latest = nonPending.slice(-6).reverse();
   const counts = { events: st.events.length, claims: st.claims.length };
 
   const latestHtml = latest.map((e) => {
-    const t = e.text.length > 150 ? e.text.slice(0, e.text.lastIndexOf(" ", 150)) + "…" : e.text;
-    return `<a class="card" href="#${itemId(e.date)}"><div class="when"><span>${long(e.date)}</span>${stamp(e.label)}</div><p>${esc(t)}</p></a>`;
+    const t = e.text.length > 150 ? e.text.slice(0, e.text.lastIndexOf(" ", 150)).replace(/[.,;:]$/, "") + "…" : e.text;
+    return `<a class="card" href="#${itemId(e)}"><div class="when"><span>${long(e.date)}</span>${stamp(e.label)}${added(e)}</div><p>${esc(t)}</p></a>`;
   }).join("\n");
 
   const timelineHtml = st.phases.map((p) => {
     const rows = st.events.filter((e) => e.phase === p.id);
     if (!rows.length) return "";
     const items = rows.map((e) => {
-      const post = `${long(e.date)}: ${e.text}\n\nFull timeline and sources on Unowned: ${SITE}${path}#${itemId(e.date)}`;
+      const post = `${long(e.date)}: ${e.text}\n\nFull timeline and sources on Unowned: ${SITE}${path}#${itemId(e)}`;
       const share = e.label === "pending" ? "" : `<button type="button" class="share" data-post="${esc(post)}" aria-label="Share the ${esc(short(e.date))} entry">Share</button>`;
-      return `<li id="${itemId(e.date)}" data-label="${e.label}"><span class="date">${short(e.date)}</span><div class="body"><div class="item-top">${stamp(e.label)}${share}</div><p>${esc(e.text)}</p>${srcLine(S, e.sources)}</div></li>`;
+      return `<li id="${itemId(e)}" data-label="${e.label}"><span class="date">${short(e.date)}</span><div class="body"><div class="item-top">${stamp(e.label)}${share}</div><p>${esc(e.text)}</p>${srcLine(S, e.sources)}</div></li>`;
     }).join("\n");
     return `<div class="phase-block"><div class="phase"><p class="eyebrow">${esc(p.when)}</p><h3>${esc(p.name)}</h3></div><ol class="timeline">${items}</ol></div>`;
   }).join("\n");
@@ -133,14 +140,14 @@ function storyPage(st) {
   <p class="eyebrow">${esc(st.kicker)}</p>
   <h1>${esc(st.title)}</h1>
   <p class="lede">${esc(st.dek)}</p>
-  <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${long(st.updated)}</span><span>${counts.events} events · ${counts.claims} disputed claims</span></div>
+  <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span><span>${counts.events} events · ${counts.claims} disputed claims</span></div>
   <nav class="jump" aria-label="Sections">
     <a href="#latest">Latest</a><a href="#summary">Summary</a><a href="#glance">At a glance</a><a href="#timeline">Timeline</a><a href="#disputed">Disputed claims</a><a href="#accountability">Accountability log</a><a href="#places">Places</a><a href="#method">How we work</a><a href="#sources">Sources</a>
   </nav>
 </header>
 
 <section id="latest" aria-labelledby="h-latest">
-  <div class="section-head"><h2 id="h-latest">Latest</h2><p>The most recent developments. Each links to its full entry and sources.</p></div>
+  <div class="section-head"><h2 id="h-latest">Live updates</h2><p>Newest first. We add developments as they are reported and checked; each links to its full entry and sources.</p></div>
   <div class="latest">${latestHtml}</div>
 </section>
 
@@ -241,7 +248,7 @@ function build() {
   rmSync(OUT, { recursive: true, force: true });
   cpSync("static", OUT, { recursive: true });
 
-  const stories = readdirSync("content/stories").filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(join("content/stories", f), "utf8")));
+  const stories = readdirSync("content/stories").filter((f) => f.endsWith(".json")).map((f) => withIds(JSON.parse(readFileSync(join("content/stories", f), "utf8"))));
   const built = stories.map(storyPage);
 
   /* Home */
@@ -250,6 +257,9 @@ function build() {
     <h3>${esc(st.title)}</h3><p>${esc(st.dek)}</p>
     <p class="src">Latest: ${esc(long(latest[0].date))}, ${esc(latest[0].text.slice(0, latest[0].text.indexOf(". ") + 1 || 140))}</p>
   </a>`).join("\n");
+  const live = stories.flatMap((st) => st.events.filter((e) => e.label !== "pending").map((e, i) => ({ st, e, i })))
+    .sort((a, b) => (b.e.added || b.e.date).localeCompare(a.e.added || a.e.date) || b.e.date.localeCompare(a.e.date) || b.i - a.i).slice(0, 6);
+  const liveHtml = live.map(({ st, e }) => `<li><a href="/${st.slug}/#${itemId(e)}"><span class="when">${short(e.date)} ${stamp(e.label)} ${added(e)}</span><span class="what">${esc(e.text.split(". ")[0].replace(/\.$/, ""))}.</span><span class="story">${esc(st.title)}</span></a></li>`).join("\n");
   write("index.html", page({
     title: "Unowned",
     description: "News nobody owns. Verified, sourced reporting from the people who were there, with both sides shown.",
@@ -259,6 +269,7 @@ function build() {
   <h1>News nobody owns.</h1>
   <p class="lede">Unowned gathers what people on the ground record and report, checks it, labels how certain it is, and organizes it into stories you can follow. Every item links to its source. Where accounts disagree, we show both.</p>
 </header>
+<section aria-labelledby="h-live"><div class="section-head"><h2 id="h-live">Live updates</h2><p>The newest checked developments across our stories.</p></div><ol class="livefeed">${liveHtml}</ol></section>
 <section aria-labelledby="h-stories"><h2 id="h-stories">Following now</h2>${cards}</section>
 <section aria-labelledby="h-how">
   <h2 id="h-how">Why Unowned</h2>
@@ -366,11 +377,11 @@ function build() {
 
   /* RSS feed: the latest entries across stories */
   const items = stories.flatMap((s) => s.events.filter((e) => e.label !== "pending").map((e) => ({ s, e })))
-    .sort((a, b) => b.e.date.localeCompare(a.e.date)).slice(0, 30);
+    .sort((a, b) => (b.e.added || b.e.date).localeCompare(a.e.added || a.e.date)).slice(0, 30);
   write("feed.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
 <title>Unowned</title><link>${SITE}/</link><description>News nobody owns. Told by the people who were there.</description><language>en</language>
-${items.map(({ s, e }) => `<item><title>${esc(`${long(e.date)}: ${e.text.split(". ")[0]}`)}</title><link>${SITE}/${s.slug}/#${itemId(e.date)}</link><guid isPermaLink="true">${SITE}/${s.slug}/#${itemId(e.date)}</guid><pubDate>${new Date(e.date + "T12:00:00Z").toUTCString()}</pubDate><description>${esc(`[${LABEL[e.label]}] ${e.text}`)}</description></item>`).join("\n")}
+${items.map(({ s, e }) => `<item><title>${esc(`${long(e.date)}: ${e.text.split(". ")[0]}`)}</title><link>${SITE}/${s.slug}/#${itemId(e)}</link><guid isPermaLink="true">${SITE}/${s.slug}/#${itemId(e)}</guid><pubDate>${new Date(e.added || e.date + "T12:00:00Z").toUTCString()}</pubDate><description>${esc(`[${LABEL[e.label]}] ${e.text}`)}</description></item>`).join("\n")}
 </channel></rss>
 `);
 
