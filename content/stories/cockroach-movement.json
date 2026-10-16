@@ -5,7 +5,7 @@
   "dek": "What happened, what is confirmed, and where the accounts disagree, from the exam leak in May to the protests against the Election Commission in October.",
   "status": "Season 2 active",
   "updated": "2026-10-16",
-  "updatedAt": "2026-10-16T21:45:00Z",
+  "updatedAt": "2026-10-16T21:52:04Z",
   "summary": [
     "The Cockroach Janta Party (CJP) began on May 16 as a satirical online response to remarks by Chief Justice Surya Kant, a day after he reportedly likened some unemployed youth to cockroaches. Anger over the cancelled NEET medical entrance exam turned it into a street movement.",
     "After a 36-day protest in Delhi, including a July 20 march met with tear gas and batons, Education Minister Dharmendra Pradhan resigned on July 25 and the CJP called off its protest, saying its demands had been accepted. From August, the CJP said the government had not honoured those commitments, chiefly withdrawing criminal cases against protesters and compensating families of students who died by suicide.",
@@ -59,6 +59,7 @@
     { "date": "2026-10-16", "phase": "s2", "label": "alleged", "added": "2026-10-16T20:21:00Z", "text": "AISA says its president Neha Bohra was taken to an unknown location after her detention. Police have not responded to the claim.", "sources": ["weekOct16"] },
     { "date": "2026-10-16", "phase": "s2", "label": "reported", "added": "2026-10-16T21:45:00Z", "text": "Police sources say Dipke was taken to Jafarpur Kalan police station; the CJP says on X that it has lost contact with him. AISA says Bohra is being held at an Anti-Narcotics Task Force office, and police say those detained were held for law-and-order and traffic reasons.", "sources": ["siasatOct16"] },
     { "date": "2026-10-16", "phase": "s2", "label": "reported", "added": "2026-10-16T21:45:00Z", "text": "Former West Bengal chief minister Mamata Banerjee calls Dipke's detention an undeclared Emergency. Defence Minister Rajnath Singh accuses the Congress and its allies of making young people \"pawns in the politics of anarchy\", and BJP leader Dilip Ghosh accuses the CJP of disrupting Navratri and Durga Puja celebrations.", "sources": ["dcOct16", "tribuneOct16"] },
+    { "date": "2026-10-16", "phase": "s2", "label": "alleged", "added": "2026-10-16T21:52:04Z", "text": "The CJP says Dipke has not been allowed to speak to lawyers and asks Delhi Police to disclose where he is being held. ANI reports no immediate response from police, who placed him under preventive detention under Section 163 prohibitory orders.", "sources": ["aniOct16"] },
     { "date": "2026-10-16", "phase": "s2", "label": "pending", "text": "Release of Dipke and others detained. Still being checked.", "sources": ["printOct16"] }
   ],
   "claims": [
@@ -137,7 +138,7 @@
     ["Launch and takedowns", ["outlookX", "excelsiorX", "mooknayakX", "ajWeb", "ktThreats", "altnews", "fpjInsta", "outlookInsta"]],
     ["Return and July protests", ["etvReturn", "mooknayakReturn", "reutersProfile", "kaumudiProfile", "ktJul19", "apJul20", "ajJul20", "apJul21", "cgfoe", "npr", "apJul25", "ajJul25"]],
     ["August and September", ["reutersParty", "ktSep5", "weekSep5", "sentinel", "kaumudiLatur", "awaaz"]],
-    ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16", "dawnOct16", "gulfOct16", "ptiOct16", "etvOct16", "printOct16", "weekOct16", "tribuneOct16"]],
+    ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16", "dawnOct16", "gulfOct16", "ptiOct16", "etvOct16", "printOct16", "weekOct16", "tribuneOct16", "aniOct16"]],
     ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16"]]
   ],
   "sources": {
@@ -199,7 +200,8 @@
     "uniOct14": ["UNI", "https://www.uniindia.com/west-india/cjp-founder-dipke-alleges-unofficial-emergency-under-modi-govt/213101"],
     "weekAug7": ["The Week", "https://www.theweek.in/news/india/2026/08/07/abhijeet-dipke-lashes-out-at-cop-in-viral-video-outside-maharashtra-home-netizens-react-who-are-you-to.html"],
     "siasatOct16": ["The Siasat Daily (PTI)", "https://www.siasat.com/tiranga-march-dipke-bora-detained-flash-protests-in-delhi-3559711/"],
-    "dcOct16": ["Deccan Chronicle", "https://www.deccanchronicle.com/nation/cjps-lehra-do-tiranga-march-in-delhi-sees-tricolours-protests-detentions-1996507"]
+    "dcOct16": ["Deccan Chronicle", "https://www.deccanchronicle.com/nation/cjps-lehra-do-tiranga-march-in-delhi-sees-tricolours-protests-detentions-1996507"],
+    "aniOct16": ["ANI", "https://www.aninews.in/news/national/general-news/cjp-alleges-delhi-police-took-abhijeet-dipke-to-undisclosed-location-denies-access-to-lawyers20261016215447"]
   },
   "nav": "Cockroach movement",
   "region": "India",
