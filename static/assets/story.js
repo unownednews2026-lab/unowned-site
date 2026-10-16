@@ -164,3 +164,20 @@
   });
   phaseChart(); mapChart();
 })();
+/* Highlight the current section in the sticky section bar. */
+(function () {
+  "use strict";
+  var links = document.querySelectorAll(".secnav a[href^='#']");
+  if (!links.length || !("IntersectionObserver" in window)) return;
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      links.forEach(function (a) { a.classList.remove("on"); });
+      var a = map[en.target.id];
+      if (a) { a.classList.add("on"); a.scrollIntoView({ block: "nearest", inline: "nearest" }); }
+    });
+  }, { rootMargin: "-70px 0px -70% 0px" });
+  Object.keys(map).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+})();
