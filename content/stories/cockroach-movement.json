@@ -4,7 +4,7 @@
   "kicker": "Story tracker · India",
   "dek": "What happened, what is confirmed, and where the accounts disagree, from the exam leak in May to the protests against the Election Commission in October.",
   "status": "Season 2 active",
-  "updated": "2026-10-15",
+  "updated": "2026-10-16",
   "summary": [
     "The Cockroach Janta Party (CJP) began on May 16 as a satirical online response to remarks by Chief Justice Surya Kant, a day after he reportedly likened some unemployed youth to cockroaches. Anger over the cancelled NEET medical entrance exam turned it into a street movement.",
     "After a 36-day protest in Delhi, including a July 20 march met with tear gas and batons, Education Minister Dharmendra Pradhan resigned on July 25 and the CJP called off its protest, saying its demands had been accepted. From August, the CJP said the government had not honoured those commitments, chiefly withdrawing criminal cases against protesters and compensating families of students who died by suicide.",
@@ -40,7 +40,12 @@
     { "date": "2026-10-08", "phase": "s2", "label": "confirmed", "text": "CJP rally in Bengaluru demanding the Chief Election Commissioner's resignation; Dhruv Rathee is among those attending.", "sources": ["prothom"] },
     { "date": "2026-10-10", "phase": "s2", "label": "disputed", "milestone": "Leaders detained", "hot": true, "text": "Central Delhi is sealed, with metro stations shut and mobile internet suspended. Dipke, Saurav Das and Ashutosh Ranka are detained from their Air India flight on landing. Thousands are detained; counts range from about 2,000 to 7,000.", "sources": ["uni", "print", "btFlight", "qatar"] },
     { "date": "2026-10-11", "phase": "s2", "label": "confirmed", "text": "The three leaders are released by an Executive Magistrate on condition of no breach of peace for one year, with a Rs 50,000 bond. Dipke's family says the delay made him miss his grandmother's funeral; police say due procedure was followed.", "sources": ["ktRelease", "printFuneral"] },
-    { "date": "2026-10-12", "phase": "s2", "label": "pending", "text": "Opposition INDIA bloc protest planned. Outcome still being checked.", "sources": ["ktSecond"] }
+    { "date": "2026-10-12", "phase": "s2", "label": "reported", "text": "Opposition workers and activists, led by Rahul Gandhi and Priyanka Gandhi Vadra, march toward the Supreme Court demanding the Chief Election Commissioner’s resignation.", "sources": ["apOct14"] },
+    { "date": "2026-10-12", "phase": "s2", "label": "confirmed", "text": "Delhi Police remove Jantar Mantar from the list of official protest sites.", "sources": ["apOct14", "afpOct14"] },
+    { "date": "2026-10-13", "phase": "s2", "label": "confirmed", "text": "About a dozen people are detained after climbing barricades to enter Jantar Mantar, including CJP spokespeople Saurav Das and Ashutosh Ranka. Police accuse them of trespassing and defying prohibitory orders.", "sources": ["apOct14", "afpOct14"] },
+    { "date": "2026-10-14", "phase": "s2", "label": "confirmed", "milestone": "Leaders jailed", "hot": true, "text": "A local court sends Das and Ranka to five days’ judicial custody. The CJP says they are being punished for raising the national flag at Jantar Mantar; police say the site is no longer an official protest venue.", "sources": ["apOct14", "afpOct14"] },
+    { "date": "2026-10-15", "phase": "s2", "label": "confirmed", "text": "The civic authority closes Central Park in Connaught Place for two days, citing administrative reasons, after the CJP calls a flag-raising rally there. Delhi Police urge people not to join and offer to let a small group carry the flag at a suitable place.", "sources": ["ajOct16", "diOct16"] },
+    { "date": "2026-10-16", "phase": "s2", "label": "pending", "hot": true, "text": "Thousands of extra police and barricades are deployed in central Delhi ahead of the CJP’s 5 pm rally. Founder Abhijeet Dipke says supporters are ready to go to jail. Outcome still being checked.", "sources": ["ajOct16", "diOct16"] }
   ],
   "claims": [
     { "title": "What the Chief Justice meant", "label": "disputed", "a": "Reports and critics: he likened unemployed youth to cockroaches and parasites.", "aSrc": ["fpj"], "b": "The Chief Justice: he was misquoted and meant people entering professions with fake degrees.", "bSrc": ["quint"], "status": "Both accounts are on record." },
@@ -64,7 +69,11 @@
     { "date": "Ongoing", "action": "Criminal cases against protesters; the Supreme Court reportedly asked the government for a list on Aug 18", "by": "Various state police", "label": "reported" },
     { "date": "Oct 10", "action": "Leaders detained from an aircraft; mass detentions; metro and mobile internet shut in central Delhi", "by": "Delhi Police", "label": "confirmed" },
     { "date": "Oct 10", "action": "Dhruv Rathee detained at his Gurugram home ahead of the protest", "by": "Police", "label": "reported" },
-    { "date": "Oct 11", "action": "Leaders released on condition of no breach of peace for one year", "by": "Executive Magistrate, Delhi Cantt", "label": "confirmed" }
+    { "date": "Oct 11", "action": "Leaders released on condition of no breach of peace for one year", "by": "Executive Magistrate, Delhi Cantt", "label": "confirmed" },
+    { "date": "Oct 12", "action": "Jantar Mantar removed from the list of official protest sites", "by": "Delhi Police", "label": "confirmed" },
+    { "date": "Oct 13", "action": "About a dozen detained at Jantar Mantar, including CJP spokespeople Das and Ranka", "by": "Delhi Police", "label": "confirmed" },
+    { "date": "Oct 14", "action": "Das and Ranka sent to five days’ judicial custody", "by": "Local court, New Delhi", "label": "confirmed" },
+    { "date": "Oct 15", "action": "Central Park, Connaught Place, closed for two days before a CJP rally", "by": "Civic authority", "label": "confirmed" }
   ],
   "places": [
     { "name": "Delhi NCR", "lat": 28.61, "lon": 77.21, "desc": "Jantar Mantar sit-in Jun 6 to Jul 25; Jul 20 march; Oct 10 detentions; Gurugram, Oct 10", "r": 8, "anchor": "end", "dx": -12, "dy": 4 },
@@ -85,7 +94,7 @@
     "Official NEET re-exam date and outcome",
     "Number and status of cases against protesters",
     "Government and Election Commission statements in full",
-    "October 11 and 12 protests"
+    "What happened at the October 16 Central Park rally"
   ],
   "corrections": [],
   "sourceGroups": [
@@ -94,7 +103,7 @@
     ["Launch and takedowns", ["outlookX", "excelsiorX", "mooknayakX", "ajWeb", "ktThreats", "altnews", "fpjInsta", "outlookInsta"]],
     ["Return and July protests", ["etvReturn", "mooknayakReturn", "reutersProfile", "kaumudiProfile", "ktJul19", "apJul20", "ajJul20", "apJul21", "cgfoe", "npr", "apJul25", "ajJul25"]],
     ["August and September", ["reutersParty", "ktSep5", "weekSep5", "sentinel", "kaumudiLatur", "awaaz"]],
-    ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral"]]
+    ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16"]]
   ],
   "sources": {
     "newslaundry": ["Newslaundry", "https://www.newslaundry.com/amp/story/2026%2F05%2F12%2Fwhy-neet-ug-2026-has-been-cancelled"],
@@ -139,6 +148,10 @@
     "ktSecond": ["Khaleej Times", "https://www.khaleejtimes.com/asia/india-delhi-braces-second-day-cjp-protests-gyanesh-kumar-resignation"],
     "ktRelease": ["Khaleej Times", "https://www.khaleejtimes.com/world/asia/india-cockroach-party-cjp-leaders-abhijeet-saurav-ashutosh-released-detention"],
     "qatar": ["Qatar Tribune (DPA)", "https://www.qatar-tribune.com/article/258606/world/indias-cjp-leaders-freed-on-bail/amp"],
-    "printFuneral": ["ThePrint (PTI)", "https://theprint.in/india/dipkes-family-claims-delhi-police-delayed-release-causing-him-to-miss-grandmothers-funeral/3068268/"]
+    "printFuneral": ["ThePrint (PTI)", "https://theprint.in/india/dipkes-family-claims-delhi-police-delayed-release-causing-him-to-miss-grandmothers-funeral/3068268/"],
+    "apOct14": ["AP (via WDIV)", "https://www.clickondetroit.com/news/world/2026/10/14/cockroach-movement-leaders-jailed-for-5-days-after-scaling-barricades-at-new-delhi-protest/"],
+    "afpOct14": ["AFP (via Türkiye Today)", "https://www.turkiyetoday.com/world/cockroach-janta-party-leaders-sent-to-judicial-custody-over-alleged-trespassing-3230261"],
+    "ajOct16": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/16/indian-police-launch-new-delhi-clampdown-for-cockroach-party-rally"],
+    "diOct16": ["The Diplomatic Insight", "https://thediplomaticinsight.com/delhi-shuts-central-park-cockroach-rally"]
   }
 }
