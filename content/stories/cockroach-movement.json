@@ -32,7 +32,7 @@
     { "date": "2026-07-21", "phase": "street", "label": "confirmed", "text": "Opposition leader Rahul Gandhi and Congress MPs stage a sit-in outside the Prime Minister's residence. Amnesty International criticises the police action.", "sources": ["apJul21"] },
     { "date": "2026-07-22", "phase": "street", "label": "confirmed", "text": "The CJP's Instagram account is withheld in India after a legal request to Meta.", "sources": ["fpjInsta", "outlookInsta"] },
     { "date": "2026-07-23", "phase": "street", "label": "reported", "text": "Prime Minister Modi promises fast-track courts for officials accused in exam leaks; a CJP spokesman calls it a \"band-aid\".", "sources": ["cgfoe"] },
-    { "date": "2026-07-25", "phase": "street", "label": "confirmed", "milestone": "Minister resigns", "text": "Pradhan resigns. The CJP ends its 36-day protest, saying all its demands were accepted; a federal minister also says they were accepted.", "sources": ["apJul25", "ajJul25"] },
+    { "date": "2026-07-25", "phase": "street", "label": "confirmed", "milestone": "Minister resigns", "text": "Pradhan resigns. The CJP ends its 36-day protest, saying all its demands were accepted; a federal minister also says they were accepted.", "sources": ["apJul25", "ajJul25"], "callout": true },
     { "date": "2026-08-04", "phase": "dispute", "label": "reported", "text": "Dipke says the CJP has no immediate plans to become a political party.", "sources": ["reutersParty"] },
     { "date": "2026-08-15", "phase": "dispute", "label": "reported", "text": "The CJP's Instagram is inaccessible in India for about two hours. Meta gives no reason.", "sources": ["outlookInsta"] },
     { "date": "2026-08-24", "phase": "dispute", "label": "confirmed", "milestone": "CJP says promises broken", "text": "The CJP says the government broke its July 25 commitments and calls a September 5 march. Delhi Police say no permission request has been received.", "sources": ["ktSep5", "weekSep5", "sentinel"] },
@@ -91,10 +91,27 @@
     { "name": "Hyderabad", "lat": 17.39, "lon": 78.49, "desc": "Solidarity protest, Jul 24", "r": 6, "anchor": "start", "dx": 12, "dy": 4 },
     { "name": "Bengaluru", "lat": 12.97, "lon": 77.59, "desc": "Detentions Jul 20; Season 2 rally Oct 8", "r": 7, "anchor": "start", "dx": 12, "dy": 4 }
   ],
+  "timelineChart": {
+    "title": "Five months, five phases",
+    "from": "2026-05-01",
+    "to": "2026-10-31",
+    "ticks": ["2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01", "2026-09-01", "2026-10-01"],
+    "caption": "Filled marker: the latest major development. Hover or tap a marker for the event.",
+    "aria": "Timeline of the movement from May to October 2026, in five phases with key dates marked"
+  },
+  "map": {
+    "lon0": 68,
+    "lon1": 90,
+    "lat0": 8,
+    "lat1": 34,
+    "lonTicks": [70, 75, 80, 85],
+    "latTicks": [10, 15, 20, 25, 30],
+    "aria": "Approximate positions of cities with reported protests or incidents in India"
+  },
   "figures": {
-    "followers": { "title": "Instagram followers, five days after launch", "rows": [["CJP", 13.9], ["BJP", 8.8]], "max": 16, "unit": " million", "caption": "May 21, 2026. Source: The Mooknayak. The CJP passed about 22 million within days (Reuters)." },
-    "injuries": { "title": "People injured on July 20, per Delhi Police", "rows": [["Security staff", 118], ["Protesters", 60]], "max": 140, "unit": "", "caption": "Source: AP, citing Delhi Police. A protest monitor estimates 60 to 150 protesters injured; the figures are disputed." },
-    "detentions": { "title": "People detained around the October 10 protest", "rows": [["Night before, Delhi (UNI)", 400, 400, "more than 400", false], ["On the day, Indian media range", 3000, 7000, "3,000 to 7,000", false], ["Nationwide, CJP claim", 10000, 10000, "10,000 (claim)", true]], "caption": "Sources: UNI (night before), DPA via Qatar Tribune (Indian media range), CJP statement (nationwide claim, not independently confirmed)." }
+    "followers": { "title": "Instagram followers, five days after launch", "rows": [["CJP", 13.9], ["BJP", 8.8]], "max": 16, "unit": " million", "caption": "May 21, 2026. Source: The Mooknayak. The CJP passed about 22 million within days (Reuters).", "aria": "Instagram followers on May 21: CJP about 13.9 million, BJP about 8.8 million" },
+    "injuries": { "title": "People injured on July 20, per Delhi Police", "rows": [["Security staff", 118], ["Protesters", 60]], "max": 140, "unit": "", "caption": "Source: AP, citing Delhi Police. A protest monitor estimates 60 to 150 protesters injured; the figures are disputed.", "aria": "Delhi Police figures for July 20: 118 security personnel and 60 protesters injured" },
+    "detentions": { "title": "People detained around the October 10 protest", "rows": [["Night before, Delhi (UNI)", 400, 400, "more than 400", false], ["On the day, Indian media range", 3000, 7000, "3,000 to 7,000", false], ["Nationwide, CJP claim", 10000, 10000, "10,000 (claim)", true]], "caption": "Sources: UNI (night before), DPA via Qatar Tribune (Indian media range), CJP statement (nationwide claim, not independently confirmed).", "type": "range", "max": 10000, "ticks": [0, 2500, 5000, 7500, 10000], "aria": "Detention counts around October 10: more than 400 the night before, 3,000 to 7,000 on the day per Indian media, 10,000 nationwide per the CJP" }
   },
   "gaps": [
     "What happened at the September 5 march",
@@ -168,5 +185,6 @@
     "printOct16": ["ThePrint (PTI)", "https://theprint.in/india/abhijeet-dipke-neha-bora-among-over-150-detained-amid-lehra-do-tiranga-protests/3074067/"],
     "weekOct16": ["The Week", "https://www.theweek.in/news/india/2026/10/16/150-protesters-detained-amid-delhi-police-crackdown-at-cjp-s-tiranga-march-neha-bora-taken-to-unknown-location.html"],
     "tribuneOct16": ["The Tribune live updates", "https://www.tribuneindia.com/liveblog/delhi/cjp-lehra-do-tiranga-march-live-abhijeet-dipke-detained-by-delhi-police/"]
-  }
+  },
+  "nav": "Cockroach movement"
 }

@@ -1,5 +1,5 @@
 // Builds the Unowned website into ./dist from ./content and ./static. Run: node build.mjs
-import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 
 const SITE = "https://unownednews.com";
@@ -21,6 +21,7 @@ function withIds(st) {
   st.events.forEach((e) => { seen[e.date] = (seen[e.date] || 0) + 1; e.id = seen[e.date] === 1 ? `e-${e.date}` : `e-${e.date}-${seen[e.date]}`; });
   return st;
 }
+const voteWidget = (st) => `<div class="votes" data-story="${st.slug}" role="group" aria-label="Vote on ${esc(st.title)}"><button type="button" class="up" aria-pressed="false" aria-label="Vote up">▲</button><span class="score" aria-live="polite">0</span><button type="button" class="down" aria-pressed="false" aria-label="Vote down">▼</button></div>`;
 const added = (e) => e.added ? `<time class="ago" datetime="${e.added}">Added ${long(e.added.slice(0, 10))}</time>` : "";
 const stamp = (l) => `<span class="stamp s-${l}">${LABEL[l]}</span>`;
 
@@ -31,7 +32,7 @@ function write(path, content) {
 }
 
 const NAV = [
-  ["/cockroach-movement/", "Cockroach movement"],
+  ["/", "Trending"],
   ["/submit/", "Send a link"],
   ["/how-we-work/", "How we work"],
   ["/who-owns-unowned/", "Who owns Unowned"],
@@ -133,14 +134,14 @@ function storyPage(st) {
   const srcHtml = st.sourceGroups.map(([name, keys]) => `<div><strong>${esc(name)}</strong><ul>${keys.map((k) => `<li><a href="${esc(S[k][1])}" rel="noopener nofollow">${esc(S[k][0])}</a></li>`).join("")}</ul></div>`).join("\n");
 
   // Only what the charts need goes into the page as data.
-  const chartData = { phases: st.phases, events: st.events.map(({ date, milestone, hot }) => ({ date, milestone, hot })), places: st.places, figures: st.figures };
+  const chartData = { phases: st.phases, events: st.events.map(({ date, milestone, hot, callout }) => ({ date, milestone, hot, callout })), places: st.places, figures: st.figures, timelineChart: st.timelineChart, map: st.map };
 
   const body = `
 <header class="top">
   <p class="eyebrow">${esc(st.kicker)}</p>
   <h1>${esc(st.title)}</h1>
   <p class="lede">${esc(st.dek)}</p>
-  <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span><span>${counts.events} events · ${counts.claims} disputed claims</span></div>
+  <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span><span>${counts.events} events · ${counts.claims} disputed claims</span>${voteWidget(st)}</div>
   <nav class="jump" aria-label="Sections">
     <a href="#latest">Latest</a><a href="#summary">Summary</a><a href="#glance">At a glance</a><a href="#timeline">Timeline</a><a href="#disputed">Disputed claims</a><a href="#accountability">Accountability log</a><a href="#places">Places</a><a href="#method">How we work</a><a href="#sources">Sources</a>
   </nav>
@@ -159,20 +160,14 @@ function storyPage(st) {
 <section id="glance" aria-labelledby="h-glance">
   <div class="section-head"><h2 id="h-glance">At a glance</h2><p>Figures come from the sources named under each chart. Where sources disagree, the range is shown.</p></div>
   <div class="figs">
-    <figure class="wide"><h3>Five months, five phases</h3>
-      <div class="chart-wrap"><svg class="chart" id="phasechart" viewBox="0 0 720 150" role="img" aria-label="Timeline of the movement from May to October 2026, in five phases with key dates marked"></svg></div>
-      <figcaption>Filled marker: the October 10 detentions. Hover or tap a marker for the event.</figcaption></figure>
-    <figure><h3>${esc(st.figures.followers.title)}</h3>
-      <svg class="chart" id="followchart" viewBox="0 0 340 120" role="img" aria-label="Instagram followers on May 21: CJP about 13.9 million, BJP about 8.8 million"></svg>
-      <figcaption>${esc(st.figures.followers.caption)}</figcaption></figure>
-    <figure><h3>${esc(st.figures.injuries.title)}</h3>
-      <svg class="chart" id="injurychart" viewBox="0 0 340 120" role="img" aria-label="Delhi Police figures for July 20: 118 security personnel and 60 protesters injured"></svg>
-      <figcaption>${esc(st.figures.injuries.caption)}</figcaption></figure>
-    <figure class="wide"><h3>${esc(st.figures.detentions.title)}</h3>
-      <svg class="chart" id="detainchart" viewBox="0 0 720 140" role="img" aria-label="Detention counts around October 10: more than 400 the night before, 3,000 to 7,000 on the day per Indian media, 10,000 nationwide per the CJP"></svg>
-      <figcaption>${esc(st.figures.detentions.caption)}</figcaption></figure>
+    <figure class="wide"><h3>${esc(st.timelineChart.title)}</h3>
+      <div class="chart-wrap"><svg class="chart" id="phasechart" viewBox="0 0 720 150" role="img" aria-label="${esc(st.timelineChart.aria)}"></svg></div>
+      <figcaption>${esc(st.timelineChart.caption)}</figcaption></figure>
+    ${Object.entries(st.figures).map(([k, f]) => `<figure${f.type === "range" ? ' class="wide"' : ""}><h3>${esc(f.title)}</h3>
+      <svg class="chart" id="fig-${k}" viewBox="0 0 ${f.type === "range" ? "720 " + (f.rows.length * 34 + 36) : "340 " + (f.rows.length * 40 + 20)}" role="img" aria-label="${esc(f.aria)}"></svg>
+      <figcaption>${esc(f.caption)}</figcaption></figure>`).join("\n    ")}
     <figure class="wide"><h3>Where it happened</h3>
-      <div class="chart-wrap"><svg class="chart" id="mapchart" viewBox="0 0 720 360" role="img" aria-label="Approximate positions of cities with reported protests or incidents in India"></svg></div>
+      <div class="chart-wrap"><svg class="chart" id="mapchart" viewBox="0 0 720 360" role="img" aria-label="${esc(st.map.aria)}"></svg></div>
       <figcaption>Positions are approximate, plotted by latitude and longitude. This is not a map of borders.</figcaption></figure>
   </div>
 </section>
@@ -202,7 +197,7 @@ function storyPage(st) {
 </section>
 
 <section id="accountability" aria-labelledby="h-acc">
-  <div class="section-head"><h2 id="h-acc">Accountability log</h2><p>Takedowns, detentions, restrictions and legal cases connected to the movement.</p></div>
+  <div class="section-head"><h2 id="h-acc">Accountability log</h2><p>Arrests, detentions, restrictions, investigations and legal cases connected to this story.</p></div>
   <div class="table-wrap"><table><thead><tr><th scope="col">Date</th><th scope="col">Action</th><th scope="col">By</th><th scope="col">Label</th></tr></thead><tbody>${accHtml}</tbody></table></div>
 </section>
 
@@ -232,8 +227,8 @@ function storyPage(st) {
     description: st.dek,
     path,
     body,
-    scripts: ["/assets/story.js"],
-    og: `/assets/og-${st.slug}.png`,
+    scripts: ["/assets/story.js", "/assets/votes.js"],
+    og: existsSync(`static/assets/og-${st.slug}.png`) ? `/assets/og-${st.slug}.png` : "/assets/og-default.png",
     type: "article",
   }));
   return { st, latest };
@@ -252,11 +247,17 @@ function build() {
   const built = stories.map(storyPage);
 
   /* Home */
-  const cards = built.map(({ st, latest }) => `<a class="story-card" href="/${st.slug}/">
-    <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${long(st.updated)}</span></div>
-    <h3>${esc(st.title)}</h3><p>${esc(st.dek)}</p>
-    <p class="src">Latest: ${esc(long(latest[0].date))}, ${esc(latest[0].text.slice(0, latest[0].text.indexOf(". ") + 1 || 140))}</p>
-  </a>`).join("\n");
+  const byUpdate = [...built].sort((a, b) => (b.st.updatedAt || b.st.updated).localeCompare(a.st.updatedAt || a.st.updated));
+  const cards = byUpdate.map(({ st, latest }, i) => `<li class="trend" data-story="${st.slug}" data-order="${i}">
+    <span class="rank" aria-hidden="true">${i + 1}</span>
+    ${voteWidget(st)}
+    <a class="story-card" href="/${st.slug}/">
+      <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span></div>
+      <h3>${esc(st.title)}</h3><p>${esc(st.dek)}</p>
+      <p class="src">Latest: ${esc(long(latest[0].date))}, ${esc(latest[0].text.slice(0, latest[0].text.indexOf(". ") + 1 || 140))}</p>
+    </a>
+  </li>`).join("\n");
+  write("stories.json", JSON.stringify(stories.map((s) => s.slug)));
   const live = stories.flatMap((st) => st.events.filter((e) => e.label !== "pending").map((e, i) => ({ st, e, i })))
     .sort((a, b) => (b.e.added || b.e.date).localeCompare(a.e.added || a.e.date) || b.e.date.localeCompare(a.e.date) || b.i - a.i).slice(0, 6);
   const liveHtml = live.map(({ st, e }) => `<li><a href="/${st.slug}/#${itemId(e)}"><span class="when">${short(e.date)} ${stamp(e.label)} ${added(e)}</span><span class="what">${esc(e.text.split(". ")[0].replace(/\.$/, ""))}.</span><span class="story">${esc(st.title)}</span></a></li>`).join("\n");
@@ -264,13 +265,15 @@ function build() {
     title: "Unowned",
     description: "News nobody owns. Verified, sourced reporting from the people who were there, with both sides shown.",
     path: "/",
+    scripts: ["/assets/votes.js"],
     body: `
 <header class="top">
   <h1>News nobody owns.</h1>
   <p class="lede">Unowned gathers what people on the ground record and report, checks it, labels how certain it is, and organizes it into stories you can follow. Every item links to its source. Where accounts disagree, we show both.</p>
 </header>
+
+<section aria-labelledby="h-stories"><div class="section-head"><h2 id="h-stories">Trending now</h2><p>Ranked by readers' votes. Vote up the stories you want followed most closely.</p></div><ol class="trending">${cards}</ol></section>
 <section aria-labelledby="h-live"><div class="section-head"><h2 id="h-live">Live updates</h2><p>The newest checked developments across our stories.</p></div><ol class="livefeed">${liveHtml}</ol></section>
-<section aria-labelledby="h-stories"><h2 id="h-stories">Following now</h2>${cards}</section>
 <section aria-labelledby="h-how">
   <h2 id="h-how">Why Unowned</h2>
   <div class="pillars">

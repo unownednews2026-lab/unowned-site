@@ -181,3 +181,19 @@ button.primary[disabled] { opacity: 0.6; cursor: progress; }
 .livefeed a:hover .what { color: var(--accent); }
 .livefeed .when { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .livefeed .story { font-size: 0.82rem; color: var(--muted); }
+
+/* Trending now + votes */
+.trending { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.trend { display: grid; grid-template-columns: 28px 44px minmax(0, 1fr); gap: 10px; align-items: start; }
+.trend .rank { font-family: var(--mono); font-size: 1.1rem; color: var(--muted); padding-top: 18px; text-align: right; }
+.trend .story-card { margin: 0; }
+.votes { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; }
+.trend .votes { padding-top: 10px; }
+.votes button { width: 36px; height: 30px; border: 1px solid var(--rule); background: var(--surface); color: var(--muted); border-radius: 6px; cursor: pointer; font-size: 0.8rem; line-height: 1; }
+.votes button:hover { border-color: var(--accent); color: var(--fg); }
+.votes button.up[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.votes button.down[aria-pressed="true"] { background: var(--muted); border-color: var(--muted); color: #fff; }
+.votes .score { font-family: var(--mono); font-size: 0.9rem; font-weight: 600; min-width: 2ch; text-align: center; }
+.meta-row .votes { flex-direction: row; gap: 6px; margin-left: auto; }
+.meta-row .votes button { width: 32px; height: 26px; }
+@media (max-width: 720px) { .trend { grid-template-columns: 20px 40px minmax(0, 1fr); gap: 8px; } }

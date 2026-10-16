@@ -6,3 +6,8 @@ compatibility_date = "2026-09-01"
 [[kv_namespaces]]
 binding = "SUBMISSIONS"
 id = "5082e3ebb28543bea4324579e69f6b54"
+
+[[d1_databases]]
+binding = "VOTES"
+database_name = "unowned-votes"
+database_id = "afc5102f-7362-40cb-801f-b892b04a176e"
