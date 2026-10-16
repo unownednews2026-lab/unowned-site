@@ -11,6 +11,13 @@
     "After a 36-day protest in Delhi, including a July 20 march met with tear gas and batons, Education Minister Dharmendra Pradhan resigned on July 25 and the CJP called off its protest, saying its demands had been accepted. From August, the CJP said the government had not honoured those commitments, chiefly withdrawing criminal cases against protesters and compensating families of students who died by suicide.",
     "Season 2 began in October with a new demand: the resignation of Chief Election Commissioner Gyanesh Kumar over a voter-roll revision that critics say favours the ruling BJP. The Election Commission and the BJP deny this. On October 10, police detained founder Abhijeet Dipke and two leaders from their plane in Delhi, and thousands of protesters were detained. The leaders were released on October 11 on condition of no breach of peace for a year, and say they will continue."
   ],
+  "ground": [
+    { "date": "2026-10-16", "platform": "Instagram", "who": "Cockroach Janta Party (official account)", "shows": "A live video in which police stop founder Abhijeet Dipke as he walks out of a house, and drive him away in a police car after a brief argument.", "label": "reported", "check": "Described by AFP and Reuters, which say the footage was streamed live on the party's Instagram account.", "sources": ["dawnOct16"] },
+    { "date": "2026-10-16", "platform": "X", "who": "M K Stalin, DMK president", "shows": "A post calling on the central government to release Dipke and student leader Neha Bohra and to say where they are being held.", "label": "reported", "check": "Reported by PTI; not yet independently confirmed by a second outlet.", "sources": ["printStalin"] },
+    { "date": "2026-10-14", "platform": "X", "who": "Abhijeet Dipke, CJP founder", "shows": "A post addressed to Prime Minister Modi after two CJP spokespeople were jailed, saying that if the government wants to crush dissent it should officially declare an Emergency.", "label": "confirmed", "check": "Reported by AP; Dipke repeated the \"unofficial Emergency\" charge to reporters in Nagpur the same day (UNI).", "sources": ["apOct14", "uniOct14"] },
+    { "date": "2026-10-14", "platform": "X", "who": "Rahul Gandhi, Leader of the Opposition", "shows": "A post calling the arrests at Jantar Mantar an act of cowardice and saying the site belongs to the people of India.", "label": "reported", "check": "Quoted by AP.", "sources": ["apOct14"] },
+    { "date": "2026-08-07", "platform": "Video, shared on X", "who": "Filmer not identified", "shows": "Dipke in a heated argument with a police sub-inspector outside his home in Maharashtra, after the officer reportedly stopped guests from visiting him.", "label": "reported", "check": "The Week reported on the video but said it could not verify the exact context; the date of the incident is not known.", "sources": ["weekAug7"] }
+  ],
   "phases": [
     { "id": "leak", "when": "May", "name": "The exam leak and the remark", "short": "Leak", "start": "2026-05-03", "end": "2026-05-15" },
     { "id": "online", "when": "May", "name": "An online movement, and the takedowns", "short": "Online", "start": "2026-05-16", "end": "2026-06-05" },
@@ -128,7 +135,8 @@
     ["Launch and takedowns", ["outlookX", "excelsiorX", "mooknayakX", "ajWeb", "ktThreats", "altnews", "fpjInsta", "outlookInsta"]],
     ["Return and July protests", ["etvReturn", "mooknayakReturn", "reutersProfile", "kaumudiProfile", "ktJul19", "apJul20", "ajJul20", "apJul21", "cgfoe", "npr", "apJul25", "ajJul25"]],
     ["August and September", ["reutersParty", "ktSep5", "weekSep5", "sentinel", "kaumudiLatur", "awaaz"]],
-    ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16", "dawnOct16", "gulfOct16", "ptiOct16", "etvOct16", "printOct16", "weekOct16", "tribuneOct16"]]
+    ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16", "dawnOct16", "gulfOct16", "ptiOct16", "etvOct16", "printOct16", "weekOct16", "tribuneOct16"]],
+    ["From the ground", ["printStalin", "uniOct14", "weekAug7"]]
   ],
   "sources": {
     "newslaundry": ["Newslaundry", "https://www.newslaundry.com/amp/story/2026%2F05%2F12%2Fwhy-neet-ug-2026-has-been-cancelled"],
@@ -184,7 +192,10 @@
     "etvOct16": ["ETV Bharat live updates", "https://www.etvbharat.com/en/bharat/live-blog--delhi-protest-live-updates-cjp-lehra-do-tiranga-march-central-park-connaught-place-6000-police-personnel-deployed-abhijeet-dipke-cec-gyanesh-kumar-ndmc-traffic-restrictions-enn26101602215"],
     "printOct16": ["ThePrint (PTI)", "https://theprint.in/india/abhijeet-dipke-neha-bora-among-over-150-detained-amid-lehra-do-tiranga-protests/3074067/"],
     "weekOct16": ["The Week", "https://www.theweek.in/news/india/2026/10/16/150-protesters-detained-amid-delhi-police-crackdown-at-cjp-s-tiranga-march-neha-bora-taken-to-unknown-location.html"],
-    "tribuneOct16": ["The Tribune live updates", "https://www.tribuneindia.com/liveblog/delhi/cjp-lehra-do-tiranga-march-live-abhijeet-dipke-detained-by-delhi-police/"]
+    "tribuneOct16": ["The Tribune live updates", "https://www.tribuneindia.com/liveblog/delhi/cjp-lehra-do-tiranga-march-live-abhijeet-dipke-detained-by-delhi-police/"],
+    "printStalin": ["ThePrint (PTI)", "https://theprint.in/india/stalin-tells-centre-to-release-abhijeet-dipke-neha-bora/3074190/"],
+    "uniOct14": ["UNI", "https://www.uniindia.com/west-india/cjp-founder-dipke-alleges-unofficial-emergency-under-modi-govt/213101"],
+    "weekAug7": ["The Week", "https://www.theweek.in/news/india/2026/08/07/abhijeet-dipke-lashes-out-at-cop-in-viral-video-outside-maharashtra-home-netizens-react-who-are-you-to.html"]
   },
   "nav": "Cockroach movement",
   "region": "India",
