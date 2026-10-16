@@ -75,7 +75,7 @@
     svg.appendChild(sv("line", { "class": "axis", x1: L, x2: L, y1: top - 6, y2: top + fig.rows.length * (bh + gap) - gap + 6 }));
     fig.rows.forEach(function (row, i) {
       var name = row[0], v = row[1], y = top + i * (bh + gap), g = sv("g", { "class": "hit" });
-      var txt = v + fig.unit;
+      var txt = (v >= 1000 ? v.toLocaleString("en") : String(v)) + fig.unit;
       g.appendChild(sv("rect", { x: 0, y: y - 6, width: W, height: bh + 12, fill: "transparent" }));
       g.appendChild(sv("text", { "class": "lab", x: L - 10, y: y + 13, "text-anchor": "end" }, name));
       g.appendChild(hbar(L, y, X(v) - L, bh, "bar"));
@@ -90,15 +90,15 @@
   function phaseChart() {
     var svg = document.getElementById("phasechart"); if (!svg) return;
     var L = 16, R = 704, t = function (d) { return Date.parse(d) / 864e5; };
-    var t0 = t("2026-05-01"), t1 = t("2026-10-31");
+    var TC = D.timelineChart, t0 = t(TC.from), t1 = t(TC.to);
     var X = function (d) { return L + (t(d) - t0) / (t1 - t0) * (R - L); };
     D.phases.forEach(function (p, i) {
       svg.appendChild(sv("rect", { "class": "band" + (i % 2 ? " alt" : ""), x: X(p.start), y: 22, width: Math.max(2, X(p.end) - X(p.start)), height: 46, rx: 4 }));
       svg.appendChild(sv("text", { "class": "lab muted", x: X(p.start) + 4, y: 16 }, p.short));
     });
-    ["2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01", "2026-09-01", "2026-10-01"].forEach(function (d) {
+    TC.ticks.forEach(function (d) {
       svg.appendChild(sv("line", { "class": "grid", x1: X(d), x2: X(d), y1: 22, y2: 92 }));
-      svg.appendChild(sv("text", { "class": "val muted", x: X(d) + 3, y: 108 }, dayLabel(d).split(" ")[0]));
+      svg.appendChild(sv("text", { "class": "val muted", x: X(d) + 3, y: 108 }, TC.tickDays ? dayLabel(d) : dayLabel(d).split(" ")[0]));
     });
     svg.appendChild(sv("line", { "class": "axis", x1: L, x2: R, y1: 92, y2: 92 }));
     D.events.filter(function (e) { return e.milestone; }).forEach(function (e) {
@@ -107,21 +107,21 @@
       g.appendChild(sv("circle", { "class": "ms" + (e.hot ? " hot" : ""), cx: X(e.date), cy: 45, r: 5 }));
       tip(g, dayLabel(e.date) + ": " + e.milestone); svg.appendChild(g);
     });
-    var resign = D.events.find(function (e) { return e.milestone === "Minister resigns"; });
-    var hot = D.events.find(function (e) { return e.hot; });
-    if (resign) svg.appendChild(sv("text", { "class": "lab", x: X(resign.date) - 6, y: 84, "text-anchor": "end" }, "Minister resigns, " + dayLabel(resign.date)));
+    var callout = D.events.find(function (e) { return e.callout; });
+    var hot = D.events.filter(function (e) { return e.hot && e.milestone; }).pop();
+    if (callout) svg.appendChild(sv("text", { "class": "lab", x: X(callout.date) - 6, y: 84, "text-anchor": "end" }, callout.milestone + ", " + dayLabel(callout.date)));
     if (hot) {
       svg.appendChild(sv("text", { "class": "lab", x: X(hot.date) - 6, y: 136, "text-anchor": "end" }, hot.milestone + ", " + dayLabel(hot.date)));
       svg.appendChild(sv("line", { "class": "axis", x1: X(hot.date), x2: X(hot.date), y1: 52, y2: 124 }));
     }
   }
-  function detainChart() {
-    var svg = document.getElementById("detainchart"); if (!svg) return;
-    var fig = D.figures.detentions, W = 720, L = 250, R = 590, max = 10000;
+  function rangeChart(id, fig) {
+    var svg = document.getElementById(id); if (!svg) return;
+    var W = 720, L = 250, R = 590, max = fig.max, base = fig.rows.length * 34;
     var X = function (v) { return L + v / max * (R - L); };
-    [0, 2500, 5000, 7500, 10000].forEach(function (v) {
-      svg.appendChild(sv("line", { "class": "grid", x1: X(v), x2: X(v), y1: 8, y2: 112 }));
-      svg.appendChild(sv("text", { "class": "val muted", x: X(v), y: 130, "text-anchor": "middle" }, v.toLocaleString("en")));
+    fig.ticks.forEach(function (v) {
+      svg.appendChild(sv("line", { "class": "grid", x1: X(v), x2: X(v), y1: 8, y2: base + 4 }));
+      svg.appendChild(sv("text", { "class": "val muted", x: X(v), y: base + 22, "text-anchor": "middle" }, v.toLocaleString("en")));
     });
     fig.rows.forEach(function (row, i) {
       var name = row[0], a = row[1], b = row[2], txt = row[3], claim = row[4];
@@ -139,14 +139,14 @@
   }
   function mapChart() {
     var svg = document.getElementById("mapchart"); if (!svg) return;
-    var lon0 = 68, lon1 = 90, lat0 = 8, lat1 = 34, L = 40, R = 680, T = 16, B = 340;
+    var M = D.map, lon0 = M.lon0, lon1 = M.lon1, lat0 = M.lat0, lat1 = M.lat1, L = 40, R = 680, T = 16, B = 340;
     var X = function (lon) { return L + (lon - lon0) / (lon1 - lon0) * (R - L); };
     var Y = function (lat) { return T + (lat1 - lat) / (lat1 - lat0) * (B - T); };
-    [70, 75, 80, 85].forEach(function (lon) {
+    M.lonTicks.forEach(function (lon) {
       svg.appendChild(sv("line", { "class": "grid", x1: X(lon), x2: X(lon), y1: T, y2: B }));
-      svg.appendChild(sv("text", { "class": "val muted", x: X(lon) + 3, y: B + 14 }, lon + "°E"));
+      svg.appendChild(sv("text", { "class": "val muted", x: X(lon) + 3, y: B + 14 }, (lon < 0 ? -lon + "°W" : lon + "°E")));
     });
-    [10, 15, 20, 25, 30].forEach(function (lat) {
+    M.latTicks.forEach(function (lat) {
       svg.appendChild(sv("line", { "class": "grid", x1: L, x2: R, y1: Y(lat), y2: Y(lat) }));
       svg.appendChild(sv("text", { "class": "val muted", x: L - 4, y: Y(lat) + 4, "text-anchor": "end" }, lat + "°N"));
     });
@@ -158,7 +158,9 @@
       tip(g, p.name + ": " + p.desc); svg.appendChild(g);
     });
   }
-  barChart("followchart", D.figures.followers, 340);
-  barChart("injurychart", D.figures.injuries, 340);
-  phaseChart(); detainChart(); mapChart();
+  Object.keys(D.figures).forEach(function (k) {
+    var f = D.figures[k];
+    if (f.type === "range") rangeChart("fig-" + k, f); else barChart("fig-" + k, f, 340);
+  });
+  phaseChart(); mapChart();
 })();
