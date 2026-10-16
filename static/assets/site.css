@@ -172,3 +172,12 @@ button.primary[disabled] { opacity: 0.6; cursor: progress; }
 @media (max-width: 560px) { ol.timeline li { grid-template-columns: minmax(0, 1fr); } .sides, .two { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 .edition { margin-top: 12px; }
+
+/* Live updates */
+.ago { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.livefeed { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.livefeed li { border-bottom: 1px solid var(--rule); }
+.livefeed a { display: grid; gap: 4px; padding: 12px 0; text-decoration: none; color: var(--fg); }
+.livefeed a:hover .what { color: var(--accent); }
+.livefeed .when { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.livefeed .story { font-size: 0.82rem; color: var(--muted); }
