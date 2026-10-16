@@ -2,6 +2,11 @@
   "slug": "france-school-protests",
   "title": "France's high school protests",
   "nav": "France school protests",
+  "region": "France",
+  "topics": [
+    "Protest",
+    "Education"
+  ],
   "kicker": "Story tracker · France",
   "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
   "status": "Ongoing",

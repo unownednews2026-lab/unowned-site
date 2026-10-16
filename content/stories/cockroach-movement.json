@@ -186,5 +186,10 @@
     "weekOct16": ["The Week", "https://www.theweek.in/news/india/2026/10/16/150-protesters-detained-amid-delhi-police-crackdown-at-cjp-s-tiranga-march-neha-bora-taken-to-unknown-location.html"],
     "tribuneOct16": ["The Tribune live updates", "https://www.tribuneindia.com/liveblog/delhi/cjp-lehra-do-tiranga-march-live-abhijeet-dipke-detained-by-delhi-police/"]
   },
-  "nav": "Cockroach movement"
+  "nav": "Cockroach movement",
+  "region": "India",
+  "topics": [
+    "Protest",
+    "Elections"
+  ]
 }

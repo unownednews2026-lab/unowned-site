@@ -11,3 +11,8 @@
 
 /api/*
   Cache-Control: no-store
+
+/live.json
+  Cache-Control: no-cache
+/stories.json
+  Cache-Control: no-cache
