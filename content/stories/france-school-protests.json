@@ -11,7 +11,7 @@
   "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
   "status": "Ongoing",
   "updated": "2026-10-16",
-  "updatedAt": "2026-10-16T20:32:00Z",
+  "updatedAt": "2026-10-16T21:45:00Z",
   "summary": [
     "French high school students began blockading their schools in the Paris suburbs in mid to late September, protesting teacher shortages, overcrowded classes, run-down buildings and classrooms that reached 35 to 40°C in heatwaves. Within two weeks the blockades had spread across France, with hundreds of schools closed or disrupted.",
     "The police response has become a story of its own. Thousands of people, most of them minors, have been arrested; hundreds of students, school staff and police officers have been injured. A 15-year-old lost a hand in Lens on October 5, and the government suspended stun grenades at student protests two days later. Rights groups say force against minors has been disproportionate; police unions say force is used against people who attack officers.",
@@ -59,6 +59,7 @@
     { "date": "2026-10-13", "phase": "national", "label": "disputed", "added": "2026-10-16T20:32:00Z", "milestone": "Turnout disputed", "text": "A third week of marches. The Interior Ministry counts 161,500 protesters nationwide, including 41,500 in Paris; unions say about 480,000. Clashes break out near Les Invalides in Paris, and Nuñez says 11 officers were hospitalised.", "sources": ["euroOct13", "afpOct14"] },
     { "date": "2026-10-14", "phase": "response", "label": "confirmed", "added": "2026-10-16T20:32:00Z", "milestone": "Macron responds", "hot": true, "text": "After a cabinet meeting, government spokeswoman Maud Bregeon says Macron sees students' concerns as legitimate but believes they are being exploited for political ends and turned into urban violence. He asks ministers for concrete responses within weeks.", "sources": ["afpOct14", "euroOct14"] },
     { "date": "2026-10-14", "phase": "response", "label": "reported", "added": "2026-10-16T20:32:00Z", "text": "The Justice Ministry says 7,950 people have been apprehended since late September, 85% of them minors, and 2,735 charged. Lecornu says 248 students, 937 police officers and 149 school staff have been injured. 36 internal investigations into alleged police violence are open.", "sources": ["afpOct14", "euroOct14"] },
+    { "date": "2026-10-15", "phase": "response", "label": "reported", "added": "2026-10-16T21:45:00Z", "text": "Geffray holds a third meeting with student organisations and says a good part of the way has been made; he says Parcoursup changes due by late October will apply to this year's final-year students. The Union syndicale lycéenne walks out, saying it was not being listened to, and says it will skip a follow-up meeting on Monday.", "sources": ["mesinfosOct16"] },
     { "date": "2026-10-16", "phase": "response", "label": "reported", "added": "2026-10-16T20:32:00Z", "text": "The autumn school holidays begin, which may pause the school blockades.", "sources": ["localOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-16T20:32:00Z", "text": "National protest day over the cost of living, joined by students and unions, with online calls from Yellow Vest supporters. The Interior Ministry expects about 60 marches and 20,000 to 40,000 people in Paris. Outcome still being checked.", "sources": ["localOct17"] }
   ],
@@ -104,7 +105,7 @@
     ["How it started", ["ajVoices", "bbcSep28"]],
     ["Injuries, arrests and the police response", ["ajOct5", "ajOct7", "euroOct7", "psOct7"]],
     ["Government measures and turnout", ["mwnOct9", "euroOct13", "afpOct14", "euroOct14", "localOct17"]],
-    ["From the ground", ["pmOct10"]]
+    ["From the ground", ["pmOct10", "mesinfosOct16"]]
   ],
   "sources": {
     "ajVoices": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/7/were-short-of-resources-frances-student-protesters-in-their-own-words"],
@@ -118,6 +119,7 @@
     "afpOct14": ["AFP (via eNCA)", "https://www.enca.com/news/macron-says-french-student-protesters-exploited-political-forces-spokeswoman"],
     "euroOct14": ["Euronews", "https://www.euronews.com/2026/10/14/macron-warns-student-anger-is-being-exploited-as-france-braces-for-more-protests"],
     "localOct17": ["The Local France", "https://www.thelocal.fr/20261012/france-protests-what-to-expect-on-october-17th"],
-    "pmOct10": ["Paris Match Belgium (French)", "https://www.parismatch.be/actualites/monde/2026/10/10/il-a-juste-demande-de-passer-un-policier-saisit-violemment-un-adolescent-par-le-cou-et-lembarque-les-images-font-le-buzz-en-france-video-ZBWEHL6EPJBZTLGLVRO2ZZ5SUQ/"]
+    "pmOct10": ["Paris Match Belgium (French)", "https://www.parismatch.be/actualites/monde/2026/10/10/il-a-juste-demande-de-passer-un-policier-saisit-violemment-un-adolescent-par-le-cou-et-lembarque-les-images-font-le-buzz-en-france-video-ZBWEHL6EPJBZTLGLVRO2ZZ5SUQ/"],
+    "mesinfosOct16": ["Mes Infos (AFP)", "https://mesinfos.fr/mouvement-lyceen-la-jeunesse-mise-desormais-sur-la-mobilisation-du-17-octobre-341254.html"]
   }
 }
