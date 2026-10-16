@@ -108,6 +108,7 @@ function storyPage(st) {
   const overview = [
     ["latest", "Live updates", recent ? `${plural(recent, "update", "updates")} in the last 48 hours` : `Newest: ${short(nonPending[nonPending.length - 1].date)}`, null],
     ["summary", "Where things stand", "The story so far, in three paragraphs", null],
+    ...((st.ground || []).length ? [["ground", "From the ground", `${plural(st.ground.length, "post", "posts and videos")}, checked`, st.ground.length]] : []),
     ["glance", "At a glance", "Charts, figures and a map", null],
     ["timeline", "Timeline", `${plural(st.events.length, "event", "events")} since ${firstMonth}`, st.events.length],
     ["disputed", "Disputed claims", `${plural(st.claims.length, "claim", "claims")}, both sides shown`, st.claims.length],
@@ -132,6 +133,13 @@ function storyPage(st) {
     return `<div class="phase-block"><div class="phase"><p class="eyebrow">${esc(p.when)}</p><h3>${esc(p.name)}</h3></div><ol class="timeline">${items}</ol></div>`;
   }).join("\n");
 
+  const groundHtml = (st.ground || []).map((g) => `<article class="ground-card">
+    <div class="g-top"><span class="platform">${esc(g.platform)}</span><span class="when">${short(g.date)}</span>${stamp(g.label)}</div>
+    <p class="who">${esc(g.who)}</p>
+    <p class="shows">${esc(g.shows)}</p>
+    <p class="check"><strong>How we checked:</strong> ${esc(g.check)}</p>
+    ${srcLine(S, g.sources)}
+  </article>`).join("\n");
   const claimsHtml = st.claims.map((c) => `<article class="claim">
   <div class="claim-head"><h3>${esc(c.title)}</h3>${stamp(c.label)}</div>
   <div class="sides">
@@ -180,7 +188,12 @@ ${keyStrip()}
   <div class="summary">${st.summary.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
 </section>
 
-<section id="glance" aria-labelledby="h-glance">
+${groundHtml ? `<section id="ground" aria-labelledby="h-ground">
+  <div class="section-head"><h2 id="h-ground">From the ground</h2><p>Posts and videos from people involved and people who were there, checked against news reporting. We describe them rather than embed them, so social media companies can't track you here, and we don't name ordinary people who posted or appear in them.</p></div>
+  <div class="ground">${groundHtml}</div>
+  <p class="note">Seen a post we should check? <a href="/submit/">Send us the public link</a>. No name or email needed.</p>
+</section>
+` : ""}<section id="glance" aria-labelledby="h-glance">
   <div class="section-head"><h2 id="h-glance">At a glance</h2><p>Figures come from the sources named under each chart. Where sources disagree, the range is shown.</p></div>
   <div class="figs">
     <figure class="wide"><h3>${esc(st.timelineChart.title)}</h3>
