@@ -1,0 +1,117 @@
+{
+  "slug": "france-school-protests",
+  "title": "France's high school protests",
+  "nav": "France school protests",
+  "region": "France",
+  "topics": [
+    "Protest",
+    "Education"
+  ],
+  "kicker": "Story tracker · France",
+  "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
+  "status": "Ongoing",
+  "updated": "2026-10-16",
+  "updatedAt": "2026-10-16T20:32:00Z",
+  "summary": [
+    "French high school students began blockading their schools in the Paris suburbs in mid to late September, protesting teacher shortages, overcrowded classes, run-down buildings and classrooms that reached 35 to 40°C in heatwaves. Within two weeks the blockades had spread across France, with hundreds of schools closed or disrupted.",
+    "The police response has become a story of its own. Thousands of people, most of them minors, have been arrested; hundreds of students, school staff and police officers have been injured. A 15-year-old lost a hand in Lens on October 5, and the government suspended stun grenades at student protests two days later. Rights groups say force against minors has been disproportionate; police unions say force is used against people who attack officers.",
+    "The government says students' concerns are legitimate but that the movement is being exploited politically and turned into urban violence. It has promised 3,000 substitute teachers and budget changes; students say that is not enough. A wider national protest day is planned for October 17, and unions have called a strike for November 5."
+  ],
+  "timelineChart": {
+    "title": "One month, four phases",
+    "from": "2026-09-14",
+    "to": "2026-10-31",
+    "ticks": ["2026-09-15", "2026-10-01", "2026-10-15"],
+    "tickDays": true,
+    "caption": "Filled marker: the latest major development. Hover or tap a marker for the event.",
+    "aria": "Timeline of the protests from mid-September to October 2026, in four phases with key dates marked"
+  },
+  "map": {
+    "lon0": -5,
+    "lon1": 9,
+    "lat0": 42,
+    "lat1": 51.5,
+    "lonTicks": [-4, 0, 4, 8],
+    "latTicks": [43, 45, 47, 49, 51],
+    "aria": "Approximate positions of French cities with reported protests or incidents"
+  },
+  "phases": [
+    { "id": "start", "when": "Mid to late September", "name": "Blockades begin in the Paris suburbs", "short": "Blockades", "start": "2026-09-17", "end": "2026-09-27" },
+    { "id": "spread", "when": "September 28 to October 5", "name": "Arrests, closures and injuries", "short": "Spread", "start": "2026-09-28", "end": "2026-10-05" },
+    { "id": "national", "when": "October 6 to 13", "name": "National days of action", "short": "Nationwide", "start": "2026-10-06", "end": "2026-10-13" },
+    { "id": "response", "when": "From October 14", "name": "The political response", "short": "Response", "start": "2026-10-14", "end": "2026-10-31" }
+  ],
+  "events": [
+    { "date": "2026-09-17", "phase": "start", "label": "reported", "added": "2026-10-16T20:32:00Z", "milestone": "First blockades", "text": "High school students start blockading school entrances in Créteil, a Paris suburb, over teacher shortages and run-down buildings. Accounts of the exact start date differ; the BBC places the first blockades in the following week.", "sources": ["ajVoices", "bbcSep28"] },
+    { "date": "2026-09-28", "phase": "spread", "label": "reported", "added": "2026-10-16T20:32:00Z", "text": "Interior Minister Laurent Nuñez reports 164 arrests in one day, 180 schools affected and 27 people hurt: 12 security officers, 12 students and three school staff. Prime Minister Sébastien Lecornu says nothing justifies endangering students, staff or police.", "sources": ["bbcSep28"] },
+    { "date": "2026-10-02", "phase": "spread", "label": "reported", "added": "2026-10-16T20:32:00Z", "text": "Education Minister Édouard Geffray meets student leaders and announces a five-point plan. Students say it is not enough.", "sources": ["ajVoices"] },
+    { "date": "2026-10-04", "phase": "spread", "label": "reported", "added": "2026-10-16T20:32:00Z", "text": "Geffray says 190 students and 78 school staff have been injured and 24 schools burned or ransacked since the movement began, and that about 500 schools are likely to be fully or partly closed the next day.", "sources": ["ajOct5"] },
+    { "date": "2026-10-05", "phase": "spread", "label": "disputed", "added": "2026-10-16T20:32:00Z", "milestone": "Teen loses hand", "text": "A 15-year-old loses a hand in an explosion during a protest in Lens. A police union source says he picked up a police grenade to throw it back; prosecutors say it is not yet established whether he picked it up or it landed on him.", "sources": ["ajOct5", "psOct7"] },
+    { "date": "2026-10-06", "phase": "national", "label": "confirmed", "added": "2026-10-16T20:32:00Z", "milestone": "National day of action", "text": "About 250,000 students, teachers and parents protest nationwide, backed by unions, according to the Interior Ministry, which reports 488 arrests and 43 security officers injured.", "sources": ["ajVoices", "euroOct7"] },
+    { "date": "2026-10-06", "phase": "national", "label": "confirmed", "added": "2026-10-16T20:32:00Z", "text": "A police officer is charged in Paris after a 14-year-old was hit in the face by a tear-gas grenade at close range and lost several teeth.", "sources": ["ajOct7", "euroOct7"] },
+    { "date": "2026-10-07", "phase": "national", "label": "confirmed", "added": "2026-10-16T20:32:00Z", "milestone": "Grenades suspended", "text": "Nuñez suspends police use of stun grenades at high school protests until the Lens incident is clarified, and says 18 internal investigations into police conduct have been opened. LFI's Manuel Bompard says the suspension came only after children were seriously injured.", "sources": ["ajOct7", "euroOct7", "psOct7"] },
+    { "date": "2026-10-07", "phase": "national", "label": "reported", "added": "2026-10-16T20:32:00Z", "text": "President Emmanuel Macron holds an emergency meeting with Lecornu and key ministers.", "sources": ["ajOct7"] },
+    { "date": "2026-10-08", "phase": "national", "label": "confirmed", "added": "2026-10-16T20:32:00Z", "text": "Geffray announces that 3,000 unassigned substitute teachers will be sent to the worst-hit schools, along with extra teaching hours and an online platform for students' demands. The Interior Ministry reports 71,500 protesters and 504 arrests that day.", "sources": ["mwnOct9", "afpOct14"] },
+    { "date": "2026-10-13", "phase": "national", "label": "disputed", "added": "2026-10-16T20:32:00Z", "milestone": "Turnout disputed", "text": "A third week of marches. The Interior Ministry counts 161,500 protesters nationwide, including 41,500 in Paris; unions say about 480,000. Clashes break out near Les Invalides in Paris, and Nuñez says 11 officers were hospitalised.", "sources": ["euroOct13", "afpOct14"] },
+    { "date": "2026-10-14", "phase": "response", "label": "confirmed", "added": "2026-10-16T20:32:00Z", "milestone": "Macron responds", "hot": true, "text": "After a cabinet meeting, government spokeswoman Maud Bregeon says Macron sees students' concerns as legitimate but believes they are being exploited for political ends and turned into urban violence. He asks ministers for concrete responses within weeks.", "sources": ["afpOct14", "euroOct14"] },
+    { "date": "2026-10-14", "phase": "response", "label": "reported", "added": "2026-10-16T20:32:00Z", "text": "The Justice Ministry says 7,950 people have been apprehended since late September, 85% of them minors, and 2,735 charged. Lecornu says 248 students, 937 police officers and 149 school staff have been injured. 36 internal investigations into alleged police violence are open.", "sources": ["afpOct14", "euroOct14"] },
+    { "date": "2026-10-16", "phase": "response", "label": "reported", "added": "2026-10-16T20:32:00Z", "text": "The autumn school holidays begin, which may pause the school blockades.", "sources": ["localOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-16T20:32:00Z", "text": "National protest day over the cost of living, joined by students and unions, with online calls from Yellow Vest supporters. The Interior Ministry expects about 60 marches and 20,000 to 40,000 people in Paris. Outcome still being checked.", "sources": ["localOct17"] }
+  ],
+  "claims": [
+    { "title": "Who is driving the movement?", "label": "disputed", "a": "The government says students' concerns are legitimate but that the movement is being exploited for political ends and turned into urban violence.", "aSrc": ["afpOct14", "euroOct14"], "b": "Students describe it as a response to teacher shortages, overcrowding and neglected buildings. LFI, which the government has blamed for stoking tensions, says the government acted on police force only after children were badly hurt.", "bSrc": ["ajVoices", "euroOct7"], "status": "Open. Both positions are on record; there is no independent finding on who organises the protests." },
+    { "title": "How did the Lens student lose his hand?", "label": "disputed", "a": "A police union source says the 15-year-old picked up a police grenade and tried to throw it back.", "aSrc": ["ajOct5"], "b": "Prosecutors say investigators have not established whether he picked it up or it landed on him, or whether the shot followed the rules. The grenade model was suspended as a precaution.", "bSrc": ["ajOct5", "psOct7"], "status": "Under investigation by police internal affairs." },
+    { "title": "How many marched on October 13?", "label": "disputed", "a": "The Interior Ministry counted 161,500 people nationwide, including 41,500 in Paris.", "aSrc": ["euroOct13", "afpOct14"], "b": "Organising unions said about 480,000.", "bSrc": ["euroOct13", "afpOct14"], "status": "Both figures are reported; no independent count is available." },
+    { "title": "Has police force been proportionate?", "label": "disputed", "a": "Amnesty International France says policing must be lawful, necessary and proportionate, and has criticised force against minors. A lawyer for arrested students says every client she represents reports being insulted, slapped, held down or put in chokeholds.", "aSrc": ["ajOct5", "euroOct7", "euroOct13"], "b": "The Alliance police union says force is justified against people who attack officers and rejects the word repression. The Interior Minister has condemned violence against police.", "bSrc": ["euroOct13"], "status": "36 internal investigations into alleged police violence are open (Interior Ministry, October 14)." },
+    { "title": "Is the government's response enough?", "label": "disputed", "a": "The government has promised 3,000 substitute teachers for the worst-hit schools, extra teaching hours, a consultation platform and budget changes; Geffray says 2,000 substitutes had started by October 14.", "aSrc": ["mwnOct9", "afpOct14"], "b": "Students say the measures are insufficient and have called for protests to join the October 17 national day.", "bSrc": ["euroOct14", "ajVoices"], "status": "Macron has asked ministers for concrete responses within weeks." }
+  ],
+  "accountability": [
+    { "date": "Sep 28", "action": "164 people arrested in one day", "by": "Police (Interior Minister's figure)", "label": "reported" },
+    { "date": "Oct 5", "action": "About 500 schools expected to be fully or partly closed", "by": "Education Ministry (minister's estimate)", "label": "reported" },
+    { "date": "Oct 6", "action": "Officer charged over a 14-year-old's tear-gas injury in Paris", "by": "Prosecutors", "label": "confirmed" },
+    { "date": "Oct 6", "action": "488 arrests on the national day of action", "by": "Police (Interior Ministry figure)", "label": "reported" },
+    { "date": "Oct 7", "action": "Stun grenades suspended at high school protests", "by": "Interior Ministry", "label": "confirmed" },
+    { "date": "Early Oct", "action": "Video of a plainclothes officer pinning a 14-year-old girl in Metz; she denies being assaulted and the officer has filed a defamation complaint", "by": "Police", "label": "reported" },
+    { "date": "Oct 14", "action": "7,950 people apprehended since late September, 2,735 charged", "by": "Justice Ministry", "label": "reported" },
+    { "date": "Oct 14", "action": "36 internal investigations into alleged police violence", "by": "IGPN (police internal affairs)", "label": "confirmed" }
+  ],
+  "places": [
+    { "name": "Paris region", "lat": 48.86, "lon": 2.35, "desc": "Créteil, where blockades began; Saint-Denis; clashes near Les Invalides on October 13", "r": 9, "anchor": "start", "dx": 12, "dy": 4 },
+    { "name": "Lens", "lat": 50.43, "lon": 2.83, "desc": "A 15-year-old loses a hand, October 5", "r": 6, "anchor": "end", "dx": -10, "dy": 4 },
+    { "name": "Lille", "lat": 50.63, "lon": 3.06, "desc": "Clashes reported, October 5", "r": 5, "anchor": "start", "dx": 10, "dy": -8 },
+    { "name": "Metz", "lat": 49.12, "lon": 6.18, "desc": "Video of an officer pinning a 14-year-old girl", "r": 5, "anchor": "start", "dx": 10, "dy": 4 },
+    { "name": "Toulouse", "lat": 43.6, "lon": 1.44, "desc": "Tear gas used at protests, October 5", "r": 5, "anchor": "start", "dx": 10, "dy": 4 }
+  ],
+  "figures": {
+    "turnout": { "type": "range", "title": "How many marched, by whose count", "rows": [["Oct 6, Interior Ministry", 250000, 250000, "about 250,000", false], ["Oct 13, Interior Ministry", 161500, 161500, "161,500", false], ["Oct 13, unions", 480000, 480000, "about 480,000", true]], "max": 500000, "ticks": [0, 100000, 200000, 300000, 400000, 500000], "caption": "The union figure is the organisers' own count. Sources: Interior Ministry and unions, via Euronews and AFP. No independent count is available.", "aria": "Turnout: about 250,000 on October 6 per the Interior Ministry; on October 13, 161,500 per the ministry and about 480,000 per unions" },
+    "injuries": { "type": "bar", "title": "People injured since late September, per the Prime Minister", "rows": [["Police", 937], ["Students", 248], ["School staff", 149]], "max": 1000, "unit": "", "caption": "As of October 14. Source: Sébastien Lecornu, via AFP. Figures for students have varied by ministry and date.", "aria": "Injured as of October 14 per the Prime Minister: 937 police officers, 248 students, 149 school staff" },
+    "arrests": { "type": "bar", "title": "Arrests since late September, per the Justice Ministry", "rows": [["Apprehended", 7950], ["Charged", 2735]], "max": 9000, "unit": "", "caption": "As of October 14, 85% of them minors. Source: Justice Ministry, via AFP. Euronews cites 6,800 taken into custody.", "aria": "As of October 14: 7,950 people apprehended and 2,735 charged, per the Justice Ministry" }
+  },
+  "gaps": [
+    "Turnout and incidents on the October 17 protest day",
+    "Findings of the investigation into the Lens injury",
+    "Outcome of the 36 internal police investigations",
+    "Whether all 3,000 substitute teachers are in place",
+    "The government's concrete proposals, requested by Macron within weeks",
+    "Exact date and school where the first blockade began"
+  ],
+  "corrections": [],
+  "sourceGroups": [
+    ["How it started", ["ajVoices", "bbcSep28"]],
+    ["Injuries, arrests and the police response", ["ajOct5", "ajOct7", "euroOct7", "psOct7"]],
+    ["Government measures and turnout", ["mwnOct9", "euroOct13", "afpOct14", "euroOct14", "localOct17"]]
+  ],
+  "sources": {
+    "ajVoices": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/7/were-short-of-resources-frances-student-protesters-in-their-own-words"],
+    "bbcSep28": ["BBC (via MyJoyOnline)", "https://www.myjoyonline.com/french-pm-warns-against-escalation-of-school-protests-after-164-arrested/"],
+    "ajOct5": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/5/students-continue-to-protest-in-france-as-hundreds-of-schools-close"],
+    "ajOct7": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/7/france-halts-police-use-of-stun-grenades-at-student-protests"],
+    "euroOct7": ["Euronews", "https://www.euronews.com/2026/10/07/france-suspends-police-stun-grenades-at-student-protests-after-teenager-loses-hand"],
+    "psOct7": ["Public Sénat (French)", "https://www.publicsenat.fr/actualites/politique/blocus-des-lycees-dix-huit-enquetes-igpn-ouvertes-lusage-des-grenades-assourdissantes-suspendu"],
+    "mwnOct9": ["Morocco World News", "https://www.moroccoworldnews.com/2026/10/341320/france-to-deploy-3000-substitute-teachers-to-address-staffing-shortages/"],
+    "euroOct13": ["Euronews", "https://www.euronews.com/2026/10/13/violence-in-paris-as-tens-of-thousands-turn-out-for-student-protests-across-france"],
+    "afpOct14": ["AFP (via eNCA)", "https://www.enca.com/news/macron-says-french-student-protesters-exploited-political-forces-spokeswoman"],
+    "euroOct14": ["Euronews", "https://www.euronews.com/2026/10/14/macron-warns-student-anger-is-being-exploited-as-france-braces-for-more-protests"],
+    "localOct17": ["The Local France", "https://www.thelocal.fr/20261012/france-protests-what-to-expect-on-october-17th"]
+  }
+}
