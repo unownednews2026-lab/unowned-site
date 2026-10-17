@@ -11,7 +11,7 @@
   "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
   "status": "Ongoing",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T14:30:03Z",
+  "updatedAt": "2026-10-17T14:54:03Z",
   "summary": [
     "French high school students began blockading their schools in the Paris suburbs in mid to late September, protesting teacher shortages, overcrowded classes, run-down buildings and classrooms that reached 35 to 40°C in heatwaves. Within two weeks the blockades had spread across France, with hundreds of schools closed or disrupted.",
     "The police response has become a story of its own. Thousands of people, most of them minors, have been arrested; hundreds of students, school staff and police officers have been injured. A 15-year-old lost a hand in Lens on October 5, and the government suspended stun grenades at student protests two days later. Rights groups say force against minors has been disproportionate; police unions say force is used against people who attack officers.",
@@ -72,6 +72,7 @@
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T12:22:43Z", "text": "The Paris police prefecture says about 20 people were arrested after projectiles were thrown and windows broken outside CNews headquarters. In Marseille, the minister’s office says shops were vandalised, and AFP reports protesters briefly entered city hall.", "sources": ["lematinAfpOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:30:03Z", "text": "In Lyon, a branch of the tourism office is ransacked and set on fire during the protest, CNews and ICI report; Al Jazeera cites local media. No official figures for Lyon have been given yet.", "sources": ["cnewsLyonOct17", "iciOct17", "ajOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T14:30:03Z", "text": "According to AFP, the Paris police prefecture says about 100 people had been arrested in Paris by midday. Marseille mayor Benoît Payan says President Macron assured him police reinforcements would be sent.", "sources": ["sudradioAfpOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:54:03Z", "text": "CNews, ICI and Sud Radio report that 272 people had been arrested nationwide by mid-afternoon; BFM TV gives the count as of 3pm. The reports seen do not name who issued the figure.", "sources": ["cnewsLiveOct17b", "iciOct17", "sudradioLiveOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-16T20:32:00Z", "text": "National protest day over the cost of living, joined by students and unions, with online calls from Yellow Vest supporters. Nuñez expects about 80 marches to be authorised, with 20,000 to 40,000 people expected in Paris. Outcome still being checked.", "sources": ["localOct17", "aaOct16"] }
   ],
   "claims": [
@@ -94,7 +95,8 @@
     { "date": "Oct 17", "action": "About 40 arrests in Paris early on protest day, mostly for carrying banned protective gear or weapons (first count)", "by": "Paris police prefecture", "label": "reported" },
     { "date": "Oct 17", "action": "166 arrests nationwide by midday on protest day", "by": "Interior Ministry", "label": "confirmed" },
     { "date": "Oct 17", "action": "About 20 arrests after incident outside CNews headquarters in Paris", "by": "Paris police prefecture", "label": "reported" },
-    { "date": "Oct 17", "action": "About 100 arrests in Paris by midday", "by": "Paris police prefecture (figure via AFP)", "label": "reported" }
+    { "date": "Oct 17", "action": "About 100 arrests in Paris by midday", "by": "Paris police prefecture (figure via AFP)", "label": "reported" },
+    { "date": "Oct 17", "action": "272 arrests nationwide by mid-afternoon", "by": "Count reported by CNews, ICI, Sud Radio and BFM TV; issuer not named", "label": "confirmed" }
   ],
   "places": [
     { "name": "Paris region", "lat": 48.86, "lon": 2.35, "desc": "Créteil, where blockades began; Saint-Denis; clashes near Les Invalides on October 13", "r": 9, "anchor": "start", "dx": 12, "dy": 4 },
@@ -121,7 +123,7 @@
     ["How it started", ["ajVoices", "bbcSep28"]],
     ["Injuries, arrests and the police response", ["ajOct5", "ajOct7", "euroOct7", "psOct7"]],
     ["Government measures and turnout", ["mwnOct9", "euroOct13", "afpOct14", "euroOct14", "localOct17"]],
-    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17"]]
+    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17"]]
   ],
   "sources": {
     "ajVoices": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/7/were-short-of-resources-frances-student-protesters-in-their-own-words"],
@@ -153,6 +155,8 @@
     "iciOct17": ["ICI (France Bleu)", "https://www.ici.fr/infos/societe/direct-mobilisation-du-17-octobre-150000-personnes-attendues-dans-les-rues-ce-samedi-hors-agglomeration-parisienne-4822424"],
     "sudradioAfpOct17": ["Sud Radio (AFP)", "https://www.sudradio.fr/societe/journee-de-mobilisation-contre-la-vie-chere-les-derniers-developpements-2"],
     "ajOct17": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/17/france-wave-of-nationwide-protests"],
-    "cnewsLyonOct17": ["CNews", "https://www.cnews.fr/videos/france/2026-10-17/mobilisation-du-17-octobre-loffice-du-tourisme-de-lyon-saccage-et-incendie"]
+    "cnewsLyonOct17": ["CNews", "https://www.cnews.fr/videos/france/2026-10-17/mobilisation-du-17-octobre-loffice-du-tourisme-de-lyon-saccage-et-incendie"],
+    "cnewsLiveOct17b": ["CNews", "https://www.cnews.fr/france/2026-10-17/mobilisation-du-17-octobre-les-rassemblements-degenerent-paris-marseille-et-lyon"],
+    "sudradioLiveOct17": ["Sud Radio", "https://www.sudradio.fr/sud-radio/en-direct-la-journee-de-mobilisation-du-17-octobre-en-live-integral"]
   }
 }
