@@ -1,0 +1,117 @@
+{
+  "slug": "italy-student-protests",
+  "title": "Italy's student and cost-of-living protests",
+  "nav": "Italy protests",
+  "region": "Italy",
+  "topics": [
+    "Protest",
+    "Education"
+  ],
+  "kicker": "Story tracker · Italy",
+  "dek": "Students and cost-of-living protesters march against Giorgia Meloni's government, the clashes with police in Turin, Milan and Bologna, and the unions' call for a general strike.",
+  "status": "Ongoing",
+  "updated": "2026-10-17",
+  "updatedAt": "2026-10-17T20:31:24Z",
+  "summary": [
+    "On Friday, October 16, students marched in dozens of Italian cities on what organisers called \"No Meloni Day\", protesting run-down schools, a decree capping foreign pupils at 30% of a class, the cost of living and military spending. Organisers say more than 400,000 took part; the Education Ministry puts participation in the school strike at about 1%. Police used water cannon and tear gas in Turin, and bottles and firecrackers were thrown at police in Rome.",
+    "On Saturday, October 17, cost-of-living marches called by the \"Italia in Piazza\" movement were held in several cities. In Milan, groups broke away and clashed with police around Piazza Duomo; Il Giorno, citing police and the prefecture, reports about 50 people detained and 15 officers injured. In Rome, the CGIL union held a separate rally and announced a general strike for November 20.",
+    "Prime Minister Giorgia Meloni says the right to protest does not mean turning cities into battlefields. Education Minister Giuseppe Valditara calls the violence political hooliganism. Students and unions say the protests are about schools, wages and prices, with inflation at 4.2% in September according to Istat. Italy holds a general election next year."
+  ],
+  "ground": [
+    { "date": "2026-10-17", "platform": "X", "who": "Prime Minister Giorgia Meloni", "shows": "A post condemning the violence in Milan and Bologna, saying demonstrating is a right but turning cities into battlefields is not.", "label": "reported", "check": "Reported by Reuters. Text post; date known.", "sources": ["reutersOct17"] },
+    { "date": "2026-10-17", "platform": "X", "who": "Deputy Prime Minister Antonio Tajani", "shows": "A post calling the violence and vandalism in Milan, Bologna, Turin and other cities totally unacceptable, criticising part of the opposition and expressing solidarity with the police.", "label": "reported", "check": "Reported by Sky TG24. Text post; date known.", "sources": ["skyMilan"] }
+  ],
+  "timelineChart": {
+    "title": "Two days of protest, and what comes next",
+    "from": "2026-10-10",
+    "to": "2026-11-25",
+    "ticks": ["2026-10-12", "2026-10-19", "2026-10-26", "2026-11-02", "2026-11-09", "2026-11-16", "2026-11-23"],
+    "tickDays": true,
+    "caption": "Filled marker: the latest major development. Hover or tap a marker for the event.",
+    "aria": "Timeline of protests in Italy from mid-October to late November 2026, in four phases with key dates marked"
+  },
+  "map": {
+    "lon0": 6.5,
+    "lon1": 18.6,
+    "lat0": 36.6,
+    "lat1": 47.1,
+    "lonTicks": [8, 12, 16],
+    "latTicks": [38, 40, 42, 44, 46],
+    "aria": "Approximate positions of Italian cities with reported protests or incidents"
+  },
+  "phases": [
+    { "id": "buildup", "when": "October 12 to 15", "name": "Anger over prices builds", "short": "Build-up", "start": "2026-10-12", "end": "2026-10-15" },
+    { "id": "students", "when": "October 16", "name": "Students' \"No Meloni Day\"", "short": "Students", "start": "2026-10-16", "end": "2026-10-16" },
+    { "id": "costliving", "when": "October 17", "name": "Cost-of-living marches and the CGIL rally", "short": "Marches", "start": "2026-10-17", "end": "2026-10-17" },
+    { "id": "next", "when": "From October 18", "name": "Towards the November 20 general strike", "short": "Next", "start": "2026-10-18", "end": "2026-11-25" }
+  ],
+  "events": [
+    { "date": "2026-10-14", "phase": "buildup", "label": "reported", "added": "2026-10-17T20:31:24Z", "text": "Farmers and truck drivers block roads in Puglia, Calabria and Sicily during the week over fuel prices, and students camp out in Milan, Rome and Bologna, AFP reports. Istat puts September inflation at 4.2%, mainly because of fuel prices.", "sources": ["afpOct16"] },
+    { "date": "2026-10-16", "phase": "students", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "milestone": "No Meloni Day", "text": "Students march in dozens of cities on \"No Meloni Day\", against run-down schools, the school decree, the cost of living and military spending. Schools are occupied in several cities.", "sources": ["afpOct16", "soleOct16", "avvenireOct16"] },
+    { "date": "2026-10-16", "phase": "students", "label": "reported", "added": "2026-10-17T20:31:24Z", "text": "Organisers say more than 400,000 young people took part, La Repubblica reports; provisional Education Ministry figures put participation in the school strike at 1.08%, Il Sole 24 Ore reports.", "sources": ["repubblicaOct16", "soleOct16"] },
+    { "date": "2026-10-16", "phase": "students", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "hot": true, "text": "In Turin, protesters throw stones and other objects at police in Piazza Castello, and police respond with water cannon and tear gas.", "sources": ["avvenireOct16", "mirrorOct16", "soleOct16"] },
+    { "date": "2026-10-16", "phase": "students", "label": "reported", "added": "2026-10-17T20:31:24Z", "text": "Avvenire reports that 10 officers were injured in Turin, three minors were arrested for resisting a public official and about 50 others were identified and referred to judicial authorities.", "sources": ["avvenireOct16"] },
+    { "date": "2026-10-16", "phase": "students", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "text": "In Rome, thousands rally outside the Education Ministry; police say bottles, flares and firecrackers are thrown at officers.", "sources": ["afpOct16", "soleOct16", "mirrorOct16"] },
+    { "date": "2026-10-16", "phase": "students", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "text": "In Verona, police identify 21 young people and report them over criminal damage and other offences; Il Sole 24 Ore says 20 of them are under 18. Clashes are also reported in Bologna.", "sources": ["soleOct16", "avvenireOct16"] },
+    { "date": "2026-10-16", "phase": "students", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "text": "Meloni says she welcomes mobilisation but condemns the violence and attacks on police, and calls on all parties to back peaceful protest. Education Minister Valditara calls the violence political hooliganism, not democratic dissent.", "sources": ["avvenireOct16", "soleOct16", "repubblicaOct16"] },
+    { "date": "2026-10-16", "phase": "students", "label": "reported", "added": "2026-10-17T20:31:24Z", "text": "Interior Minister Matteo Piantedosi says police acted decisively, professionally and prudently on a difficult day, La Repubblica reports. Deputy Prime Minister Matteo Salvini calls students who threw stones criminals, Il Sole 24 Ore reports.", "sources": ["repubblicaOct16", "soleOct16"] },
+    { "date": "2026-10-17", "phase": "costliving", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "text": "Cost-of-living marches called by the \"Italia in Piazza\" movement, which began on social media, are held in several cities, including Milan and Bologna; Open also lists Turin, Florence, Rome, Naples and Genoa.", "sources": ["openOct17", "skyMilan", "reutersOct17"] },
+    { "date": "2026-10-17", "phase": "costliving", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "milestone": "Milan clashes", "hot": true, "text": "In Milan, groups break away from the march and clash with police around Piazza Duomo and the Galleria Vittorio Emanuele II. Police use tear gas and a water cannon after stones and other objects are thrown; shops close and the Duomo metro station is shut.", "sources": ["reutersOct17", "skyMilan", "ilgiornoOct17", "openOct17"] },
+    { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T20:31:24Z", "text": "Il Giorno, citing a preliminary police and prefecture report, says about 50 people were detained in Milan, almost half of them minors, and 15 members of the security forces were injured. Sky TG24 reports five young people taken to hospital with injuries first described as minor.", "sources": ["ilgiornoOct17", "skyMilan"] },
+    { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T20:31:24Z", "text": "In Bologna, police use a water cannon after clashes near the railway station and make seven arrests, Reuters reports citing ANSA.", "sources": ["reutersOct17"] },
+    { "date": "2026-10-17", "phase": "costliving", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "text": "In Rome, the CGIL union and more than 100 associations march from Piazza della Repubblica to Piazza del Popolo. CGIL leader Maurizio Landini announces a general strike for November 20 and says more than 100,000 people took part; no independent count has been published.", "sources": ["skyCgil", "openOct17"] },
+    { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T20:31:24Z", "text": "Opposition leaders Elly Schlein (PD) and Giuseppe Conte (M5S) attend the CGIL rally; Conte calls for the government to step down, Sky TG24 reports.", "sources": ["skyCgil"] },
+    { "date": "2026-11-20", "phase": "next", "label": "pending", "added": "2026-10-17T20:31:24Z", "text": "General strike called by the CGIL for November 20. Further protests, final arrest and injury figures for October 16 and 17, and any government response to the protesters' demands are still being checked.", "sources": ["skyCgil", "openOct17"] }
+  ],
+  "claims": [
+    { "title": "What are the protests about?", "label": "disputed", "a": "The government condemns the violence. Meloni says she welcomes peaceful mobilisation; Valditara calls the violence political hooliganism with nothing to do with students' rights, and Tajani accuses part of the opposition of fuelling the unrest.", "aSrc": ["avvenireOct16", "soleOct16", "skyMilan"], "b": "Students and unions say the protests are about crumbling schools, the school decree, low wages, rising prices and military spending. The CGIL says Italy is in a dramatic economic and social crisis.", "bSrc": ["soleOct16", "avvenireOct16", "afpOct16"], "status": "Open. Both positions are on record." },
+    { "title": "How many took part on October 16?", "label": "disputed", "a": "Organisers say more than 400,000 young people marched.", "aSrc": ["repubblicaOct16"], "b": "Provisional Education Ministry figures put participation in the school strike at 1.08%.", "bSrc": ["soleOct16"], "status": "The two figures measure different things (marchers and striking school staff and students), and no independent count of marchers has been published." }
+  ],
+  "accountability": [
+    { "date": "Oct 16", "action": "Three minors arrested for resisting a public official; about 50 others identified and referred to judicial authorities in Turin", "by": "Police (figures via Avvenire)", "label": "reported" },
+    { "date": "Oct 16", "action": "21 young people identified and reported in Verona", "by": "Police", "label": "confirmed" },
+    { "date": "Oct 16", "action": "One person detained and 30 reported after an attempt to occupy a school in Alessandria", "by": "Police (figures via Avvenire)", "label": "reported" },
+    { "date": "Oct 16", "action": "Video footage reviewed to identify those involved in violence in Rome", "by": "Rome police", "label": "reported" },
+    { "date": "Oct 17", "action": "About 50 people detained in Milan, almost half of them minors (preliminary figure)", "by": "Police and prefecture (figure via Il Giorno)", "label": "reported" },
+    { "date": "Oct 17", "action": "Seven arrests in Bologna", "by": "Police (figure via ANSA, cited by Reuters)", "label": "reported" }
+  ],
+  "places": [
+    { "name": "Milan", "lat": 45.46, "lon": 9.19, "desc": "Clashes around Piazza Duomo; about 50 detained, Oct 17", "r": 9, "anchor": "end", "dx": -12, "dy": -4 },
+    { "name": "Turin", "lat": 45.07, "lon": 7.69, "desc": "Water cannon and tear gas in Piazza Castello, Oct 16", "r": 8, "anchor": "start", "dx": 10, "dy": 14 },
+    { "name": "Verona", "lat": 45.44, "lon": 10.99, "desc": "21 young people reported to police, Oct 16", "r": 5, "anchor": "start", "dx": 10, "dy": -4 },
+    { "name": "Bologna", "lat": 44.49, "lon": 11.34, "desc": "Clashes near the station; seven arrests, Oct 17", "r": 6, "anchor": "start", "dx": 10, "dy": 6 },
+    { "name": "Rome", "lat": 41.9, "lon": 12.5, "desc": "Students at the Education Ministry, Oct 16; CGIL rally, Oct 17", "r": 9, "anchor": "start", "dx": 12, "dy": 4 },
+    { "name": "Naples", "lat": 40.85, "lon": 14.27, "desc": "Student protests and school occupations", "r": 5, "anchor": "start", "dx": 10, "dy": 4 },
+    { "name": "Bari", "lat": 41.12, "lon": 16.87, "desc": "About 700 students march, Oct 16", "r": 5, "anchor": "end", "dx": -10, "dy": -8 }
+  ],
+  "figures": {
+    "detained": { "type": "bar", "title": "Detained, arrested or reported to police, by city", "rows": [["Milan, Oct 17", 50], ["Turin, Oct 16", 53], ["Verona, Oct 16", 21], ["Bologna, Oct 17", 7]], "max": 60, "unit": "", "caption": "Preliminary figures from police, via Il Giorno (Milan), Avvenire (Turin: 3 arrested, about 50 identified), Il Sole 24 Ore and Avvenire (Verona) and ANSA via Reuters (Bologna). Measures differ by city; no national total has been published.", "aria": "About 50 detained in Milan on October 17; 3 arrested and about 50 identified in Turin and 21 reported in Verona on October 16; 7 arrested in Bologna on October 17" },
+    "officers": { "type": "bar", "title": "Police officers injured, as reported", "rows": [["Milan, Oct 17", 15], ["Turin, Oct 16", 10], ["Alessandria, Oct 16", 2]], "max": 20, "unit": "", "caption": "Sources: police and prefecture via Il Giorno (Milan); Avvenire (Turin, Alessandria). No national figure has been published, and no total for injured protesters.", "aria": "Officers injured: 15 in Milan on October 17, 10 in Turin and 2 in Alessandria on October 16" }
+  },
+  "gaps": [
+    "National totals of arrests and injuries for October 16 and 17, including injured protesters",
+    "An independent count of how many people marched",
+    "Who organises the \"Italia in Piazza\" movement",
+    "Charges against those detained in Milan, Turin and Bologna",
+    "Whether the government changes the school decree or responds to protesters' demands",
+    "Whether students follow through on a threatened general strike on October 30, reported by Il Sole 24 Ore"
+  ],
+  "corrections": [],
+  "sourceGroups": [
+    ["Background and the build-up", ["afpOct16"]],
+    ["October 16: \"No Meloni Day\"", ["soleOct16", "avvenireOct16", "mirrorOct16", "repubblicaOct16"]],
+    ["Latest", ["reutersOct17", "openOct17", "skyMilan", "ilgiornoOct17", "skyCgil"]]
+  ],
+  "sources": {
+    "afpOct16": ["AFP (via The Local Italy)", "https://www.thelocal.it/20261016/italy-braces-for-autumn-of-discontent-as-students-protest"],
+    "soleOct16": ["Il Sole 24 Ore", "https://en.ilsole24ore.com/art/no-meloni-day-students-take-to-the-streets-to-protest-against-education-policies-AJDQlImB"],
+    "avvenireOct16": ["Avvenire", "https://www.avvenire.it/attualita/slogan-e-pietre-un-giorno-di-guerriglia-gli-studenti-copiano-la-rabbia-francese_114421"],
+    "mirrorOct16": ["Mirror (via AOL)", "https://www.aol.co.uk/articles/student-protests-spread-across-europe-184913000.html"],
+    "repubblicaOct16": ["La Repubblica (via UNN)", "https://unn.ua/en/news/massive-student-protests-erupted-in-italy-more-than-400000-people-took-to-the-streets"],
+    "reutersOct17": ["Reuters (via The Jerusalem Post)", "https://www.jpost.com/international/article-911986"],
+    "openOct17": ["Open", "https://www.open.online/2026/10/17/proteste-italia-in-piazza-via-maestra-aggiornamenti/"],
+    "skyMilan": ["Sky TG24", "https://tg24.sky.it/cronaca/2026/10/17/milano-corteo-scontri-feriti"],
+    "ilgiornoOct17": ["Il Giorno", "https://www.ilgiorno.it/milano/cronaca/corteo-scontri-piazza-duomo-milano-uidm31e6"],
+    "skyCgil": ["Sky TG24", "https://tg24.sky.it/cronaca/2026/10/17/manifestazione-cgil-roma"]
+  }
+}
