@@ -23,10 +23,39 @@ function withIds(st) {
 }
 const voteWidget = (st, hint) => `<div class="votes" data-story="${st.slug}" role="group" aria-label="Vote on ${esc(st.title)}"><button type="button" class="up" aria-pressed="false" title="Upvote: move this story up the list"><span aria-hidden="true">▲</span> Upvote</button><span class="score" aria-live="polite" title="Votes">0</span><button type="button" class="down" aria-pressed="false" title="Downvote: move this story down the list"><span aria-hidden="true">▼</span><span class="sr">Downvote</span></button>${hint ? `<span class="vhint">${hint}</span>` : ""}</div>`;
 const added = (e) => e.added ? `<time class="ago" datetime="${e.added}">Added ${long(e.added.slice(0, 10))}</time>` : "";
-const MEANING = { confirmed: "Two or more independent outlets", reported: "One outlet so far", disputed: "Accounts conflict; we show both", alleged: "One side's claim, not yet confirmed", pending: "Expected; outcome being checked" };
+const MEANING = { confirmed: "Two or more independent sources; copies of one wire story count once", reported: "One outlet so far", disputed: "Accounts conflict; we show both", alleged: "One side's claim, not yet confirmed", pending: "Expected; outcome being checked" };
 const stamp = (l) => `<span class="stamp s-${l}" title="${LABEL[l]}: ${MEANING[l]}">${LABEL[l]}</span>`;
 const SHORT = { confirmed: "2+ outlets", reported: "1 outlet", disputed: "sides disagree", alleged: "one side's claim", pending: "being checked" };
-const keyStrip = () => `<div class="key" role="note" aria-label="What our labels mean"><span class="key-title">How sure are we?</span><ul>${["confirmed", "reported", "disputed", "alleged", "pending"].map((l) => `<li>${stamp(l)}<span>${SHORT[l]}</span></li>`).join("")}</ul></div>`;
+const keyStrip = () => `<div class="key" role="note" aria-label="What our labels mean"><a class="key-title" href="/how-we-work/#labels">How sure are we?</a><ul>${["confirmed", "reported", "disputed", "alleged", "pending"].map((l) => `<li>${stamp(l)}<span>${SHORT[l]}</span></li>`).join("")}</ul></div>`;
+/* Independence: wire copy republished by several outlets counts once, and so do outlets with the same parent. */
+const WIRES = ["AFP", "Reuters", "AP", "PTI", "IANS", "ANI", "UNI", "Xinhua", "Anadolu", "DPA", "EFE", "ANSA"];
+const PARENT = { "ICI": "Radio France", "France Bleu": "Radio France", "franceinfo": "Radio France", "France Inter": "Radio France", "France 2": "France Télévisions", "France 3": "France Télévisions", "CNews": "Bolloré media", "Europe 1": "Bolloré media", "JDD": "Bolloré media" };
+function origins(name) {
+  const n = name.replace(/\s+live updates$/i, "").trim();
+  const via = n.match(/^(.*?)\s+via\s+.*$/i); if (via && !n.includes("(")) return [via[1].trim()];
+  const m = n.match(/^(.*?)\s*\((.*)\)\s*$/);
+  if (!m) return [n];
+  if (/^via\s/i.test(m[2])) return [m[1].trim()];
+  const w = m[2].split(/,\s*/).filter((x) => WIRES.includes(x));
+  return w.length ? w : [m[1].trim()];
+}
+function independent(S, keys) {
+  const g = new Map();
+  for (const k of keys) for (const o of origins(S[k][0])) { const key = PARENT[o] || o; if (!g.has(key)) g.set(key, new Set()); g.get(key).add(o); }
+  return [...g.values()].map((x) => [...x].join(" / "));
+}
+const andList = (a) => a.length <= 1 ? (a[0] || "") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
+const LABEL_WARNINGS = [];
+function why(S, label, keys, where) {
+  const how = ` <a href="/how-we-work/#labels">How we label</a>`;
+  if (label === "confirmed") {
+    const g = independent(S, keys);
+    if (g.length < 2) LABEL_WARNINGS.push(`${where}: confirmed but only ${g.length} independent source(s): ${g.join(", ")}`);
+    return `<p class="why">Confirmed by ${g.length >= 2 ? "independent reports from " : ""}${esc(andList(g))}.${how}</p>`;
+  }
+  const text = { reported: "Reported: not yet confirmed by a second independent source.", disputed: "Disputed: the accounts conflict. Both are given, with their sources.", alleged: "Alleged: one side's claim, not independently confirmed.", pending: "Checking: expected or unresolved. We will update this when the outcome is known." }[label];
+  return text ? `<p class="why">${text}${how}</p>` : "";
+}
 const newestAdded = (st) => st.events.reduce((m, e) => (e.added && e.added > m ? e.added : m), st.updatedAt || "");
 const firstSentence = (t, max) => { const f = t.split(". ")[0].replace(/\.$/, ""); return f.length > max ? f.slice(0, f.lastIndexOf(" ", max)) + "…" : f + "."; };
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
@@ -130,7 +159,7 @@ function storyPage(st) {
     const items = rows.map((e) => {
       const post = `${long(e.date)}: ${e.text}\n\nFull timeline and sources on Unowned: ${SITE}${path}#${itemId(e)}`;
       const share = e.label === "pending" ? "" : `<button type="button" class="share" data-post="${esc(post)}" aria-label="Share the ${esc(short(e.date))} entry">Share</button>`;
-      return `<li id="${itemId(e)}" data-label="${e.label}"><span class="date">${short(e.date)}</span><div class="body"><div class="item-top">${stamp(e.label)}${share}</div><p>${esc(e.text)}</p>${srcLine(S, e.sources)}</div></li>`;
+      return `<li id="${itemId(e)}" data-label="${e.label}"><span class="date">${short(e.date)}</span><div class="body"><div class="item-top">${stamp(e.label)}${share}</div><p>${esc(e.text)}</p>${srcLine(S, e.sources)}${why(S, e.label, e.sources, `${st.slug} ${e.date}`)}</div></li>`;
     }).join("\n");
     return { n: rows.length, html: `<div class="phase-block"><div class="phase"><p class="eyebrow">${esc(p.when)}</p><h3>${esc(p.name)}</h3></div><ol class="timeline">${items}</ol></div>` };
   }).filter((b) => b && b.html);
@@ -143,7 +172,7 @@ function storyPage(st) {
     <p class="who">${esc(g.who)}</p>
     <p class="shows">${esc(g.shows)}</p>
     <p class="check"><strong>How we checked:</strong> ${esc(g.check)}</p>
-    ${srcLine(S, g.sources)}
+    ${srcLine(S, g.sources)}${why(S, g.label, g.sources, `${st.slug} ground ${g.date}`)}
   </article>`).join("\n");
   const claimsHtml = st.claims.map((c) => `<article class="claim">
   <div class="claim-head"><h3>${esc(c.title)}</h3>${stamp(c.label)}</div>
@@ -237,7 +266,7 @@ ${groundHtml ? `<section id="ground" aria-labelledby="h-ground">
 <section id="method" aria-labelledby="h-method">
   <h2 id="h-method">How this page is made</h2>
   <details class="fold"><summary>Our method, corrections and open questions</summary>
-  <p>Only published reporting and publicly posted material. AI helps gather, check and organize it. Routine updates are published once they pass our sourcing and fairness checks; anything sensitive waits for a person, and a person reviews everything we publish. <a href="/how-we-work/">Our full standards</a>.</p>
+  <p>Only published reporting and publicly posted material. AI helps gather, check and organize it. Routine updates are published automatically once they pass our sourcing and fairness checks; anything sensitive waits for a person to approve it. <a href="/how-we-work/">Our full standards</a>.</p>
   <div class="two">
     <div class="panel"><h3>Corrections</h3>${corrHtml}</div>
     <div class="panel"><h3>Still being checked</h3><ul>${gapsHtml}</ul></div>
@@ -359,18 +388,28 @@ function build() {
 
   simple("/how-we-work/", "How we work", "Unowned's standards for sourcing, labelling, fairness and corrections.", `<div class="prose">
 <p>Unowned turns scattered reports and footage into a clear, checked record. These are the rules every item follows.</p>
+<h2>Where our information comes from</h2>
+<p>Unowned does not have reporters on the ground yet. Most of what we publish is checked against established news organisations and wire services, and against official statements. Posts and videos from people who were there appear in <strong>From the ground</strong>: we describe them, say who posted them and which outlets reported on them, and link to the original. A post on its own is never enough to label anything confirmed.</p>
+<p>Many of the outlets we cite are owned by companies, governments or wealthy individuals. We show who reported what on every item so you can judge for yourself, rather than ask you to trust us.</p>
 <h2>Sourcing</h2>
 <ol>
-<li>We use published reporting and publicly posted material. Every item links to where it came from.</li>
-<li>An item is marked <strong>confirmed</strong> only when two or more independent outlets report it, ideally with different leanings.</li>
+<li>Every item links to where it came from.</li>
 <li>We link to original posts rather than re-uploading them, and say who posted them and when. We check for old or recycled footage before using any clip.</li>
+<li>Under each item, a line says why it has its label, for example "Confirmed by independent reports from AP and Reuters".</li>
 </ol>
-<h2>Labels</h2>
+<h2 id="labels">Labels</h2>
 <ul>
-<li>${stamp("confirmed")} two or more independent outlets</li>
-<li>${stamp("reported")} one outlet so far; we are looking for a second</li>
-<li>${stamp("disputed")} the sides give conflicting accounts, and we show both</li>
-<li>${stamp("alleged")} one party's claim that has not been independently confirmed</li>
+<li>${stamp("confirmed")} <strong>Two or more independent sources</strong> report it. Sources are independent when they did their own reporting. When several outlets publish the same wire story (for example AFP or Reuters), that counts as one source. So do outlets owned by the same company, such as franceinfo and ICI (both Radio France).</li>
+<li>${stamp("reported")} <strong>One source so far.</strong> We are looking for a second.</li>
+<li>${stamp("disputed")} <strong>The accounts conflict.</strong> We give each side in its own terms, with its sources, and say what is still unknown.</li>
+<li>${stamp("alleged")} <strong>One side's claim</strong> that has not been independently confirmed, such as an accusation by a party, a group or the authorities.</li>
+<li>${stamp("pending")} <strong>Expected or unresolved,</strong> such as a court hearing or a planned march. We replace it when the outcome is known.</li>
+</ul>
+<h3>What "confirmed" does and doesn't mean</h3>
+<ul>
+<li>When we write "police say 150 were detained" and label it confirmed, we have confirmed that police gave that figure, not that the figure is right. Official figures are always attributed, and where other counts differ we show them.</li>
+<li>Confirmed means independent sources agree. It is not a guarantee. If later reporting shows we were wrong, we change the label and say so on the <a href="/corrections/">corrections page</a>.</li>
+<li>Labels can go down as well as up. An item moves from reported to confirmed when a second independent source appears, and back if we find the sources were not independent.</li>
 </ul>
 <h2>Fairness</h2>
 <ul>
@@ -379,7 +418,7 @@ function build() {
 <li>We don't name ordinary protesters or private individuals.</li>
 </ul>
 <h2>How AI is used</h2>
-<p>AI helps us find, translate, sort, check and draft. Routine updates backed by published reporting are published as soon as they pass our checks, so stories stay current. Anything sensitive (an accusation against a named person, details that could identify a minor or a private individual, claims of deaths, or anything from a single unverified post) waits for a person to approve it. A person reviews everything we publish, and mistakes are corrected in public on the <a href="/corrections/">corrections page</a>.</p>
+<p>AI finds, translates, sorts, checks and drafts our updates. Routine updates backed by published reporting are published automatically once they pass our written checks, without waiting for a person, so stories stay current. Anything sensitive waits for a person to approve it: an accusation against a named person, details that could identify a minor or a private individual, claims of deaths, or anything resting on a single unverified post. Mistakes are corrected in public on the <a href="/corrections/">corrections page</a>.</p>
 <h2>Corrections</h2>
 <p>We correct mistakes quickly and in public. Every change made after publishing is listed with its date. <a href="/submit/">Report an error</a>.</p>
 </div>`);
@@ -430,6 +469,8 @@ ${items.map(({ s, e }) => `<item><title>${esc(`${long(e.date)}: ${e.text.split("
   write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE}${u}</loc></url>`).join("")}</urlset>\n`);
   write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
   console.log(`Built ${stories.length} story page(s) and ${urls.length} pages into ./${OUT}`);
+  if (LABEL_WARNINGS.length) console.warn(`LABEL CHECK: ${LABEL_WARNINGS.length} item(s) need attention\n` + LABEL_WARNINGS.map((w) => "  - " + w).join("\n"));
+  else console.log("LABEL CHECK: every confirmed item has two or more independent sources");
 }
 
 build();
