@@ -5,7 +5,7 @@
   "dek": "What happened, what is confirmed, and where the accounts disagree, from the exam leak in May to the protests against the Election Commission in October.",
   "status": "Season 2 active",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T11:23:11Z",
+  "updatedAt": "2026-10-17T12:22:43Z",
   "summary": [
     "The Cockroach Janta Party (CJP) began on May 16 as a satirical online response to remarks by Chief Justice Surya Kant, a day after he reportedly likened some unemployed youth to cockroaches. Anger over the cancelled NEET medical entrance exam turned it into a street movement.",
     "After a 36-day protest in Delhi, including a July 20 march met with tear gas and batons, Education Minister Dharmendra Pradhan resigned on July 25 and the CJP called off its protest, saying its demands had been accepted. From August, the CJP said the government had not honoured those commitments, chiefly withdrawing criminal cases against protesters and compensating families of students who died by suicide.",
@@ -63,7 +63,8 @@
     { "date": "2026-10-17", "phase": "s2", "label": "confirmed", "added": "2026-10-17T01:23:18Z", "text": "Delhi Police say AISA president Neha Bora was released early on Saturday after formalities under the Delhi Police Act. Dipke has been arrested under preventive sections 126 and 170 of the BNSS, and police sources say he will be produced before a Special Executive Magistrate later on Saturday.", "sources": ["ptiOct17", "iansOct17"] },
     { "date": "2026-10-17", "phase": "s2", "label": "confirmed", "added": "2026-10-17T07:23:38Z", "text": "Delhi Police register multiple FIRs over alleged violations of Section 163 prohibitory orders during Friday's protests in Connaught Place and other parts of New Delhi, and say repeat offenders will face action. Police say displaying the national flag was not banned, but processions or assemblies without permission could lead to legal action.", "sources": ["statesmanOct17", "hansOct17"] },
     { "date": "2026-10-17", "phase": "s2", "label": "confirmed", "added": "2026-10-17T11:23:11Z", "text": "A Special Executive Magistrate grants Dipke conditional bail and directs him to furnish a peace bond; LiveLaw reports one condition requires him to keep the peace for one year. Reports say he will be released once bond formalities are completed.", "sources": ["barandbenchOct17", "livelawOct17", "aajtakOct17"] },
-    { "date": "2026-10-17", "phase": "s2", "label": "pending", "added": "2026-10-17T11:23:11Z", "text": "Confirmation of Dipke's release, full bail conditions, and release of others detained on October 16. Still being checked.", "sources": ["livelawOct17"] }
+    { "date": "2026-10-17", "phase": "s2", "label": "confirmed", "added": "2026-10-17T12:22:43Z", "text": "Dipke is released on Saturday after the magistrate hearing. CJP legal head Ratna Singh says he agreed to conditions she did not detail; The Week reports that several lawyers were kept out of the hearing by security.", "sources": ["reutersOct17", "weekOct17"] },
+    { "date": "2026-10-17", "phase": "s2", "label": "pending", "added": "2026-10-17T12:22:43Z", "text": "Whether all others detained on October 16 have been released, and the outcome of further protests that student groups called for on Saturday. Still being checked.", "sources": ["reutersOct17", "weekOct17"] }
   ],
   "claims": [
     { "title": "What the Chief Justice meant", "label": "disputed", "a": "Reports and critics: he likened unemployed youth to cockroaches and parasites.", "aSrc": ["fpj"], "b": "The Chief Justice: he was misquoted and meant people entering professions with fake degrees.", "bSrc": ["quint"], "status": "Both accounts are on record." },
@@ -135,7 +136,7 @@
     "Official NEET re-exam date and outcome",
     "Number and status of cases against protesters",
     "Government and Election Commission statements in full",
-    "Full bail conditions, confirmation of Dipke's release, and release of others detained on October 16",
+    "Full bail conditions for Dipke, and whether all others detained on October 16 have been released",
     "Number of FIRs registered over the October 16 protests and who is named in them"
   ],
   "corrections": [
@@ -148,7 +149,7 @@
     ["Return and July protests", ["etvReturn", "mooknayakReturn", "reutersProfile", "kaumudiProfile", "ktJul19", "apJul20", "ajJul20", "apJul21", "cgfoe", "npr", "apJul25", "ajJul25"]],
     ["August and September", ["reutersParty", "ktSep5", "weekSep5", "sentinel", "kaumudiLatur", "awaaz"]],
     ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16", "dawnOct16", "gulfOct16", "ptiOct16", "etvOct16", "printOct16", "weekOct16", "tribuneOct16", "aniOct16"]],
-    ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16", "ptiOct17", "iansOct17", "statesmanOct17", "hansOct17", "barandbenchOct17", "livelawOct17", "aajtakOct17"]]
+    ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16", "ptiOct17", "iansOct17", "statesmanOct17", "hansOct17", "barandbenchOct17", "livelawOct17", "aajtakOct17", "reutersOct17", "weekOct17"]]
   ],
   "sources": {
     "newslaundry": ["Newslaundry", "https://www.newslaundry.com/amp/story/2026%2F05%2F12%2Fwhy-neet-ug-2026-has-been-cancelled"],
@@ -217,7 +218,9 @@
     "hansOct17": ["The Hans India", "https://www.thehansindia.com/news/cities/new-delhi/neha-bora-released-abhijeet-dipke-to-be-produced-before-magistrate-1133199"],
     "barandbenchOct17": ["Bar & Bench", "https://www.barandbench.com/news/delhi-sem-court-grants-bail-to-cjp-founder-abhijeet-dipke"],
     "livelawOct17": ["LiveLaw", "https://www.livelaw.in/news-updates/delhi-court-grants-bail-to-cjp-founder-abhijeet-dipke-555194"],
-    "aajtakOct17": ["Aaj Tak", "https://www.aajtak.in/india/delhi/story/abhijeet-dipke-bail-cjp-chief-after-delhi-police-detention-magistrate-court-order-ntc-mnrd-rpti-2673330-2026-10-17"]
+    "aajtakOct17": ["Aaj Tak", "https://www.aajtak.in/india/delhi/story/abhijeet-dipke-bail-cjp-chief-after-delhi-police-detention-magistrate-court-order-ntc-mnrd-rpti-2673330-2026-10-17"],
+    "reutersOct17": ["Reuters (via ThePrint)", "https://theprint.in/world/indias-cockroach-movement-founder-released-a-day-after-detention/3074712/"],
+    "weekOct17": ["The Week", "https://www.theweek.in/news/india/2026/10/17/abhijeet-dipke-released-on-conditional-bail-peace-bond-by-court.html"]
   },
   "nav": "Cockroach movement",
   "region": "India",
