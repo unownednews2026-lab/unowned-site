@@ -11,7 +11,7 @@
   "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
   "status": "Ongoing",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T14:54:03Z",
+  "updatedAt": "2026-10-17T16:30:19Z",
   "summary": [
     "French high school students began blockading their schools in the Paris suburbs in mid to late September, protesting teacher shortages, overcrowded classes, run-down buildings and classrooms that reached 35 to 40°C in heatwaves. Within two weeks the blockades had spread across France, with hundreds of schools closed or disrupted.",
     "The police response has become a story of its own. Thousands of people, most of them minors, have been arrested; hundreds of students, school staff and police officers have been injured. A 15-year-old lost a hand in Lens on October 5, and the government suspended stun grenades at student protests two days later. Rights groups say force against minors has been disproportionate; police unions say force is used against people who attack officers.",
@@ -73,6 +73,7 @@
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:30:03Z", "text": "In Lyon, a branch of the tourism office is ransacked and set on fire during the protest, CNews and ICI report; Al Jazeera cites local media. No official figures for Lyon have been given yet.", "sources": ["cnewsLyonOct17", "iciOct17", "ajOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T14:30:03Z", "text": "According to AFP, the Paris police prefecture says about 100 people had been arrested in Paris by midday. Marseille mayor Benoît Payan says President Macron assured him police reinforcements would be sent.", "sources": ["sudradioAfpOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:54:03Z", "text": "CNews, ICI and Sud Radio report that 272 people had been arrested nationwide by mid-afternoon; BFM TV gives the count as of 3pm. The reports seen do not name who issued the figure.", "sources": ["cnewsLiveOct17b", "iciOct17", "sudradioLiveOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T16:30:19Z", "text": "The CGT union says more than 500,000 people demonstrated across France, according to franceinfo and ICI. No official turnout figure had been published in the reports seen.", "sources": ["fiLiveOct17", "iciOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-16T20:32:00Z", "text": "National protest day over the cost of living, joined by students and unions, with online calls from Yellow Vest supporters. Nuñez expects about 80 marches to be authorised, with 20,000 to 40,000 people expected in Paris. Outcome still being checked.", "sources": ["localOct17", "aaOct16"] }
   ],
   "claims": [
@@ -111,7 +112,7 @@
     "arrests": { "type": "bar", "title": "Arrests since late September, per the Justice Ministry", "rows": [["Apprehended", 7950], ["Charged", 2735]], "max": 9000, "unit": "", "caption": "As of October 14, 85% of them minors. Source: Justice Ministry, via AFP. Euronews cites 6,800 taken into custody.", "aria": "As of October 14: 7,950 people apprehended and 2,735 charged, per the Justice Ministry" }
   },
   "gaps": [
-    "Turnout, final arrest figures and incidents on the October 17 protest day",
+    "Official turnout (the CGT says more than 500,000), final arrest figures and incidents on the October 17 protest day",
     "Findings of the investigation into the Lens injury",
     "Outcome of the 36 internal police investigations",
     "Whether all 3,000 substitute teachers are in place",
