@@ -11,7 +11,7 @@
   "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
   "status": "Ongoing",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T18:54:01Z",
+  "updatedAt": "2026-10-17T22:25:35Z",
   "summary": [
     "French high school students began blockading their schools in the Paris suburbs in mid to late September, protesting teacher shortages, overcrowded classes, run-down buildings and classrooms that reached 35 to 40°C in heatwaves. Within two weeks the blockades had spread across France, with hundreds of schools closed or disrupted.",
     "The police response has become a story of its own. Thousands of people, most of them minors, have been arrested; hundreds of students, school staff and police officers have been injured. A 15-year-old lost a hand in Lens on October 5, and the government suspended stun grenades at student protests two days later. Rights groups say force against minors has been disproportionate; police unions say force is used against people who attack officers.",
@@ -65,6 +65,7 @@
     { "date": "2026-10-16", "phase": "response", "label": "reported", "added": "2026-10-16T22:54:00Z", "text": "Speaking in Brussels, Macron calls for calm before Saturday's protests, saying the right to protest must come with respect and means not insulting or smashing, and that officers have faced \"extreme violence\". Prime Minister Lecornu convenes an interministerial crisis cell for Saturday.", "sources": ["europe1Oct16", "20minOct16"] },
     { "date": "2026-10-16", "phase": "response", "label": "confirmed", "added": "2026-10-16T22:54:00Z", "text": "Interior Minister Laurent Nuñez tells France 2 that police and gendarmes must be able to use all their intermediate weapons on Saturday, including stun grenades in case of very serious urban violence.", "sources": ["aaOct16", "20minOct16"] },
     { "date": "2026-10-16", "phase": "response", "label": "confirmed", "added": "2026-10-17T01:23:18Z", "text": "The Paris police prefect bans a student march from République to Concorde planned for Saturday, citing serious risks to public order and violence at Tuesday's march. He offers a République–Nation route instead; organisers from Paris-area university assemblies refuse it.", "sources": ["fiOct16", "apOct16"] },
+    { "date": "2026-10-16", "phase": "response", "label": "reported", "added": "2026-10-16T20:32:00Z", "text": "Ahead of Saturday's national protest day over the cost of living, joined by students and unions and with online calls from Yellow Vest supporters, Nuñez says he expects about 80 marches to be authorised, with 20,000 to 40,000 people expected in Paris.", "sources": ["localOct17", "aaOct16"] },
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T09:53:21Z", "text": "Early on Saturday, police disperse small groups attempting to block roads in Lyon, and franceinfo reports burning barricades in Rennes. The main marches, including in Paris, are due in the afternoon.", "sources": ["fiLiveOct17", "cnewsOct17", "entrevueOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T10:23:21Z", "text": "In Marseille, France 3 and BFMTV report the first tensions between protesters and police on Saturday morning, with bins set on fire. No official arrest or injury figures have been given yet.", "sources": ["f3MarseilleOct17", "bfmMarseilleOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T10:54:13Z", "text": "The Paris police prefecture tells AFP that about 40 people were arrested early on Saturday, mostly for carrying banned protective gear or weapons, during checks enforcing protest bans near seats of power and train stations. It describes this as a first count.", "sources": ["hespressAfpOct17"] },
@@ -84,7 +85,11 @@
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T18:22:19Z", "text": "In Limoges, a fire breaks out at the town hall after a group attacks the building following the march, Europe 1 reports citing AFP; the prefecture confirms the fire.", "sources": ["europe1LiveOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T18:54:01Z", "text": "In a post on X, President Emmanuel Macron says there is \"no place for violence\" in the Republic and that those who damaged or looted prefectures, shops and town halls will be prosecuted and punished; he also voices support for the police.", "sources": ["europe1MacronOct17", "fiLiveOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T18:54:01Z", "text": "Prime Minister Lecornu rejects La France insoumise leader Jean-Luc Mélenchon's claim that police command was to blame for the chaos in Paris, calling it a dangerous reversal of responsibility, Europe 1 reports citing AFP.", "sources": ["europe1LiveOct17"] },
-    { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-16T20:32:00Z", "text": "National protest day over the cost of living, joined by students and unions, with online calls from Yellow Vest supporters. Nuñez expects about 80 marches to be authorised, with 20,000 to 40,000 people expected in Paris. Outcome still being checked.", "sources": ["localOct17", "aaOct16"] }
+    { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T22:25:35Z", "text": "The Paris police prefecture says 191 people had been arrested in Paris by 6pm, about 90% of them adults, Europe 1 reports.", "sources": ["europe1LiveOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T22:25:35Z", "text": "Haute-Vienne prefect Maurice Barate tells AFP that the Limoges town hall is largely lost: the roof has collapsed onto the lower floors except in the west wing, and about two-thirds of the façade is gone.", "sources": ["europe1LiveOct17", "f24LimogesOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T22:25:35Z", "text": "Justice Minister Gérald Darmanin instructs prosecutors to seek an extremely firm judicial response, including pre-trial detention, for those who attacked police, firefighters, public buildings and shops, Europe 1 reports.", "sources": ["europe1LiveOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T22:25:35Z", "text": "Late on Saturday, about 30 people try to storm La Santé prison in Paris, firing fireworks mortars at the building and nearby, and four people are arrested, Europe 1 reports.", "sources": ["europe1LiveOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-17T22:25:35Z", "text": "Final national arrest and injury figures for the October 17 protest day, how many people remain in custody, and any further protest dates. Still being checked.", "sources": ["europe1LiveOct17"] }
   ],
   "claims": [
     { "title": "Who is driving the movement?", "label": "disputed", "a": "The government says students' concerns are legitimate but that the movement is being exploited for political ends and turned into urban violence.", "aSrc": ["afpOct14", "euroOct14"], "b": "Students describe it as a response to teacher shortages, overcrowding and neglected buildings. LFI, which the government has blamed for stoking tensions, says the government acted on police force only after children were badly hurt.", "bSrc": ["ajVoices", "euroOct7"], "status": "Open. Both positions are on record; there is no independent finding on who organises the protests." },
@@ -108,7 +113,10 @@
     { "date": "Oct 17", "action": "About 20 arrests after incident outside CNews headquarters in Paris", "by": "Paris police prefecture", "label": "reported" },
     { "date": "Oct 17", "action": "About 100 arrests in Paris by midday", "by": "Paris police prefecture (figure via AFP)", "label": "reported" },
     { "date": "Oct 17", "action": "272 arrests nationwide by mid-afternoon", "by": "Interior minister's entourage, per Le Parisien via L'Express; also reported by CNews, ICI, Sud Radio and BFM TV", "label": "confirmed" },
-    { "date": "Oct 17", "action": "About 400 arrests nationwide by the evening", "by": "Interior Minister Laurent Nuñez, per Europe 1 and CNews", "label": "reported" }
+    { "date": "Oct 17", "action": "About 400 arrests nationwide by the evening", "by": "Interior Minister Laurent Nuñez, per Europe 1 and CNews", "label": "reported" },
+    { "date": "Oct 17", "action": "191 arrests in Paris by 6pm", "by": "Paris police prefecture, per Europe 1", "label": "reported" },
+    { "date": "Oct 17", "action": "Prosecutors instructed to seek a very firm response, including pre-trial detention", "by": "Justice Minister Gérald Darmanin, per Europe 1", "label": "reported" },
+    { "date": "Oct 17", "action": "Four arrests after an attempt to storm La Santé prison in Paris", "by": "Europe 1", "label": "reported" }
   ],
   "places": [
     { "name": "Paris region", "lat": 48.86, "lon": 2.35, "desc": "Créteil, where blockades began; Saint-Denis; clashes near Les Invalides on October 13", "r": 9, "anchor": "start", "dx": 12, "dy": 4 },
@@ -123,7 +131,7 @@
     "arrests": { "type": "bar", "title": "Arrests since late September, per the Justice Ministry", "rows": [["Apprehended", 7950], ["Charged", 2735]], "max": 9000, "unit": "", "caption": "As of October 14, 85% of them minors. Source: Justice Ministry, via AFP. Euronews cites 6,800 taken into custody.", "aria": "As of October 14: 7,950 people apprehended and 2,735 charged, per the Justice Ministry" }
   },
   "gaps": [
-    "Independent confirmation of turnout (organisers say about 800,000, the interior minister 550,000) and of the interior minister’s figure of about 400 arrests, injuries on the October 17 protest day, the extent of the Limoges town hall fire, and whether an investigation is opened into the Saint-Étienne injury",
+    "Independent confirmation of turnout (organisers say about 800,000, the interior minister 550,000) and of the interior minister’s figure of about 400 arrests; a CNews live headline gives at least 1,200 arrests, not yet reported elsewhere. Also: injuries on the October 17 protest day, whether investigations are opened into the Limoges town hall fire and the Saint-Étienne injury, and an independent account of the La Santé prison incident",
     "Findings of the investigation into the Lens injury",
     "Outcome of the 36 internal police investigations",
     "Whether all 3,000 substitute teachers are in place",
@@ -137,7 +145,7 @@
     ["How it started", ["ajVoices", "bbcSep28"]],
     ["Injuries, arrests and the police response", ["ajOct5", "ajOct7", "euroOct7", "psOct7"]],
     ["Government measures and turnout", ["mwnOct9", "euroOct13", "afpOct14", "euroOct14", "localOct17"]],
-    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17", "europe1StEtienneOct17", "fiStEtienneOct17", "iciStEtienneOct17", "f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17", "cnewsLecornuOct17", "lexpressOrangeOct17", "europe1BordeauxOct17", "lessentielBordeauxOct17", "europe1LiveOct17", "cnewsNunezOct17", "europe1MacronOct17"]]
+    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17", "europe1StEtienneOct17", "fiStEtienneOct17", "iciStEtienneOct17", "f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17", "cnewsLecornuOct17", "lexpressOrangeOct17", "europe1BordeauxOct17", "lessentielBordeauxOct17", "europe1LiveOct17", "cnewsNunezOct17", "europe1MacronOct17", "f24LimogesOct17"]]
   ],
   "sources": {
     "ajVoices": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/7/were-short-of-resources-frances-student-protesters-in-their-own-words"],
@@ -184,6 +192,7 @@
     "lessentielBordeauxOct17": ["L'essentiel (AFP)", "https://www.lessentiel.lu/fr/story/mouvement-en-france-les-forces-speciales-contre-les-violences-urbaines-deployees-103644650"],
     "europe1LiveOct17": ["Europe 1 (with AFP)", "https://www.europe1.fr/societe/en-direct-mobilisation-du-17-octobre-800000-participants-selon-les-organisateurs-550000-selon-laurent-nunez-1156250"],
     "cnewsNunezOct17": ["CNews", "https://www.cnews.fr/france/2026-10-17/mobilisation-du-17-octobre-550000-personnes-ont-defile-travers-la-france-au-moins"],
-    "europe1MacronOct17": ["Europe 1 (AFP)", "https://www.europe1.fr/politique/manifestations-en-france-aucune-place-pour-la-violence-nous-ferons-tous-bloc-face-aux-semeurs-de-chaos-affirme-emmanuel-macron-1157889"]
+    "europe1MacronOct17": ["Europe 1 (AFP)", "https://www.europe1.fr/politique/manifestations-en-france-aucune-place-pour-la-violence-nous-ferons-tous-bloc-face-aux-semeurs-de-chaos-affirme-emmanuel-macron-1157889"],
+    "f24LimogesOct17": ["France 24 (AFP)", "https://www.france24.com/en/live-news/20261017-fire-rages-at-town-hall-in-france-s-limoges-after-protests-authorities"]
   }
 }
