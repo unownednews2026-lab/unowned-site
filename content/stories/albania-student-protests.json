@@ -11,7 +11,7 @@
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T15:23:36Z",
+  "updatedAt": "2026-10-17T19:23:44Z",
   "summary": [
     "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
     "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days. The interior minister says 156 people were injured over four days, including 97 police officers and 45 protesters.",
@@ -70,6 +70,7 @@
     { "date": "2026-10-17", "phase": "spread", "label": "confirmed", "added": "2026-10-17T14:30:03Z", "text": "Rama launches \"Dëmi im\" (\"My damage\"), a scheme on the e-Albania portal for small businesses damaged in the protests to claim compensation, with tax teams to verify claims.", "sources": ["kohajoneOct17", "topChLiveOct17"] },
     { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-17T14:30:03Z", "text": "Opposition leader Sali Berisha urges Democratic Party supporters and businesses to back the students, and says he is against damaging property. No separate opposition protest has been reported.", "sources": ["topChBerishaOct17"] },
     { "date": "2026-10-17", "phase": "spread", "label": "confirmed", "added": "2026-10-17T15:23:36Z", "text": "State Police chief Skënder Hita says 167 people have been arrested and 388 others face criminal proceedings over five days of protests, 132 officers have been injured and seven officers suspended pending disciplinary investigations. He says online groups are calling for violence against police; he gives no figure for injured protesters.", "sources": ["kohaHita167", "vizionHita132"] },
+    { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-17T19:23:44Z", "text": "Reuters says its video shows police firing a shotgun towards crowds outside the Education Ministry, that its reporters found rubber pellets on the ground, and that pellets hit two Reuters journalists and several protesters. Police chief Hita does not deny using rubber bullets and says the means were used in a limited way.", "sources": ["reutersPellets"] },
     { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T14:30:03Z", "text": "Official arrest and injury figures for Saturday, and whether talks between students and the government begin. Still being checked.", "sources": ["topChLiveOct17"] }
   ],
   "claims": [
@@ -110,13 +111,14 @@
     "Whether students and the government open talks",
     "Full details and status of the Zvërnec resort project",
     "Evidence for claims of foreign or opposition involvement",
-    "Who authorised the use of rubber bullets, and how many people were hit"
+    "Who authorised the use of rubber bullets, and how many people were hit",
+    "Total arrests: Reuters reports police chief Hita as saying 1,067 people have been arrested, while Albanian outlets report his figure as 167"
   ],
   "corrections": [],
   "sourceGroups": [
     ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
     ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
-    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132"]]
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets"]]
   ],
   "sources": {
     "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
@@ -147,6 +149,7 @@
     "topChLiveOct17": ["Top Channel", "https://top-channel.tv/2026/10/17/live-dita-e-peste-e-protestes-pershkallezohet-situata-te-ministria-e-arsimit-protestuesit-hedhin-molotove-dhe-gure-policia-pergjigjet-me-plumba-gome/"],
     "topChBerishaOct17": ["Top Channel", "https://top-channel.tv/2026/10/17/jam-absolutisht-kunder-prekjes-se-pronave-berisha-per-protesten-te-bashkohemi-me-ta-sepse-po-shohim-cdo-dite-skenat-me-horror/"],
     "kohaHita167": ["Koha", "https://www.koha.net/arberi/drejtori-i-policise-167-shtetas-te-arrestuar-per-pese-dite-7-police-jane-pezulluar"],
-    "vizionHita132": ["Vizion Plus", "https://www.vizionplus.tv/jane-bere-thirrje-per-sulm-ndaj-efektiveve-hita-132-punonjes-policie-te-lenduar/"]
+    "vizionHita132": ["Vizion Plus", "https://www.vizionplus.tv/jane-bere-thirrje-per-sulm-ndaj-efektiveve-hita-132-punonjes-policie-te-lenduar/"],
+    "reutersPellets": ["Reuters (via ThePrint)", "https://theprint.in/world/albanian-police-fire-rubber-bullets-as-student-protests-rage/3074885/"]
   }
 }
