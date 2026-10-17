@@ -11,7 +11,7 @@
   "dek": "Students and cost-of-living protesters march against Giorgia Meloni's government, the clashes with police in Turin, Milan and Bologna, and the unions' call for a general strike.",
   "status": "Ongoing",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T21:29:23Z",
+  "updatedAt": "2026-10-17T22:25:35Z",
   "summary": [
     "On Friday, October 16, students marched in dozens of Italian cities on what organisers called \"No Meloni Day\", protesting run-down schools, a decree capping foreign pupils at 30% of a class, the cost of living and military spending. Organisers say more than 400,000 took part; the Education Ministry puts participation in the school strike at about 1%. Police used water cannon and tear gas in Turin, and bottles and firecrackers were thrown at police in Rome.",
     "On Saturday, October 17, cost-of-living marches called by the \"Italia in Piazza\" movement were held in several cities. In Milan, groups broke away and clashed with police around Piazza Duomo; Il Giorno, citing police and the prefecture, and ANSA report about 50 people detained; injury figures differ between reports. In Rome, the CGIL union held a separate rally and announced a general strike for November 20.",
@@ -65,6 +65,8 @@
     { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T20:31:24Z", "text": "Opposition leaders Elly Schlein (PD) and Giuseppe Conte (M5S) attend the CGIL rally; Conte calls for the government to step down, Sky TG24 reports.", "sources": ["skyCgil"] },
     { "date": "2026-10-17", "phase": "costliving", "label": "confirmed", "added": "2026-10-17T21:29:23Z", "text": "In a social media post with video of the Milan clashes, Prime Minister Giorgia Meloni says protest is a right but setting cities ablaze is not, and asks the opposition to condemn the violence without ambiguity: \"every reticence becomes justification\". Milan mayor Giuseppe Sala says the protesters' reasons are understandable but the violence is unjustifiable, and warns against political exploitation.", "sources": ["ansaOct17", "fattoOct17", "openMeloniOct17"] },
     { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T21:29:23Z", "text": "Interior and justice undersecretaries from the League propose a financial deposit for demonstrations, with organisers held responsible for damage, and say an amendment is ready, Il Fatto Quotidiano reports.", "sources": ["fattoOct17"] },
+    { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T22:25:35Z", "text": "In Turin, young people throw objects at police guarding the entrance to Porta Nuova station and officers respond with tear gas; a group enters the Feltrinelli bookshop inside the station and knocks books to the floor, AGI reports.", "sources": ["agiOct17"] },
+    { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T22:25:35Z", "text": "Bologna mayor Matteo Lepore calls the scenes near the station unacceptable and says the march did not appear to have been authorised, AGI reports.", "sources": ["agiOct17"] },
     { "date": "2026-11-20", "phase": "next", "label": "pending", "added": "2026-10-17T20:31:24Z", "text": "General strike called by the CGIL for November 20. Further protests, final arrest and injury figures for October 16 and 17, and any government response to the protesters' demands are still being checked.", "sources": ["skyCgil", "openOct17"] }
   ],
   "claims": [
@@ -106,7 +108,7 @@
   "sourceGroups": [
     ["Background and the build-up", ["afpOct16"]],
     ["October 16: \"No Meloni Day\"", ["soleOct16", "avvenireOct16", "mirrorOct16", "repubblicaOct16"]],
-    ["Latest", ["reutersOct17", "openOct17", "skyMilan", "ilgiornoOct17", "skyCgil", "ansaMilanOct17", "ansaOct17", "fattoOct17", "openMeloniOct17"]]
+    ["Latest", ["reutersOct17", "openOct17", "skyMilan", "ilgiornoOct17", "skyCgil", "ansaMilanOct17", "ansaOct17", "fattoOct17", "openMeloniOct17", "agiOct17"]]
   ],
   "sources": {
     "afpOct16": ["AFP (via The Local Italy)", "https://www.thelocal.it/20261016/italy-braces-for-autumn-of-discontent-as-students-protest"],
@@ -122,6 +124,7 @@
     "ansaMilanOct17": ["ANSA", "https://www.ansa.it/sito/notizie/topnews/2026/10/17/scontri-a-milano-circa-50-fermati-quasi-la-meta-minorenni_672f523e-6b66-434f-b44d-ae835af7cc8b.html"],
     "ansaOct17": ["ANSA", "https://www.ansa.it/sito/notizie/cronaca/2026/10/17/la-protesta-per-il-carovita-diventa-guerriglia-milano-un-campo-di-battaglia_a783ef65-c2c2-4fb9-8d99-7c64d791f43c.html"],
     "fattoOct17": ["Il Fatto Quotidiano", "https://www.ilfattoquotidiano.it/2026/10/17/scontri-milano-reazioni-meloni-opposizioni-sala-notizie/8541974/"],
-    "openMeloniOct17": ["Open", "https://www.open.online/2026/10/17/scontri-proteste-rabbia-meloni-violenze/"]
+    "openMeloniOct17": ["Open", "https://www.open.online/2026/10/17/scontri-proteste-rabbia-meloni-violenze/"],
+    "agiOct17": ["AGI", "https://www.agi.it/economia/news/2026-10-17/caro-vita-proteste-manifestazioni-39583412/"]
   }
 }
