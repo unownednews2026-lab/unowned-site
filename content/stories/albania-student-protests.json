@@ -11,7 +11,7 @@
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T14:30:03Z",
+  "updatedAt": "2026-10-17T15:23:36Z",
   "summary": [
     "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
     "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days. The interior minister says 156 people were injured over four days, including 97 police officers and 45 protesters.",
@@ -69,6 +69,7 @@
     { "date": "2026-10-17", "phase": "spread", "label": "confirmed", "added": "2026-10-17T14:30:03Z", "text": "In the afternoon clashes move to the prime minister's office, where police use tear gas and water cannon and protesters throw stones. Koha Jonë reports three protesters taken to hospital, all conscious.", "sources": ["kohajoneOct17", "topChLiveOct17"] },
     { "date": "2026-10-17", "phase": "spread", "label": "confirmed", "added": "2026-10-17T14:30:03Z", "text": "Rama launches \"Dëmi im\" (\"My damage\"), a scheme on the e-Albania portal for small businesses damaged in the protests to claim compensation, with tax teams to verify claims.", "sources": ["kohajoneOct17", "topChLiveOct17"] },
     { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-17T14:30:03Z", "text": "Opposition leader Sali Berisha urges Democratic Party supporters and businesses to back the students, and says he is against damaging property. No separate opposition protest has been reported.", "sources": ["topChBerishaOct17"] },
+    { "date": "2026-10-17", "phase": "spread", "label": "confirmed", "added": "2026-10-17T15:23:36Z", "text": "State Police chief Skënder Hita says 167 people have been arrested and 388 others face criminal proceedings over five days of protests, 132 officers have been injured and seven officers suspended pending disciplinary investigations. He says online groups are calling for violence against police; he gives no figure for injured protesters.", "sources": ["kohaHita167", "vizionHita132"] },
     { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T14:30:03Z", "text": "Official arrest and injury figures for Saturday, and whether talks between students and the government begin. Still being checked.", "sources": ["topChLiveOct17"] }
   ],
   "claims": [
@@ -87,7 +88,8 @@
     { "date": "Oct 16", "action": "Two officers suspended over force used on a protester; disciplinary investigation opened", "by": "State Police", "label": "confirmed" },
     { "date": "Oct 16", "action": "Ombudsman reviews complaints of police violence against detainees", "by": "Ombudsman", "label": "reported" },
     { "date": "Oct 16", "action": "10 arrests and criminal proceedings against 22 people after Friday protests (police figures cited by AFP)", "by": "State Police", "label": "reported" },
-    { "date": "Oct 17", "action": "About 500 protesters detained over the week, 330 since released (police figures cited by Reuters)", "by": "State Police", "label": "reported" }
+    { "date": "Oct 17", "action": "About 500 protesters detained over the week, 330 since released (police figures cited by Reuters)", "by": "State Police", "label": "reported" },
+    { "date": "Oct 17", "action": "167 arrested and 388 facing criminal proceedings over five days; seven officers suspended pending disciplinary investigations (police figures)", "by": "State Police", "label": "confirmed" }
   ],
   "places": [
     { "name": "Tirana", "lat": 41.33, "lon": 19.82, "desc": "Education Ministry fire, Oct 13–14; riots and government buildings set alight; daily marches", "r": 9, "anchor": "end", "dx": -12, "dy": 4 },
@@ -102,7 +104,7 @@
     "arrests": { "type": "bar", "title": "Arrests and investigations, per police", "rows": [["Arrested over three days", 152], ["Under investigation", 324]], "max": 350, "unit": "", "caption": "As of October 16. Source: police, via DW. Al Jazeera reports 160 detained on the evening of October 15 alone; counts differ by date and definition.", "aria": "As of October 16, police say 152 people were arrested and 324 are under investigation" }
   },
   "gaps": [
-    "Full breakdown of injuries, including journalists, and official figures for October 17",
+    "Number of protesters and journalists injured, and Saturday-only arrest figures",
     "Charges against those arrested",
     "Outcome of the investigations into police conduct, and the police response to the Ombudsman's findings",
     "Whether students and the government open talks",
@@ -114,7 +116,7 @@
   "sourceGroups": [
     ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
     ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
-    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17"]]
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132"]]
   ],
   "sources": {
     "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
@@ -143,6 +145,8 @@
     "vizionHitaOct17": ["Vizion Plus", "https://www.vizionplus.tv/policia-do-vijoje-te-mbroje-jeten-hita-flet-per-perdorimin-e-plumbave-te-gomes-ne-proteste-mjete-te-certifikuara/"],
     "kohajoneOct17": ["Koha Jonë", "https://kohajone.com/aktualitet/tension-i-madh-te-kryeministria-molotove-gure-gaz-lotjselles-dhe-uje-me-presion/"],
     "topChLiveOct17": ["Top Channel", "https://top-channel.tv/2026/10/17/live-dita-e-peste-e-protestes-pershkallezohet-situata-te-ministria-e-arsimit-protestuesit-hedhin-molotove-dhe-gure-policia-pergjigjet-me-plumba-gome/"],
-    "topChBerishaOct17": ["Top Channel", "https://top-channel.tv/2026/10/17/jam-absolutisht-kunder-prekjes-se-pronave-berisha-per-protesten-te-bashkohemi-me-ta-sepse-po-shohim-cdo-dite-skenat-me-horror/"]
+    "topChBerishaOct17": ["Top Channel", "https://top-channel.tv/2026/10/17/jam-absolutisht-kunder-prekjes-se-pronave-berisha-per-protesten-te-bashkohemi-me-ta-sepse-po-shohim-cdo-dite-skenat-me-horror/"],
+    "kohaHita167": ["Koha", "https://www.koha.net/arberi/drejtori-i-policise-167-shtetas-te-arrestuar-per-pese-dite-7-police-jane-pezulluar"],
+    "vizionHita132": ["Vizion Plus", "https://www.vizionplus.tv/jane-bere-thirrje-per-sulm-ndaj-efektiveve-hita-132-punonjes-policie-te-lenduar/"]
   }
 }
