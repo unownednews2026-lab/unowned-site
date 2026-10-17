@@ -5,7 +5,7 @@
   "dek": "What happened, what is confirmed, and where the accounts disagree, from the exam leak in May to the protests against the Election Commission in October.",
   "status": "Season 2 active",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T12:22:43Z",
+  "updatedAt": "2026-10-17T17:28:26Z",
   "summary": [
     "The Cockroach Janta Party (CJP) began on May 16 as a satirical online response to remarks by Chief Justice Surya Kant, a day after he reportedly likened some unemployed youth to cockroaches. Anger over the cancelled NEET medical entrance exam turned it into a street movement.",
     "After a 36-day protest in Delhi, including a July 20 march met with tear gas and batons, Education Minister Dharmendra Pradhan resigned on July 25 and the CJP called off its protest, saying its demands had been accepted. From August, the CJP said the government had not honoured those commitments, chiefly withdrawing criminal cases against protesters and compensating families of students who died by suicide.",
@@ -36,7 +36,7 @@
     { "date": "2026-06-06", "phase": "street", "label": "confirmed", "milestone": "Dipke returns", "text": "Dipke lands in Delhi and protests begin at Jantar Mantar.", "sources": ["reutersProfile", "kaumudiProfile"] },
     { "date": "2026-07-19", "phase": "street", "label": "confirmed", "text": "Delhi Police say no permission was sought or granted for a march to Parliament.", "sources": ["ktJul19", "weekSep5"] },
     { "date": "2026-07-20", "phase": "street", "label": "disputed", "milestone": "March to Parliament", "text": "\"Chalo Sansad\" march to Parliament, about 50,000 by one estimate. Police use tear gas and batons; mobile internet is suspended in Delhi; people are detained in Delhi, Mumbai and Bengaluru. Injury figures differ between police and monitors.", "sources": ["apJul20", "ajJul20", "cgfoe"] },
-    { "date": "2026-07-21", "phase": "street", "label": "confirmed", "text": "Opposition leader Rahul Gandhi and Congress MPs stage a sit-in outside the Prime Minister's residence. Amnesty International criticises the police action.", "sources": ["apJul21"] },
+    { "date": "2026-07-21", "phase": "street", "label": "reported", "text": "Opposition leader Rahul Gandhi and Congress MPs stage a sit-in outside the Prime Minister's residence. Amnesty International criticises the police action.", "sources": ["apJul21"] },
     { "date": "2026-07-22", "phase": "street", "label": "confirmed", "text": "The CJP's Instagram account is withheld in India after a legal request to Meta.", "sources": ["fpjInsta", "outlookInsta"] },
     { "date": "2026-07-23", "phase": "street", "label": "reported", "text": "Prime Minister Modi promises fast-track courts for officials accused in exam leaks; a CJP spokesman calls it a \"band-aid\".", "sources": ["cgfoe"] },
     { "date": "2026-07-25", "phase": "street", "label": "confirmed", "milestone": "Minister resigns", "text": "Pradhan resigns. The CJP ends its 36-day protest, saying all its demands were accepted; a federal minister also says they were accepted.", "sources": ["apJul25", "ajJul25"], "callout": true },
@@ -45,7 +45,7 @@
     { "date": "2026-08-24", "phase": "dispute", "label": "confirmed", "milestone": "CJP says promises broken", "text": "The CJP says the government broke its July 25 commitments and calls a September 5 march. Delhi Police say no permission request has been received.", "sources": ["ktSep5", "weekSep5", "sentinel"] },
     { "date": "2026-08-31", "phase": "dispute", "label": "reported", "text": "The Supreme Court issues notice on a plea against the September 5 protest and sets a hearing for September 10.", "sources": ["awaaz"] },
     { "date": "2026-09-05", "phase": "dispute", "label": "pending", "text": "Planned march from India Gate to Delhi Police headquarters. Outcome still being checked.", "sources": [] },
-    { "date": "2026-10-08", "phase": "s2", "label": "confirmed", "text": "CJP rally in Bengaluru demanding the Chief Election Commissioner's resignation; Dhruv Rathee is among those attending.", "sources": ["prothom"] },
+    { "date": "2026-10-08", "phase": "s2", "label": "reported", "text": "CJP rally in Bengaluru demanding the Chief Election Commissioner's resignation; Dhruv Rathee is among those attending.", "sources": ["prothom"] },
     { "date": "2026-10-10", "phase": "s2", "label": "disputed", "milestone": "Leaders detained", "hot": true, "text": "Central Delhi is sealed, with metro stations shut and mobile internet suspended. Dipke, Saurav Das and Ashutosh Ranka are detained from their Air India flight on landing. Thousands are detained; counts range from about 2,000 to 7,000.", "sources": ["uni", "print", "btFlight", "qatar"] },
     { "date": "2026-10-11", "phase": "s2", "label": "confirmed", "text": "The three leaders are released by an Executive Magistrate on condition of no breach of peace for one year, with a Rs 50,000 bond. Dipke's family says the delay made him miss his grandmother's funeral; police say due procedure was followed.", "sources": ["ktRelease", "printFuneral"] },
     { "date": "2026-10-12", "phase": "s2", "label": "reported", "added": "2026-10-16T11:06:00Z", "text": "Opposition workers and activists, led by Rahul Gandhi and Priyanka Gandhi Vadra, march toward the Supreme Court demanding the Chief Election Commissioner’s resignation.", "sources": ["apOct14"] },
@@ -140,7 +140,8 @@
     "Number of FIRs registered over the October 16 protests and who is named in them"
   ],
   "corrections": [
-    { "date": "2026-10-17", "text": "The AISA president's surname was misspelled as \"Bohra\" in earlier updates. It is Bora." }
+    { "date": "2026-10-17", "text": "The AISA president's surname was misspelled as \"Bohra\" in earlier updates. It is Bora." },
+    { "date": "2026-10-17", "text": "Two timeline entries, the July 21 sit-in by Congress MPs (AP) and the October 8 Bengaluru rally (AFP), were labelled confirmed but rested on a single outlet each. They are now labelled reported." }
   ],
   "sourceGroups": [
     ["Exam leak", ["scroll", "newslaundry", "excelsiorNeet", "pioneer"]],
