@@ -11,7 +11,7 @@
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T09:23:07Z",
+  "updatedAt": "2026-10-17T12:53:08Z",
   "summary": [
     "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
     "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days. The interior minister says 156 people were injured over four days, including 97 police officers and 45 protesters.",
@@ -62,8 +62,10 @@
     { "date": "2026-10-16", "phase": "spread", "label": "confirmed", "added": "2026-10-17T06:53:11Z", "text": "State Police chief Skënder Hita suspends two officers after videos appeared to show them using force on a protester lying on the ground, saying the force used was disproportionate, and orders a disciplinary investigation. Interior Minister Ervin Demo welcomes the move.", "sources": ["euroAlSusp", "topChSusp"] },
     { "date": "2026-10-16", "phase": "spread", "label": "reported", "added": "2026-10-17T06:53:11Z", "text": "Interior Minister Ervin Demo says 156 people have been injured over four days, including 97 police officers and 45 protesters, and urges parents to keep children away from the violence.", "sources": ["euroAlLive"] },
     { "date": "2026-10-16", "phase": "spread", "label": "reported", "added": "2026-10-17T06:53:11Z", "text": "Ombudsman Endri Shabani says his anti-torture team contacted 214 detained people in 72 hours, received complaints of police violence, found signs of violence on 26, and found minors questioned without a psychologist. No police response has been reported yet.", "sources": ["euroAlLive"] },
+    { "date": "2026-10-16", "phase": "spread", "label": "reported", "added": "2026-10-17T12:53:08Z", "text": "According to AFP, police say 10 people were arrested after Friday's protests and criminal proceedings were opened against 22 more; the health ministry says 25 people, including nine police officers, suffered minor injuries in Tirana, Vlora and Lezha.", "sources": ["afpOct17"] },
     { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-17T09:23:07Z", "text": "Reuters, citing police figures, reports that about 500 protesters have been detained this week, 330 of whom have since been released, and that about 120 police officers and 45 protesters have been injured; it says protester injuries are likely under-recorded. Independent MP Marjana Koceku joins the call for Rama to step down.", "sources": ["reutersOct17"] },
-    { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T06:53:11Z", "text": "Whether protests and the class boycott continue over the weekend, and whether talks begin. Opposition leader Sali Berisha has called for a protest in Tirana on Saturday. Still being checked.", "sources": ["dwOct16", "euroAlLive"] }
+    { "date": "2026-10-17", "phase": "spread", "label": "confirmed", "added": "2026-10-17T12:53:08Z", "text": "Clashes continue for a fifth day as protesters gather outside the Education Ministry in Tirana; Reuters and AFP report rocks thrown at police, who use tear gas and water cannon. Rama says on Facebook that the government respects the students and will protect their right to protest, but will not let anyone jeopardise the country's future.", "sources": ["reutersOct17b", "afpOct17"] },
+    { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T12:53:08Z", "text": "Saturday arrest and injury figures, whether the opposition protest called by Sali Berisha goes ahead, and whether talks begin. Still being checked.", "sources": ["afpOct17", "dwOct16"] }
   ],
   "claims": [
     { "title": "Who is behind the violence?", "label": "disputed", "a": "Rama says the unrest is not a student phenomenon and blames foreign hands and the opposition, which he says is using masked people. Police urge peaceful protesters to distance themselves from masked agitators.", "aSrc": ["ajOct16", "dwOct16", "occrpOct"], "b": "Students say they are protesting university conditions, costs and job prospects after months of ignored peaceful protest. Opposition leader Sali Berisha denies the opposition is involved in the violence.", "bSrc": ["reutersOct14", "reutersOct16", "dwOct16"], "status": "Open. Neither side has published evidence; police investigations are under way." },
@@ -80,6 +82,7 @@
     { "date": "Oct 16", "action": "Court orders one person held in prison, five under house arrest and others to report to police over the Oct 13 protest", "by": "Tirana court", "label": "reported" },
     { "date": "Oct 16", "action": "Two officers suspended over force used on a protester; disciplinary investigation opened", "by": "State Police", "label": "confirmed" },
     { "date": "Oct 16", "action": "Ombudsman reviews complaints of police violence against detainees", "by": "Ombudsman", "label": "reported" },
+    { "date": "Oct 16", "action": "10 arrests and criminal proceedings against 22 people after Friday protests (police figures cited by AFP)", "by": "State Police", "label": "reported" },
     { "date": "Oct 17", "action": "About 500 protesters detained over the week, 330 since released (police figures cited by Reuters)", "by": "State Police", "label": "reported" }
   ],
   "places": [
@@ -95,7 +98,7 @@
     "arrests": { "type": "bar", "title": "Arrests and investigations, per police", "rows": [["Arrested over three days", 152], ["Under investigation", 324]], "max": 350, "unit": "", "caption": "As of October 16. Source: police, via DW. Al Jazeera reports 160 detained on the evening of October 15 alone; counts differ by date and definition.", "aria": "As of October 16, police say 152 people were arrested and 324 are under investigation" }
   },
   "gaps": [
-    "Full breakdown of injuries, including journalists",
+    "Full breakdown of injuries, including journalists, and figures for October 17",
     "Charges against those arrested",
     "Outcome of the investigations into police conduct, and the police response to the Ombudsman's findings",
     "Whether students and the government open talks",
@@ -106,7 +109,7 @@
   "sourceGroups": [
     ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
     ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
-    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17"]]
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17"]]
   ],
   "sources": {
     "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
@@ -126,6 +129,8 @@
     "euroAlLive": ["Euronews Albania", "https://euronews.al/live-protesta-hyn-ne-dite-e-katert-tensione-ne-qytete-arrestime-ne-korce-dhe-vlore-tensione-ne-tirane-rama-nuk-do-perkulemi/"],
     "euroAlSusp": ["Euronews Albania", "https://euronews.al/aktet-e-dhunes-ndaj-protestuesve-pezullohen-nga-detyra-2-efektive-video/"],
     "topChSusp": ["Top Channel", "https://top-channel.tv/2026/10/16/pamjet-e-renda-te-dhunimit-te-te-riut-sot-nga-policia-pezullohen-nga-detyra-dy-efektivet-e-perfshire66/"],
-    "reutersOct17": ["Reuters (via Internazionale)", "https://www.internazionale.it/ultime-notizie-reuters/2026/10/17/our-land-our-albania-young-lawmaker-demands-new-future-as-protests-rage"]
+    "reutersOct17": ["Reuters (via Internazionale)", "https://www.internazionale.it/ultime-notizie-reuters/2026/10/17/our-land-our-albania-young-lawmaker-demands-new-future-as-protests-rage"],
+    "reutersOct17b": ["Reuters (via ThePrint)", "https://theprint.in/world/albanian-anti-government-protesters-clash-with-police-in-tirana/3074745/"],
+    "afpOct17": ["AFP (via Yahoo News)", "https://sg.news.yahoo.com/albanian-capital-sees-fifth-straight-121445640.html"]
   }
 }
