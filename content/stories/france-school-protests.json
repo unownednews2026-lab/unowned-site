@@ -11,7 +11,7 @@
   "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
   "status": "Ongoing",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T17:28:26Z",
+  "updatedAt": "2026-10-17T17:54:02Z",
   "summary": [
     "French high school students began blockading their schools in the Paris suburbs in mid to late September, protesting teacher shortages, overcrowded classes, run-down buildings and classrooms that reached 35 to 40°C in heatwaves. Within two weeks the blockades had spread across France, with hundreds of schools closed or disrupted.",
     "The police response has become a story of its own. Thousands of people, most of them minors, have been arrested; hundreds of students, school staff and police officers have been injured. A 15-year-old lost a hand in Lens on October 5, and the government suspended stun grenades at student protests two days later. Rights groups say force against minors has been disproportionate; police unions say force is used against people who attack officers.",
@@ -79,6 +79,7 @@
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T16:53:41Z", "text": "In Lille, protesters force several entrances to the town hall and damage the building before leaving, AFP reports; shops are also looted. Mayor Arnaud Deslandes condemns the acts and says no staff were hurt.", "sources": ["f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T16:53:41Z", "text": "Prime Minister Sébastien Lecornu says the government will not be intimidated and condemns the violence on the margins of the marches; CNews reports he accused the ultra-left of organising it. Interior Minister Laurent Nuñez is due to speak in the evening.", "sources": ["fiLiveOct17", "cnewsLecornuOct17", "lexpressOrangeOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T17:24:13Z", "text": "In Bordeaux, people enter and ransack the Gironde prefect's official residence, a prefecture spokesperson tells AFP; city-centre shops are also looted. Prefect Sophie Brocas condemns the damage, and a source close to the authorities tells AFP the RAID police unit was sent in as support.", "sources": ["europe1BordeauxOct17", "lessentielBordeauxOct17", "lexpressOrangeOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T17:54:02Z", "text": "Organisers say about 800,000 people demonstrated across France, franceinfo and ICI report; franceinfo reports the interior minister put the figure at 550,000.", "sources": ["fiLiveOct17", "iciOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-16T20:32:00Z", "text": "National protest day over the cost of living, joined by students and unions, with online calls from Yellow Vest supporters. Nuñez expects about 80 marches to be authorised, with 20,000 to 40,000 people expected in Paris. Outcome still being checked.", "sources": ["localOct17", "aaOct16"] }
   ],
   "claims": [
@@ -117,7 +118,7 @@
     "arrests": { "type": "bar", "title": "Arrests since late September, per the Justice Ministry", "rows": [["Apprehended", 7950], ["Charged", 2735]], "max": 9000, "unit": "", "caption": "As of October 14, 85% of them minors. Source: Justice Ministry, via AFP. Euronews cites 6,800 taken into custody.", "aria": "As of October 14: 7,950 people apprehended and 2,735 charged, per the Justice Ministry" }
   },
   "gaps": [
-    "Official turnout (the CGT says more than 500,000), final arrest figures (Paris counts differ between outlets), injuries and incidents on the October 17 protest day, and whether an investigation is opened into the Saint-Étienne injury",
+    "Independent confirmation of turnout (organisers say about 800,000, the interior minister 550,000), final arrest figures (Paris counts differ between outlets), injuries and incidents on the October 17 protest day, and whether an investigation is opened into the Saint-Étienne injury",
     "Findings of the investigation into the Lens injury",
     "Outcome of the 36 internal police investigations",
     "Whether all 3,000 substitute teachers are in place",
