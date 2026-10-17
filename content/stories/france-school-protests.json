@@ -11,7 +11,7 @@
   "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
   "status": "Ongoing",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T16:30:19Z",
+  "updatedAt": "2026-10-17T16:53:41Z",
   "summary": [
     "French high school students began blockading their schools in the Paris suburbs in mid to late September, protesting teacher shortages, overcrowded classes, run-down buildings and classrooms that reached 35 to 40°C in heatwaves. Within two weeks the blockades had spread across France, with hundreds of schools closed or disrupted.",
     "The police response has become a story of its own. Thousands of people, most of them minors, have been arrested; hundreds of students, school staff and police officers have been injured. A 15-year-old lost a hand in Lens on October 5, and the government suspended stun grenades at student protests two days later. Rights groups say force against minors has been disproportionate; police unions say force is used against people who attack officers.",
@@ -74,6 +74,9 @@
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T14:30:03Z", "text": "According to AFP, the Paris police prefecture says about 100 people had been arrested in Paris by midday. Marseille mayor Benoît Payan says President Macron assured him police reinforcements would be sent.", "sources": ["sudradioAfpOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:54:03Z", "text": "CNews, ICI and Sud Radio report that 272 people had been arrested nationwide by mid-afternoon; BFM TV gives the count as of 3pm. The reports seen do not name who issued the figure.", "sources": ["cnewsLiveOct17b", "iciOct17", "sudradioLiveOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T16:30:19Z", "text": "The CGT union says more than 500,000 people demonstrated across France, according to franceinfo and ICI. No official turnout figure had been published in the reports seen.", "sources": ["fiLiveOct17", "iciOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T16:53:41Z", "text": "In Saint-Étienne, a man in his twenties is seriously injured in the hand by a police grenade, AFP reports; the Loire prefecture confirms a serious hand injury, and a source close to the case tells AFP he had picked the grenade up. He was taken to hospital.", "sources": ["europe1StEtienneOct17", "fiStEtienneOct17", "iciStEtienneOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T16:53:41Z", "text": "In Lille, protesters force several entrances to the town hall and damage the building before leaving, AFP reports; shops are also looted. Mayor Arnaud Deslandes condemns the acts and says no staff were hurt.", "sources": ["f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17"] },
+    { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T16:53:41Z", "text": "Prime Minister Sébastien Lecornu says the government will not be intimidated and condemns the violence on the margins of the marches; CNews reports he accused the ultra-left of organising it. Interior Minister Laurent Nuñez is due to speak in the evening.", "sources": ["fiLiveOct17", "cnewsLecornuOct17", "lexpressOrangeOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-16T20:32:00Z", "text": "National protest day over the cost of living, joined by students and unions, with online calls from Yellow Vest supporters. Nuñez expects about 80 marches to be authorised, with 20,000 to 40,000 people expected in Paris. Outcome still being checked.", "sources": ["localOct17", "aaOct16"] }
   ],
   "claims": [
@@ -112,7 +115,7 @@
     "arrests": { "type": "bar", "title": "Arrests since late September, per the Justice Ministry", "rows": [["Apprehended", 7950], ["Charged", 2735]], "max": 9000, "unit": "", "caption": "As of October 14, 85% of them minors. Source: Justice Ministry, via AFP. Euronews cites 6,800 taken into custody.", "aria": "As of October 14: 7,950 people apprehended and 2,735 charged, per the Justice Ministry" }
   },
   "gaps": [
-    "Official turnout (the CGT says more than 500,000), final arrest figures and incidents on the October 17 protest day",
+    "Official turnout (the CGT says more than 500,000), final arrest figures, injuries and incidents on the October 17 protest day, and whether an investigation is opened into the Saint-Étienne injury",
     "Findings of the investigation into the Lens injury",
     "Outcome of the 36 internal police investigations",
     "Whether all 3,000 substitute teachers are in place",
@@ -124,7 +127,7 @@
     ["How it started", ["ajVoices", "bbcSep28"]],
     ["Injuries, arrests and the police response", ["ajOct5", "ajOct7", "euroOct7", "psOct7"]],
     ["Government measures and turnout", ["mwnOct9", "euroOct13", "afpOct14", "euroOct14", "localOct17"]],
-    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17"]]
+    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17", "europe1StEtienneOct17", "fiStEtienneOct17", "iciStEtienneOct17", "f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17", "cnewsLecornuOct17", "lexpressOrangeOct17"]]
   ],
   "sources": {
     "ajVoices": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/7/were-short-of-resources-frances-student-protesters-in-their-own-words"],
@@ -158,6 +161,14 @@
     "ajOct17": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/17/france-wave-of-nationwide-protests"],
     "cnewsLyonOct17": ["CNews", "https://www.cnews.fr/videos/france/2026-10-17/mobilisation-du-17-octobre-loffice-du-tourisme-de-lyon-saccage-et-incendie"],
     "cnewsLiveOct17b": ["CNews", "https://www.cnews.fr/france/2026-10-17/mobilisation-du-17-octobre-les-rassemblements-degenerent-paris-marseille-et-lyon"],
-    "sudradioLiveOct17": ["Sud Radio", "https://www.sudradio.fr/sud-radio/en-direct-la-journee-de-mobilisation-du-17-octobre-en-live-integral"]
+    "sudradioLiveOct17": ["Sud Radio", "https://www.sudradio.fr/sud-radio/en-direct-la-journee-de-mobilisation-du-17-octobre-en-live-integral"],
+    "europe1StEtienneOct17": ["Europe 1 (AFP)", "https://www.europe1.fr/societe/mobilisation-du-17-octobre-un-manifestant-a-eu-la-main-arrachee-par-une-grenade-policiere-a-saint-etienne-1157541"],
+    "fiStEtienneOct17": ["franceinfo", "https://www.franceinfo.fr/economie/greve/a-saint-etienne-un-manifestant-grievement-blesse-a-la-main-a-saint-etienne-pendant-une-mobilisation-du-17-octobre_8241952.html"],
+    "iciStEtienneOct17": ["ICI", "https://www.ici.fr/auvergne-rhone-alpes/loire-42/mobilisation-du-17-octobre-un-manifestant-grievement-blesse-a-saint-etienne-8645650"],
+    "f24LilleOct17": ["France 24 (AFP)", "https://www.france24.com/fr/info-en-continu/20261017-d%C3%A9gradations-%C3%A0-la-mairie-de-lille-bri%C3%A8vement-envahie-et-magasins-saccag%C3%A9s"],
+    "cnewsLilleOct17": ["CNews", "https://www.cnews.fr/france/2026-10-17/mobilisation-du-17-octobre-la-mairie-de-lille-envahie-les-locaux-saccages-1936855"],
+    "fiLilleOct17": ["franceinfo", "https://www.franceinfo.fr/societe/education/blocage-des-lycees/a-lille-des-manifestants-forcent-plusieurs-entree-de-la-mairie_8241970.html"],
+    "cnewsLecornuOct17": ["CNews", "https://www.cnews.fr/france/2026-10-17/mobilisation-du-17-octobre-sebastien-lecornu-accuse-lultragauche-dorganiser-la"],
+    "lexpressOrangeOct17": ["L'Express (via Orange)", "https://actu.orange.fr/france/mobilisation-du-17-octobre-des-centaines-interpellations-des-mairies-visees-et-des-scenes-de-violences-dans-plusieurs-villes-de-france-l-express-via-6medias-CNT000002t0sYW.html"]
   }
 }
