@@ -123,6 +123,9 @@ ol.timeline .body { display: grid; gap: 6px; min-width: 0; }
 .share:hover { color: var(--fg); border-color: var(--fg); }
 .src { font-size: 0.8rem; color: var(--muted); }
 .src a { color: var(--muted); } .src a:hover { color: var(--accent); }
+.why { font-size: 0.78rem; color: var(--muted); margin: 2px 0 0; }
+.why a { color: var(--muted); white-space: nowrap; } .why a:hover { color: var(--accent); }
+a.key-title { text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
 .empty { color: var(--muted); font-size: 0.9rem; padding: 12px 0; }
 
 /* Claims */
