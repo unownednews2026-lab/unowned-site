@@ -11,7 +11,7 @@
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
   "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T12:53:08Z",
+  "updatedAt": "2026-10-17T14:30:03Z",
   "summary": [
     "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
     "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days. The interior minister says 156 people were injured over four days, including 97 police officers and 45 protesters.",
@@ -65,7 +65,11 @@
     { "date": "2026-10-16", "phase": "spread", "label": "reported", "added": "2026-10-17T12:53:08Z", "text": "According to AFP, police say 10 people were arrested after Friday's protests and criminal proceedings were opened against 22 more; the health ministry says 25 people, including nine police officers, suffered minor injuries in Tirana, Vlora and Lezha.", "sources": ["afpOct17"] },
     { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-17T09:23:07Z", "text": "Reuters, citing police figures, reports that about 500 protesters have been detained this week, 330 of whom have since been released, and that about 120 police officers and 45 protesters have been injured; it says protester injuries are likely under-recorded. Independent MP Marjana Koceku joins the call for Rama to step down.", "sources": ["reutersOct17"] },
     { "date": "2026-10-17", "phase": "spread", "label": "confirmed", "added": "2026-10-17T12:53:08Z", "text": "Clashes continue for a fifth day as protesters gather outside the Education Ministry in Tirana; Reuters and AFP report rocks thrown at police, who use tear gas and water cannon. Rama says on Facebook that the government respects the students and will protect their right to protest, but will not let anyone jeopardise the country's future.", "sources": ["reutersOct17b", "afpOct17"] },
-    { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T12:53:08Z", "text": "Saturday arrest and injury figures, whether the opposition protest called by Sali Berisha goes ahead, and whether talks begin. Still being checked.", "sources": ["afpOct17", "dwOct16"] }
+    { "date": "2026-10-17", "phase": "spread", "label": "confirmed", "added": "2026-10-17T14:30:03Z", "text": "Several Albanian outlets report that police fire rubber bullets at protesters outside the Education Ministry; protesters say some people were hit. State Police chief Skënder Hita says only certified, permitted means were used, in a limited way, and urges parents not to let minors join the protests.", "sources": ["bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17"] },
+    { "date": "2026-10-17", "phase": "spread", "label": "confirmed", "added": "2026-10-17T14:30:03Z", "text": "In the afternoon clashes move to the prime minister's office, where police use tear gas and water cannon and protesters throw stones. Koha Jonë reports three protesters taken to hospital, all conscious.", "sources": ["kohajoneOct17", "topChLiveOct17"] },
+    { "date": "2026-10-17", "phase": "spread", "label": "confirmed", "added": "2026-10-17T14:30:03Z", "text": "Rama launches \"Dëmi im\" (\"My damage\"), a scheme on the e-Albania portal for small businesses damaged in the protests to claim compensation, with tax teams to verify claims.", "sources": ["kohajoneOct17", "topChLiveOct17"] },
+    { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-17T14:30:03Z", "text": "Opposition leader Sali Berisha urges Democratic Party supporters and businesses to back the students, and says he is against damaging property. No separate opposition protest has been reported.", "sources": ["topChBerishaOct17"] },
+    { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T14:30:03Z", "text": "Official arrest and injury figures for Saturday, and whether talks between students and the government begin. Still being checked.", "sources": ["topChLiveOct17"] }
   ],
   "claims": [
     { "title": "Who is behind the violence?", "label": "disputed", "a": "Rama says the unrest is not a student phenomenon and blames foreign hands and the opposition, which he says is using masked people. Police urge peaceful protesters to distance themselves from masked agitators.", "aSrc": ["ajOct16", "dwOct16", "occrpOct"], "b": "Students say they are protesting university conditions, costs and job prospects after months of ignored peaceful protest. Opposition leader Sali Berisha denies the opposition is involved in the violence.", "bSrc": ["reutersOct14", "reutersOct16", "dwOct16"], "status": "Open. Neither side has published evidence; police investigations are under way." },
@@ -98,18 +102,19 @@
     "arrests": { "type": "bar", "title": "Arrests and investigations, per police", "rows": [["Arrested over three days", 152], ["Under investigation", 324]], "max": 350, "unit": "", "caption": "As of October 16. Source: police, via DW. Al Jazeera reports 160 detained on the evening of October 15 alone; counts differ by date and definition.", "aria": "As of October 16, police say 152 people were arrested and 324 are under investigation" }
   },
   "gaps": [
-    "Full breakdown of injuries, including journalists, and figures for October 17",
+    "Full breakdown of injuries, including journalists, and official figures for October 17",
     "Charges against those arrested",
     "Outcome of the investigations into police conduct, and the police response to the Ombudsman's findings",
     "Whether students and the government open talks",
     "Full details and status of the Zvërnec resort project",
-    "Evidence for claims of foreign or opposition involvement"
+    "Evidence for claims of foreign or opposition involvement",
+    "Who authorised the use of rubber bullets, and how many people were hit"
   ],
   "corrections": [],
   "sourceGroups": [
     ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
     ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
-    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17"]]
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17"]]
   ],
   "sources": {
     "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
@@ -131,6 +136,13 @@
     "topChSusp": ["Top Channel", "https://top-channel.tv/2026/10/16/pamjet-e-renda-te-dhunimit-te-te-riut-sot-nga-policia-pezullohen-nga-detyra-dy-efektivet-e-perfshire66/"],
     "reutersOct17": ["Reuters (via Internazionale)", "https://www.internazionale.it/ultime-notizie-reuters/2026/10/17/our-land-our-albania-young-lawmaker-demands-new-future-as-protests-rage"],
     "reutersOct17b": ["Reuters (via ThePrint)", "https://theprint.in/world/albanian-anti-government-protesters-clash-with-police-in-tirana/3074745/"],
-    "afpOct17": ["AFP (via Yahoo News)", "https://sg.news.yahoo.com/albanian-capital-sees-fifth-straight-121445640.html"]
+    "afpOct17": ["AFP (via Yahoo News)", "https://sg.news.yahoo.com/albanian-capital-sees-fifth-straight-121445640.html"],
+    "bulevardOct17": ["Bulevard", "https://www.bulevardnews.com/2026/10/17/policia-qellon-me-plumba-gome-drejt-protestuesve-para-ministrise-se-arsimit-nje-i-ri-i-goditur-ne-gjoks/"],
+    "cnaOct17": ["CNA", "https://www.cna.al/english/aktualitet/policia-qellon-me--gome-protestuesit-i477120"],
+    "kohanetOct17": ["Koha (Kosovo)", "https://www.koha.net/arberi/policia-gjuan-me-plumba-gome-protestuesit-ne-tiran"],
+    "vizionHitaOct17": ["Vizion Plus", "https://www.vizionplus.tv/policia-do-vijoje-te-mbroje-jeten-hita-flet-per-perdorimin-e-plumbave-te-gomes-ne-proteste-mjete-te-certifikuara/"],
+    "kohajoneOct17": ["Koha Jonë", "https://kohajone.com/aktualitet/tension-i-madh-te-kryeministria-molotove-gure-gaz-lotjselles-dhe-uje-me-presion/"],
+    "topChLiveOct17": ["Top Channel", "https://top-channel.tv/2026/10/17/live-dita-e-peste-e-protestes-pershkallezohet-situata-te-ministria-e-arsimit-protestuesit-hedhin-molotove-dhe-gure-policia-pergjigjet-me-plumba-gome/"],
+    "topChBerishaOct17": ["Top Channel", "https://top-channel.tv/2026/10/17/jam-absolutisht-kunder-prekjes-se-pronave-berisha-per-protesten-te-bashkohemi-me-ta-sepse-po-shohim-cdo-dite-skenat-me-horror/"]
   }
 }
