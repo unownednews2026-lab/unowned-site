@@ -1,0 +1,119 @@
+{
+  "slug": "albania-student-protests",
+  "title": "Albania's student protests",
+  "nav": "Albania protests",
+  "region": "Albania",
+  "topics": [
+    "Protest",
+    "Education"
+  ],
+  "kicker": "Story tracker · Albania",
+  "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
+  "status": "Ongoing",
+  "updated": "2026-10-17",
+  "updatedAt": "2026-10-17T02:35:00Z",
+  "summary": [
+    "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
+    "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days and 71 officers injured; no total for injured protesters has been published.",
+    "Rama says governments change through elections and will not resign. He blames \"foreign hands\" and the opposition for the violence; opposition leader Sali Berisha rejects that and backs the call for Rama to go. Students say months of peaceful protest were ignored. President Bajram Begaj and the EU delegation have urged calm and a proportionate police response."
+  ],
+  "ground": [
+    { "date": "2026-10-16", "platform": "Video address", "who": "Prime Minister Edi Rama", "shows": "Rama speaking from the fire-damaged College of Europe building near his office, accusing the opposition of using masked people and rejecting calls to resign.", "label": "reported", "check": "Reported by DW. Date and place are given in the report.", "sources": ["dwOct16"] },
+    { "date": "2026-10-14", "platform": "Facebook post", "who": "Deputy Prime Minister Albana Kociu", "shows": "A statement that protest is a legitimate right but cannot be used as an excuse for violence, urging people to distance themselves from vandalism.", "label": "confirmed", "check": "Reported by Al Jazeera and Reuters. Text post; date known.", "sources": ["ajOct14", "reutersOct14"] }
+  ],
+  "timelineChart": {
+    "title": "Nine months, four phases",
+    "from": "2026-02-01",
+    "to": "2026-10-31",
+    "ticks": ["2026-02-01", "2026-04-01", "2026-06-01", "2026-08-01", "2026-10-01"],
+    "caption": "Filled marker: the latest major development. Hover or tap a marker for the event.",
+    "aria": "Timeline of protests in Albania from February to October 2026, in four phases with key dates marked"
+  },
+  "map": {
+    "lon0": 18.9,
+    "lon1": 21.3,
+    "lat0": 39.6,
+    "lat1": 42.7,
+    "lonTicks": [19, 20, 21],
+    "latTicks": [40, 41, 42],
+    "aria": "Approximate positions of Albanian cities with reported protests or incidents"
+  },
+  "phases": [
+    { "id": "before", "when": "February", "name": "Opposition protests over corruption", "short": "Opposition", "start": "2026-02-01", "end": "2026-05-29" },
+    { "id": "flamingo", "when": "Late May to early October", "name": "The Flamingo Revolution", "short": "Flamingo", "start": "2026-05-30", "end": "2026-10-12" },
+    { "id": "students", "when": "October 13 to 14", "name": "Students join; Tirana riots", "short": "Students", "start": "2026-10-13", "end": "2026-10-14" },
+    { "id": "spread", "when": "From October 15", "name": "Protests spread; Rama refuses to resign", "short": "Spread", "start": "2026-10-15", "end": "2026-10-31" }
+  ],
+  "events": [
+    { "date": "2026-02-11", "phase": "before", "label": "reported", "added": "2026-10-17T02:35:00Z", "text": "Protests called by opposition Democratic Party leader Sali Berisha turn violent in Tirana; at least 13 people are arrested. Protesters want Rama and Deputy Prime Minister Belinda Balluku, whom prosecutors accuse of interfering in public contracts, to leave office. Rama later dismissed Balluku, Reuters reports.", "sources": ["ajFeb11", "reutersJun10"] },
+    { "date": "2026-05-30", "phase": "flamingo", "label": "reported", "added": "2026-10-17T02:35:00Z", "milestone": "Flamingo protests begin", "text": "In late May, demonstrators try to block construction of a resort near Zvërnec, beside the protected Vjosa wetlands. Protests soon spread to Tirana and other cities, and the movement becomes known as the Flamingo Revolution.", "sources": ["oswJun", "obctOct13", "dwOct16"] },
+    { "date": "2026-06-10", "phase": "flamingo", "label": "reported", "added": "2026-10-17T02:35:00Z", "text": "Thousands march in Tirana in the largest protest yet against the Kushner-backed resort, chanting outside Rama's office. Rama tells Reuters the project will go ahead and be completed responsibly; protesters say it lacks transparency.", "sources": ["reutersJun10"] },
+    { "date": "2026-06-12", "phase": "flamingo", "label": "reported", "added": "2026-10-17T02:35:00Z", "text": "Rama calls the protests genuine but says foreign groups with anti-American and antisemitic views are trying to use them against Albania's interests.", "sources": ["temaJun12"] },
+    { "date": "2026-10-13", "phase": "students", "label": "confirmed", "added": "2026-10-17T02:35:00Z", "milestone": "Students join", "text": "Students protesting university conditions, fees and job prospects rally outside the Education Ministry in Tirana. The protest turns violent: stones are thrown, fires are set at the city hall and on Durrës Street, and police use tear gas and water cannon.", "sources": ["obctOct13", "euroOct14", "occrpOct"] },
+    { "date": "2026-10-14", "phase": "students", "label": "confirmed", "added": "2026-10-17T02:35:00Z", "text": "Police say protesters broke into the Education Ministry overnight and set a fire inside. Police report 16 arrests, 49 people facing criminal proceedings and six officers injured.", "sources": ["ajOct14", "euroOct14", "occrpOct"] },
+    { "date": "2026-10-14", "phase": "students", "label": "confirmed", "added": "2026-10-17T02:35:00Z", "text": "Riots last more than eight hours. The prime minister's office, ministry buildings and bank branches are set alight, and protesters build barricades. The Albanian media report protests at universities in Elbasan and Shkodër.", "sources": ["apOct14", "reutersOct14", "ajWhy"] },
+    { "date": "2026-10-14", "phase": "students", "label": "reported", "added": "2026-10-17T02:35:00Z", "text": "Authorities say 23 police officers and six other people are being treated for injuries and 35 people have been detained, AP reports.", "sources": ["apOct14"] },
+    { "date": "2026-10-14", "phase": "students", "label": "confirmed", "added": "2026-10-17T02:35:00Z", "text": "President Bajram Begaj condemns the violence and calls for restraint from young people and proportionate force from police. Deputy Prime Minister Albana Kociu says protest is a right but no excuse for violence. The EU delegation expresses concern and calls for a proportionate response.", "sources": ["apOct14", "occrpOct", "ajOct14", "reutersOct14"] },
+    { "date": "2026-10-15", "phase": "spread", "label": "confirmed", "added": "2026-10-17T02:35:00Z", "milestone": "Rama refuses to resign", "text": "Rama tells Reuters that governments change through elections, not revolution, and says he will not resign, citing his mandate to complete EU membership talks. He says he is open to discussing education costs.", "sources": ["ajWhy", "ajOct16", "dwOct16"] },
+    { "date": "2026-10-15", "phase": "spread", "label": "reported", "added": "2026-10-17T02:35:00Z", "text": "Protests in Tirana become a riot again, with windows smashed and a bank raided. Police say 160 people were detained that evening over alleged violent acts.", "sources": ["reutersOct16", "ajOct16"] },
+    { "date": "2026-10-16", "phase": "spread", "label": "disputed", "added": "2026-10-17T02:35:00Z", "text": "Rama says the unrest is \"not a student phenomenon\" and blames \"foreign hands\"; he also accuses the opposition of using masked people. Opposition leader Sali Berisha rejects claims that the opposition is behind the violence and backs the call for Rama to resign.", "sources": ["ajOct16", "dwOct16"] },
+    { "date": "2026-10-16", "phase": "spread", "label": "confirmed", "added": "2026-10-17T02:35:00Z", "hot": true, "text": "Thousands march in Tirana on a fourth day, with clashes outside the Education Ministry. Protests are reported in Lezhë, Elbasan, Shkodër and Korçë. Rama writes on Facebook that the government will not bow to violence.", "sources": ["reutersOct16", "ajOct16"] },
+    { "date": "2026-10-16", "phase": "spread", "label": "reported", "added": "2026-10-17T02:35:00Z", "text": "Police say 152 people have been arrested over three days and 324 are under investigation, and that 71 officers have been injured. Students are boycotting classes and say they will not negotiate except on Rama's resignation.", "sources": ["dwOct16"] },
+    { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T02:35:00Z", "text": "Whether protests and the class boycott continue over the weekend, and whether talks between students and the government begin. Still being checked.", "sources": ["dwOct16"] }
+  ],
+  "claims": [
+    { "title": "Who is behind the violence?", "label": "disputed", "a": "Rama says the unrest is not a student phenomenon and blames foreign hands and the opposition, which he says is using masked people. Police urge peaceful protesters to distance themselves from masked agitators.", "aSrc": ["ajOct16", "dwOct16", "occrpOct"], "b": "Students say they are protesting university conditions, costs and job prospects after months of ignored peaceful protest. Opposition leader Sali Berisha denies the opposition is involved in the violence.", "bSrc": ["reutersOct14", "reutersOct16", "dwOct16"], "status": "Open. Neither side has published evidence; police investigations are under way." },
+    { "title": "Has police force been proportionate?", "label": "disputed", "a": "Police say anyone who uses violence, burns property or attacks officers bears individual responsibility, and report officers injured by stones, hard objects and explosives.", "aSrc": ["reutersOct14", "occrpOct"], "b": "Organisers allege excessive police violence against protesters and journalists. A trauma hospital official attributed a 19-year-old's broken leg to police violence, and the Association of Albanian Journalists condemned police obstruction of reporters.", "bSrc": ["apOct14", "obctOct13"], "status": "Five officers suspended and an investigation opened by the Police Supervision Agency with prosecutors (OBCT, October 13)." },
+    { "title": "Should the Zvërnec resort go ahead?", "label": "disputed", "a": "Rama says the project will go ahead and be completed responsibly; OSW, a Polish research centre, reports that he says it will create 10,000 jobs.", "aSrc": ["reutersJun10", "oswJun"], "b": "Protesters say the plans lack transparency and threaten a protected wetland home to flamingos and other wildlife.", "bSrc": ["reutersJun10", "oswJun"], "status": "Planning permission has been granted but full details have not been published, according to OSW. Cost estimates differ: about €5 billion (Reuters) and at least $1.4 billion (OSW). Reuters found no evidence of wrongdoing by Kushner." }
+  ],
+  "accountability": [
+    { "date": "Feb 11", "action": "At least 13 arrested at an opposition protest in Tirana", "by": "Police", "label": "reported" },
+    { "date": "Oct 13", "action": "Five officers suspended; investigation opened into police conduct", "by": "State Police; Police Supervision Agency with prosecutors", "label": "reported" },
+    { "date": "Oct 14", "action": "16 arrested and 49 facing criminal proceedings after the Education Ministry fire", "by": "State Police", "label": "confirmed" },
+    { "date": "Oct 14", "action": "35 people detained", "by": "Authorities (figure via AP)", "label": "reported" },
+    { "date": "Oct 15", "action": "160 people detained over alleged violent acts", "by": "Police (figure via Al Jazeera)", "label": "reported" },
+    { "date": "Oct 16", "action": "152 arrested over three days; 324 under investigation", "by": "Police (figure via DW)", "label": "reported" }
+  ],
+  "places": [
+    { "name": "Tirana", "lat": 41.33, "lon": 19.82, "desc": "Education Ministry fire, Oct 13–14; riots and government buildings set alight; daily marches", "r": 9, "anchor": "end", "dx": -12, "dy": 4 },
+    { "name": "Shkodër", "lat": 42.07, "lon": 19.51, "desc": "University protests from Oct 14", "r": 6, "anchor": "start", "dx": 10, "dy": 4 },
+    { "name": "Lezhë", "lat": 41.78, "lon": 19.64, "desc": "Clashes with police, Oct 16", "r": 5, "anchor": "start", "dx": 10, "dy": 4 },
+    { "name": "Elbasan", "lat": 41.11, "lon": 20.08, "desc": "University protests from Oct 14", "r": 6, "anchor": "start", "dx": 10, "dy": 4 },
+    { "name": "Korçë", "lat": 40.62, "lon": 20.78, "desc": "Windows broken and bins set alight, per local media, Oct 16", "r": 5, "anchor": "end", "dx": -10, "dy": 4 },
+    { "name": "Zvërnec", "lat": 40.51, "lon": 19.4, "desc": "Planned resort site; protests began here in late May", "r": 6, "anchor": "start", "dx": 10, "dy": 4 }
+  ],
+  "figures": {
+    "officers": { "type": "bar", "title": "Police officers injured, by police count", "rows": [["Oct 14, first update", 6], ["Oct 14, evening", 23], ["Oct 16, three days", 71]], "max": 80, "unit": "", "caption": "Running totals from police and authorities, via Euronews and OCCRP, AP, and DW. No total for injured protesters or journalists has been published.", "aria": "Police officers injured per police: 6 in the first update on October 14, 23 by that evening, 71 by October 16" },
+    "arrests": { "type": "bar", "title": "Arrests and investigations, per police", "rows": [["Arrested over three days", 152], ["Under investigation", 324]], "max": 350, "unit": "", "caption": "As of October 16. Source: police, via DW. Al Jazeera reports 160 detained on the evening of October 15 alone; counts differ by date and definition.", "aria": "As of October 16, police say 152 people were arrested and 324 are under investigation" }
+  },
+  "gaps": [
+    "Number of protesters and journalists injured",
+    "Charges against those arrested",
+    "Outcome of the investigation into police conduct",
+    "Whether students and the government open talks",
+    "Full details and status of the Zvërnec resort project",
+    "Evidence for claims of foreign or opposition involvement"
+  ],
+  "corrections": [],
+  "sourceGroups": [
+    ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
+    ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16"]]
+  ],
+  "sources": {
+    "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
+    "oswJun": ["OSW Centre for Eastern Studies", "https://www.osw.waw.pl/en/publikacje/analyses/2026-06-23/flamingo-revolution-anti-government-protests-albania"],
+    "reutersJun10": ["Reuters (via MarketScreener)", "https://www.marketscreener.com/news/albania-protests-swell-as-opposition-to-kushner-resort-persists-ce7f5cdbdc8bf62d"],
+    "temaJun12": ["Gazeta Tema", "https://english.gazetatema.net/politics/foreign-interference-is-distorting-albanian-protests-says-pm-i345798"],
+    "obctOct13": ["OBC Transeuropa", "https://www.balcanicaucaso.org/en/cp_article/albania-students-protest-escalates-into-violence/"],
+    "ajOct14": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/14/fire-erupts-at-albanias-education-ministry-as-protests-enter-third-day"],
+    "euroOct14": ["Euronews", "https://www.euronews.com/video/2026/10/14/albania-student-protests-in-tirana-turn-violent-as-flamingo-revolution-escalates"],
+    "apOct14": ["AP (via ABC News)", "https://abcnews.com/International/wireStory/clashes-erupt-albania-protesting-students-join-anti-government-137261398"],
+    "reutersOct14": ["Reuters (via Cyprus Mail)", "https://cyprus-mail.com/2026/10/14/buildings-burn-as-albanias-capital-tirana-erupts-into-student-violence"],
+    "occrpOct": ["OCCRP", "https://www.occrp.org/en/news/chaos-in-tirana-violent-student-protests-surge"],
+    "ajWhy": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/15/boiling-point-why-students-are-protesting-against-albanias-edi-rama"],
+    "ajOct16": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/16/albanian-pm-blames-foreign-hands-for-unrest-as-student-protests-intensify"],
+    "reutersOct16": ["Reuters (via Business Recorder)", "https://www.brecorder.com/news/40444562/thousands-march-in-albanian-capital-as-anti-government-protests-spread"],
+    "dwOct16": ["DW (via UA.NEWS)", "https://ua.news/en/world/u-tirani-za-tri-dni-protestiv-zaareshtuvali-152-liudei-deutsche-welle"]
+  }
+}
