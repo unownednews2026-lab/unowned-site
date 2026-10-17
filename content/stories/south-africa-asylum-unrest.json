@@ -1,0 +1,137 @@
+{
+  "slug": "south-africa-asylum-unrest",
+  "title": "South Africa's asylum ruling unrest",
+  "nav": "South Africa unrest",
+  "region": "South Africa",
+  "topics": [
+    "Protest",
+    "Migration"
+  ],
+  "kicker": "Story tracker · South Africa",
+  "dek": "Riots in Durban and Soweto after a court ruling on asylum, the army deployment and arrests that followed, and the competing claims over what the ruling means and who is behind the violence.",
+  "status": "Ongoing",
+  "updated": "2026-10-17",
+  "updatedAt": "2026-10-17T14:36:15Z",
+  "summary": [
+    "On July 7, 2026, South Africa's Constitutional Court struck down rules that barred people from applying for asylum if they had entered the country irregularly, had no asylum transit visa or missed a reporting deadline. On September 28 the Home Affairs department told refugee offices to accept in-person applications. The move came after months of protests by anti-migrant groups, which had demanded that undocumented foreigners leave.",
+    "In early October anti-migrant groups, including March and March, protested at refugee offices. On October 8 protests in Soweto and Durban turned violent: police say 24 vehicles were torched, and foreign-owned shops were looted. Home Affairs withdrew the directive on October 9, saying its offices had been overwhelmed, but violence continued in Durban and the army was deployed there on October 10. Officials say 30 people were arrested in the first days, and court cases are under way.",
+    "The government says the ruling has been misrepresented: it does not automatically grant refugee status, residence or voting rights, and officials blame deliberate false information for the violence. Anti-migrant groups say the ruling and directive opened the door to undocumented migrants, and March and March denies its members were behind the violence. Rights groups say the court order is binding and call for those who incited violence to be prosecuted. Local elections are due on November 4."
+  ],
+  "ground": [
+    { "date": "2026-10-09", "platform": "Video remarks", "who": "President Cyril Ramaphosa", "shows": "Ramaphosa, speaking in the Free State, saying the security cluster is on top of the situation in Durban and that there should be no loss of life.", "label": "reported", "check": "Reported by AFP. Date and place are given in the report.", "sources": ["afpOct9", "africanInsiderOct9"] },
+    { "date": "2026-10-10", "platform": "Social media post", "who": "Jacinta Ngobese-Zuma, founder of March and March", "shows": "A statement that the group does not associate itself with criminal activities and that the violence in Durban is \"not us\".", "label": "reported", "check": "Reported by TimesLIVE. Text post; date is approximate (around October 9 to 10).", "sources": ["timesliveOct10"] }
+  ],
+  "timelineChart": {
+    "title": "Four months, four phases",
+    "from": "2026-06-15",
+    "to": "2026-11-15",
+    "ticks": ["2026-07-01", "2026-08-01", "2026-09-01", "2026-10-01", "2026-11-01"],
+    "caption": "Filled marker: the latest major development. Hover or tap a marker for the event.",
+    "aria": "Timeline of the asylum ruling and the unrest in South Africa from June to November 2026, in four phases with key dates marked"
+  },
+  "map": {
+    "lon0": 16,
+    "lon1": 33.5,
+    "lat0": -35,
+    "lat1": -22,
+    "lonTicks": [18, 22, 26, 30],
+    "latTicks": [-34, -30, -26],
+    "aria": "Approximate positions of South African cities with reported protests, unrest or related events"
+  },
+  "phases": [
+    { "id": "ruling", "when": "June to September", "name": "Anti-migrant protests and the court ruling", "short": "Ruling", "start": "2026-06-15", "end": "2026-09-27" },
+    { "id": "directive", "when": "September 28 to October 7", "name": "The directive and the first protests", "short": "Directive", "start": "2026-09-28", "end": "2026-10-07" },
+    { "id": "riots", "when": "October 8 to 10", "name": "Riots; directive withdrawn; army deployed", "short": "Riots", "start": "2026-10-08", "end": "2026-10-10" },
+    { "id": "response", "when": "From October 11", "name": "Arrests, courts and the government's plan", "short": "Response", "start": "2026-10-11", "end": "2026-11-15" }
+  ],
+  "events": [
+    { "date": "2026-07-01", "phase": "ruling", "label": "reported", "added": "2026-10-17T14:36:15Z", "text": "Police say more than 900 people were arrested during anti-migrant protests, after groups set a June 30 deadline for undocumented foreigners to leave the country, Reuters reports.", "sources": ["ajJul2", "irishJul1"] },
+    { "date": "2026-07-07", "phase": "ruling", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "milestone": "Court ruling", "text": "The Constitutional Court rules that people cannot be barred from applying for asylum because they entered irregularly, had no asylum transit visa or missed a reporting deadline; officials must consider individual claims. The case was brought by the Scalabrini Centre of Cape Town and Lawyers for Human Rights.", "sources": ["mgOct9", "xinhuaOct11", "dmOct13"] },
+    { "date": "2026-09-28", "phase": "directive", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "The Home Affairs director-general issues a directive telling refugee reception offices to accept in-person asylum applications.", "sources": ["mgOct9", "xinhuaOct11"] },
+    { "date": "2026-10-06", "phase": "directive", "label": "reported", "added": "2026-10-17T14:36:15Z", "text": "Members of the anti-migrant group March and March disrupt asylum processing at the Durban refugee reception office, Daily Maverick reports.", "sources": ["dmOct9"] },
+    { "date": "2026-10-07", "phase": "directive", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "Home Affairs says a \"coordinated disinformation campaign\" is misrepresenting the ruling and says it will refer the matter to the Electoral Commission.", "sources": ["ewnOct7", "dmOct9"] },
+    { "date": "2026-10-08", "phase": "riots", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "milestone": "Riots begin", "text": "Protests in Soweto and Durban turn violent. Acting National Police Commissioner Puleng Dimpane says 24 vehicles were torched, 10 in Soweto and 14 in Durban, and foreign-owned shops are looted.", "sources": ["apOct8", "ajOct8", "mgOct9"] },
+    { "date": "2026-10-08", "phase": "riots", "label": "disputed", "added": "2026-10-17T14:36:15Z", "text": "KwaZulu-Natal police say three foreign nationals were arrested on suspicion of attacking a protester and breaking his neck, and that this may have sparked the Durban violence. Protesters say a demonstrator was shot by a foreign national; in Soweto, a community leader alleges foreign nationals fired shots first.", "sources": ["apOct8", "timesliveOct10"] },
+    { "date": "2026-10-08", "phase": "riots", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "Government spokesperson William Baloyi says the violence was triggered by people deliberately spreading false information, and that the ruling does not automatically give anyone refugee status or other rights. The inter-ministerial committee on migration says all refugee offices are overwhelmed.", "sources": ["ajOct8", "sanewsImc"] },
+    { "date": "2026-10-09", "phase": "riots", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "milestone": "Directive withdrawn", "text": "Home Affairs withdraws the directive, saying its offices were \"overwhelmed within a matter of days\". The department says the directive was issued without Minister Leon Schreiber's knowledge; Schreiber says the department changed its position because the \"facts shifted\".", "sources": ["mgOct9", "afpOct9", "ewnOct9"] },
+    { "date": "2026-10-09", "phase": "riots", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "Violence continues in Durban for a second day; AFP reports police using tear gas and stun grenades, houses set alight and shops looted. President Cyril Ramaphosa says the security cluster is handling the unrest and there should be no loss of life.", "sources": ["afpOct9", "timesliveOct10"] },
+    { "date": "2026-10-09", "phase": "riots", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "Protesters march to the Constitutional Court in Johannesburg. Daily Maverick reports police fired rubber bullets and a vehicle was set alight.", "sources": ["afpOct9", "dmOct9"] },
+    { "date": "2026-10-10", "phase": "riots", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "milestone": "Army deployed", "text": "Soldiers are deployed in Durban and patrol the city centre with police, after KwaZulu-Natal Premier Thami Ntuli called for the army.", "sources": ["timesliveOct10", "dmOct11", "anaLive"] },
+    { "date": "2026-10-10", "phase": "riots", "label": "reported", "added": "2026-10-17T14:36:15Z", "text": "KwaZulu-Natal police say 19 people have been arrested in Durban, four of them for attempted murder and discharging a firearm in public. March and March's founder says on social media that the group does not associate itself with criminal activities.", "sources": ["timesliveOct10"] },
+    { "date": "2026-10-10", "phase": "riots", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "Police arrest three March and March members outside the Durban refugee office; they are charged with incitement to commit public violence, public violence and riotous or threatening conduct.", "sources": ["iolOct17", "groundupOct13"] },
+    { "date": "2026-10-11", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "Justice Minister Mmamoloko Kubayi, who chairs the inter-ministerial committee, says the government will ask the courts for a supervisory order on implementing the ruling, possibly with a suspension period. She says a new asylum appointment system will be in place by November 10 and that 30 people have been arrested since October 8.", "sources": ["xinhuaOct11", "dmOct11"] },
+    { "date": "2026-10-11", "phase": "response", "label": "reported", "added": "2026-10-17T14:36:15Z", "text": "Nigeria's foreign ministry says 2,037 Nigerians have been repatriated from South Africa since June 10 amid what it calls xenophobic attacks.", "sources": ["thisdayOct12"] },
+    { "date": "2026-10-12", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "24 accused appear in Durban Magistrate's Court. Two of the arrested March and March members are granted bail of R1,000 on condition they stay away from violent protests and from Home Affairs offices.", "sources": ["groundupOct13", "iolOct13"] },
+    { "date": "2026-10-15", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "The lawyer for March and March leader Jacinta Ngobese-Zuma says arrest warrants have been issued for her and for him; the movement calls it intimidation before the elections. The National Prosecuting Authority and KwaZulu-Natal police say no warrant or case exists.", "sources": ["timesliveOct15", "iolOct17", "citizenOct15"] },
+    { "date": "2026-10-16", "phase": "response", "label": "reported", "added": "2026-10-17T14:36:15Z", "text": "IOL reports that 19 people linked to the movement appear in Durban Magistrate's Court on charges linked to public violence.", "sources": ["iolOct17"] },
+    { "date": "2026-11-04", "phase": "response", "label": "pending", "added": "2026-10-17T14:36:15Z", "text": "Local government elections on November 4, the new asylum appointment system due by November 10, and whether the government files for a supervisory order. Still being checked.", "sources": ["dmOct9", "xinhuaOct11"] }
+  ],
+  "claims": [
+    { "title": "What does the court ruling do?", "label": "disputed", "a": "The government says the ruling does not automatically grant refugee status, permanent residence or voting rights, and that false claims about it caused the violence.", "aSrc": ["ajOct8", "sanewsImc", "ewnOct7"], "b": "Anti-migrant groups say the ruling and the directive opened the door to undocumented migrants; March and March's founder called the ruling \"absolutely shocking\".", "bSrc": ["dmOct9"], "status": "The ruling requires officials to consider individual asylum claims and remains binding after the directive was withdrawn (Mail & Guardian)." },
+    { "title": "Who is responsible for the violence?", "label": "disputed", "a": "March and March says it does not associate itself with criminal activities. Protesters say the Durban violence followed the alleged shooting of a demonstrator by a foreign national.", "aSrc": ["timesliveOct10", "apOct8"], "b": "Police say three foreign nationals were arrested over an assault on a protester, and dozens of people have been arrested for public violence. A coalition of 160 civil society groups calls for those who incited violence to be prosecuted.", "bSrc": ["apOct8", "timesliveOct10", "xinhuaOct11"], "status": "Court cases are under way; no court has made findings yet." },
+    { "title": "Were arrest warrants issued for March and March leaders?", "label": "disputed", "a": "The movement's lawyer says warrants were issued for him and the movement's founder; its spokesperson calls this intimidation before the November 4 elections.", "aSrc": ["timesliveOct15", "iolOct17"], "b": "The National Prosecuting Authority and KwaZulu-Natal police say no warrant was issued and no case exists.", "bSrc": ["timesliveOct15", "iolOct17", "citizenOct15"], "status": "No warrant has been produced." }
+  ],
+  "accountability": [
+    { "date": "Jul 1", "action": "More than 900 arrested during anti-migrant protests", "by": "Police (figure via Reuters)", "label": "reported" },
+    { "date": "Oct 7", "action": "Alleged disinformation about the ruling to be referred to the Electoral Commission", "by": "Home Affairs", "label": "confirmed" },
+    { "date": "Oct 8", "action": "Three foreign nationals arrested over an assault on a protester in Durban", "by": "KwaZulu-Natal police", "label": "confirmed" },
+    { "date": "Oct 9", "action": "Asylum directive of September 28 withdrawn", "by": "Home Affairs", "label": "confirmed" },
+    { "date": "Oct 10", "action": "Army deployed in Durban", "by": "National government, at the request of the KwaZulu-Natal premier", "label": "confirmed" },
+    { "date": "Oct 10", "action": "19 arrested in Durban, including four for attempted murder and discharging a firearm", "by": "KwaZulu-Natal police", "label": "reported" },
+    { "date": "Oct 10", "action": "Three March and March members arrested and charged with incitement and public violence", "by": "Police", "label": "confirmed" },
+    { "date": "Oct 11", "action": "30 arrested since October 8: 25 in KwaZulu-Natal, 5 in Gauteng", "by": "Police (figure via the inter-ministerial committee)", "label": "confirmed" },
+    { "date": "Oct 11", "action": "Supervisory order on implementing the ruling to be sought from the courts", "by": "Inter-ministerial committee on migration", "label": "confirmed" },
+    { "date": "Oct 12", "action": "24 accused appear in court; two granted bail with conditions", "by": "Durban Magistrate's Court", "label": "confirmed" },
+    { "date": "Oct 16", "action": "19 people linked to March and March appear on charges linked to public violence", "by": "Durban Magistrate's Court", "label": "reported" }
+  ],
+  "places": [
+    { "name": "Durban", "lat": -29.86, "lon": 31.02, "desc": "Riots, looting and arson, Oct 8–9; army deployed Oct 10; court cases", "r": 9, "anchor": "end", "dx": -12, "dy": 4 },
+    { "name": "Johannesburg and Soweto", "lat": -26.22, "lon": 27.95, "desc": "Vehicles torched in Soweto, Oct 8; march to the Constitutional Court, Oct 9", "r": 8, "anchor": "end", "dx": -12, "dy": 6 },
+    { "name": "Pretoria", "lat": -25.75, "lon": 28.19, "desc": "Inter-ministerial committee briefings on migration", "r": 5, "anchor": "start", "dx": 10, "dy": -6 },
+    { "name": "Cape Town", "lat": -33.92, "lon": 18.42, "desc": "Scalabrini Centre, which brought the asylum case", "r": 5, "anchor": "start", "dx": 10, "dy": 4 },
+    { "name": "Beitbridge", "lat": -22.22, "lon": 30, "desc": "Planned first refugee office at a port of entry, from December", "r": 5, "anchor": "start", "dx": 10, "dy": 10 }
+  ],
+  "figures": {
+    "vehicles": { "type": "bar", "title": "Vehicles torched on October 8, per police", "rows": [["Durban", 14], ["Soweto", 10]], "max": 16, "unit": "", "caption": "Source: Acting National Police Commissioner Puleng Dimpane, via AP, Al Jazeera and the Mail & Guardian. TimesLIVE gives different counts for Durban by day.", "aria": "Vehicles torched on October 8 per police: 14 in Durban and 10 in Soweto" },
+    "arrests": { "type": "bar", "title": "Arrests reported by officials", "rows": [["Durban, by Oct 10", 19], ["Nationwide, Oct 8 to 11", 30]], "max": 35, "unit": "", "caption": "Sources: KwaZulu-Natal police via TimesLIVE; the inter-ministerial committee via Xinhua and Daily Maverick (25 in KwaZulu-Natal, 5 in Gauteng). Counts overlap and differ by date.", "aria": "19 arrests in Durban by October 10 per KwaZulu-Natal police; 30 nationwide from October 8 to 11 per the inter-ministerial committee" }
+  },
+  "gaps": [
+    "A full count of injuries in October, and whether anyone was killed",
+    "Who fired shots on October 8, and the condition of the injured protester",
+    "Number of troops deployed and for how long",
+    "What asylum arrangements apply now that the directive is withdrawn",
+    "Whether the government has filed for a supervisory order",
+    "Outcome of the referral to the Electoral Commission",
+    "Statements from the African Union, SADC and neighbouring governments"
+  ],
+  "corrections": [],
+  "sourceGroups": [
+    ["The ruling and the directive", ["ajJul2", "irishJul1", "mgOct9", "dmOct13", "ewnOct7", "sanewsImc"]],
+    ["The riots and the police response", ["apOct8", "ajOct8", "afpOct9", "africanInsiderOct9", "dmOct9", "ewnOct9", "timesliveOct10", "anaLive", "dmOct11"]],
+    ["Latest", ["xinhuaOct11", "thisdayOct12", "groundupOct13", "iolOct13", "timesliveOct15", "citizenOct15", "iolOct17"]]
+  ],
+  "sources": {
+    "ajJul2": ["Al Jazeera", "https://aljazeera.com/news/2026/7/2/more-than-900-arrested-during-south-africas-antimigrant-protests"],
+    "irishJul1": ["The Irish Times (Reuters)", "https://www.irishtimes.com/world/africa/2026/07/01/more-than-900-arrested-during-anti-migrant-protests-in-south-africa/"],
+    "mgOct9": ["Mail & Guardian", "https://mg.co.za/news/south-africa/2026-10-09-home-affairs-withdraws-asylum-directive-as-schreiber-defends-reversal/"],
+    "dmOct13": ["Daily Maverick", "https://www.dailymaverick.co.za/article/2026-10-13-what-the-constitutional-court-judgment-on-asylum-actually-said/"],
+    "ewnOct7": ["EWN", "https://www.ewn.co.za/2026/10/07/home-affairs-rebukes-disinformation-campaign-over-concourt-asylum-ruling"],
+    "sanewsImc": ["SAnews (government)", "https://www.sanews.gov.za/south-africa/concourt-asylum-ruling-does-not-automatically-grant-refugee-status-imc"],
+    "apOct8": ["AP (via ABC News)", "https://abcnews.com/International/wireStory/vehicles-torched-south-africa-protests-asylum-ruling-rage-137105122"],
+    "ajOct8": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/8/south-africa-protests-turn-violent-amid-rage-over-asylum-ruling"],
+    "afpOct9": ["AFP (via Edition.mv)", "https://edition.mv/world/54772"],
+    "africanInsiderOct9": ["African Insider (AFP)", "https://www.africaninsider.com/politics/watch-security-cluster-is-on-top-of-the-situation-ramaphosa-on-durban-unrest/"],
+    "dmOct9": ["Daily Maverick", "https://www.dailymaverick.co.za/article/2026-10-09-what-to-know-about-the-refugee-ruling-that-sparked-riots-in-durban-and-soweto/"],
+    "ewnOct9": ["EWN", "https://www.ewn.co.za/2026/10/09/home-affairs-withdraws-directive-as-asylum-seeker-applications-overwhelm-systems-says-schreiber"],
+    "timesliveOct10": ["TimesLIVE", "https://www.timeslive.co.za/news/2026-10-10-army-rolls-into-durban-as-xenophobic-violence-rages/"],
+    "anaLive": ["African News Agency", "https://africannewsagency.com/live-anti-immigrant-protests-government-can-approach-the-courts-for-a-supervisory-order-imc-on-migration/"],
+    "dmOct11": ["Daily Maverick", "https://www.dailymaverick.co.za/article/2026-10-11-durbans-uneasy-calm-can-the-state-keep-a-lid-on-violence/"],
+    "xinhuaOct11": ["Xinhua", "https://english.news.cn/20261011/830bc772a2cf4336992081f2d56a2550/c.html"],
+    "thisdayOct12": ["ThisDay (Nigeria)", "https://www.thisdaylive.com/2026/10/12/nigerians-fleeing-south-africa-rises-to-2037-as-xenophobic-violence-persists/"],
+    "groundupOct13": ["GroundUp (via allAfrica)", "https://allafrica.com/stories/202610130070.html"],
+    "iolOct13": ["IOL (Sunday Tribune)", "https://iol.co.za/sunday-tribune/news/2026-10-13-two-march-and-march-activists-granted-bail-in-durban-parolee-remains-in-custody/"],
+    "timesliveOct15": ["TimesLIVE", "https://www.timeslive.co.za/politics/2026-10-15-no-arrest-warrants-for-jacinta-or-her-husband-police-and-npa/"],
+    "citizenOct15": ["The Citizen", "https://www.citizen.co.za/news/npa-and-police-deny-arrest-warrants-were-issued-for-march-and-march-leaders/"],
+    "iolOct17": ["IOL", "https://iol.co.za/news/south-africa/2026-10-17-from-street-protests-to-the-courtroom-a-defining-week-for-march-and-march/"]
+  }
+}
