@@ -11,7 +11,7 @@
   "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
   "status": "Ongoing",
   "updated": "2026-10-18",
-  "updatedAt": "2026-10-18T04:13:48Z",
+  "updatedAt": "2026-10-18T06:18:01Z",
   "summary": [
     "French high school students began blockading their schools in the Paris suburbs in mid to late September, protesting teacher shortages, overcrowded classes, run-down buildings and classrooms that reached 35 to 40°C in heatwaves. Within two weeks the blockades had spread across France, with hundreds of schools closed or disrupted.",
     "The police response has become a story of its own. Thousands of people, most of them minors, have been arrested; hundreds of students, school staff and police officers have been injured. A 15-year-old lost a hand in Lens on October 5, and the government suspended stun grenades at student protests two days later. Rights groups say force against minors has been disproportionate; police unions say force is used against people who attack officers.",
@@ -92,7 +92,7 @@
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T23:29:12Z", "text": "Visiting security forces in Paris on Saturday evening, Prime Minister Lecornu says about 1,200 people have been arrested across France so far, a higher figure than the interior minister gave earlier in the evening.", "sources": ["hespressAfpLecornuOct17", "bfmLecornuOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T23:29:12Z", "text": "Lecornu also says 150 police officers and gendarmes were injured, calling it a miracle the toll was not higher, and tells La France insoumise it is now time to choose a side, AFP reports.", "sources": ["hespressAfpLecornuOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-17T22:25:35Z", "text": "Final national arrest and injury figures for the October 17 protest day, how many people remain in custody, and any further protest dates. Still being checked.", "sources": ["europe1LiveOct17"] },
-    { "date": "2026-10-18", "phase": "response", "label": "reported", "added": "2026-10-18T04:13:48Z", "text": "The mayors of Paris, Marseille and Lyon ask to meet the prime minister early this week and request a detailed account of how Saturday's events unfolded, Zinfos974 reports.", "sources": ["zinfosMayorsOct18"] }
+    { "date": "2026-10-18", "phase": "response", "label": "confirmed", "added": "2026-10-18T06:18:01Z", "text": "The mayors of Paris, Marseille and Lyon ask to meet Prime Minister Lecornu early this week, together with the mayors of other affected towns, and request a detailed and transparent account of how Saturday's events unfolded, Zinfos974 and Lyon Mag report.", "sources": ["zinfosMayorsOct18", "lyonmagMayorsOct18"] }
   ],
   "claims": [
     { "title": "Who is driving the movement?", "label": "disputed", "a": "The government says students' concerns are legitimate but that the movement is being exploited for political ends and turned into urban violence.", "aSrc": ["afpOct14", "euroOct14"], "b": "Students describe it as a response to teacher shortages, overcrowding and neglected buildings. LFI, which the government has blamed for stoking tensions, says the government acted on police force only after children were badly hurt.", "bSrc": ["ajVoices", "euroOct7"], "status": "Open. Both positions are on record; there is no independent finding on who organises the protests." },
@@ -120,7 +120,8 @@
     { "date": "Oct 17", "action": "191 arrests in Paris by 6pm", "by": "Paris police prefecture, per Europe 1", "label": "reported" },
     { "date": "Oct 17", "action": "Prosecutors instructed to seek a very firm response, including pre-trial detention", "by": "Justice Minister Gérald Darmanin, per Europe 1", "label": "reported" },
     { "date": "Oct 17", "action": "Four arrests after an attempt to storm La Santé prison in Paris", "by": "Europe 1", "label": "reported" },
-    { "date": "Oct 17", "action": "About 1,200 arrests nationwide by late evening", "by": "Prime Minister Sébastien Lecornu, per AFP and BFMTV", "label": "confirmed" }
+    { "date": "Oct 17", "action": "About 1,200 arrests nationwide by late evening", "by": "Prime Minister Sébastien Lecornu, per AFP and BFMTV", "label": "confirmed" },
+    { "date": "Oct 18", "action": "Mayors of Paris, Marseille and Lyon ask the prime minister for a meeting and a detailed account of Saturday's events", "by": "Zinfos974, Lyon Mag", "label": "confirmed" }
   ],
   "places": [
     { "name": "Paris region", "lat": 48.86, "lon": 2.35, "desc": "Créteil, where blockades began; Saint-Denis; clashes near Les Invalides on October 13", "r": 9, "anchor": "start", "dx": 12, "dy": 4 },
@@ -149,7 +150,7 @@
     ["How it started", ["ajVoices", "bbcSep28"]],
     ["Injuries, arrests and the police response", ["ajOct5", "ajOct7", "euroOct7", "psOct7"]],
     ["Government measures and turnout", ["mwnOct9", "euroOct13", "afpOct14", "euroOct14", "localOct17"]],
-    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17", "europe1StEtienneOct17", "fiStEtienneOct17", "iciStEtienneOct17", "f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17", "cnewsLecornuOct17", "lexpressOrangeOct17", "europe1BordeauxOct17", "lessentielBordeauxOct17", "europe1LiveOct17", "cnewsNunezOct17", "europe1MacronOct17", "f24LimogesOct17", "hespressAfpLecornuOct17", "bfmLecornuOct17", "zinfosMayorsOct18"]]
+    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17", "europe1StEtienneOct17", "fiStEtienneOct17", "iciStEtienneOct17", "f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17", "cnewsLecornuOct17", "lexpressOrangeOct17", "europe1BordeauxOct17", "lessentielBordeauxOct17", "europe1LiveOct17", "cnewsNunezOct17", "europe1MacronOct17", "f24LimogesOct17", "hespressAfpLecornuOct17", "bfmLecornuOct17", "zinfosMayorsOct18", "lyonmagMayorsOct18"]]
   ],
   "sources": {
     "ajVoices": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/7/were-short-of-resources-frances-student-protesters-in-their-own-words"],
@@ -200,6 +201,7 @@
     "f24LimogesOct17": ["France 24 (AFP)", "https://www.france24.com/en/live-news/20261017-fire-rages-at-town-hall-in-france-s-limoges-after-protests-authorities"],
     "hespressAfpLecornuOct17": ["Hespress (AFP)", "https://fr.hespress.com/492873-violences-en-france-1-200-interpellations-150-policiers-et-gendarmes-blesses.html"],
     "bfmLecornuOct17": ["BFMTV (via Titres Presse)", "https://www.titrespresse.com/25576052603/sebastien-lecornu-paris"],
-    "zinfosMayorsOct18": ["Zinfos974", "https://www.zinfos974.com/1-200-interpellations-150-policiers-et-gendarmes-blesses-un-samedi-de-mobilisation-marque-par-les-incendies-et-les-pillages/"]
+    "zinfosMayorsOct18": ["Zinfos974", "https://www.zinfos974.com/1-200-interpellations-150-policiers-et-gendarmes-blesses-un-samedi-de-mobilisation-marque-par-les-incendies-et-les-pillages/"],
+    "lyonmagMayorsOct18": ["Lyon Mag", "https://www.lyonmag.com/article/154444/violences-du-17-octobre-gregory-doucet-et-les-maires-de-paris-et-marseille-demandent-a-etre-recus-par-le-premier-ministre"]
   }
 }
