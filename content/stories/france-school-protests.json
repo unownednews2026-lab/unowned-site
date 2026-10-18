@@ -10,8 +10,8 @@
   "kicker": "Story tracker · France",
   "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
   "status": "Ongoing",
-  "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T23:29:12Z",
+  "updated": "2026-10-18",
+  "updatedAt": "2026-10-18T04:13:48Z",
   "summary": [
     "French high school students began blockading their schools in the Paris suburbs in mid to late September, protesting teacher shortages, overcrowded classes, run-down buildings and classrooms that reached 35 to 40°C in heatwaves. Within two weeks the blockades had spread across France, with hundreds of schools closed or disrupted.",
     "The police response has become a story of its own. Thousands of people, most of them minors, have been arrested; hundreds of students, school staff and police officers have been injured. A 15-year-old lost a hand in Lens on October 5, and the government suspended stun grenades at student protests two days later. Rights groups say force against minors has been disproportionate; police unions say force is used against people who attack officers.",
@@ -91,7 +91,8 @@
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T22:25:35Z", "text": "Late on Saturday, about 30 people try to storm La Santé prison in Paris, firing fireworks mortars at the building and nearby, and four people are arrested, Europe 1 reports.", "sources": ["europe1LiveOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "confirmed", "added": "2026-10-17T23:29:12Z", "text": "Visiting security forces in Paris on Saturday evening, Prime Minister Lecornu says about 1,200 people have been arrested across France so far, a higher figure than the interior minister gave earlier in the evening.", "sources": ["hespressAfpLecornuOct17", "bfmLecornuOct17"] },
     { "date": "2026-10-17", "phase": "response", "label": "reported", "added": "2026-10-17T23:29:12Z", "text": "Lecornu also says 150 police officers and gendarmes were injured, calling it a miracle the toll was not higher, and tells La France insoumise it is now time to choose a side, AFP reports.", "sources": ["hespressAfpLecornuOct17"] },
-    { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-17T22:25:35Z", "text": "Final national arrest and injury figures for the October 17 protest day, how many people remain in custody, and any further protest dates. Still being checked.", "sources": ["europe1LiveOct17"] }
+    { "date": "2026-10-17", "phase": "response", "label": "pending", "added": "2026-10-17T22:25:35Z", "text": "Final national arrest and injury figures for the October 17 protest day, how many people remain in custody, and any further protest dates. Still being checked.", "sources": ["europe1LiveOct17"] },
+    { "date": "2026-10-18", "phase": "response", "label": "reported", "added": "2026-10-18T04:13:48Z", "text": "The mayors of Paris, Marseille and Lyon ask to meet the prime minister early this week and request a detailed account of how Saturday's events unfolded, Zinfos974 reports.", "sources": ["zinfosMayorsOct18"] }
   ],
   "claims": [
     { "title": "Who is driving the movement?", "label": "disputed", "a": "The government says students' concerns are legitimate but that the movement is being exploited for political ends and turned into urban violence.", "aSrc": ["afpOct14", "euroOct14"], "b": "Students describe it as a response to teacher shortages, overcrowding and neglected buildings. LFI, which the government has blamed for stoking tensions, says the government acted on police force only after children were badly hurt.", "bSrc": ["ajVoices", "euroOct7"], "status": "Open. Both positions are on record; there is no independent finding on who organises the protests." },
@@ -134,7 +135,7 @@
     "arrests": { "type": "bar", "title": "Arrests since late September, per the Justice Ministry", "rows": [["Apprehended", 7950], ["Charged", 2735]], "max": 9000, "unit": "", "caption": "As of October 14, 85% of them minors. Source: Justice Ministry, via AFP. Euronews cites 6,800 taken into custody.", "aria": "As of October 14: 7,950 people apprehended and 2,735 charged, per the Justice Ministry" }
   },
   "gaps": [
-    "Independent confirmation of turnout (organisers say about 800,000, the interior minister 550,000), of the injury figures (Lecornu says 150 police and gendarmes), and of a Europe 1 report that a Paris police officer is in critical condition. Also: how many of the roughly 1,200 people arrested remain in custody, whether investigations are opened into the Limoges town hall fire and the Saint-Étienne injury, and an independent account of the La Santé prison incident",
+    "Independent confirmation of turnout (organisers say about 800,000, the interior minister 550,000), of the injury figures (Lecornu says 150 police and gendarmes), and of a Europe 1 report that a Paris police officer is in critical condition. Also: how many of the roughly 1,200 people arrested remain in custody, whether investigations are opened into the Limoges town hall fire and the Saint-Étienne injury, and an independent account of the La Santé prison incident, and whether the prime minister meets the mayors of Paris, Marseille and Lyon",
     "Findings of the investigation into the Lens injury",
     "Outcome of the 36 internal police investigations",
     "Whether all 3,000 substitute teachers are in place",
@@ -148,7 +149,7 @@
     ["How it started", ["ajVoices", "bbcSep28"]],
     ["Injuries, arrests and the police response", ["ajOct5", "ajOct7", "euroOct7", "psOct7"]],
     ["Government measures and turnout", ["mwnOct9", "euroOct13", "afpOct14", "euroOct14", "localOct17"]],
-    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17", "europe1StEtienneOct17", "fiStEtienneOct17", "iciStEtienneOct17", "f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17", "cnewsLecornuOct17", "lexpressOrangeOct17", "europe1BordeauxOct17", "lessentielBordeauxOct17", "europe1LiveOct17", "cnewsNunezOct17", "europe1MacronOct17", "f24LimogesOct17", "hespressAfpLecornuOct17", "bfmLecornuOct17"]]
+    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17", "europe1StEtienneOct17", "fiStEtienneOct17", "iciStEtienneOct17", "f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17", "cnewsLecornuOct17", "lexpressOrangeOct17", "europe1BordeauxOct17", "lessentielBordeauxOct17", "europe1LiveOct17", "cnewsNunezOct17", "europe1MacronOct17", "f24LimogesOct17", "hespressAfpLecornuOct17", "bfmLecornuOct17", "zinfosMayorsOct18"]]
   ],
   "sources": {
     "ajVoices": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/7/were-short-of-resources-frances-student-protesters-in-their-own-words"],
@@ -198,6 +199,7 @@
     "europe1MacronOct17": ["Europe 1 (AFP)", "https://www.europe1.fr/politique/manifestations-en-france-aucune-place-pour-la-violence-nous-ferons-tous-bloc-face-aux-semeurs-de-chaos-affirme-emmanuel-macron-1157889"],
     "f24LimogesOct17": ["France 24 (AFP)", "https://www.france24.com/en/live-news/20261017-fire-rages-at-town-hall-in-france-s-limoges-after-protests-authorities"],
     "hespressAfpLecornuOct17": ["Hespress (AFP)", "https://fr.hespress.com/492873-violences-en-france-1-200-interpellations-150-policiers-et-gendarmes-blesses.html"],
-    "bfmLecornuOct17": ["BFMTV (via Titres Presse)", "https://www.titrespresse.com/25576052603/sebastien-lecornu-paris"]
+    "bfmLecornuOct17": ["BFMTV (via Titres Presse)", "https://www.titrespresse.com/25576052603/sebastien-lecornu-paris"],
+    "zinfosMayorsOct18": ["Zinfos974", "https://www.zinfos974.com/1-200-interpellations-150-policiers-et-gendarmes-blesses-un-samedi-de-mobilisation-marque-par-les-incendies-et-les-pillages/"]
   }
 }
