@@ -10,8 +10,8 @@
   "kicker": "Story tracker · Albania",
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
-  "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T20:24:29Z",
+  "updated": "2026-10-18",
+  "updatedAt": "2026-10-18T01:53:54Z",
   "summary": [
     "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
     "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days. The interior minister says 156 people were injured over four days, including 97 police officers and 45 protesters.",
@@ -73,7 +73,9 @@
     { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-17T19:23:44Z", "text": "Reuters says its video shows police firing a shotgun towards crowds outside the Education Ministry, that its reporters found rubber pellets on the ground, and that pellets hit two Reuters journalists and several protesters. Police chief Hita does not deny using rubber bullets and says the means were used in a limited way.", "sources": ["reutersPellets"] },
     { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-17T20:24:29Z", "text": "Rama visits businesses damaged in the unrest, warns against further destruction and accuses his conservative opponents of encouraging the violence, AFP and AP report (via Al Jazeera).", "sources": ["ajOct17"] },
     { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-17T20:24:29Z", "text": "The health ministry says nine protesters and four police officers received medical treatment on Saturday, AFP and AP report (via Al Jazeera).", "sources": ["ajOct17"] },
-    { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T14:30:03Z", "text": "Saturday-only arrest figures, and whether talks between students and the government begin. Still being checked.", "sources": ["topChLiveOct17"] }
+    { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-18T01:53:54Z", "text": "News24 reports that President Bajram Begaj has met two groups of protesters on separate days; they asked him to dissolve parliament and set up a one-year transitional government to prepare early elections. No statement from the president's office has been reported.", "sources": ["news24BegajGsh"] },
+    { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-18T01:53:54Z", "text": "The US Embassy in Tirana calls on all sides to show restraint and keep calm, saying citizens should protest peacefully and that violence and destruction of property are not civic engagement, Gazeta Shqiptare reports.", "sources": ["gshUsEmbassy"] },
+    { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T14:30:03Z", "text": "Saturday-only arrest figures, whether talks between students and the government begin, and any response from President Begaj to the protesters' demands. Still being checked.", "sources": ["topChLiveOct17"] }
   ],
   "claims": [
     { "title": "Who is behind the violence?", "label": "disputed", "a": "Rama says the unrest is not a student phenomenon and blames foreign hands and the opposition, which he says is using masked people. Police urge peaceful protesters to distance themselves from masked agitators.", "aSrc": ["ajOct16", "dwOct16", "occrpOct"], "b": "Students say they are protesting university conditions, costs and job prospects after months of ignored peaceful protest. Opposition leader Sali Berisha denies the opposition is involved in the violence.", "bSrc": ["reutersOct14", "reutersOct16", "dwOct16"], "status": "Open. Neither side has published evidence; police investigations are under way." },
@@ -110,7 +112,7 @@
     "Number of protesters and journalists injured, and Saturday-only arrest figures",
     "Charges against those arrested",
     "Outcome of the investigations into police conduct, and the police response to the Ombudsman's findings",
-    "Whether students and the government open talks",
+    "Whether students and the government open talks, and whether President Begaj responds to protesters' calls to dissolve parliament",
     "Full details and status of the Zvërnec resort project",
     "Evidence for claims of foreign or opposition involvement",
     "Who authorised the use of rubber bullets, and how many people were hit",
@@ -120,7 +122,7 @@
   "sourceGroups": [
     ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
     ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
-    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17"]]
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy"]]
   ],
   "sources": {
     "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
@@ -153,6 +155,8 @@
     "kohaHita167": ["Koha", "https://www.koha.net/arberi/drejtori-i-policise-167-shtetas-te-arrestuar-per-pese-dite-7-police-jane-pezulluar"],
     "vizionHita132": ["Vizion Plus", "https://www.vizionplus.tv/jane-bere-thirrje-per-sulm-ndaj-efektiveve-hita-132-punonjes-policie-te-lenduar/"],
     "reutersPellets": ["Reuters (via ThePrint)", "https://theprint.in/world/albanian-police-fire-rubber-bullets-as-student-protests-rage/3074885/"],
-    "ajOct17": ["Al Jazeera (AFP, AP)", "https://www.aljazeera.com/news/2026/10/17/albanian-police-fire-rubber-bullets-as-protests-against-rama-escalate"]
+    "ajOct17": ["Al Jazeera (AFP, AP)", "https://www.aljazeera.com/news/2026/10/17/albanian-police-fire-rubber-bullets-as-protests-against-rama-escalate"],
+    "news24BegajGsh": ["News24 (via Gazeta Shqiptare)", "https://gazetashqiptare.al/2026/10/17/revolta-studentore-kunder-rames-presidenti-begaj-takon-dy-grupe-protestuesish-te-rinjte-i-kerkojne-te-shperndaje-parlamentin-dhe-qeveri-tranzitore/"],
+    "gshUsEmbassy": ["Gazeta Shqiptare", "https://gazetashqiptare.al/2026/10/17/studentet-ne-revolte-kunder-rames-reagon-ambasada-e-shba-u-bejme-thirrje-paleve-per-vetepermbajtje-qytetaret-te-protestojne-paqesisht-dhe-pa-akte-te-dhunshme/"]
   }
 }
