@@ -96,6 +96,7 @@ function page({ title, description, path, body, scripts = [], og = "/assets/og-d
 <meta name="twitter:site" content="@unownednews">
 <meta name="referrer" content="no-referrer">
 <link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/quick.css">
 </head>
 <body>
 <div class="wrap">
@@ -126,6 +127,34 @@ ${["/assets/time.js", ...scripts].map((s) => `<script src="${s}" defer></script>
 function srcLine(S, keys) {
   if (!keys.length) return `<p class="src">Sources to follow</p>`;
   return `<p class="src">Sources: ${keys.map((k) => `<a href="${esc(S[k][1])}" rel="noopener nofollow">${esc(S[k][0])}</a>`).join(" · ")}</p>`;
+}
+
+/* "In 30 seconds": five short cards built from data each story already has. Used on the page and as shareable images. */
+function quickCards(st) {
+  const strip = (t) => t.replace(/\s*(Outcome )?[Ss]till being checked\.?\s*$/, "").trim();
+  const items = st.events.filter((e) => e.label !== "pending");
+  const latest = items[items.length - 1];
+  const confirmed = items.filter((e) => e.label === "confirmed" && e !== latest).slice(-2).reverse();
+  const recentCut = latest ? new Date(Date.parse(latest.date) - 3 * 864e5).toISOString().slice(0, 10) : "";
+  const pending = st.events.filter((e) => e.label === "pending" && e.date >= recentCut).slice(-2).reverse();
+  const claim = st.claims[st.claims.length - 1];
+  const cards = [
+    { kind: "What's happening", lines: [{ text: firstSentence(st.summary[0], 300) }] },
+    latest && { kind: "Latest", lines: [{ date: latest.date, label: latest.label, text: firstSentence(latest.text, 300) }] },
+    confirmed.length && { kind: "What's confirmed", lines: confirmed.map((e) => ({ date: e.date, label: "confirmed", text: firstSentence(e.text, 300) })) },
+    claim && { kind: "What's disputed", title: claim.title, lines: [{ side: "One account", text: firstSentence(claim.a, 280) }, { side: "Other account", text: firstSentence(claim.b, 280) }] },
+    pending.length && { kind: "What's next", lines: pending.map((e) => ({ date: e.date, text: firstSentence(strip(e.text), 200) })) },
+  ].filter(Boolean);
+  return cards;
+}
+function quickHtml(st, cards) {
+  const n = cards.length;
+  const line = (l) => `<li>${l.side ? `<span class="q-side">${esc(l.side)}</span>` : ""}${l.label ? stamp(l.label) + " " : ""}${l.date ? `<span class="q-date">${short(l.date)}</span> ` : ""}${esc(l.text)}</li>`;
+  return `<section id="quick" class="quick" aria-labelledby="h-quick">
+  <div class="section-head"><h2 id="h-quick">In 30 seconds</h2><p>Swipe through. The full record, with every source, is below.</p></div>
+  <ol class="qcards">${cards.map((c, i) => `<li class="qcard"><p class="eyebrow">${i + 1}/${n} · ${esc(c.kind)}</p>${c.title ? `<h3>${esc(c.title)}</h3>` : ""}<ul>${c.lines.map(line).join("")}</ul></li>`).join("")}</ol>
+  <p class="q-foot"><a href="/${st.slug}/share/">Save these cards as images to share</a></p>
+</section>`;
 }
 
 function storyPage(st) {
@@ -202,6 +231,7 @@ function storyPage(st) {
   <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span></div>
   ${voteWidget(st, "Want this followed closely? Upvote it.")}
 </header>
+${quickHtml(st, quickCards(st))}
 <nav class="secnav" aria-label="Jump to section"><div class="secnav-in">${overview.map(([id, name, , n]) => `<a href="#${id}">${esc(name)}${n != null ? ` <span class="n">${n}</span>` : ""}</a>`).join("")}<a href="/" class="home-link">All stories</a></div></nav>
 ${keyStrip()}
 
@@ -290,6 +320,16 @@ ${groundHtml ? `<section id="ground" aria-labelledby="h-ground">
     scripts: ["/assets/story.js", "/assets/votes.js", "/assets/live.js"],
     og: existsSync(`static/assets/og-${st.slug}.png`) ? `/assets/og-${st.slug}.png` : "/assets/og-default.png",
     type: "article",
+  }));
+  const shareData = { title: st.title, slug: st.slug, site: SITE.replace(/^https:\/\//, ""), cards: quickCards(st).map((c) => ({ ...c, lines: c.lines.map((l) => ({ ...l, date: l.date ? short(l.date) : undefined, label: l.label ? LABEL[l.label] : undefined })) })) };
+  write(`${st.slug}/share/index.html`, page({
+    title: `${st.title}: share cards | Unowned`,
+    description: `The ${st.title} story in a few short cards.`,
+    path: `${path}share/`,
+    body: `<header class="top"><p class="eyebrow">Share cards</p><h1>${esc(st.title)}</h1><p class="lede">Short cards you can post on Instagram or X. On a phone, press and hold a card to save it. On a computer, right-click it. Every card points back to the full timeline and sources.</p></header>
+<section><div id="share-cards" class="share-cards"><p class="src">Drawing the cards…</p></div><p><a href="${path}">Back to the full story</a></p></section>
+<script type="application/json" id="cards-data">${JSON.stringify(shareData).replace(/</g, "\\u003c")}</script>`,
+    scripts: ["/assets/cards.js"],
   }));
   return { st, latest };
 }
