@@ -1,7 +1,7 @@
 // Builds the Unowned website into ./dist from ./content and ./static. Run: node build.mjs
 import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { loadBriefings, buildBriefing } from "./tools/briefing.mjs";
+import { loadBriefings, buildBriefing, freshBriefing, miniPlayer } from "./tools/briefing.mjs";
 
 const SITE = "https://unownednews.com";
 const SOCIAL = [
@@ -69,6 +69,7 @@ function write(path, content) {
 
 const NAV = [
   ["/", "Trending"],
+  ["/briefing/", "Briefing"],
   ["/submit/", "Send a link"],
   ["/how-we-work/", "How we work"],
   ["/who-owns-unowned/", "Ownership"],
@@ -98,6 +99,7 @@ function page({ title, description, path, body, scripts = [], og = "/assets/og-d
 <meta name="referrer" content="no-referrer">
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/quick.css">
+<link rel="stylesheet" href="/assets/briefing.css">
 </head>
 <body>
 <div class="wrap">
@@ -158,7 +160,7 @@ function quickHtml(st, cards) {
 </section>`;
 }
 
-function storyPage(st) {
+function storyPage(st, brief) {
   const S = st.sources;
   const path = `/${st.slug}/`;
   const nonPending = st.events.filter((e) => e.label !== "pending");
@@ -231,6 +233,7 @@ function storyPage(st) {
   <p class="lede">${esc(st.dek)}</p>
   <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span></div>
   ${voteWidget(st, "Want this followed closely? Upvote it.")}
+  ${brief && (brief.stories || []).includes(st.slug) ? miniPlayer(brief, { esc, long, label: "This story is in the daily briefing" }) : ""}
 </header>
 ${quickHtml(st, quickCards(st))}
 <nav class="secnav" aria-label="Jump to section"><div class="secnav-in">${overview.map(([id, name, , n]) => `<a href="#${id}">${esc(name)}${n != null ? ` <span class="n">${n}</span>` : ""}</a>`).join("")}<a href="/" class="home-link">All stories</a></div></nav>
@@ -318,7 +321,7 @@ ${groundHtml ? `<section id="ground" aria-labelledby="h-ground">
     description: st.dek,
     path,
     body,
-    scripts: ["/assets/story.js", "/assets/votes.js", "/assets/live.js", "/assets/catchup.js"],
+    scripts: ["/assets/story.js", "/assets/votes.js", "/assets/live.js", "/assets/catchup.js", "/assets/briefing.js"],
     og: existsSync(`static/assets/og-${st.slug}.png`) ? `/assets/og-${st.slug}.png` : "/assets/og-default.png",
     type: "article",
   }));
@@ -345,8 +348,9 @@ function build() {
   cpSync("static", OUT, { recursive: true });
 
   const stories = readdirSync("content/stories").filter((f) => f.endsWith(".json")).map((f) => withIds(JSON.parse(readFileSync(join("content/stories", f), "utf8"))));
-  const built = stories.map(storyPage);
   const briefings = loadBriefings();
+  const brief = freshBriefing(briefings);
+  const built = stories.map((st) => storyPage(st, brief));
 
   /* Home */
   const byUpdate = [...built].sort((a, b) => (b.st.updatedAt || b.st.updated).localeCompare(a.st.updatedAt || a.st.updated));
@@ -374,12 +378,12 @@ function build() {
     title: "Unowned",
     description: "News nobody owns. Verified, sourced reporting from the people who were there, with both sides shown.",
     path: "/",
-    scripts: ["/assets/votes.js", "/assets/live.js", "/assets/catchup.js"],
+    scripts: ["/assets/votes.js", "/assets/live.js", "/assets/catchup.js", "/assets/briefing.js"],
     body: `
 <header class="top">
   <h1>News nobody owns.</h1>
   <p class="lede">The stories that matter, anywhere in the world: checked, sourced and kept up to date. Both sides shown.</p>
-  ${briefings.length ? `<p class="listen" style="font-weight:600"><a href="/briefing/">▶ Listen: today's 90-second briefing</a></p>` : ""}
+  ${brief ? miniPlayer(brief, { esc, long, label: "Listen to the daily briefing" }) : ""}
   <p class="coverage"><span>Following now in</span>${regions.map((r) => `<span class="tag">${esc(r)}</span>`).join("")}<a href="/submit/#suggest">Suggest a story to follow</a></p>
 </header>
 
