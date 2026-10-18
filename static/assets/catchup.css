@@ -1,0 +1,19 @@
+/* "Since your last visit" (catchup.js) */
+.catchup { margin-top: 24px; display: grid; gap: 12px; background: var(--surface); border: 1px solid var(--accent); border-left-width: 4px; border-radius: 8px; padding: 18px 20px; }
+.catchup-head h2 { font-size: 1.2rem; margin: 0; }
+.catchup-when { color: var(--muted); font-size: 0.9rem; margin: 4px 0 0; }
+.catchup-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.catchup-list a { display: flex; gap: 10px; align-items: baseline; padding: 8px 0; border-top: 1px solid var(--rule); color: var(--fg); text-decoration: none; }
+.catchup-list li:first-child a { border-top: 0; }
+.catchup-list a:hover .catchup-text { text-decoration: underline; }
+.catchup-list .stamp { flex: none; }
+.catchup-fold summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 0.95rem; }
+.catchup-fold[open] summary { margin-bottom: 4px; }
+.catchup-foot { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.catchup-foot button { border: 1px solid var(--rule); background: transparent; color: var(--fg); border-radius: 6px; padding: 6px 12px; font: inherit; font-size: 0.9rem; cursor: pointer; }
+.catchup-foot button:hover { border-color: var(--accent); }
+.new-pill, .new-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; background: var(--accent); color: var(--bg); white-space: nowrap; }
+.new-pill { margin-right: 6px; }
+li.is-new { box-shadow: inset 3px 0 0 var(--accent); }
+.catchup-summary { margin: 6px 0 0; font-weight: 600; color: var(--accent); }
+@media (max-width: 520px) { .catchup { padding: 14px 16px; } .catchup-list a { flex-direction: column; gap: 4px; } }

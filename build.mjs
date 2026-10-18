@@ -318,7 +318,7 @@ ${groundHtml ? `<section id="ground" aria-labelledby="h-ground">
     description: st.dek,
     path,
     body,
-    scripts: ["/assets/story.js", "/assets/votes.js", "/assets/live.js"],
+    scripts: ["/assets/story.js", "/assets/votes.js", "/assets/live.js", "/assets/catchup.js"],
     og: existsSync(`static/assets/og-${st.slug}.png`) ? `/assets/og-${st.slug}.png` : "/assets/og-default.png",
     type: "article",
   }));
@@ -363,6 +363,9 @@ function build() {
   </li>`).join("\n");
   write("stories.json", JSON.stringify(stories.map((s) => s.slug)));
   write("live.json", JSON.stringify(stories.flatMap((st) => st.events.filter((e) => e.added && e.label !== "pending").map((e) => ({ story: st.slug, storyTitle: st.title, id: e.id, label: e.label, added: e.added, text: e.text.split(". ")[0] }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)).slice(0, 30)));
+  /* "Since your last visit": every published item added in the last 14 days, read once per page by catchup.js. */
+  const since = new Date(Date.now() - 14 * 864e5).toISOString().slice(0, 19) + "Z";
+  write("updates.json", JSON.stringify({ since, items: stories.flatMap((st) => st.events.filter((e) => e.added && e.added >= since && e.label !== "pending").map((e) => ({ story: st.slug, id: e.id, label: e.label, added: e.added, date: e.date, text: e.text.split(". ")[0] }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)) }));
   const regions = [...new Set(byUpdate.map(({ st }) => st.region))];
   const live = stories.flatMap((st) => st.events.filter((e) => e.label !== "pending").map((e, i) => ({ st, e, i })))
     .sort((a, b) => (b.e.added || b.e.date).localeCompare(a.e.added || a.e.date) || b.e.date.localeCompare(a.e.date) || b.i - a.i).slice(0, 6);
@@ -371,7 +374,7 @@ function build() {
     title: "Unowned",
     description: "News nobody owns. Verified, sourced reporting from the people who were there, with both sides shown.",
     path: "/",
-    scripts: ["/assets/votes.js", "/assets/live.js"],
+    scripts: ["/assets/votes.js", "/assets/live.js", "/assets/catchup.js"],
     body: `
 <header class="top">
   <h1>News nobody owns.</h1>
@@ -483,6 +486,7 @@ function build() {
 <ul>
 <li>No ads, no tracking scripts, no cookies, and no third-party fonts or analytics. Everything on this site loads from this site.</li>
 <li>Our hosting provider, Cloudflare, handles connections to the site and may process technical data such as IP addresses to deliver it and protect it from attacks. We don't add tracking on top of that.</li>
+<li>Your own browser remembers when you last opened each story, so we can show what's new since your last visit, and which way you voted. That record stays on your device and is never sent to us; a vote only adds one to an anonymous count. Clearing your browser's site data removes it.</li>
 </ul>
 <h2>Contributors</h2>
 <ul>
