@@ -10,8 +10,8 @@
   "kicker": "Story tracker · Italy",
   "dek": "Students and cost-of-living protesters march against Giorgia Meloni's government, the clashes with police in Turin, Milan and Bologna, and the unions' call for a general strike.",
   "status": "Ongoing",
-  "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T22:25:35Z",
+  "updated": "2026-10-18",
+  "updatedAt": "2026-10-18T09:22:30Z",
   "summary": [
     "On Friday, October 16, students marched in dozens of Italian cities on what organisers called \"No Meloni Day\", protesting run-down schools, a decree capping foreign pupils at 30% of a class, the cost of living and military spending. Organisers say more than 400,000 took part; the Education Ministry puts participation in the school strike at about 1%. Police used water cannon and tear gas in Turin, and bottles and firecrackers were thrown at police in Rome.",
     "On Saturday, October 17, cost-of-living marches called by the \"Italia in Piazza\" movement were held in several cities. In Milan, groups broke away and clashed with police around Piazza Duomo; Il Giorno, citing police and the prefecture, and ANSA report about 50 people detained; injury figures differ between reports. In Rome, the CGIL union held a separate rally and announced a general strike for November 20.",
@@ -52,6 +52,7 @@
     { "date": "2026-10-16", "phase": "students", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "hot": true, "text": "In Turin, protesters throw stones and other objects at police in Piazza Castello, and police respond with water cannon and tear gas.", "sources": ["avvenireOct16", "mirrorOct16", "soleOct16"] },
     { "date": "2026-10-16", "phase": "students", "label": "reported", "added": "2026-10-17T20:31:24Z", "text": "Avvenire reports that 10 officers were injured in Turin, three minors were arrested for resisting a public official and about 50 others were identified and referred to judicial authorities.", "sources": ["avvenireOct16"] },
     { "date": "2026-10-16", "phase": "students", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "text": "In Rome, thousands rally outside the Education Ministry; police say bottles, flares and firecrackers are thrown at officers.", "sources": ["afpOct16", "soleOct16", "mirrorOct16"] },
+    { "date": "2026-10-16", "phase": "students", "label": "reported", "added": "2026-10-18T09:22:30Z", "text": "A Rome official of the Siulp police union says 18 officers were injured outside the Education Ministry, hit by firecrackers, smoke bombs, stones and bottles, and that the figure may rise, Orizzonte Scuola reports, citing ANSA. Education Minister Valditara calls the officer in charge to express solidarity.", "sources": ["orizzonteOct16"] },
     { "date": "2026-10-16", "phase": "students", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "text": "In Verona, police identify 21 young people and report them over criminal damage and other offences; Il Sole 24 Ore says 20 of them are under 18. Clashes are also reported in Bologna.", "sources": ["soleOct16", "avvenireOct16"] },
     { "date": "2026-10-16", "phase": "students", "label": "confirmed", "added": "2026-10-17T20:31:24Z", "text": "Meloni says she welcomes mobilisation but condemns the violence and attacks on police, and calls on all parties to back peaceful protest. Education Minister Valditara calls the violence political hooliganism, not democratic dissent.", "sources": ["avvenireOct16", "soleOct16", "repubblicaOct16"] },
     { "date": "2026-10-16", "phase": "students", "label": "reported", "added": "2026-10-17T20:31:24Z", "text": "Interior Minister Matteo Piantedosi says police acted decisively, professionally and prudently on a difficult day, La Repubblica reports. Deputy Prime Minister Matteo Salvini calls students who threw stones criminals, Il Sole 24 Ore reports.", "sources": ["repubblicaOct16", "soleOct16"] },
@@ -92,7 +93,7 @@
   ],
   "figures": {
     "detained": { "type": "bar", "title": "Detained, arrested or reported to police, by city", "rows": [["Milan, Oct 17", 50], ["Turin, Oct 16", 53], ["Verona, Oct 16", 21], ["Bologna, Oct 17", 11]], "max": 60, "unit": "", "caption": "Preliminary figures from police, via Il Giorno and ANSA (Milan), Avvenire (Turin: 3 arrested, about 50 identified), Il Sole 24 Ore and Avvenire (Verona) and ANSA (Bologna: 4 arrested, 7 reported). Measures differ by city; no national total has been published.", "aria": "About 50 detained in Milan on October 17; 3 arrested and about 50 identified in Turin and 21 reported in Verona on October 16; 4 arrested and 7 reported in Bologna on October 17" },
-    "officers": { "type": "bar", "title": "Police officers injured, as reported", "rows": [["Bologna, Oct 17", 36], ["Milan, Oct 17", 15], ["Turin, Oct 16", 10], ["Alessandria, Oct 16", 2]], "max": 40, "unit": "", "caption": "Sources: police via ANSA (Bologna); police and prefecture via Il Giorno (Milan; ANSA reports at least four officers and 20 protesters injured there); Avvenire (Turin, Alessandria). No national figure has been published, and no total for injured protesters.", "aria": "Officers injured: 36 in Bologna and 15 in Milan (a figure ANSA puts at four) on October 17, 10 in Turin and 2 in Alessandria on October 16" }
+    "officers": { "type": "bar", "title": "Police officers injured, as reported", "rows": [["Bologna, Oct 17", 36], ["Rome, Oct 16", 18], ["Milan, Oct 17", 15], ["Turin, Oct 16", 10], ["Alessandria, Oct 16", 2]], "max": 40, "unit": "", "caption": "Sources: police via ANSA (Bologna); police and prefecture via Il Giorno (Milan; ANSA reports at least four officers and 20 protesters injured there); the Siulp police union via Orizzonte Scuola (ANSA) (Rome); Avvenire (Turin, Alessandria). No national figure has been published, and no total for injured protesters.", "aria": "Officers injured: 36 in Bologna and 15 in Milan (a figure ANSA puts at four) on October 17, 18 in Rome (per a police union), 10 in Turin and 2 in Alessandria on October 16" }
   },
   "gaps": [
     "National totals of arrests and injuries for October 16 and 17, including injured protesters",
@@ -108,7 +109,7 @@
   "sourceGroups": [
     ["Background and the build-up", ["afpOct16"]],
     ["October 16: \"No Meloni Day\"", ["soleOct16", "avvenireOct16", "mirrorOct16", "repubblicaOct16"]],
-    ["Latest", ["reutersOct17", "openOct17", "skyMilan", "ilgiornoOct17", "skyCgil", "ansaMilanOct17", "ansaOct17", "fattoOct17", "openMeloniOct17", "agiOct17"]]
+    ["Latest", ["reutersOct17", "openOct17", "skyMilan", "ilgiornoOct17", "skyCgil", "ansaMilanOct17", "ansaOct17", "fattoOct17", "openMeloniOct17", "agiOct17", "orizzonteOct16"]]
   ],
   "sources": {
     "afpOct16": ["AFP (via The Local Italy)", "https://www.thelocal.it/20261016/italy-braces-for-autumn-of-discontent-as-students-protest"],
@@ -125,6 +126,7 @@
     "ansaOct17": ["ANSA", "https://www.ansa.it/sito/notizie/cronaca/2026/10/17/la-protesta-per-il-carovita-diventa-guerriglia-milano-un-campo-di-battaglia_a783ef65-c2c2-4fb9-8d99-7c64d791f43c.html"],
     "fattoOct17": ["Il Fatto Quotidiano", "https://www.ilfattoquotidiano.it/2026/10/17/scontri-milano-reazioni-meloni-opposizioni-sala-notizie/8541974/"],
     "openMeloniOct17": ["Open", "https://www.open.online/2026/10/17/scontri-proteste-rabbia-meloni-violenze/"],
-    "agiOct17": ["AGI", "https://www.agi.it/economia/news/2026-10-17/caro-vita-proteste-manifestazioni-39583412/"]
+    "agiOct17": ["AGI", "https://www.agi.it/economia/news/2026-10-17/caro-vita-proteste-manifestazioni-39583412/"],
+    "orizzonteOct16": ["Orizzonte Scuola (ANSA)", "https://www.orizzontescuola.it/manifestazioni-studentesche-18-poliziotti-feriti-nel-corteo-a-roma-valditara-esprime-solidarieta-e-vicinanza/"]
   }
 }
