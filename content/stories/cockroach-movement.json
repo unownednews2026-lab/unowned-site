@@ -4,8 +4,8 @@
   "kicker": "Story tracker · India",
   "dek": "What happened, what is confirmed, and where the accounts disagree, from the exam leak in May to the protests against the Election Commission in October.",
   "status": "Season 2 active",
-  "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T17:28:26Z",
+  "updated": "2026-10-18",
+  "updatedAt": "2026-10-18T02:29:26Z",
   "summary": [
     "The Cockroach Janta Party (CJP) began on May 16 as a satirical online response to remarks by Chief Justice Surya Kant, a day after he reportedly likened some unemployed youth to cockroaches. Anger over the cancelled NEET medical entrance exam turned it into a street movement.",
     "After a 36-day protest in Delhi, including a July 20 march met with tear gas and batons, Education Minister Dharmendra Pradhan resigned on July 25 and the CJP called off its protest, saying its demands had been accepted. From August, the CJP said the government had not honoured those commitments, chiefly withdrawing criminal cases against protesters and compensating families of students who died by suicide.",
@@ -53,6 +53,8 @@
     { "date": "2026-10-13", "phase": "s2", "label": "confirmed", "added": "2026-10-16T11:06:00Z", "text": "About a dozen people are detained after climbing barricades to enter Jantar Mantar, including CJP spokespeople Saurav Das and Ashutosh Ranka. Police accuse them of trespassing and defying prohibitory orders.", "sources": ["apOct14", "afpOct14"] },
     { "date": "2026-10-14", "phase": "s2", "label": "confirmed", "added": "2026-10-16T11:06:00Z", "milestone": "Leaders jailed", "hot": true, "text": "A local court sends Das and Ranka to five days’ judicial custody. The CJP says they are being punished for raising the national flag at Jantar Mantar; police say the site is no longer an official protest venue.", "sources": ["apOct14", "afpOct14"] },
     { "date": "2026-10-15", "phase": "s2", "label": "confirmed", "added": "2026-10-16T11:06:00Z", "text": "The civic authority closes Central Park in Connaught Place for two days, citing administrative reasons, after the CJP calls a flag-raising rally there. Delhi Police urge people not to join and offer to let a small group carry the flag at a suitable place.", "sources": ["ajOct16", "diOct16"] },
+    { "date": "2026-10-15", "phase": "s2", "label": "confirmed", "added": "2026-10-18T02:29:26Z", "text": "Authorities issue actor Imran Khan a notice to leave India by October 28 under immigration law, after he joined a protest in Mumbai on October 10 demanding the Chief Election Commissioner’s resignation. Police say action was taken under the Immigration Act; reports say he is not an Indian citizen.", "sources": ["dcAniOct15", "ttIansOct15", "reutersKhanOct15"] },
+    { "date": "2026-10-15", "phase": "s2", "label": "confirmed", "added": "2026-10-18T02:29:26Z", "text": "Khan plans to challenge the notice in the Bombay High Court; PTI reports his plea argues that no law bars an Overseas Citizen of India cardholder from taking part in a protest.", "sources": ["dcPtiOct15", "bbKhanOct15"] },
     { "date": "2026-10-16", "phase": "s2", "label": "confirmed", "added": "2026-10-16T20:21:00Z", "text": "Police bar gatherings around Connaught Place under Section 163 restrictions and serve founder Abhijeet Dipke a notice; police say waving the flag is not illegal but an unpermitted march is. More than 6,000 police are deployed, per a police briefing reported by ETV Bharat.", "sources": ["dawnOct16", "gulfOct16", "etvOct16"] },
     { "date": "2026-10-16", "phase": "s2", "label": "confirmed", "added": "2026-10-16T20:21:00Z", "milestone": "Founder detained", "hot": true, "text": "Police detain Dipke outside the house where he was staying, shortly before the rally; AISA president Neha Bora is detained separately on her way. Dipke asks how he can be held when he has broken no law; police give no immediate comment.", "sources": ["dawnOct16", "ptiOct16", "gulfOct16"] },
     { "date": "2026-10-16", "phase": "s2", "label": "confirmed", "added": "2026-10-16T20:21:00Z", "text": "Hundreds gather in flash protests at Connaught Place and Mandi House, waving the national flag. Police say about 150 people have been detained and describe the situation as peaceful; no injuries are reported.", "sources": ["printOct16", "weekOct16", "tribuneOct16"] },
@@ -64,7 +66,7 @@
     { "date": "2026-10-17", "phase": "s2", "label": "confirmed", "added": "2026-10-17T07:23:38Z", "text": "Delhi Police register multiple FIRs over alleged violations of Section 163 prohibitory orders during Friday's protests in Connaught Place and other parts of New Delhi, and say repeat offenders will face action. Police say displaying the national flag was not banned, but processions or assemblies without permission could lead to legal action.", "sources": ["statesmanOct17", "hansOct17"] },
     { "date": "2026-10-17", "phase": "s2", "label": "confirmed", "added": "2026-10-17T11:23:11Z", "text": "A Special Executive Magistrate grants Dipke conditional bail and directs him to furnish a peace bond; LiveLaw reports one condition requires him to keep the peace for one year. Reports say he will be released once bond formalities are completed.", "sources": ["barandbenchOct17", "livelawOct17", "aajtakOct17"] },
     { "date": "2026-10-17", "phase": "s2", "label": "confirmed", "added": "2026-10-17T12:22:43Z", "text": "Dipke is released on Saturday after the magistrate hearing. CJP legal head Ratna Singh says he agreed to conditions she did not detail; The Week reports that several lawyers were kept out of the hearing by security.", "sources": ["reutersOct17", "weekOct17"] },
-    { "date": "2026-10-17", "phase": "s2", "label": "pending", "added": "2026-10-17T12:22:43Z", "text": "Whether all others detained on October 16 have been released, and the outcome of further protests that student groups called for on Saturday. Still being checked.", "sources": ["reutersOct17", "weekOct17"] }
+    { "date": "2026-10-17", "phase": "s2", "label": "pending", "added": "2026-10-17T12:22:43Z", "text": "Whether all others detained on October 16 have been released, the outcome of further protests that student groups called for on Saturday, and whether the Bombay High Court hears Imran Khan’s challenge before the October 28 deadline. Still being checked.", "sources": ["reutersOct17", "weekOct17"] }
   ],
   "claims": [
     { "title": "What the Chief Justice meant", "label": "disputed", "a": "Reports and critics: he likened unemployed youth to cockroaches and parasites.", "aSrc": ["fpj"], "b": "The Chief Justice: he was misquoted and meant people entering professions with fake degrees.", "bSrc": ["quint"], "status": "Both accounts are on record." },
@@ -93,6 +95,7 @@
     { "date": "Oct 13", "action": "About a dozen detained at Jantar Mantar, including CJP spokespeople Das and Ranka", "by": "Delhi Police", "label": "confirmed" },
     { "date": "Oct 14", "action": "Das and Ranka sent to five days’ judicial custody", "by": "Local court, New Delhi", "label": "confirmed" },
     { "date": "Oct 15", "action": "Central Park, Connaught Place, closed for two days before a CJP rally", "by": "Civic authority", "label": "confirmed" },
+    { "date": "Oct 15", "action": "Notice to leave India by October 28 issued to actor Imran Khan after he joined the October 10 Mumbai protest", "by": "Mumbai Police / Foreigners Regional Registration Office", "label": "confirmed" },
     { "date": "Oct 16", "action": "Gatherings barred around Connaught Place; notice served on Dipke", "by": "Delhi Police (Section 163, BNSS)", "label": "confirmed" },
     { "date": "Oct 16", "action": "CJP founder Dipke and AISA president Neha Bora detained before the rally", "by": "Delhi Police", "label": "confirmed" },
     { "date": "Oct 16", "action": "About 150 people detained at flash protests in central Delhi", "by": "Delhi Police (figure from police)", "label": "confirmed" },
@@ -137,7 +140,8 @@
     "Number and status of cases against protesters",
     "Government and Election Commission statements in full",
     "Full bail conditions for Dipke, and whether all others detained on October 16 have been released",
-    "Number of FIRs registered over the October 16 protests and who is named in them"
+    "Number of FIRs registered over the October 16 protests and who is named in them",
+    "Whether Imran Khan has filed his High Court challenge, and any ruling before October 28"
   ],
   "corrections": [
     { "date": "2026-10-17", "text": "The AISA president's surname was misspelled as \"Bohra\" in earlier updates. It is Bora." },
@@ -150,7 +154,7 @@
     ["Return and July protests", ["etvReturn", "mooknayakReturn", "reutersProfile", "kaumudiProfile", "ktJul19", "apJul20", "ajJul20", "apJul21", "cgfoe", "npr", "apJul25", "ajJul25"]],
     ["August and September", ["reutersParty", "ktSep5", "weekSep5", "sentinel", "kaumudiLatur", "awaaz"]],
     ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16", "dawnOct16", "gulfOct16", "ptiOct16", "etvOct16", "printOct16", "weekOct16", "tribuneOct16", "aniOct16"]],
-    ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16", "ptiOct17", "iansOct17", "statesmanOct17", "hansOct17", "barandbenchOct17", "livelawOct17", "aajtakOct17", "reutersOct17", "weekOct17"]]
+    ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16", "ptiOct17", "iansOct17", "statesmanOct17", "hansOct17", "barandbenchOct17", "livelawOct17", "aajtakOct17", "reutersOct17", "weekOct17", "dcAniOct15", "ttIansOct15", "reutersKhanOct15", "dcPtiOct15", "bbKhanOct15"]]
   ],
   "sources": {
     "newslaundry": ["Newslaundry", "https://www.newslaundry.com/amp/story/2026%2F05%2F12%2Fwhy-neet-ug-2026-has-been-cancelled"],
@@ -221,7 +225,12 @@
     "livelawOct17": ["LiveLaw", "https://www.livelaw.in/news-updates/delhi-court-grants-bail-to-cjp-founder-abhijeet-dipke-555194"],
     "aajtakOct17": ["Aaj Tak", "https://www.aajtak.in/india/delhi/story/abhijeet-dipke-bail-cjp-chief-after-delhi-police-detention-magistrate-court-order-ntc-mnrd-rpti-2673330-2026-10-17"],
     "reutersOct17": ["Reuters (via ThePrint)", "https://theprint.in/world/indias-cockroach-movement-founder-released-a-day-after-detention/3074712/"],
-    "weekOct17": ["The Week", "https://www.theweek.in/news/india/2026/10/17/abhijeet-dipke-released-on-conditional-bail-peace-bond-by-court.html"]
+    "weekOct17": ["The Week", "https://www.theweek.in/news/india/2026/10/17/abhijeet-dipke-released-on-conditional-bail-peace-bond-by-court.html"],
+    "dcAniOct15": ["Deccan Chronicle (ANI)", "https://www.deccanchronicle.com/entertainment/bollywood/mumbai-police-ask-imran-khan-to-leave-india-by-october-28-over-anti-cec-protests-1996003"],
+    "ttIansOct15": ["Telangana Today (IANS)", "https://telanganatoday.com/imran-khan-asked-to-leave-india-by-october-28-after-joining-mumbai-protests"],
+    "reutersKhanOct15": ["Reuters (via TimesLIVE)", "https://www.timeslive.co.za/news/world/2026-10-15-bollywood-actor-imran-khan-told-to-leave-india-after-joining-protest/"],
+    "dcPtiOct15": ["Deccan Chronicle (PTI)", "https://www.deccanchronicle.com/nation/current-affairs/actor-imran-khan-to-move-hc-against-notice-asking-him-to-leave-country-for-taking-part-in-protest-1996058"],
+    "bbKhanOct15": ["Bar and Bench", "https://barandbench.com/news/actor-imran-khan-to-move-bombay-high-court-against-notice-to-leave-india-after-protests-against-cec"]
   },
   "nav": "Cockroach movement",
   "region": "India",
