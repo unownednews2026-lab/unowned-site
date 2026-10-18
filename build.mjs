@@ -1,6 +1,7 @@
 // Builds the Unowned website into ./dist from ./content and ./static. Run: node build.mjs
 import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
+import { loadBriefings, buildBriefing } from "./tools/briefing.mjs";
 
 const SITE = "https://unownednews.com";
 const SOCIAL = [
@@ -345,6 +346,7 @@ function build() {
 
   const stories = readdirSync("content/stories").filter((f) => f.endsWith(".json")).map((f) => withIds(JSON.parse(readFileSync(join("content/stories", f), "utf8"))));
   const built = stories.map(storyPage);
+  const briefings = loadBriefings();
 
   /* Home */
   const byUpdate = [...built].sort((a, b) => (b.st.updatedAt || b.st.updated).localeCompare(a.st.updatedAt || a.st.updated));
@@ -374,6 +376,7 @@ function build() {
 <header class="top">
   <h1>News nobody owns.</h1>
   <p class="lede">The stories that matter, anywhere in the world: checked, sourced and kept up to date. Both sides shown.</p>
+  ${briefings.length ? `<p class="listen" style="font-weight:600"><a href="/briefing/">▶ Listen: today's 90-second briefing</a></p>` : ""}
   <p class="coverage"><span>Following now in</span>${regions.map((r) => `<span class="tag">${esc(r)}</span>`).join("")}<a href="/submit/#suggest">Suggest a story to follow</a></p>
 </header>
 
@@ -505,7 +508,8 @@ ${items.map(({ s, e }) => `<item><title>${esc(`${long(e.date)}: ${e.text.split("
 </channel></rss>
 `);
 
-  const urls = ["/", ...stories.map((s) => `/${s.slug}/`), "/submit/", "/how-we-work/", "/who-owns-unowned/", "/privacy/", "/corrections/"];
+  buildBriefing({ briefings, stories, write, simple, esc, long, SITE });
+  const urls = ["/", ...stories.map((s) => `/${s.slug}/`), ...(briefings.length ? ["/briefing/"] : []), "/submit/", "/how-we-work/", "/who-owns-unowned/", "/privacy/", "/corrections/"];
   write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE}${u}</loc></url>`).join("")}</urlset>\n`);
   write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
   console.log(`Built ${stories.length} story page(s) and ${urls.length} pages into ./${OUT}`);
