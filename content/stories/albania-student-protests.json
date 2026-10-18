@@ -11,7 +11,7 @@
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
   "updated": "2026-10-18",
-  "updatedAt": "2026-10-18T02:12:32Z",
+  "updatedAt": "2026-10-18T06:58:23Z",
   "summary": [
     "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
     "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days. The interior minister says 156 people were injured over four days, including 97 police officers and 45 protesters.",
@@ -19,7 +19,8 @@
   ],
   "ground": [
     { "date": "2026-10-16", "platform": "Video address", "who": "Prime Minister Edi Rama", "shows": "Rama speaking from the fire-damaged College of Europe building near his office, accusing the opposition of using masked people and rejecting calls to resign.", "label": "reported", "check": "Reported by DW. Date and place are given in the report.", "sources": ["dwOct16"] },
-    { "date": "2026-10-14", "platform": "Facebook post", "who": "Deputy Prime Minister Albana Kociu", "shows": "A statement that protest is a legitimate right but cannot be used as an excuse for violence, urging people to distance themselves from vandalism.", "label": "confirmed", "check": "Reported by Al Jazeera and Reuters. Text post; date known.", "sources": ["ajOct14", "reutersOct14"] }
+    { "date": "2026-10-14", "platform": "Facebook post", "who": "Deputy Prime Minister Albana Kociu", "shows": "A statement that protest is a legitimate right but cannot be used as an excuse for violence, urging people to distance themselves from vandalism.", "label": "confirmed", "check": "Reported by Al Jazeera and Reuters. Text post; date known.", "sources": ["ajOct14", "reutersOct14"] },
+    { "date": "2026-10-18", "platform": "Facebook live video", "who": "Prime Minister Edi Rama", "shows": "Rama speaking from his office, saying an explosives-laden drone aimed at the Prime Minister’s Office was neutralised and that the violence is not the work of students.", "label": "confirmed", "check": "Reported by Euronews Albania and Koha. Date known (Sunday morning, October 18); claims in it are not independently verified.", "sources": ["euroAlDrone", "kohaDrone"] }
   ],
   "timelineChart": {
     "title": "Nine months, four phases",
@@ -77,7 +78,8 @@
     { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-18T01:53:54Z", "text": "The US Embassy in Tirana calls on all sides to show restraint and keep calm, saying citizens should protest peacefully and that violence and destruction of property are not civic engagement, Gazeta Shqiptare reports.", "sources": ["gshUsEmbassy"] },
     { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-18T02:12:32Z", "text": "Protests continue into Saturday night; the Supreme Court building, the entrance of the Bank of Albania, banks and a post office are set on fire or badly damaged, AFP reports. Justice Minister Toni Gogu says the attacks targeted independent institutions, not the government.", "sources": ["afpOct18"] },
     { "date": "2026-10-17", "phase": "spread", "label": "reported", "added": "2026-10-18T02:12:32Z", "text": "AFP reports that the health ministry says 35 people were injured on Saturday, 18 police officers and 17 protesters, a higher figure than the ministry gave earlier in the day.", "sources": ["afpOct18"] },
-    { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T14:30:03Z", "text": "Saturday-only arrest figures, whether talks between students and the government begin, and any response from President Begaj to the protesters' demands. Still being checked.", "sources": ["topChLiveOct17"] }
+    { "date": "2026-10-17", "phase": "spread", "label": "pending", "added": "2026-10-17T14:30:03Z", "text": "Saturday-only arrest figures, whether talks between students and the government begin, and any response from President Begaj to the protesters' demands. Still being checked.", "sources": ["topChLiveOct17"] },
+    { "date": "2026-10-18", "phase": "spread", "label": "alleged", "added": "2026-10-18T06:58:23Z", "text": "In a live video on Sunday morning, Prime Minister Edi Rama says police neutralised a drone carrying explosives two days earlier that was meant to hit the Prime Minister’s Office, and says a foreign hand, not students, is behind the violence, Euronews Albania and Koha report. No police statement or evidence about the drone has been reported.", "sources": ["euroAlDrone", "kohaDrone"] }
   ],
   "claims": [
     { "title": "Who is behind the violence?", "label": "disputed", "a": "Rama says the unrest is not a student phenomenon and blames foreign hands and the opposition, which he says is using masked people. Police urge peaceful protesters to distance themselves from masked agitators.", "aSrc": ["ajOct16", "dwOct16", "occrpOct"], "b": "Students say they are protesting university conditions, costs and job prospects after months of ignored peaceful protest. Opposition leader Sali Berisha denies the opposition is involved in the violence.", "bSrc": ["reutersOct14", "reutersOct16", "dwOct16"], "status": "Open. Neither side has published evidence; police investigations are under way." },
@@ -118,13 +120,14 @@
     "Full details and status of the Zvërnec resort project",
     "Evidence for claims of foreign or opposition involvement",
     "Who authorised the use of rubber bullets, and how many people were hit",
-    "Total arrests: Reuters reports police chief Hita as saying 1,067 people have been arrested, and separately cites police figures of 500 detained and 330 released, while Albanian outlets and AFP/AP report his figure as 167"
+    "Total arrests: Reuters reports police chief Hita as saying 1,067 people have been arrested, and separately cites police figures of 500 detained and 330 released, while Albanian outlets and AFP/AP report his figure as 167",
+    "Evidence for, and any police statement on, the explosives-laden drone the prime minister says was neutralised"
   ],
   "corrections": [],
   "sourceGroups": [
     ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
     ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
-    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy", "afpOct18"]]
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy", "afpOct18", "euroAlDrone", "kohaDrone"]]
   ],
   "sources": {
     "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
@@ -160,6 +163,8 @@
     "ajOct17": ["Al Jazeera (AFP, AP)", "https://www.aljazeera.com/news/2026/10/17/albanian-police-fire-rubber-bullets-as-protests-against-rama-escalate"],
     "news24BegajGsh": ["News24 (via Gazeta Shqiptare)", "https://gazetashqiptare.al/2026/10/17/revolta-studentore-kunder-rames-presidenti-begaj-takon-dy-grupe-protestuesish-te-rinjte-i-kerkojne-te-shperndaje-parlamentin-dhe-qeveri-tranzitore/"],
     "gshUsEmbassy": ["Gazeta Shqiptare", "https://gazetashqiptare.al/2026/10/17/studentet-ne-revolte-kunder-rames-reagon-ambasada-e-shba-u-bejme-thirrje-paleve-per-vetepermbajtje-qytetaret-te-protestojne-paqesisht-dhe-pa-akte-te-dhunshme/"],
-    "afpOct18": ["Inquirer (AFP)", "https://globalnation.inquirer.net/342404/albanian-capital-sees-fifth-straight-day-of-violent-clashes"]
+    "afpOct18": ["Inquirer (AFP)", "https://globalnation.inquirer.net/342404/albanian-capital-sees-fifth-straight-day-of-violent-clashes"],
+    "euroAlDrone": ["Euronews Albania", "https://euronews.al/neutralizuam-nje-dron-me-eksploziv-qe-do-godiste-kryeministrine-rama-eshte-nje-dore-e-huaj/"],
+    "kohaDrone": ["Koha (Kosovo)", "https://www.koha.net/arberi/rama-eshte-neutralizuar-nje-dron-me-eksploziv-qe-kishte-cak-kryeministrine"]
   }
 }
