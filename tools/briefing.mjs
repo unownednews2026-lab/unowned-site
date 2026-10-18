@@ -10,8 +10,32 @@ export function loadBriefings() {
   return readdirSync(dir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).map((f) => {
     const b = JSON.parse(readFileSync(join(dir, f), "utf8"));
     const mp3 = `static/briefings/${f.replace(".json", ".mp3")}`;
-    return existsSync(mp3) ? { ...b, date: f.slice(0, 10), audio: "/" + mp3.slice("static/".length), bytes: statSync(mp3).size } : null;
+    if (!existsSync(mp3)) return null;
+    const bytes = statSync(mp3).size;
+    // The recorder (tools/briefing_audio.py) encodes at a constant 128 kbit/s, so length follows from file size.
+    return { ...b, date: f.slice(0, 10), audio: "/" + mp3.slice("static/".length), bytes, seconds: Math.round((bytes * 8) / 128000) };
   }).filter(Boolean).sort((a, b) => b.date.localeCompare(a.date));
+}
+
+/* "1:23" for 83 seconds. */
+export const mmss = (sec) => `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`;
+
+/* The newest briefing if it is from today or yesterday (UTC), else null, so a stale briefing is never promoted. */
+export function freshBriefing(briefings) {
+  const b = briefings[0];
+  if (!b) return null;
+  const yesterday = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+  return b.date >= yesterday ? b : null;
+}
+
+/* Compact player for the home page and story pages: a link without JavaScript, an inline play button with it (briefing.js). */
+export function miniPlayer(b, { esc, long, label = "Daily briefing", note = "" }) {
+  const title = b.title.length > 70 ? b.title.slice(0, b.title.lastIndexOf(" ", 70)) + "…" : b.title;
+  return `<div class="brief-mini" data-date="${b.date}">
+  <a class="brief-play" href="/briefing/" aria-label="Play the ${esc(long(b.date))} briefing, ${mmss(b.seconds)} long"><span aria-hidden="true">▶</span></a>
+  <div class="brief-text"><a href="/briefing/">${esc(label)}</a><span class="brief-meta">${esc(long(b.date).replace(/, \d{4}$/, ""))} · ${mmss(b.seconds)}${note ? " · " + esc(note) : ""}</span><span class="brief-title">${esc(title)}</span></div>
+  <audio preload="none" src="${b.audio}"></audio>
+</div>`;
 }
 
 export function buildBriefing({ briefings, stories, write, simple, esc, long, SITE }) {
@@ -20,14 +44,18 @@ export function buildBriefing({ briefings, stories, write, simple, esc, long, SI
   const [today, ...past] = briefings;
   const storyLinks = (b) => (b.stories || []).filter((s) => titleOf[s]).map((s) => `<a href="/${s}/">${esc(titleOf[s])}</a>`).join(" · ");
   simple("/briefing/", "Daily briefing", "A short spoken update on the stories Unowned is following, read by a synthetic voice from our checked timelines.", `<div class="prose">
-<p class="eyebrow">${esc(long(today.date))}</p>
+<p class="eyebrow">${esc(long(today.date))} · ${mmss(today.seconds)}</p>
 <h2>${esc(today.title)}</h2>
 <audio id="briefing-audio" controls preload="metadata" src="${today.audio}" style="width:100%"></audio>
 <p class="src">Read by a synthetic voice. Every fact comes from our published timelines, with the same labels: <a href="/how-we-work/#labels">how we label</a>. Full stories: ${storyLinks(today)}</p>
-<p>Listen on the go: add <strong>${SITE}/podcast.xml</strong> to your podcast app.</p>
 <details class="fold"><summary>Read the transcript</summary>${today.script.map((p) => `<p>${esc(p)}</p>`).join("")}</details>
-${past.length ? `<h2>Earlier briefings</h2><ul>${past.slice(0, 14).map((b) => `<li>${esc(long(b.date))}: ${esc(b.title)} <audio controls preload="none" src="${b.audio}" style="width:100%"></audio></li>`).join("")}</ul>` : ""}
-</div>`);
+<div class="podcast-box">
+  <h3>Get it every morning in your podcast app</h3>
+  <p class="podcast-url"><code>${SITE}/podcast.xml</code> <button type="button" class="copy-feed" data-copy="${SITE}/podcast.xml" hidden>Copy link</button></p>
+  <p class="src">In most podcast apps, choose "Add by URL" and paste the link. In Apple Podcasts: Library, then the ⋯ menu, then "Follow a Show by URL". A new briefing arrives each morning, around 06:00 UTC.</p>
+</div>
+${past.length ? `<h2>Earlier briefings</h2><ul>${past.slice(0, 14).map((b) => `<li>${esc(long(b.date))} · ${mmss(b.seconds)}: ${esc(b.title)} <audio controls preload="none" src="${b.audio}" style="width:100%"></audio></li>`).join("")}</ul>` : ""}
+</div>`, ["/assets/briefing.js"]);
   write("podcast.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
 <title>Unowned Daily Briefing</title><link>${SITE}/briefing/</link><language>en</language>
@@ -35,7 +63,7 @@ ${past.length ? `<h2>Earlier briefings</h2><ul>${past.slice(0, 14).map((b) => `<
 <description>News nobody owns. A short daily update on the stories Unowned is following: what's confirmed, what's disputed, and what's next. Read by a synthetic voice from our checked, sourced timelines.</description>
 <itunes:author>Unowned</itunes:author><itunes:explicit>false</itunes:explicit><itunes:category text="News"><itunes:category text="Daily News"/></itunes:category>
 <itunes:image href="${SITE}/briefings/cover.png"/><image><url>${SITE}/briefings/cover.png</url><title>Unowned Daily Briefing</title><link>${SITE}/briefing/</link></image>
-${briefings.slice(0, 60).map((b) => `<item><title>${esc(`${long(b.date)}: ${b.title}`)}</title><link>${SITE}/briefing/</link><guid isPermaLink="false">unowned-briefing-${b.date}</guid><pubDate>${new Date(b.date + "T06:00:00Z").toUTCString()}</pubDate><description>${esc(b.script.join(" "))}</description><enclosure url="${SITE}${b.audio}" length="${b.bytes}" type="audio/mpeg"/></item>`).join("\n")}
+${briefings.slice(0, 60).map((b) => `<item><title>${esc(`${long(b.date)}: ${b.title}`)}</title><link>${SITE}/briefing/</link><guid isPermaLink="false">unowned-briefing-${b.date}</guid><pubDate>${new Date(b.date + "T06:00:00Z").toUTCString()}</pubDate><description>${esc(b.script.join(" "))}</description><enclosure url="${SITE}${b.audio}" length="${b.bytes}" type="audio/mpeg"/><itunes:duration>${b.seconds}</itunes:duration></item>`).join("\n")}
 </channel></rss>
 `);
 }
