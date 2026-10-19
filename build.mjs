@@ -477,12 +477,12 @@ function build() {
 <p>Unowned is built on one idea: news nobody owns can't be bent by an owner.</p>
 <ul>
 <li><strong>No government, party, billionaire or advertiser owns or controls Unowned.</strong></li>
-<li>Advertisers never influence our coverage. Any sponsorship is clearly labelled, never tracks you, and never appears inside a story.</li>
-<li>We will publish every funder, cap how much any one funder can give, and place Unowned in a structure that cannot be bought or sold.</li>
-<li>Editorial decisions are made under our published standards, and no funder has a say in them.</li>
-<li>If any government or company demands we remove something, we will say so publicly.</li>
+<li><strong>No one who pays us can change our coverage.</strong> Advertisers, sponsors, members and funders get no say in what we report or how we label it.</li>
+<li>Any sponsorship is clearly labelled, never tracks you, and never appears inside a story.</li>
+<li>We'll be open about our money. As we start earning, we'll publish where our income comes from, by type and by major funder.</li>
+<li>If anyone tries to buy influence, or demands we remove something, we'll say so publicly.</li>
 </ul>
-<p class="note">Unowned is in its early stage and currently self-funded. This page will list every funder as soon as there is one.</p>
+<p class="note">Unowned is in its early stage and currently self-funded. When that changes, this page will say where our money comes from.</p>
 </div>`);
 
   simple("/privacy/", "Privacy", "What Unowned collects and what it never collects.", `<div class="prose">
