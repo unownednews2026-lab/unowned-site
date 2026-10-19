@@ -477,7 +477,7 @@ function build() {
 <p>Unowned is built on one idea: news nobody owns can't be bent by an owner.</p>
 <ul>
 <li><strong>No government, party, billionaire or advertiser owns or controls Unowned.</strong></li>
-<li>We don't run advertising.</li>
+<li>Advertisers never influence our coverage. Any sponsorship is clearly labelled, never tracks you, and never appears inside a story.</li>
 <li>We will publish every funder, cap how much any one funder can give, and place Unowned in a structure that cannot be bought or sold.</li>
 <li>Editorial decisions are made under our published standards, and no funder has a say in them.</li>
 <li>If any government or company demands we remove something, we will say so publicly.</li>
@@ -488,7 +488,7 @@ function build() {
   simple("/privacy/", "Privacy", "What Unowned collects and what it never collects.", `<div class="prose">
 <h2>Readers</h2>
 <ul>
-<li>No ads, no tracking scripts, no cookies, and no third-party fonts or analytics. Everything on this site loads from this site.</li>
+<li>No ad networks, no tracking scripts, no cookies, and no third-party fonts or analytics. Everything on this site loads from this site.</li>
 <li>Our hosting provider, Cloudflare, handles connections to the site and may process technical data such as IP addresses to deliver it and protect it from attacks. We don't add tracking on top of that.</li>
 <li>Your own browser remembers when you last opened each story, so we can show what's new since your last visit, and which way you voted. That record stays on your device and is never sent to us; a vote only adds one to an anonymous count. Clearing your browser's site data removes it.</li>
 </ul>
