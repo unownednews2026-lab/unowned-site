@@ -22,7 +22,7 @@ jobs:
       - name: Install voice and audio tools
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-          pip install -q kokoro-onnx==0.6.1 soundfile pillow
+          pip install -q kokoro-onnx==0.6.1 soundfile pillow fonttools brotli
       - name: Cache voice model
         uses: actions/cache@v4
         with:
