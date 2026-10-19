@@ -10,12 +10,13 @@
   "kicker": "Story tracker · Italy",
   "dek": "Students and cost-of-living protesters march against Giorgia Meloni's government, the clashes with police in Turin, Milan and Bologna, and the unions' call for a general strike.",
   "status": "Ongoing",
-  "updated": "2026-10-18",
-  "updatedAt": "2026-10-18T09:22:30Z",
+  "updated": "2026-10-19",
+  "updatedAt": "2026-10-19T21:58:23Z",
   "summary": [
     "On Friday, October 16, students marched in dozens of Italian cities on what organisers called \"No Meloni Day\", protesting run-down schools, a decree capping foreign pupils at 30% of a class, the cost of living and military spending. Organisers say more than 400,000 took part; the Education Ministry puts participation in the school strike at about 1%. Police used water cannon and tear gas in Turin, and bottles and firecrackers were thrown at police in Rome.",
     "On Saturday, October 17, cost-of-living marches called by the \"Italia in Piazza\" movement were held in several cities. In Milan, groups broke away and clashed with police around Piazza Duomo; Il Giorno, citing police and the prefecture, and ANSA report about 50 people detained; injury figures differ between reports. In Rome, the CGIL union held a separate rally and announced a general strike for November 20.",
-    "Prime Minister Giorgia Meloni says the right to protest does not mean turning cities into battlefields. Education Minister Giuseppe Valditara calls the violence political hooliganism. Students and unions say the protests are about schools, wages and prices, with inflation at 4.2% in September according to Istat. Italy holds a general election next year."
+    "Prime Minister Giorgia Meloni says the right to protest does not mean turning cities into battlefields. Education Minister Giuseppe Valditara calls the violence political hooliganism. Students and unions say the protests are about schools, wages and prices, with inflation at 4.2% in September according to Istat. Italy holds a general election next year.",
+    "Clashes resumed in Milan for a second night on Sunday, October 18, with hooded groups described by police as mostly minors from the city's outskirts looting stores including a Carrefour supermarket and a Decathlon. Police figures reported by ANSA and Fanpage differ but both describe a sharply larger toll than Saturday's, with over 270 people taken to police stations across the two days and dozens of arrests. President Sergio Mattarella called the violence unacceptable and asked for solidarity with police; the government says it is drafting a decree-law and considering extra troops for Milan, to be discussed on October 20."
   ],
   "ground": [
     { "date": "2026-10-17", "platform": "X", "who": "Prime Minister Giorgia Meloni", "shows": "A post condemning the violence in Milan and Bologna, saying demonstrating is a right but turning cities into battlefields is not.", "label": "confirmed", "check": "Reported by Reuters, ANSA and Il Fatto Quotidiano; ANSA and Il Fatto say it was posted with video of the Milan clashes. Date known.", "sources": ["reutersOct17", "ansaOct17", "fattoOct17"] },
@@ -68,7 +69,12 @@
     { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T21:29:23Z", "text": "Interior and justice undersecretaries from the League propose a financial deposit for demonstrations, with organisers held responsible for damage, and say an amendment is ready, Il Fatto Quotidiano reports.", "sources": ["fattoOct17"] },
     { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T22:25:35Z", "text": "In Turin, young people throw objects at police guarding the entrance to Porta Nuova station and officers respond with tear gas; a group enters the Feltrinelli bookshop inside the station and knocks books to the floor, AGI reports.", "sources": ["agiOct17"] },
     { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T22:25:35Z", "text": "Bologna mayor Matteo Lepore calls the scenes near the station unacceptable and says the march did not appear to have been authorised, AGI reports.", "sources": ["agiOct17"] },
-    { "date": "2026-11-20", "phase": "next", "label": "pending", "added": "2026-10-17T20:31:24Z", "text": "General strike called by the CGIL for November 20. Further protests, final arrest and injury figures for October 16 and 17, and any government response to the protesters' demands are still being checked.", "sources": ["skyCgil", "openOct17"] }
+    { "date": "2026-10-18", "phase": "next", "label": "confirmed", "added": "2026-10-19T21:58:23Z", "hot": true, "milestone": "Second night of unrest in Milan", "text": "For a second evening running, hooded groups described by police as mostly minors from Milan's outskirts loot stores and clash with police around Piazza Duomo and Via Torino, two days after the October 17 cost-of-living march, Il Post and ANSA report. A Carrefour supermarket, a Decathlon store and other shops are raided, windows are smashed near La Scala, and the Duomo metro station is shut again.", "sources": ["ilpostOct19", "ansaOct19a"] },
+    { "date": "2026-10-18", "phase": "next", "label": "disputed", "added": "2026-10-19T21:58:23Z", "text": "Tolls for the two nights vary by outlet. ANSA, citing police sources, reports 271 people taken to police stations (220 of them minors), 32 arrests (23 minors, 13 foreign nationals), 28 people reported to prosecutors, 174 held under a new preventive-detention power, and 14 police officers injured on the Sunday. Fanpage, citing police figures, reports about 270 people stopped over the two days, 160 taken to a police station on the Sunday alone (about 80% minors), 16 arrests on the Saturday (11 of them minors), 22 people reported and 104 police officers injured on the Saturday.", "sources": ["ansaOct19a", "fanpageOct19"] },
+    { "date": "2026-10-19", "phase": "next", "label": "confirmed", "added": "2026-10-19T21:58:23Z", "text": "President Sergio Mattarella says \"every violence is unacceptable\" and calls for \"an intelligent, thorough analysis\" of what he calls \"unprecedented actors\" behind the unrest, while voicing \"full solidarity\" with police, ANSA and Il Fatto Quotidiano report.", "sources": ["ansaOct19b", "fattoOct19"] },
+    { "date": "2026-10-19", "phase": "next", "label": "reported", "added": "2026-10-19T21:58:23Z", "text": "Luxury boutiques including Chanel, Hermès and Pomellato shut or lower their shutters on Via Montenapoleone, fearing further unrest, ANSA reports. A newly named \"Movimento 17 Ottobre\" announces weekly Saturday protests in Italian cities, starting in Milan, with the slogan \"until this thieving government falls\"; Mayor Giuseppe Sala says the tension is not over.", "sources": ["ansaOct19a"] },
+    { "date": "2026-10-19", "phase": "next", "label": "reported", "added": "2026-10-19T21:58:23Z", "text": "Prime Minister Meloni chairs a public-order meeting at Palazzo Chigi, where the government says it will give a \"firm\" response, ANSA reports. Officials are drafting a decree-law that could extend preventive detention to up to 24 hours, including for minors, create a deferred-arrest power for group property damage, and restrict gatherings of people deemed dangerous, with a Council of Ministers meeting expected on October 20. Defence Minister Guido Crosetto says Milan would get 500 additional soldiers under the \"Strade Sicure\" operation, with police-type powers for about three months.", "sources": ["ansaOct19a"] },
+    { "date": "2026-10-20", "phase": "next", "label": "pending", "added": "2026-10-19T21:58:23Z", "text": "Whether the Council of Ministers adopts the security decree, a reconciled national total for arrests and injuries over October 16-18, whether Movimento 17 Ottobre's next Saturday protest goes ahead, and the CGIL's general strike called for November 20. Still being checked.", "sources": ["ansaOct19a"] }
   ],
   "claims": [
     { "title": "What are the protests about?", "label": "disputed", "a": "The government condemns the violence. Meloni says she welcomes peaceful mobilisation; Valditara calls the violence political hooliganism with nothing to do with students' rights, and Tajani accuses part of the opposition of fuelling the unrest.", "aSrc": ["avvenireOct16", "soleOct16", "skyMilan"], "b": "Students and unions say the protests are about crumbling schools, the school decree, low wages, rising prices and military spending. The CGIL says Italy is in a dramatic economic and social crisis.", "bSrc": ["soleOct16", "avvenireOct16", "afpOct16"], "status": "Open. Both positions are on record." },
@@ -80,10 +86,11 @@
     { "date": "Oct 16", "action": "One person detained and 30 reported after an attempt to occupy a school in Alessandria", "by": "Police (figures via Avvenire)", "label": "reported" },
     { "date": "Oct 16", "action": "Video footage reviewed to identify those involved in violence in Rome", "by": "Rome police", "label": "reported" },
     { "date": "Oct 17", "action": "About 50 people detained in Milan, almost half of them minors (preliminary figure)", "by": "Police and prefecture (figure via Il Giorno); also reported by ANSA", "label": "confirmed" },
-    { "date": "Oct 17", "action": "Four minors arrested for resisting officers and seven people reported in Bologna", "by": "Police (figures via ANSA)", "label": "reported" }
+    { "date": "Oct 17", "action": "Four minors arrested for resisting officers and seven people reported in Bologna", "by": "Police (figures via ANSA)", "label": "reported" },
+    { "date": "Oct 18-19", "action": "271 people taken to police stations (220 minors), 32 arrests (23 minors, 13 foreign nationals), 28 reported to prosecutors, 174 held under a new preventive-detention power, in Milan (ANSA figures; Fanpage reports different totals)", "by": "Police (figures via ANSA and Fanpage)", "label": "disputed" }
   ],
   "places": [
-    { "name": "Milan", "lat": 45.46, "lon": 9.19, "desc": "Clashes around Piazza Duomo; about 50 detained, Oct 17", "r": 9, "anchor": "end", "dx": -12, "dy": -4 },
+    { "name": "Milan", "lat": 45.46, "lon": 9.19, "desc": "Clashes and looting on Oct 17 and 18; over 270 taken to police stations by Oct 19 (figures vary by outlet)", "r": 9, "anchor": "end", "dx": -12, "dy": -4 },
     { "name": "Turin", "lat": 45.07, "lon": 7.69, "desc": "Water cannon and tear gas in Piazza Castello, Oct 16", "r": 8, "anchor": "start", "dx": 10, "dy": 14 },
     { "name": "Verona", "lat": 45.44, "lon": 10.99, "desc": "21 young people reported to police, Oct 16", "r": 5, "anchor": "start", "dx": 10, "dy": -4 },
     { "name": "Bologna", "lat": 44.49, "lon": 11.34, "desc": "Clashes near the station; four arrests and seven reported, Oct 17 (police via ANSA)", "r": 6, "anchor": "start", "dx": 10, "dy": 6 },
@@ -96,12 +103,13 @@
     "officers": { "type": "bar", "title": "Police officers injured, as reported", "rows": [["Bologna, Oct 17", 36], ["Rome, Oct 16", 18], ["Milan, Oct 17", 15], ["Turin, Oct 16", 10], ["Alessandria, Oct 16", 2]], "max": 40, "unit": "", "caption": "Sources: police via ANSA (Bologna); police and prefecture via Il Giorno (Milan; ANSA reports at least four officers and 20 protesters injured there); the Siulp police union via Orizzonte Scuola (ANSA) (Rome); Avvenire (Turin, Alessandria). No national figure has been published, and no total for injured protesters.", "aria": "Officers injured: 36 in Bologna and 15 in Milan (a figure ANSA puts at four) on October 17, 18 in Rome (per a police union), 10 in Turin and 2 in Alessandria on October 16" }
   },
   "gaps": [
-    "National totals of arrests and injuries for October 16 and 17, including injured protesters",
+    "A single reconciled national total of arrests, detentions and injuries for October 16-18, including injured protesters",
     "An independent count of how many people marched",
-    "Who organises the \"Italia in Piazza\" movement",
+    "Who organises \"Italia in Piazza\" and the newly named \"Movimento 17 Ottobre\"",
     "Charges against those detained in Milan, Turin and Bologna",
     "Whether the government changes the school decree or responds to protesters' demands",
-    "Whether students follow through on a threatened general strike on October 30, reported by Il Sole 24 Ore"
+    "Whether students follow through on a threatened general strike on October 30, reported by Il Sole 24 Ore",
+    "Final text of the security decree expected October 20, and any constitutional objections to it"
   ],
   "corrections": [
     { "date": "2026-10-17", "text": "An earlier version said police made seven arrests in Bologna, as Reuters reported citing ANSA. A later ANSA report, citing police, says four people were arrested and seven reported to judicial authorities; the item has been updated." }
@@ -109,7 +117,8 @@
   "sourceGroups": [
     ["Background and the build-up", ["afpOct16"]],
     ["October 16: \"No Meloni Day\"", ["soleOct16", "avvenireOct16", "mirrorOct16", "repubblicaOct16"]],
-    ["Latest", ["reutersOct17", "openOct17", "skyMilan", "ilgiornoOct17", "skyCgil", "ansaMilanOct17", "ansaOct17", "fattoOct17", "openMeloniOct17", "agiOct17", "orizzonteOct16"]]
+    ["Latest", ["reutersOct17", "openOct17", "skyMilan", "ilgiornoOct17", "skyCgil", "ansaMilanOct17", "ansaOct17", "fattoOct17", "openMeloniOct17", "agiOct17", "orizzonteOct16"]],
+    ["October 18-19: second night in Milan", ["ilpostOct19", "ansaOct19a", "ansaOct19b", "fanpageOct19", "fattoOct19"]]
   ],
   "sources": {
     "afpOct16": ["AFP (via The Local Italy)", "https://www.thelocal.it/20261016/italy-braces-for-autumn-of-discontent-as-students-protest"],
@@ -127,6 +136,11 @@
     "fattoOct17": ["Il Fatto Quotidiano", "https://www.ilfattoquotidiano.it/2026/10/17/scontri-milano-reazioni-meloni-opposizioni-sala-notizie/8541974/"],
     "openMeloniOct17": ["Open", "https://www.open.online/2026/10/17/scontri-proteste-rabbia-meloni-violenze/"],
     "agiOct17": ["AGI", "https://www.agi.it/economia/news/2026-10-17/caro-vita-proteste-manifestazioni-39583412/"],
-    "orizzonteOct16": ["Orizzonte Scuola (ANSA)", "https://www.orizzontescuola.it/manifestazioni-studentesche-18-poliziotti-feriti-nel-corteo-a-roma-valditara-esprime-solidarieta-e-vicinanza/"]
+    "orizzonteOct16": ["Orizzonte Scuola (ANSA)", "https://www.orizzontescuola.it/manifestazioni-studentesche-18-poliziotti-feriti-nel-corteo-a-roma-valditara-esprime-solidarieta-e-vicinanza/"],
+    "ilpostOct19": ["Il Post", "https://www.ilpost.it/2026/10/19/milano-devastazioni-saccheggi-scontri-negozi-polizia-manifestazione/"],
+    "ansaOct19a": ["ANSA", "https://www.ansa.it/sito/notizie/cronaca/2026/10/19/paura-di-nuovi-disordini-a-milano-chiudono-i-negozi-del-lusso_0d0d286f-7f8f-420a-9737-2566da0ba8a2.html"],
+    "ansaOct19b": ["ANSA", "https://www.ansa.it/sito/notizie/cronaca/2026/10/19/mattarella-a-milano-violenze-inaccettabili-serve-unanalisi-approfondita_397d8359-98ac-4ba2-840f-a55dcb988745.html"],
+    "fanpageOct19": ["Fanpage", "https://www.fanpage.it/milano/il-bilancio-degli-scontri-in-duomo-a-milano-oltre-270-in-questura-e-molti-sono-minorenni-piu-di-100-feriti/"],
+    "fattoOct19": ["Il Fatto Quotidiano", "https://www.ilfattoquotidiano.it/2026/10/19/scontri-milano-mattarella-violenze-analisi-notizie/8543557/"]
   }
 }
