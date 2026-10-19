@@ -7,23 +7,30 @@ from kokoro_onnx import Kokoro
 model, voices = sys.argv[1], sys.argv[2]
 os.makedirs("static/briefings", exist_ok=True)
 
-# Podcast cover art (made once): 1400x1400, brand colours, plain text. Podcast apps require square art of at least 1400px.
-if not os.path.exists("static/briefings/cover.png"):
+# Podcast cover art: 3000x3000 (Apple's recommended size), in the site's own fonts. Remade only if missing or smaller.
+def make_cover(path="static/briefings/cover.png"):
     from PIL import Image, ImageDraw, ImageFont
-    def font(size, bold=True):
-        for f in ["/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf" if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"]:
-            if os.path.exists(f):
-                return ImageFont.truetype(f, size)
-        return ImageFont.load_default()
-    img = Image.new("RGB", (1400, 1400), "#16202b")
-    d = ImageDraw.Draw(img)
-    d.rectangle([0, 0, 1400, 24], fill="#1f5f8b")
-    d.text((110, 470), "Un", font=font(230), fill="#ffffff")
-    d.text((110 + d.textlength("Un", font=font(230)), 470), "owned", font=font(230), fill="#6fb0de")
-    d.text((116, 760), "DAILY BRIEFING", font=font(78), fill="#e3e9ef")
-    d.text((116, 1180), "News nobody owns.", font=font(56, False), fill="#9aa8b6")
-    img.save("static/briefings/cover.png")
+    if os.path.exists(path) and Image.open(path).size[0] >= 3000:
+        return
+    from fontTools.ttLib import TTFont
+    fonts = {}
+    for name in ["archivo-narrow-latin-700-normal", "noto-sans-latin-400-normal", "ibm-plex-mono-latin-500-normal"]:
+        f = TTFont(f"static/assets/fonts/{name}.woff2"); f.flavor = None
+        out = os.path.join(tempfile.gettempdir(), name + ".ttf"); f.save(out); fonts[name] = out
+    A = lambda s: ImageFont.truetype(fonts["archivo-narrow-latin-700-normal"], s)
+    N = lambda s: ImageFont.truetype(fonts["noto-sans-latin-400-normal"], s)
+    M = lambda s: ImageFont.truetype(fonts["ibm-plex-mono-latin-500-normal"], s)
+    img = Image.new("RGB", (3000, 3000), "#16202b"); d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, 3000, 60], fill="#1f5f8b")
+    x, big = 230, A(640)
+    d.text((x, 880), "Un", font=big, fill="#ffffff")
+    d.text((x + d.textlength("Un", font=big), 880), "owned", font=big, fill="#6fb0de")
+    d.text((x + 10, 1700), "DAILY BRIEFING", font=M(190), fill="#e3e9ef")
+    d.rectangle([x + 10, 1980, x + 700, 1996], fill="#6fb0de")
+    d.text((x + 10, 2560), "News nobody owns.", font=N(130), fill="#9aa8b6")
+    img.save(path, optimize=True)
     print("made cover")
+make_cover()
 k = Kokoro(model, voices)
 made = 0
 for name in sorted(os.listdir("content/briefings")):
