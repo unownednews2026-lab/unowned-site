@@ -61,7 +61,7 @@ ${past.length ? `<h2>Earlier briefings</h2><ul>${past.slice(0, 14).map((b) => `<
 <title>Unowned Daily Briefing</title><link>${SITE}/briefing/</link><language>en</language>
 <atom:link href="${SITE}/podcast.xml" rel="self" type="application/rss+xml"/>
 <description>News nobody owns. A short daily update on the stories Unowned is following: what's confirmed, what's disputed, and what's next. Read by a synthetic voice from our checked, sourced timelines.</description>
-<itunes:author>Unowned</itunes:author><itunes:explicit>false</itunes:explicit><itunes:category text="News"><itunes:category text="Daily News"/></itunes:category>
+<itunes:author>Unowned</itunes:author><itunes:owner><itunes:name>Unowned</itunes:name><itunes:email>podcast@unownednews.com</itunes:email></itunes:owner><itunes:type>episodic</itunes:type><copyright>© Unowned</copyright><itunes:explicit>false</itunes:explicit><itunes:category text="News"><itunes:category text="Daily News"/></itunes:category>
 <itunes:image href="${SITE}/briefings/cover.png"/><image><url>${SITE}/briefings/cover.png</url><title>Unowned Daily Briefing</title><link>${SITE}/briefing/</link></image>
 ${briefings.slice(0, 60).map((b) => `<item><title>${esc(`${long(b.date)}: ${b.title}`)}</title><link>${SITE}/briefing/</link><guid isPermaLink="false">unowned-briefing-${b.date}</guid><pubDate>${new Date(b.date + "T06:00:00Z").toUTCString()}</pubDate><description>${esc(b.script.join(" "))}</description><enclosure url="${SITE}${b.audio}" length="${b.bytes}" type="audio/mpeg"/><itunes:duration>${b.seconds}</itunes:duration></item>`).join("\n")}
 </channel></rss>
