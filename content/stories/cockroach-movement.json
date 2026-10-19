@@ -5,7 +5,7 @@
   "dek": "What happened, what is confirmed, and where the accounts disagree, from the exam leak in May to the protests against the Election Commission in October.",
   "status": "Season 2 active",
   "updated": "2026-10-19",
-  "updatedAt": "2026-10-19T22:22:46Z",
+  "updatedAt": "2026-10-19T22:40:00Z",
   "summary": [
     "The Cockroach Janta Party (CJP) began on May 16 as a satirical online response to remarks by Chief Justice Surya Kant, a day after he reportedly likened some unemployed youth to cockroaches. Anger over the cancelled NEET medical entrance exam turned it into a street movement.",
     "After a 36-day protest in Delhi, including a July 20 march met with tear gas and batons, Education Minister Dharmendra Pradhan resigned on July 25 and the CJP called off its protest, saying its demands had been accepted. From August, the CJP said the government had not honoured those commitments, chiefly withdrawing criminal cases against protesters and compensating families of students who died by suicide.",
@@ -72,8 +72,10 @@
     { "date": "2026-10-19", "phase": "s2", "label": "confirmed", "added": "2026-10-19T22:22:46Z", "hot": true, "milestone": "Das and Ranka's custody extended", "text": "A Special Executive Magistrate court in Delhi extends the judicial custody of CJP leaders Saurav Das and Ashutosh Ranka by two days after their initial five-day remand ends, following a request from Delhi Police. The order has not been made public and its basis is unclear, The South First and ThePrint report.", "sources": ["southfirstOct19", "theprintOct19"] },
     { "date": "2026-10-19", "phase": "s2", "label": "reported", "added": "2026-10-19T22:22:46Z", "text": "CJP legal head Ratna Singh calls the extension \"absurd\" and accuses Delhi Police and prosecutors of \"deliberate delay tactics\" and \"procedural sabotage\", saying a hearing set for noon was repeatedly postponed and that the magistrate and prosecutor did not arrive until about 5:30pm, The South First reports.", "sources": ["southfirstOct19"] },
     { "date": "2026-10-19", "phase": "s2", "label": "reported", "added": "2026-10-19T22:22:46Z", "text": "Defence lawyer Pushp Sharma says the magistrate questioned sureties alone about personal details and warned they could be held liable if Ranka and Das reoffended, and rejected one surety over what Sharma calls a \"hypertechnical\" passport-photo mismatch. Senior advocate Vikas Pahwa calls the continued detention \"illegal custody\", arguing the law cited has no provision for holding someone over an already-filed bond, ThePrint reports.", "sources": ["theprintOct19"] },
-    { "date": "2026-10-19", "phase": "s2", "label": "reported", "added": "2026-10-19T22:22:46Z", "text": "The Bombay High Court lists actor Imran Khan's petition against the order to leave India by October 28 for hearing on October 26, LawChakra reports. No interim stay has been reported.", "sources": ["lawchakraOct19"] },
-    { "date": "2026-10-20", "phase": "s2", "label": "pending", "added": "2026-10-19T22:22:46Z", "text": "Whether all others detained on October 16 have been released, the outcome of further protests that student groups called for on Saturday, the legal basis for Das and Ranka's custody extension, and the Bombay High Court's October 26 hearing on Imran Khan's petition. Still being checked.", "sources": ["southfirstOct19", "lawchakraOct19"] }
+    { "date": "2026-10-19", "phase": "s2", "label": "confirmed", "added": "2026-10-19T22:26:38Z", "text": "The Bombay High Court schedules Imran Khan's petition against the 'Leave India' notice for October 26, declining his lawyer's request for October 21, and asks him to make the Maharashtra government a party so the court can check for any criminal record, Bollywood Hungama, Daijiworld and LawChakra report.", "sources": ["bbhKhanOct19", "daijiKhanOct19", "lawchakraOct19"] },
+    { "date": "2026-10-19", "phase": "s2", "label": "reported", "added": "2026-10-19T22:26:38Z", "text": "Khan's senior counsel, Venkatesh Dhond, tells the court Khan was stopped en route to a protest and has no criminal record; no ruling on Khan's request to stay the October 28 deadline has been reported, with that expected at the October 26 hearing, Bollywood Hungama and Daijiworld report.", "sources": ["bbhKhanOct19", "daijiKhanOct19"] },
+    { "date": "2026-10-17", "phase": "s2", "label": "reported", "added": "2026-10-19T22:26:38Z", "text": "The Foreigners Regional Registration Office separately issued Khan a show-cause notice on October 17 asking why his Overseas Citizen of India registration should not be cancelled under Section 7D of the Citizenship Act; Khan has not challenged that notice in his court petition, Bollywood Hungama reports.", "sources": ["bbhKhanOct19"] },
+    { "date": "2026-10-20", "phase": "s2", "label": "pending", "added": "2026-10-19T22:40:00Z", "text": "Whether all others detained on October 16 have been released, the outcome of further protests that student groups called for, the stated legal basis for Das and Ranka's custody extension and whether a Delhi High Court challenge follows, and the outcome of the October 26 Bombay High Court hearing on Imran Khan's petition, including any ruling on his stay request and whether the FRRO proceeds with cancelling his OCI registration. Still being checked.", "sources": ["southfirstOct19", "weekKhanOct17", "bbhKhanOct19"] }
   ],
   "claims": [
     { "title": "What the Chief Justice meant", "label": "disputed", "a": "Reports and critics: he likened unemployed youth to cockroaches and parasites.", "aSrc": ["fpj"], "b": "The Chief Justice: he was misquoted and meant people entering professions with fake degrees.", "bSrc": ["quint"], "status": "Both accounts are on record." },
@@ -110,6 +112,8 @@
     { "date": "Oct 17", "action": "Multiple FIRs registered over alleged violations of prohibitory orders during the October 16 protests", "by": "Delhi Police", "label": "confirmed" },
     { "date": "Oct 17", "action": "Dipke granted conditional bail on a peace bond", "by": "Special Executive Magistrate, New Delhi", "label": "confirmed" },
     { "date": "Oct 17", "action": "Imran Khan files a petition in the Bombay High Court seeking a stay of the order to leave India", "by": "Bombay High Court (petition filed)", "label": "confirmed" },
+    { "date": "Oct 19", "action": "Bombay High Court schedules Imran Khan's petition for October 26; asks that Maharashtra be made a party", "by": "Bombay High Court", "label": "confirmed" },
+    { "date": "Oct 17", "action": "Show-cause notice issued to Imran Khan over possible cancellation of his OCI registration", "by": "Foreigners Regional Registration Office", "label": "reported" },
     { "date": "Oct 19", "action": "Das and Ranka's judicial custody extended by two days; grounds not made public", "by": "Special Executive Magistrate court, Delhi", "label": "confirmed" }
   ],
   "places": [
@@ -151,7 +155,7 @@
     "Full bail conditions for Dipke, and whether all others detained on October 16 have been released",
     "Number of FIRs registered over the October 16 protests and who is named in them",
     "The stated legal basis for extending Das and Ranka's custody, and whether a Delhi High Court challenge follows",
-    "Outcome of the Bombay High Court's October 26 hearing on Imran Khan's petition, and the FRRO's response"
+    "The outcome of the October 26 Bombay High Court hearing on Imran Khan's petition, any ruling on his stay request, and whether the FRRO proceeds with cancelling his OCI registration"
   ],
   "corrections": [
     { "date": "2026-10-17", "text": "The AISA president's surname was misspelled as \"Bohra\" in earlier updates. It is Bora." },
@@ -164,7 +168,7 @@
     ["Return and July protests", ["etvReturn", "mooknayakReturn", "reutersProfile", "kaumudiProfile", "ktJul19", "apJul20", "ajJul20", "apJul21", "cgfoe", "npr", "apJul25", "ajJul25"]],
     ["August and September", ["reutersParty", "ktSep5", "weekSep5", "sentinel", "kaumudiLatur", "awaaz"]],
     ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16", "dawnOct16", "gulfOct16", "ptiOct16", "etvOct16", "printOct16", "weekOct16", "tribuneOct16", "aniOct16"]],
-    ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16", "ptiOct17", "iansOct17", "statesmanOct17", "hansOct17", "barandbenchOct17", "livelawOct17", "aajtakOct17", "reutersOct17", "weekOct17", "dcAniOct15", "ttIansOct15", "reutersKhanOct15", "dcPtiOct15", "bbKhanOct15", "weekKhanOct17", "hawkIansOct17", "southfirstOct19", "theprintOct19", "lawchakraOct19"]]
+    ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16", "ptiOct17", "iansOct17", "statesmanOct17", "hansOct17", "barandbenchOct17", "livelawOct17", "aajtakOct17", "reutersOct17", "weekOct17", "dcAniOct15", "ttIansOct15", "reutersKhanOct15", "dcPtiOct15", "bbKhanOct15", "weekKhanOct17", "hawkIansOct17", "bbhKhanOct19", "daijiKhanOct19", "southfirstOct19", "theprintOct19", "lawchakraOct19"]]
   ],
   "sources": {
     "newslaundry": ["Newslaundry", "https://www.newslaundry.com/amp/story/2026%2F05%2F12%2Fwhy-neet-ug-2026-has-been-cancelled"],
@@ -243,6 +247,8 @@
     "bbKhanOct15": ["Bar and Bench", "https://barandbench.com/news/actor-imran-khan-to-move-bombay-high-court-against-notice-to-leave-india-after-protests-against-cec"],
     "weekKhanOct17": ["The Week", "https://www.theweek.in/news/india/2026/10/17/imran-khan-bombay-high-court-petition.html"],
     "hawkIansOct17": ["The Hawk (IANS)", "https://www.thehawk.in/news/showbiz/imran-khan-files-a-writ-petition-seeking-urgent-stay-on-the-leave-india-notice-by-frro"],
+    "bbhKhanOct19": ["Bollywood Hungama", "https://bollywoodhungama.com/news/bollywood/imran-khans-plea-against-leave-india-notice-to-be-heard-on-october-26-bombay-high-court-seeks-maharashtra-governments-inclusion"],
+    "daijiKhanOct19": ["Daijiworld", "https://daijiworld.com/news/newsDisplay?newsID=1331922"],
     "southfirstOct19": ["The South First", "https://thesouthfirst.com/beyond-south/delhi-court-extends-judicial-custody-of-cjp-leaders-saurav-das-and-ashutosh-ranka-by-two-days/"],
     "theprintOct19": ["ThePrint", "https://theprint.in/india/2-more-days-in-judicial-custody-for-cjps-ranka-das-lawyer-says-sureties-were-threatened/3076308/"],
     "lawchakraOct19": ["LawChakra", "https://lawchakra.in/high-court/bombay-high-court/leave-india-notice/"]
