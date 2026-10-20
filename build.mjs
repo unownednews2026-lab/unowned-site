@@ -57,6 +57,8 @@ function why(S, label, keys, where) {
   const text = { reported: "Reported: not yet confirmed by a second independent source.", disputed: "Disputed: the accounts conflict. Both are given, with their sources.", alleged: "Alleged: one side's claim, not independently confirmed.", pending: "Checking: expected or unresolved. We will update this when the outcome is known." }[label];
   return text ? `<p class="why">${text}${how}</p>` : "";
 }
+/* "Checked for news 1 hour ago": shown when the news desk has looked for new developments since the last published update. */
+const checkedNote = (st) => st.checkedAt && st.checkedAt > (st.updatedAt || "") ? `<span class="checked">Checked for news <time class="ago" datetime="${st.checkedAt}">${long(st.checkedAt.slice(0, 10))}</time></span>` : "";
 const newestAdded = (st) => st.events.reduce((m, e) => (e.added && e.added > m ? e.added : m), st.updatedAt || "");
 const firstSentence = (t, max) => { const f = t.split(". ")[0].replace(/\.$/, ""); return f.length > max ? f.slice(0, f.lastIndexOf(" ", max)) + "…" : f + "."; };
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
@@ -231,7 +233,7 @@ function storyPage(st, brief) {
   <p class="eyebrow">${esc(st.kicker)}</p>
   <h1>${esc(st.title)}</h1>
   <p class="lede">${esc(st.dek)}</p>
-  <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span></div>
+  <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span>${checkedNote(st)}</div>
   ${voteWidget(st, "Want this followed closely? Upvote it.")}
   ${brief && (brief.stories || []).includes(st.slug) ? miniPlayer(brief, { esc, long, label: "This story is in the daily briefing" }) : ""}
 </header>
@@ -358,7 +360,7 @@ function build() {
     <span class="rank" aria-hidden="true">${i + 1}</span>
     <div class="trend-body">
       <a class="story-card" href="/${st.slug}/">
-        <div class="meta-row"><span class="tag">${esc(st.region)}</span><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span></div>
+        <div class="meta-row"><span class="tag">${esc(st.region)}</span><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span>${checkedNote(st)}</div>
         <h3>${esc(st.title)}</h3>
         <p class="latest-line"><strong>Latest:</strong> ${esc(firstSentence(latest[0].text, 100))}</p>
       </a>
