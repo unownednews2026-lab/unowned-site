@@ -29,7 +29,7 @@ const stamp = (l) => `<span class="stamp s-${l}" title="${LABEL[l]}: ${MEANING[l
 const SHORT = { confirmed: "2+ outlets", reported: "1 outlet", disputed: "sides disagree", alleged: "one side's claim", pending: "being checked" };
 const keyStrip = () => `<div class="key" role="note" aria-label="What our labels mean"><a class="key-title" href="/how-we-work/#labels">How sure are we?</a><ul>${["confirmed", "reported", "disputed", "alleged", "pending"].map((l) => `<li>${stamp(l)}<span>${SHORT[l]}</span></li>`).join("")}</ul></div>`;
 /* Independence: wire copy republished by several outlets counts once, and so do outlets with the same parent. */
-const WIRES = ["AFP", "Reuters", "AP", "PTI", "IANS", "ANI", "UNI", "Xinhua", "Anadolu", "DPA", "EFE", "ANSA"];
+const WIRES = ["AFP", "Reuters", "AP", "The Canadian Press", "Canadian Press", "PTI", "IANS", "ANI", "UNI", "Xinhua", "Anadolu", "DPA", "EFE", "ANSA"];
 const PARENT = { "ICI": "Radio France", "France Bleu": "Radio France", "franceinfo": "Radio France", "France Inter": "Radio France", "France 2": "France Télévisions", "France 3": "France Télévisions", "CNews": "Bolloré media", "Europe 1": "Bolloré media", "JDD": "Bolloré media" };
 function origins(name) {
   const n = name.replace(/\s+live updates$/i, "").trim();
