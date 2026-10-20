@@ -10,8 +10,8 @@
   "kicker": "Story tracker · France",
   "dek": "Students blockading their schools over teacher shortages and run-down buildings, the police response, and what the government has promised, from the first blockades in September.",
   "status": "Ongoing",
-  "updated": "2026-10-19",
-  "updatedAt": "2026-10-19T22:50:00Z",
+  "updated": "2026-10-20",
+  "updatedAt": "2026-10-20T12:30:15Z",
   "summary": [
     "French high school students began blockading their schools in the Paris suburbs in mid to late September, protesting teacher shortages, overcrowded classes, run-down buildings and classrooms that reached 35 to 40°C in heatwaves. Within two weeks the blockades had spread across France, with hundreds of schools closed or disrupted.",
     "The police response has become a story of its own. Thousands of people, most of them minors, have been arrested; hundreds of students, school staff and police officers have been injured. A 15-year-old lost a hand in Lens on October 5, and the government suspended stun grenades at student protests two days later. Rights groups say force against minors has been disproportionate; police unions say force is used against people who attack officers.",
@@ -98,6 +98,8 @@
     { "date": "2026-10-18", "phase": "response", "label": "reported", "added": "2026-10-18T09:14:24Z", "text": "The Paris police prefecture says a man died following a cardiorespiratory arrest after collapsing on boulevard Magenta, France 24 and L'Express report; both describe him as a demonstrator. The timing and circumstances have not been detailed further.", "sources": ["f24LiveOct18", "lexpressOrangeOct18"] },
     { "date": "2026-10-18", "phase": "response", "label": "reported", "added": "2026-10-19T22:50:00Z", "text": "Interior Minister Laurent Nuñez gives a provisional national count on Sunday morning of about 1,800 people arrested and more than 500 police officers, gendarmes and firefighters injured, calling the toll provisional, Actu17 reports.", "sources": ["actu17Oct18"] },
     { "date": "2026-10-18", "phase": "response", "label": "confirmed", "added": "2026-10-19T22:50:00Z", "text": "The national count rises over the course of Sunday: CNews reports 2,397 people arrested nationwide and 997 police officers and gendarmes injured, seven of them seriously, while ICI separately reports close to 2,400 arrests and about a thousand injured security personnel.", "sources": ["cnewsOct18b", "iciOct18b"] },
+    { "date": "2026-10-19", "phase": "response", "label": "confirmed", "added": "2026-10-20T12:30:00Z", "text": "Prime Minister Sébastien Lecornu orders partial, localised curfews from Monday night in several cities: central Paris (Place de la République and Les Halles, from 11pm to 6am, with gatherings and demonstrations banned citywide from 8pm), Lyon, Nice and Coulaines, and Lille and three neighbouring communes, some limited to minors; the Bouches-du-Rhône prefecture separately bans all gatherings in Marseille from noon to 8pm. Lecornu rules out a full Paris curfew and says a state of emergency remains possible if needed.", "sources": ["zonebourseOct19", "ajOct19curfew"] },
+    { "date": "2026-10-19", "phase": "response", "label": "confirmed", "added": "2026-10-20T12:30:00Z", "text": "President Macron declines Interior Minister Laurent Nuñez's offer to resign over the weekend's violence, telling him to stay to keep the police chain of command intact. Nuñez says police “lost control” during Saturday's clashes and acknowledges a lack of anticipation and insufficient numbers for the crowds on the fringes of the marches.", "sources": ["zonebourseOct19", "ajOct19curfew"] },
     { "date": "2026-10-20", "phase": "response", "label": "pending", "added": "2026-10-19T22:50:00Z", "text": "How many of those arrested remain in custody, the circumstances of the boulevard Magenta death and whether an investigation has opened, and whether Prime Minister Lecornu meets the mayors of Paris, Marseille and Lyon. Still being checked.", "sources": ["actu17Oct18"] }
   ],
   "claims": [
@@ -158,7 +160,7 @@
     ["How it started", ["ajVoices", "bbcSep28"]],
     ["Injuries, arrests and the police response", ["ajOct5", "ajOct7", "euroOct7", "psOct7"]],
     ["Government measures and turnout", ["mwnOct9", "euroOct13", "afpOct14", "euroOct14", "localOct17"]],
-    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17", "europe1StEtienneOct17", "fiStEtienneOct17", "iciStEtienneOct17", "f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17", "cnewsLecornuOct17", "lexpressOrangeOct17", "europe1BordeauxOct17", "lessentielBordeauxOct17", "europe1LiveOct17", "cnewsNunezOct17", "europe1MacronOct17", "f24LimogesOct17", "hespressAfpLecornuOct17", "bfmLecornuOct17", "zinfosMayorsOct18", "lyonmagMayorsOct18", "alouetteLimogesOct18", "malaymailAfpParisOct18", "f24LiveOct18", "lexpressOrangeOct18", "actu17Oct18", "cnewsOct18b", "iciOct18b"]]
+    ["From the ground", ["pmOct10", "mesinfosOct16", "europe1Oct16", "20minOct16", "aaOct16", "fiOct16", "apOct16", "fiLiveOct17", "cnewsOct17", "entrevueOct17", "f3MarseilleOct17", "bfmMarseilleOct17", "hespressAfpOct17", "cnewsRepOct17", "lematinAfpOct17", "iciOct17", "sudradioAfpOct17", "ajOct17", "cnewsLyonOct17", "cnewsLiveOct17b", "sudradioLiveOct17", "europe1StEtienneOct17", "fiStEtienneOct17", "iciStEtienneOct17", "f24LilleOct17", "cnewsLilleOct17", "fiLilleOct17", "cnewsLecornuOct17", "lexpressOrangeOct17", "europe1BordeauxOct17", "lessentielBordeauxOct17", "europe1LiveOct17", "cnewsNunezOct17", "europe1MacronOct17", "f24LimogesOct17", "hespressAfpLecornuOct17", "bfmLecornuOct17", "zinfosMayorsOct18", "lyonmagMayorsOct18", "alouetteLimogesOct18", "malaymailAfpParisOct18", "f24LiveOct18", "lexpressOrangeOct18", "actu17Oct18", "cnewsOct18b", "iciOct18b", "zonebourseOct19", "ajOct19curfew"]]
   ],
   "sources": {
     "ajVoices": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/7/were-short-of-resources-frances-student-protesters-in-their-own-words"],
@@ -217,6 +219,8 @@
     "lexpressOrangeOct18": ["L'Express (via Orange)", "https://actu.orange.fr/france/plus-de-550-000-manifestants-1-200-interpellations-un-mort-et-des-dizaines-de-blesses-batiments-brules-le-bilan-de-la-mobilisation-du-17-octobre-l-express-via-6medias-CNT000002t2q2C.html"],
     "actu17Oct18": ["Actu17", "https://actu17.fr/faits-divers/mobilisation-du-17-octobre-1-800-interpellations-et-plus-de-500-policiers-gendarmes-et-pompiers-blesses.html"],
     "cnewsOct18b": ["CNews", "https://www.cnews.fr/france/2026-10-18/mobilisation-du-17-octobre-2397-personnes-ont-ete-interpellees-et-997-policiers"],
-    "iciOct18b": ["ICI", "https://www.ici.fr/infos/faits-divers-justice/mobilisation-du-17-octobre-1-800-interpellations-en-france-indique-le-ministre-de-l-interieur-laurent-nunez-6459330"]
+    "iciOct18b": ["ICI", "https://www.ici.fr/infos/faits-divers-justice/mobilisation-du-17-octobre-1-800-interpellations-en-france-indique-le-ministre-de-l-interieur-laurent-nunez-6459330"],
+    "zonebourseOct19": ["Reuters (via Zonebourse)", "https://www.zonebourse.com/actualite-bourse/france-macron-refuse-la-demission-de-laurent-nu-ez-reunion-de-crise-a-matignon-ce785cdbd980f025"],
+    "ajOct19curfew": ["Al Jazeera (AFP)", "https://www.aljazeera.com/news/2026/10/19/frances-macron-declines-ministers-resignation-after-violent-protests"]
   }
 }
