@@ -11,7 +11,7 @@
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
   "updated": "2026-10-20",
-  "updatedAt": "2026-10-20T08:25:21Z",
+  "updatedAt": "2026-10-20T12:30:15Z",
   "summary": [
     "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
     "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days. The interior minister says 156 people were injured over four days, including 97 police officers and 45 protesters.",
@@ -89,6 +89,7 @@
     { "date": "2026-10-19", "phase": "spread", "label": "confirmed", "added": "2026-10-19T22:50:00Z", "text": "Rama says on Facebook that demonstrators have crossed a \"red line,\" writing that \"protests are a right, whereas violence is a crime,\" and says he is open to dialogue except with those who commit violence. He pledges a one-off €2,500 payment to frontline police and a \"significant\" salary increase from January 1, and blames \"foreign hands\" for the unrest, naming Iran and Russia as sources of online disinformation and alleging tens of thousands of fake profiles tied to Iran, AFP (via Daily Sabah) and Euronews report.", "sources": ["dailySabahOct19", "euronewsOct19"] },
     { "date": "2026-10-19", "phase": "spread", "label": "reported", "added": "2026-10-19T22:50:00Z", "text": "Police spokesman Albert Nushi condemns the attack on the police station, saying \"an attack on a police station is not a protest,\" and urges peaceful demonstrators to stay away from masked individuals. The European Commission condemns the violence and says any police response must remain proportionate, Euronews reports.", "sources": ["euronewsOct19"] },
     { "date": "2026-10-20", "phase": "spread", "label": "reported", "added": "2026-10-20T08:25:21Z", "text": "Rama renews his offer to meet protesters “anytime, anywhere, without conditions,” urging organisers to keep minors out of clashes and distance themselves from violence; he again rules out resigning or negotiating with anyone involved in violence. Police say five people have been arrested and 15 others are being sought, Anadolu Agency (via Anews) reports.", "sources": ["anewsOct20"] },
+    { "date": "2026-10-20", "phase": "spread", "label": "reported", "added": "2026-10-20T12:30:00Z", "text": "Speaking at the education ministry, Rama holds up a stone to argue thrown objects can become weapons, separates violence from the right to protest, and calls the unrest “hybrid warfare” fuelled by genuine grievances over housing and jobs; he repeats unproven claims that some media outlets and unnamed foreign actors have a financial and political interest in stoking the unrest. He renews his dialogue offer and places chairs outside his office, which protesters overturn and damage while continuing to demand his resignation. University lecturers and parents join the protests, and the SPUSH academic staff union marches from Tirana Polytechnic University to the prime minister's office over separate pay demands dating to March.", "sources": ["argumentumOct20"] },
     { "date": "2026-10-20", "phase": "spread", "label": "pending", "added": "2026-10-20T08:25:21Z", "text": "Whether talks between students and the government begin despite Rama's renewed offer, full arrest and detention figures for the weekend's violence, any response from President Begaj to the protesters' demands, and evidence for the explosives-laden drone the prime minister says was neutralised. Still being checked.", "sources": ["anewsOct20"] }
   ],
   "claims": [
@@ -140,7 +141,7 @@
   "sourceGroups": [
     ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
     ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
-    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy", "afpOct18", "euroAlDrone", "kohaDrone", "ajOct18sixth", "srpskeOct18", "euronewsOct19vid", "euronewsOct19", "dailySabahOct19", "anewsOct20"]]
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy", "afpOct18", "euroAlDrone", "kohaDrone", "ajOct18sixth", "srpskeOct18", "euronewsOct19vid", "euronewsOct19", "dailySabahOct19", "anewsOct20", "argumentumOct20"]]
   ],
   "sources": {
     "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
@@ -184,6 +185,7 @@
     "euronewsOct19vid": ["Euronews", "https://www.euronews.com/video/2026/10/19/albanian-police-clash-with-protesters-in-tirana-as-unrest-enters-sixth-day"],
     "euronewsOct19": ["Euronews", "https://www.euronews.com/2026/10/19/albanias-pm-refuses-to-quit-with-protests-against-university-conditions-in-sixth-day"],
     "dailySabahOct19": ["AFP (via Daily Sabah)", "https://www.dailysabah.com/world/europe/albanias-rama-warns-protesters-after-police-station-set-ablaze"],
-    "anewsOct20": ["Anadolu Agency (via Anews)", "https://www.anews.com.tr/europe/2026/10/20/albanian-protests-enter-seventh-day-as-rama-renews-dialogue-offer"]
+    "anewsOct20": ["Anadolu Agency (via Anews)", "https://www.anews.com.tr/europe/2026/10/20/albanian-protests-enter-seventh-day-as-rama-renews-dialogue-offer"],
+    "argumentumOct20": ["Argumentum", "https://www.argumentum.al/en/albania-protests-enter-eighth-day-as-demonstrators-demand-prime-minister-ramas-resignation/"]
   }
 }
