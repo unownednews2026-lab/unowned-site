@@ -1,5 +1,5 @@
-# Freshness watchdog: no AI, no cost. Every hour it checks when a story was last updated.
-# If nothing has been published for 8 hours it opens a "Freshness alert" issue (GitHub emails the repository owner)
+# Freshness watchdog: no AI, no cost. Every hour it checks when the news desk last published an update or
+# recorded a check for news ("checkedAt"). If neither has happened for 12 hours it opens a "Freshness alert" issue (GitHub emails the repository owner)
 # and marks the run as failed (GitHub also emails a failed-run notice). It closes the issue once updates resume.
 name: Freshness check
 on:
@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 5
     env:
       GH_TOKEN: ${{ github.token }}
-      LIMIT_HOURS: "8"
+      LIMIT_HOURS: "12"
     steps:
       - uses: actions/checkout@v4
       - name: Check the newest update
@@ -29,24 +29,24 @@ jobs:
             for (const f of fs.readdirSync("content/stories")) {
               if (!f.endsWith(".json")) continue;
               const s = JSON.parse(fs.readFileSync("content/stories/" + f, "utf8"));
-              for (const v of [s.updatedAt, ...s.events.map((e) => e.added)]) if (v && v > m) m = v;
+              for (const v of [s.updatedAt, s.checkedAt, ...s.events.map((e) => e.added)]) if (v && v > m) m = v;
             }
             console.log(m);')
           age=$(( ( $(date -u +%s) - $(date -u -d "$newest" +%s) ) / 3600 ))
-          echo "Newest update: $newest ($age hours ago)"
+          echo "Newest update or check: $newest ($age hours ago)"
           open=$(gh issue list --state open --search "Freshness alert in:title" --json number --jq '.[0].number // empty')
           if [ "$age" -ge "$LIMIT_HOURS" ]; then
             if [ -z "$open" ]; then
               printf '%s\n' \
-                "Nothing has been published on unownednews.com since $newest UTC ($age hours)." "" \
-                "Either the news has been quiet, or the news desk is paused (most often because the Claude plan's usage limit was reached; it resumes on its own when the limit resets)." "" \
+                "The news desk has not published or checked for news since $newest UTC ($age hours)." "" \
+                "The news desk is most likely paused (most often because the Claude plan's usage limit was reached; it resumes on its own when the limit resets)." "" \
                 "What you can do: keep Claude chats short until the limit resets, or check the news desk's recent runs under scheduled tasks in the Claude app." "" \
                 "This issue closes itself when updates resume." > /tmp/alert.md
               gh issue create --title "Freshness alert: no updates for $age hours" --body-file /tmp/alert.md
             else
               echo "Alert already open (#$open)."
             fi
-            echo "::error::No story updates for $age hours (newest: $newest)."
+            echo "::error::No story updates or checks for $age hours (newest: $newest)."
             exit 1
           elif [ -n "$open" ]; then
             gh issue close "$open" --comment "Updates resumed: newest at $newest UTC."
