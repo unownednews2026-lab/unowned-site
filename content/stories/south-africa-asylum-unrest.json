@@ -10,8 +10,8 @@
   "kicker": "Story tracker · South Africa",
   "dek": "Riots in Durban and Soweto after a court ruling on asylum, the army deployment and arrests that followed, and the competing claims over what the ruling means and who is behind the violence.",
   "status": "Ongoing",
-  "updated": "2026-10-17",
-  "updatedAt": "2026-10-17T15:54:57Z",
+  "updated": "2026-10-21",
+  "updatedAt": "2026-10-21T20:40:00Z",
   "summary": [
     "On July 7, 2026, South Africa's Constitutional Court struck down rules that barred people from applying for asylum if they had entered the country irregularly, had no asylum transit visa or missed a reporting deadline. On September 28 the Home Affairs department told refugee offices to accept in-person applications. The move came after months of protests by anti-migrant groups, which had demanded that undocumented foreigners leave.",
     "In early October anti-migrant groups, including March and March, protested at refugee offices. On October 8 protests in Soweto and Durban turned violent: police say 24 vehicles were torched, and foreign-owned shops were looted. Home Affairs withdrew the directive on October 9, saying its offices had been overwhelmed, but violence continued in Durban and the army was deployed there on October 10. Officials say 30 people were arrested in the first days, and court cases are under way.",
@@ -66,6 +66,7 @@
     { "date": "2026-10-13", "phase": "response", "label": "reported", "added": "2026-10-17T15:54:57Z", "text": "Lawyers for Human Rights says the government should not seek a supervisory order, arguing it waited months after the July ruling to seek legal advice, and says it is unclear whether papers have been filed, EWN reports.", "sources": ["ewnOct13"] },
     { "date": "2026-10-15", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "The lawyer for March and March leader Jacinta Ngobese-Zuma says arrest warrants have been issued for her and for him; the movement calls it intimidation before the elections. The National Prosecuting Authority and KwaZulu-Natal police say no warrant or case exists.", "sources": ["timesliveOct15", "iolOct17", "citizenOct15"] },
     { "date": "2026-10-16", "phase": "response", "label": "reported", "added": "2026-10-17T14:36:15Z", "text": "IOL reports that 19 people linked to the movement appear in Durban Magistrate's Court on charges linked to public violence.", "sources": ["iolOct17"] },
+    { "date": "2026-10-20", "phase": "response", "label": "reported", "added": "2026-10-21T20:40:00Z", "text": "Speaking at a Black Wednesday commemoration in Sandton, President Ramaphosa dismisses social media claims that the ANC is registering asylum seekers to vote as \"a rubbish story,\" IOL reports. The Electoral Commission says asylum seeker status does not confer voting rights and that only South African citizens aged 18 or over on the voters' roll may vote in the November 4 local elections.", "sources": ["iolOct20anc"] },
     { "date": "2026-11-04", "phase": "response", "label": "pending", "added": "2026-10-17T15:54:57Z", "text": "Local government elections on November 4, the October 29 court hearing on the government’s supervisory-order bid, and the new asylum appointment system due by November 10. Still being checked.", "sources": ["dmOct9", "xinhuaOct11", "timesliveOct12"] }
   ],
   "claims": [
@@ -111,7 +112,7 @@
   "sourceGroups": [
     ["The ruling and the directive", ["ajJul2", "irishJul1", "mgOct9", "dmOct13", "ewnOct7", "sanewsImc"]],
     ["The riots and the police response", ["apOct8", "ajOct8", "afpOct9", "africanInsiderOct9", "dmOct9", "ewnOct9", "timesliveOct10", "anaLive", "dmOct11"]],
-    ["Latest", ["xinhuaOct11", "thisdayOct12", "groundupOct13", "iolOct13", "timesliveOct15", "citizenOct15", "iolOct17", "timesliveOct12", "ewnOct13"]]
+    ["Latest", ["xinhuaOct11", "thisdayOct12", "groundupOct13", "iolOct13", "timesliveOct15", "citizenOct15", "iolOct17", "timesliveOct12", "ewnOct13", "iolOct20anc"]]
   ],
   "sources": {
     "ajJul2": ["Al Jazeera", "https://aljazeera.com/news/2026/7/2/more-than-900-arrested-during-south-africas-antimigrant-protests"],
@@ -137,7 +138,8 @@
     "citizenOct15": ["The Citizen", "https://www.citizen.co.za/news/npa-and-police-deny-arrest-warrants-were-issued-for-march-and-march-leaders/"],
     "iolOct17": ["IOL", "https://iol.co.za/news/south-africa/2026-10-17-from-street-protests-to-the-courtroom-a-defining-week-for-march-and-march/"],
     "timesliveOct12": ["TimesLIVE", "https://www.timeslive.co.za/news/south-africa/2026-10-12-court-to-hear-governments-bid-on-asylum-seeker-supervision-on-october-29/"],
-    "ewnOct13": ["EWN", "https://www.ewn.co.za/2026/10/13/lhr-questions-states-plan-to-seek-concourt-supervisory-order-on-refugee-act"]
+    "ewnOct13": ["EWN", "https://www.ewn.co.za/2026/10/13/lhr-questions-states-plan-to-seek-concourt-supervisory-order-on-refugee-act"],
+    "iolOct20anc": ["IOL", "https://iol.co.za/news/politics/2026-10-20-ramaphosa-rejects-claim-anc-is-registering-asylum-seekers-to-vote/"]
   },
-  "checkedAt": "2026-10-21T18:32:38Z"
+  "checkedAt": "2026-10-21T20:40:00Z"
 }
