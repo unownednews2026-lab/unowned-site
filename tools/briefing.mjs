@@ -51,7 +51,7 @@ export function buildBriefing({ briefings, stories, write, simple, esc, long, SI
 <details class="fold"><summary>Read the transcript</summary>${today.script.map((p) => `<p>${esc(p)}</p>`).join("")}</details>
 <div class="podcast-box">
   <h3>Get it every morning in your podcast app</h3>
-  <p class="listen-on"><a href="https://podcasts.apple.com/us/podcast/unowned-daily-briefing/id6824657998" rel="noopener">Listen on Apple Podcasts</a></p>
+  <p class="listen-on"><a href="https://podcasts.apple.com/us/podcast/unowned-daily-briefing/id6824657998" rel="noopener">Listen on Apple Podcasts</a> · <a href="https://open.spotify.com/show/4EUJj9NhyL3hpcKi9QUszE" rel="noopener">Listen on Spotify</a></p>
   <p class="podcast-url"><code>${SITE}/podcast.xml</code> <button type="button" class="copy-feed" data-copy="${SITE}/podcast.xml" hidden>Copy link</button></p>
   <p class="src">In most podcast apps, choose "Add by URL" and paste the link. In Apple Podcasts: Library, then the ⋯ menu, then "Follow a Show by URL". A new briefing arrives each morning, around 06:00 UTC.</p>
 </div>
