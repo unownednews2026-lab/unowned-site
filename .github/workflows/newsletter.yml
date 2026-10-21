@@ -1,0 +1,23 @@
+# Daily email: builds "Today in 30 seconds" from published stories and sends it (or saves a draft) through Buttondown.
+# Runs after the morning audio briefing. Does nothing unless content/newsletter.json has "enabled": true
+# and the BUTTONDOWN_API_KEY repository secret is set.
+name: Daily email
+on:
+  schedule:
+    - cron: "35 6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: newsletter
+  cancel-in-progress: false
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Send the daily email
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+        run: node tools/send_newsletter.mjs

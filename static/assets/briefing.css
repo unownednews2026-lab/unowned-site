@@ -17,3 +17,10 @@
 .podcast-url code { font-family: var(--mono); font-size: 0.85rem; word-break: break-all; }
 .copy-feed { border: 1px solid var(--rule); background: transparent; color: var(--fg); border-radius: 6px; padding: 5px 12px; font: inherit; font-size: 0.85rem; cursor: pointer; }
 .copy-feed:hover { border-color: var(--accent); }
+
+/* Daily email sign-up (tools/newsletter.mjs) */
+.signup { display: grid; gap: 8px; margin-top: 18px; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); max-width: 640px; }
+.signup label { display: grid; gap: 4px; }
+.signup .hint { font-size: 0.85rem; color: var(--muted); }
+.signup-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.signup input[type=email] { flex: 1 1 220px; font: inherit; padding: 9px 12px; border: 1px solid var(--rule); border-radius: 6px; background: var(--bg); color: var(--fg); }

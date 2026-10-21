@@ -2,6 +2,7 @@
 import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { loadBriefings, buildBriefing, freshBriefing, miniPlayer } from "./tools/briefing.mjs";
+import { loadNewsletter, signupBox, privacyLine } from "./tools/newsletter.mjs";
 
 const SITE = "https://unownednews.com";
 const SOCIAL = [
@@ -386,6 +387,7 @@ function build() {
   <h1>News nobody owns.</h1>
   <p class="lede">The stories that matter, anywhere in the world: checked, sourced and kept up to date. Both sides shown.</p>
   ${brief ? miniPlayer(brief, { esc, long, label: "Listen to the daily briefing" }) : ""}
+  ${signupBox(loadNewsletter(), { esc })}
   <p class="coverage"><span>Following now in</span>${regions.map((r) => `<span class="tag">${esc(r)}</span>`).join("")}<a href="/submit/#suggest">Suggest a story to follow</a></p>
 </header>
 
@@ -493,6 +495,7 @@ function build() {
 <li>No ads that track you, no tracking scripts, no cookies, and no third-party fonts or analytics. Everything on this site loads from this site.</li>
 <li>Our hosting provider, Cloudflare, handles connections to the site and may process technical data such as IP addresses to deliver it and protect it from attacks. We don't add tracking on top of that.</li>
 <li>Your own browser remembers when you last opened each story, so we can show what's new since your last visit, and which way you voted. That record stays on your device and is never sent to us; a vote only adds one to an anonymous count. Clearing your browser's site data removes it.</li>
+${privacyLine(loadNewsletter())}
 </ul>
 <h2>Contributors</h2>
 <ul>
