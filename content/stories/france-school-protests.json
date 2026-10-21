@@ -151,7 +151,7 @@
     "arrests": { "type": "bar", "title": "Arrests since late September, per the Justice Ministry", "rows": [["Apprehended", 7950], ["Charged", 2735]], "max": 9000, "unit": "", "caption": "As of October 14, 85% of them minors. Source: Justice Ministry, via AFP. Euronews cites 6,800 taken into custody.", "aria": "As of October 14: 7,950 people apprehended and 2,735 charged, per the Justice Ministry" }
   },
   "gaps": [
-    "A single reconciled national total for arrests and injuries from the October 17 violence (figures rose through the day, from about 1,800 arrests/500 injured to about 2,400 arrests/1,000 injured). Also: a precise current custody count (Darmanin gave a provisional 2,513 gardes à vue on October 19 and said on October 21 that 174 people had been jailed and 917 referred to court), the circumstances of the death of a man who collapsed on boulevard Magenta in Paris, whether an investigation is opened into the Saint-Étienne injury, progress in the Limoges town hall fire investigation, and an independent account of the La Santé prison incident",
+    "A single reconciled national total for arrests and injuries from the October 17 violence (figures rose through the day, from about 1,800 arrests/500 injured to about 2,400 arrests/1,000 injured). Also: a precise current custody count (Darmanin gave a provisional 2,513 gardés à vue on October 19 and said on October 21 that 174 people had been jailed and 917 referred to court), the circumstances of the death of a man who collapsed on boulevard Magenta in Paris, whether an investigation is opened into the Saint-Étienne injury, progress in the Limoges town hall fire investigation, and an independent account of the La Santé prison incident",
     "What the October 22 meeting between Lecornu and the mayors of Paris, Marseille and Lyon produces",
     "Findings of the roughly 50 judicial investigations opened since October 17, and of the earlier 36 internal police investigations",
     "Outcomes of the roughly 580 immediate-appearance hearings Darmanin says are expected",
@@ -233,5 +233,5 @@
     "fiOct21maires": ["franceinfo", "https://www.franceinfo.fr/societe/mobilisation-du-17-octobre/sebastien-lecornu-recevra-jeudi-apres-midi-les-maires-de-paris-marseille-et-lyon-apres-les-violences-du-17-octobre_8247742.html"],
     "europe1Oct21maires": ["Europe 1", "https://www.europe1.fr/societe/en-direct-violences-urbaines-sebastien-lecornu-recevra-jeudi-apres-midi-les-maires-de-paris-marseille-et-lyon-1169310"]
   },
-  "checkedAt": "2026-10-21T18:32:38Z"
+  "checkedAt": "2026-10-21T20:40:00Z"
 }
