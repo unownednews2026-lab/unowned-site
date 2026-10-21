@@ -3,6 +3,7 @@
    into static/briefings/YYYY-MM-DD.mp3. A briefing appears only once its audio exists. */
 import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join } from "node:path";
+import { loadNewsletter, signupBox } from "./newsletter.mjs";
 
 export function loadBriefings() {
   const dir = "content/briefings";
@@ -49,6 +50,7 @@ export function buildBriefing({ briefings, stories, write, simple, esc, long, SI
 <audio id="briefing-audio" controls preload="metadata" src="${today.audio}" style="width:100%"></audio>
 <p class="src">Read by a synthetic voice. Every fact comes from our published timelines, with the same labels: <a href="/how-we-work/#labels">how we label</a>. Full stories: ${storyLinks(today)}</p>
 <details class="fold"><summary>Read the transcript</summary>${today.script.map((p) => `<p>${esc(p)}</p>`).join("")}</details>
+${signupBox(loadNewsletter(), { esc, heading: "Prefer email? Get it every morning" })}
 <div class="podcast-box">
   <h3>Get it every morning in your podcast app</h3>
   <p class="listen-on"><a href="https://podcasts.apple.com/us/podcast/unowned-daily-briefing/id6824657998" rel="noopener">Listen on Apple Podcasts</a> · <a href="https://open.spotify.com/show/4EUJj9NhyL3hpcKi9QUszE" rel="noopener">Listen on Spotify</a></p>
