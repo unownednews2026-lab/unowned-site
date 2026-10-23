@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
   issues: write
+  actions: write
 concurrency:
   group: freshness
   cancel-in-progress: true
@@ -52,4 +53,19 @@ jobs:
             fi
           elif [ -n "$open" ]; then
             gh issue close "$open" --comment "Updates resumed: newest at $newest UTC."
+          fi
+      - name: Check today's audio briefing
+        if: always()
+        run: |
+          # After 10:00 UTC, today's briefing (written and recorded at 05:45, retried at 09:30) must exist.
+          today=$(date -u +%F); hour=$(date -u +%H)
+          open=$(gh issue list --state open --search "Briefing alert in:title" --json number --jq '.[0].number // empty')
+          if [ -f "static/briefings/$today.mp3" ]; then
+            [ -n "$open" ] && gh issue close "$open" --comment "Briefing for $today is published."
+            echo "Briefing for $today is published."
+          elif [ "$hour" -ge 10 ] && [ -z "$open" ]; then
+            gh workflow run briefing-audio.yml || true
+            printf '%s\n' "Today's audio briefing ($today) was not published by 10:00 UTC, so a third attempt has been started automatically." "" "This issue closes itself once the briefing is published." > /tmp/b.md
+            gh issue create --title "Briefing alert: no briefing for $today" --body-file /tmp/b.md
+            echo "::error::No briefing for $today"; exit 1
           fi

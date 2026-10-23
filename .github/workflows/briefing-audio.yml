@@ -5,7 +5,8 @@ on:
     branches: [main]
     paths: ["content/briefings/*.json", "tools/briefing_audio.py"]
   schedule:
-    - cron: "30 6 * * *"   # 06:30 UTC every day: writes today's script from the published timelines if none exists yet
+    - cron: "45 5 * * *"   # 05:45 UTC every day: writes today's script from the published timelines and records it
+    - cron: "30 9 * * *"   # 09:30 UTC retry, in case the first run failed or GitHub skipped it (does nothing if today's briefing exists)
   workflow_dispatch:
 permissions:
   contents: write
