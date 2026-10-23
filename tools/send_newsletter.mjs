@@ -20,7 +20,7 @@ if (!key) { console.log("No BUTTONDOWN_API_KEY secret set; nothing sent."); proc
 const payload = { subject: email.subject, body: email.body, status: nl.mode === "send" ? "about_to_send" : "draft" };
 const res = await fetch("https://api.buttondown.com/v1/emails", {
   method: "POST",
-  headers: { Authorization: `Token ${key}`, "Content-Type": "application/json" },
+  headers: { Authorization: `Token ${key}`, "Content-Type": "application/json", "X-Buttondown-Live-Dangerously": "true" },
   body: JSON.stringify(payload),
 });
 const text = await res.text();
