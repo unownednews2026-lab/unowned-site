@@ -25,8 +25,10 @@ export const mmss = (sec) => `${Math.floor(sec / 60)}:${String(sec % 60).padStar
 export function freshBriefing(briefings) {
   const b = briefings[0];
   if (!b) return null;
-  const yesterday = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
-  return b.date >= yesterday ? b : null;
+  // Show the newest briefing for up to 3 days, so one missed day doesn't make the player disappear.
+  // The player always shows the briefing's date, so readers can see how recent it is.
+  const cutoff = new Date(Date.now() - 3 * 864e5).toISOString().slice(0, 10);
+  return b.date >= cutoff ? b : null;
 }
 
 /* Compact player for the home page and story pages: a link without JavaScript, an inline play button with it (briefing.js). */
