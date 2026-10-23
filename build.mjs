@@ -3,6 +3,8 @@ import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, readdirSync, ex
 import { join, dirname } from "node:path";
 import { loadBriefings, buildBriefing, freshBriefing, miniPlayer } from "./tools/briefing.mjs";
 import { loadNewsletter, signupBox, privacyLine } from "./tools/newsletter.mjs";
+// Version stamp for scripts and styles, so browsers fetch the new copy after every deploy.
+const BUILD = Date.now().toString(36);
 
 const SITE = "https://unownednews.com";
 const SOCIAL = [
@@ -100,9 +102,9 @@ function page({ title, description, path, body, scripts = [], og = "/assets/og-d
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@unownednews">
 <meta name="referrer" content="no-referrer">
-<link rel="stylesheet" href="/assets/site.css">
-<link rel="stylesheet" href="/assets/quick.css">
-<link rel="stylesheet" href="/assets/briefing.css">
+<link rel="stylesheet" href="/assets/site.css?v=${BUILD}">
+<link rel="stylesheet" href="/assets/quick.css?v=${BUILD}">
+<link rel="stylesheet" href="/assets/briefing.css?v=${BUILD}">
 </head>
 <body>
 <div class="wrap">
@@ -123,7 +125,7 @@ ${body}
   </nav>
 </footer>
 </div>
-${["/assets/time.js", ...scripts].map((s) => `<script src="${s}" defer></script>`).join("\n")}
+${["/assets/time.js", ...scripts].map((s) => `<script src="${s}?v=${BUILD}" defer></script>`).join("\n")}
 </body>
 </html>
 `;
