@@ -27,3 +27,10 @@
 .signup-msg { margin: 0; font-size: 0.9rem; }
 .signup-msg.ok { color: var(--fg); }
 .signup-msg.err { color: #c0392b; }
+/* Home page player: big, obvious and playable right on the front page. */
+.brief-home { max-width: 560px; margin: 16px 0 8px; padding: 14px 16px; background: var(--surface); border: 2px solid var(--accent); border-radius: 12px; }
+.brief-home[hidden] { display: none; }
+.brief-home h2 { margin: 0 0 4px; font-size: 1.1rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+.brief-title-full { margin: 0 0 10px; font-size: 0.92rem; color: var(--muted); }
+.brief-home audio { width: 100%; display: block; }
+.brief-links { margin: 8px 0 0; font-size: 0.82rem; color: var(--muted); }

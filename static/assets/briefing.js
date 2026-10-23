@@ -4,6 +4,10 @@
   "use strict";
   var cutoff = new Date(Date.now() - 3 * 864e5).toISOString().slice(0, 10); // same 3-day window as the build
 
+  document.querySelectorAll(".brief-home").forEach(function (box) {
+    if ((box.getAttribute("data-date") || "") < cutoff) box.hidden = true;
+  });
+
   document.querySelectorAll(".brief-mini").forEach(function (box) {
     /* Never promote a stale briefing, even if the page itself is old. */
     if ((box.getAttribute("data-date") || "") < cutoff) { box.hidden = true; return; }

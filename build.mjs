@@ -1,7 +1,7 @@
 // Builds the Unowned website into ./dist from ./content and ./static. Run: node build.mjs
 import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { loadBriefings, buildBriefing, freshBriefing, miniPlayer } from "./tools/briefing.mjs";
+import { loadBriefings, buildBriefing, freshBriefing, miniPlayer, homePlayer } from "./tools/briefing.mjs";
 import { loadNewsletter, signupBox, privacyLine } from "./tools/newsletter.mjs";
 // Version stamp for scripts and styles, so browsers fetch the new copy after every deploy.
 const BUILD = Date.now().toString(36);
@@ -388,7 +388,7 @@ function build() {
 <header class="top">
   <h1>News nobody owns.</h1>
   <p class="lede">The stories that matter, anywhere in the world: checked, sourced and kept up to date. Both sides shown.</p>
-  ${brief ? miniPlayer(brief, { esc, long, label: "Listen to the daily briefing" }) : ""}
+  ${brief ? homePlayer(brief, { esc, long }) : ""}
   ${signupBox(loadNewsletter(), { esc })}
   <p class="coverage"><span>Following now in</span>${regions.map((r) => `<span class="tag">${esc(r)}</span>`).join("")}<a href="/submit/#suggest">Suggest a story to follow</a></p>
 </header>
