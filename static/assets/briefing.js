@@ -2,11 +2,11 @@
    Without JavaScript the play button is a plain link to /briefing/. */
 (function () {
   "use strict";
-  var yesterday = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+  var cutoff = new Date(Date.now() - 3 * 864e5).toISOString().slice(0, 10); // same 3-day window as the build
 
   document.querySelectorAll(".brief-mini").forEach(function (box) {
     /* Never promote a stale briefing, even if the page itself is old. */
-    if ((box.getAttribute("data-date") || "") < yesterday) { box.hidden = true; return; }
+    if ((box.getAttribute("data-date") || "") < cutoff) { box.hidden = true; return; }
     var btn = box.querySelector(".brief-play"), audio = box.querySelector("audio"), icon = btn && btn.querySelector("span");
     if (!btn || !audio) return;
     var label = btn.getAttribute("aria-label");
