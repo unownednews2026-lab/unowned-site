@@ -39,3 +39,30 @@
     });
   });
 })();
+
+/* Daily email sign-up: submits to /api/subscribe without leaving the page. Without JavaScript the form posts normally. */
+(function () {
+  "use strict";
+  document.querySelectorAll("form.signup").forEach(function (form) {
+    var msg = form.querySelector(".signup-msg");
+    var btn = form.querySelector("button[type=submit]");
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      msg.hidden = true; msg.className = "signup-msg";
+      btn.disabled = true; btn.textContent = "Signing up…";
+      fetch(form.action, { method: "POST", body: new URLSearchParams(new FormData(form)), headers: { "Accept": "application/json" }, credentials: "omit", referrerPolicy: "no-referrer" })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          msg.hidden = false;
+          msg.classList.add(res.ok ? "ok" : "err");
+          msg.textContent = res.ok ? res.j.message : (res.j.error || "Sign-up didn't work. Please try again.");
+          if (res.ok) form.reset();
+        })
+        .catch(function () {
+          msg.hidden = false; msg.classList.add("err");
+          msg.textContent = "We couldn't reach the server. Check your connection and try again.";
+        })
+        .finally(function () { btn.disabled = false; btn.textContent = "Sign up"; });
+    });
+  });
+})();
