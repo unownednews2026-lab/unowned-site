@@ -41,6 +41,16 @@ export function miniPlayer(b, { esc, long, label = "Daily briefing", note = "" }
 </div>`;
 }
 
+/* Full player for the top of the home page: a real audio control readers can play, pause and scrub right there. */
+export function homePlayer(b, { esc, long }) {
+  return `<section class="brief-home" data-date="${b.date}" aria-labelledby="brief-home-h">
+  <h2 id="brief-home-h">🎧 Daily audio briefing <span class="brief-meta">${esc(long(b.date).replace(/, \d{4}$/, ""))} · ${mmss(b.seconds)}</span></h2>
+  <p class="brief-title-full">${esc(b.title)}</p>
+  <audio controls preload="metadata" src="${b.audio}"></audio>
+  <p class="brief-links"><a href="/briefing/">Read the transcript</a> · <a href="https://open.spotify.com/show/4EUJj9NhyL3hpcKi9QUszE" rel="noopener">Spotify</a> · <a href="https://podcasts.apple.com/us/podcast/unowned-daily-briefing/id6824657998" rel="noopener">Apple Podcasts</a></p>
+</section>`;
+}
+
 export function buildBriefing({ briefings, stories, write, simple, esc, long, SITE }) {
   if (!briefings.length) return;
   const titleOf = Object.fromEntries(stories.map((s) => [s.slug, s.title]));
