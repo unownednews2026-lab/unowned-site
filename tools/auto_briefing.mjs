@@ -45,7 +45,9 @@ const DAY = 864e5;
 const stories = readdirSync("content/stories").filter((f) => f.endsWith(".json"))
   .map((f) => JSON.parse(readFileSync(`content/stories/${f}`, "utf8")));
 
-const recent = (s, ms) => s.events.filter((e) => e.label !== "pending" && e.added && now - Date.parse(e.added) <= ms && Date.parse(e.added) <= now);
+// Safety net: never read aloud an item that names people the way outlets name private individuals.
+const unsafe = (e) => /\bnamed (by|as)\b|\bidentified (by|as)\b/i.test(e.text);
+const recent = (s, ms) => s.events.filter((e) => e.label !== "pending" && !unsafe(e) && e.added && now - Date.parse(e.added) <= ms && Date.parse(e.added) <= now);
 let picks = stories.map((s) => ({ s, ev: recent(s, DAY) })).filter((x) => x.ev.length)
   .sort((a, b) => b.ev.length - a.ev.length || Date.parse(b.s.updatedAt) - Date.parse(a.s.updatedAt)).slice(0, 3);
 if (!picks.length) {   // quiet day: the most recently updated story, newest item
