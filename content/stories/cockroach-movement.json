@@ -4,8 +4,8 @@
   "kicker": "Story tracker · India",
   "dek": "What happened, what is confirmed, and where the accounts disagree, from the exam leak in May to the protests against the Election Commission in October.",
   "status": "Season 2 active",
-  "updated": "2026-10-21",
-  "updatedAt": "2026-10-21T22:24:00Z",
+  "updated": "2026-10-23",
+  "updatedAt": "2026-10-23T02:30:00Z",
   "summary": [
     "The Cockroach Janta Party (CJP) began on May 16 as a satirical online response to remarks by Chief Justice Surya Kant, a day after he reportedly likened some unemployed youth to cockroaches. Anger over the cancelled NEET medical entrance exam turned it into a street movement.",
     "After a 36-day protest in Delhi, including a July 20 march met with tear gas and batons, Education Minister Dharmendra Pradhan resigned on July 25 and the CJP called off its protest, saying its demands had been accepted. From August, the CJP said the government had not honoured those commitments, chiefly withdrawing criminal cases against protesters and compensating families of students who died by suicide.",
@@ -76,7 +76,8 @@
     { "date": "2026-10-21", "phase": "s2", "label": "confirmed", "added": "2026-10-21T12:45:00Z", "text": "Hearing the plea, Justice Subramonium Prasad of the Delhi High Court declines to grant relief, saying a writ petition was not the appropriate remedy for an alleged repeat breach of a peace bond and that the correct course was revision; the court says it made no observations on the merits, and Das and Ranka withdraw the plea \"for the time being\" after the judge notes the Special Executive Magistrate's court would reconsider their sureties later that day, Bar and Bench and Onmanorama report.", "sources": ["barandbenchOct21", "onmanoramaOct21"] },
     { "date": "2026-10-21", "phase": "s2", "label": "confirmed", "added": "2026-10-21T18:32:38Z", "text": "The Special Executive Magistrate's court rejects Delhi Police's bid to extend Das and Ranka's custody by three more days and orders their release; ANI reports the court accepted fresh surety bonds. India TV News and Oneindia report the two walked out of Tihar Jail on October 21 after furnishing personal bonds of Rs 50,000 each, matching sureties, an apology over a media statement, and written undertakings to keep the peace and not call for protests at Jantar Mantar until it is renotified as a protest site.", "sources": ["aniOct21release", "indiatvOct21release", "oneindiaOct21release"] },
     { "date": "2026-10-21", "phase": "s2", "label": "confirmed", "added": "2026-10-21T22:24:00Z", "text": "Both outlets report Das and Ranka must attend every future hearing along with their sureties, Delhi Police must verify the sureties by the next date, and the case returns before the SEM court on October 23 at 3pm. India TV News reports they had separately withdrawn parallel petitions from the Delhi High Court before the SEM hearing.", "sources": ["indiatvOct21release", "oneindiaOct21release"] },
-    { "date": "2026-10-23", "phase": "s2", "label": "pending", "added": "2026-10-21T22:24:00Z", "text": "Whether Delhi Police verifies Das and Ranka's sureties ahead of the October 23 hearing; whether all others detained on October 16 have been released; and the outcome of the October 26 Bombay High Court hearing on Imran Khan's petition. Still being checked.", "sources": ["indiatvOct21release", "oneindiaOct21release", "barandbenchOct21", "onmanoramaOct21", "weekKhanOct17"] },
+    { "date": "2026-10-22", "phase": "s2", "label": "confirmed", "added": "2026-10-23T02:30:00Z", "text": "Delhi Police's Crime Branch, now handling the Jantar Mantar trespassing case against Das and Ranka, summons them and associate Ajinkya Shinde to its Rajouri Garden office on October 22; all three seek more time and do not appear, ThePrint, Deccan Herald, Free Press Journal and The Wire report. No reason for the request is reported, and fresh summons are expected.", "sources": ["theprintOct22", "deccanOct22", "fpjOct22", "thewireOct22", "aniOct22b"] },
+    { "date": "2026-10-23", "phase": "s2", "label": "pending", "added": "2026-10-21T22:24:00Z", "text": "Whether Delhi Police verifies Das and Ranka's sureties ahead of the October 23 hearing; when the Crime Branch will reissue its summons to Das, Ranka and Shinde; whether all others detained on October 16 have been released; and the outcome of the October 26 Bombay High Court hearing on Imran Khan's petition. Still being checked.", "sources": ["indiatvOct21release", "oneindiaOct21release", "barandbenchOct21", "onmanoramaOct21", "weekKhanOct17", "theprintOct22"] },
     { "date": "2026-10-19", "phase": "s2", "label": "confirmed", "added": "2026-10-19T22:26:38Z", "text": "The Bombay High Court schedules Imran Khan's petition against the 'Leave India' notice for October 26, declining his lawyer's request for October 21, and asks him to make the Maharashtra government a party so the court can check for any criminal record, Bollywood Hungama and Daijiworld report.", "sources": ["bbhKhanOct19", "daijiKhanOct19"] },
     { "date": "2026-10-19", "phase": "s2", "label": "reported", "added": "2026-10-19T22:26:38Z", "text": "Khan's senior counsel, Venkatesh Dhond, tells the court Khan was stopped en route to a protest and has no criminal record; no ruling on Khan's request to stay the October 28 deadline has been reported, with that expected at the October 26 hearing, Bollywood Hungama and Daijiworld report.", "sources": ["bbhKhanOct19", "daijiKhanOct19"] },
     { "date": "2026-10-17", "phase": "s2", "label": "reported", "added": "2026-10-19T22:26:38Z", "text": "The Foreigners Regional Registration Office separately issued Khan a show-cause notice on October 17 asking why his Overseas Citizen of India registration should not be cancelled under Section 7D of the Citizenship Act; Khan has not challenged that notice in his court petition, Bollywood Hungama reports.", "sources": ["bbhKhanOct19"] },
@@ -123,7 +124,8 @@
     { "date": "Oct 17", "action": "Show-cause notice issued to Imran Khan over possible cancellation of his OCI registration", "by": "Foreigners Regional Registration Office", "label": "reported" },
     { "date": "Oct 19", "action": "Das and Ranka's judicial custody extended by two days; court cites “habitualness” in calling protests in de-notified areas; case listed for October 21 after two proposed sureties were rejected", "by": "Special Executive Magistrate court, Delhi", "label": "confirmed" },
     { "date": "Oct 21", "action": "Plea against the custody extension declined relief and withdrawn; court says the remedy lies in revision, not a writ petition", "by": "Delhi High Court", "label": "confirmed" },
-    { "date": "Oct 21", "action": "Custody-extension bid rejected; release ordered for Das and Ranka on personal bonds, sureties and written undertakings not to protest at Jantar Mantar until renotified", "by": "Special Executive Magistrate's court, Delhi", "label": "confirmed" }
+    { "date": "Oct 21", "action": "Custody-extension bid rejected; release ordered for Das and Ranka on personal bonds, sureties and written undertakings not to protest at Jantar Mantar until renotified", "by": "Special Executive Magistrate's court, Delhi", "label": "confirmed" },
+    { "date": "Oct 22", "action": "Das, Ranka and Shinde summoned over the Jantar Mantar trespassing case; sought more time and did not appear", "by": "Delhi Police Crime Branch", "label": "confirmed" }
   ],
   "places": [
     { "name": "Delhi NCR", "lat": 28.61, "lon": 77.21, "desc": "Jantar Mantar sit-in Jun 6 to Jul 25; Jul 20 march; Oct 10 detentions; Gurugram, Oct 10", "r": 8, "anchor": "end", "dx": -12, "dy": 4 },
@@ -164,7 +166,8 @@
     "Full bail conditions for Dipke, and whether all others detained on October 16 have been released",
     "Number of FIRs registered over the October 16 protests and who is named in them",
     "The outcome of the October 26 Bombay High Court hearing on Imran Khan's petition, any ruling on his stay request, and whether the FRRO proceeds with cancelling his OCI registration",
-    "Whether Delhi Police verifies Das and Ranka's sureties ahead of the October 23 hearing, and what happens there"
+    "Whether Delhi Police verifies Das and Ranka's sureties ahead of the October 23 hearing, and what happens there",
+    "Why Das, Ranka and Shinde sought more time to join the Crime Branch probe, and when fresh summons will be issued"
   ],
   "corrections": [
     { "date": "2026-10-17", "text": "The AISA president's surname was misspelled as \"Bohra\" in earlier updates. It is Bora." },
@@ -177,7 +180,7 @@
     ["Return and July protests", ["etvReturn", "mooknayakReturn", "reutersProfile", "kaumudiProfile", "ktJul19", "apJul20", "ajJul20", "apJul21", "cgfoe", "npr", "apJul25", "ajJul25"]],
     ["August and September", ["reutersParty", "ktSep5", "weekSep5", "sentinel", "kaumudiLatur", "awaaz"]],
     ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16", "dawnOct16", "gulfOct16", "ptiOct16", "etvOct16", "printOct16", "weekOct16", "tribuneOct16", "aniOct16"]],
-    ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16", "ptiOct17", "iansOct17", "statesmanOct17", "hansOct17", "barandbenchOct17", "livelawOct17", "aajtakOct17", "reutersOct17", "weekOct17", "dcAniOct15", "ttIansOct15", "reutersKhanOct15", "dcPtiOct15", "bbKhanOct15", "weekKhanOct17", "hawkIansOct17", "bbhKhanOct19", "daijiKhanOct19", "southfirstOct19", "theprintOct19b", "opindiaOct20", "aniOct20b", "statesmanOct20", "organiserOct21", "thewireOct21", "iansOct21", "barandbenchOct21", "onmanoramaOct21", "aniOct21release", "indiatvOct21release", "oneindiaOct21release"]]
+    ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16", "ptiOct17", "iansOct17", "statesmanOct17", "hansOct17", "barandbenchOct17", "livelawOct17", "aajtakOct17", "reutersOct17", "weekOct17", "dcAniOct15", "ttIansOct15", "reutersKhanOct15", "dcPtiOct15", "bbKhanOct15", "weekKhanOct17", "hawkIansOct17", "bbhKhanOct19", "daijiKhanOct19", "southfirstOct19", "theprintOct19b", "opindiaOct20", "aniOct20b", "statesmanOct20", "organiserOct21", "thewireOct21", "iansOct21", "barandbenchOct21", "onmanoramaOct21", "aniOct21release", "indiatvOct21release", "oneindiaOct21release", "theprintOct22", "deccanOct22", "fpjOct22", "thewireOct22", "aniOct22b"]]
   ],
   "sources": {
     "newslaundry": ["Newslaundry", "https://www.newslaundry.com/amp/story/2026%2F05%2F12%2Fwhy-neet-ug-2026-has-been-cancelled"],
@@ -270,7 +273,12 @@
     "onmanoramaOct21": ["Onmanorama", "https://www.onmanorama.com/news/india/2026/10/21/you-are-not-gen-z-hc-declines-relief-to-cjp-s-saurav-das-ashutosh-ranka-asks-them-to-await-sem-hearing.html"],
     "aniOct21release": ["ANI", "https://www.aninews.in/news/national/general-news/sem-court-orders-release-of-cjp-activists-saurav-das-ashutosh-ranka-after-accepting-surety-bonds20261021200113/"],
     "indiatvOct21release": ["India TV News", "https://www.indiatvnews.com/news/india/cjp-s-saurav-das-ashutosh-ranka-walk-out-of-tihar-jail-as-court-rejects-police-bid-to-extend-custody-2026-10-21-1057567"],
-    "oneindiaOct21release": ["Oneindia", "https://www.oneindia.com/india/cjp-leaders-walk-out-of-tihar-jail-court-rejects-delhi-polices-3-day-custody-extension-plea-8241741.html"]
+    "oneindiaOct21release": ["Oneindia", "https://www.oneindia.com/india/cjp-leaders-walk-out-of-tihar-jail-court-rejects-delhi-polices-3-day-custody-extension-plea-8241741.html"],
+    "theprintOct22": ["ThePrint", "https://theprint.in/india/cjp-leaders-seek-more-time-to-join-crime-branch-probe-likely-to-get-fresh-summons/3078700/"],
+    "deccanOct22": ["Deccan Herald", "https://www.deccanherald.com/india/delhi/cjp-leaders-saurav-das-ashutosh-ranka-to-not-appear-before-delhi-police-crime-branch-on-thursday-seek-more-time-4191160"],
+    "fpjOct22": ["Free Press Journal", "https://www.freepressjournal.in/india/cjp-leaders-saurav-das-ashutosh-ranka-seek-more-time-to-join-delhi-police-crime-branch-probe-into-jantar-mantar-protest"],
+    "thewireOct22": ["The Wire", "https://m.thewire.in/article/law/saurav-das-ashutosh-ranka-skip-delhi-police-crime-branch-questioning-seek-more-time"],
+    "aniOct22b": ["ANI", "https://aninews.in/news/national/general-news/cjp-activists-saurabh-das-ashutosh-ranka-skip-crime-branch-questioning-seek-more-time20261022135539/"]
   },
   "nav": "Cockroach movement",
   "region": "India",
@@ -278,5 +286,5 @@
     "Protest",
     "Elections"
   ],
-  "checkedAt": "2026-10-22T00:28:49Z"
+  "checkedAt": "2026-10-23T02:30:00Z"
 }
