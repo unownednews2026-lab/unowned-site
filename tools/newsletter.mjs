@@ -1,7 +1,7 @@
 /* Daily email ("Today in 30 seconds") sent through Buttondown.
    Settings live in content/newsletter.json:
      enabled  - false hides the sign-up box and the privacy line, and the sender does nothing
-     username - the Buttondown newsletter username (used by the sign-up form)
+     username - the Buttondown newsletter username (used by the sign-up link)
      mode     - "draft" saves each day's email as a Buttondown draft for review; "send" sends it to subscribers
    Before enabling: turn off open and click tracking in Buttondown, because the privacy page says so. */
 import { readFileSync, existsSync } from "node:fs";
@@ -11,16 +11,16 @@ export function loadNewsletter() {
   return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : { enabled: false };
 }
 
-/* The sign-up form posts straight to Buttondown (their documented embed form, including embed=1); nothing is loaded from another site.
-   It opens in the same tab so Buttondown's CAPTCHA or confirmation step can show; readers come back from Buttondown's page. */
+/* Sign-up goes through Buttondown's own hosted page (buttondown.com/<username>), which handles the email field,
+   the anti-spam check and the confirmation email reliably. An embedded form posting from this site was unreliable
+   (blank page, no subscriber), likely because the site sends no referrer for privacy. Nothing is loaded from another site. */
 export function signupBox(nl, { esc, heading = "Get the daily email" } = {}) {
   if (!nl.enabled || !nl.username) return "";
   const u = encodeURIComponent(nl.username);
-  return `<form class="signup" action="https://buttondown.com/api/emails/embed-subscribe/${u}" method="post">
-  <input type="hidden" name="embed" value="1">
-  <label for="signup-email"><strong>${heading}</strong> <span class="hint">One short email each morning: what changed, with labels and sources. Unsubscribe any time.</span></label>
-  <div class="signup-row"><input id="signup-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com"><button class="primary" type="submit">Sign up</button></div>
-</form>`;
+  return `<div class="signup">
+  <p><strong>${heading}</strong> <span class="hint">One short email each morning: what changed, with labels and sources. Free, unsubscribe any time.</span></p>
+  <div class="signup-row"><a class="primary signup-link" href="https://buttondown.com/${u}" rel="noopener">Sign up for the daily email</a></div>
+</div>`;
 }
 
 export function privacyLine(nl) {
