@@ -34,3 +34,6 @@
 .brief-title-full { margin: 0 0 10px; font-size: 0.92rem; color: var(--muted); }
 .brief-home audio { width: 100%; display: block; }
 .brief-links { margin: 8px 0 0; font-size: 0.82rem; color: var(--muted); }
+.brief-listen { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
+.listen-btn { display: inline-block; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--accent); color: var(--fg); font-weight: 600; font-size: 0.88rem; text-decoration: none; }
+.listen-btn:hover { background: var(--accent); color: #fff; }
