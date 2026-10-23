@@ -8,7 +8,8 @@ import { headlinesSince } from "./signals.mjs";
 
 const KEY = process.env.GEMINI_API_KEY;
 const REPO = process.env.GITHUB_REPOSITORY;
-const MODELS = [process.env.GEMINI_MODEL, "gemini-flash-latest", "gemini-2.5-flash"].filter(Boolean);
+// Tried in order; the first one that answers is used. Older models get retired, so the newest come first.
+const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-3.8-flash-lite", "gemini-flash-lite-latest"].filter(Boolean);
 const MISSED_HOURS = 4;
 const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 const say = (m) => console.log(`backup desk: ${m}`);
@@ -41,7 +42,7 @@ async function gemini(prompt) {
       method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": KEY },
       body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }], tools: [{ google_search: {} }], generationConfig: { temperature: 0.2 } }),
     });
-    if (!r.ok) { say(`model ${m}: HTTP ${r.status} ${(await r.text()).slice(0, 200)}`); continue; }
+    if (!r.ok) { say(`model ${m}: HTTP ${r.status} ${((await r.text()).match(/"message": "([^"]{0,160})/) || [])[1] || ""}`); continue; }
     const j = await r.json();
     return (j.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
   }
