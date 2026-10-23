@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: "45 * * * *"
   workflow_dispatch:
+    inputs:
+      force_backup:
+        description: "Run the backup desk now even if the Claude desk is running (for testing)"
+        type: boolean
+        default: false
 permissions:
   contents: write
   issues: write
@@ -81,4 +86,5 @@ jobs:
         if: always()
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BACKUP_FORCE: ${{ inputs.force_backup }}
         run: node tools/backup_desk.mjs
