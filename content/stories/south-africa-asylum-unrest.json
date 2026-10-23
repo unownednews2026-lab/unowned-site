@@ -11,7 +11,7 @@
   "dek": "Riots in Durban and Soweto after a court ruling on asylum, the army deployment and arrests that followed, and the competing claims over what the ruling means and who is behind the violence.",
   "status": "Ongoing",
   "updated": "2026-10-23",
-  "updatedAt": "2026-10-23T02:30:00Z",
+  "updatedAt": "2026-10-23T10:50:00Z",
   "summary": [
     "On July 7, 2026, South Africa's Constitutional Court struck down rules that barred people from applying for asylum if they had entered the country irregularly, had no asylum transit visa or missed a reporting deadline. On September 28 the Home Affairs department told refugee offices to accept in-person applications. The move came after months of protests by anti-migrant groups, which had demanded that undocumented foreigners leave.",
     "In early October anti-migrant groups, including March and March, protested at refugee offices. On October 8 protests in Soweto and Durban turned violent: police say 24 vehicles were torched, and foreign-owned shops were looted. Home Affairs withdrew the directive on October 9, saying its offices had been overwhelmed, but violence continued in Durban and the army was deployed there on October 10. Officials say 30 people were arrested in the first days, and court cases are under way.",
@@ -63,6 +63,7 @@
     { "date": "2026-10-11", "phase": "response", "label": "reported", "added": "2026-10-17T14:36:15Z", "text": "Nigeria's foreign ministry says 2,037 Nigerians have been repatriated from South Africa since June 10 amid what it calls xenophobic attacks.", "sources": ["thisdayOct12"] },
     { "date": "2026-10-12", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "24 accused appear in Durban Magistrate's Court. Two of the arrested March and March members are granted bail of R1,000 on condition they stay away from violent protests and from Home Affairs offices.", "sources": ["groundupOct13", "iolOct13"] },
     { "date": "2026-10-12", "phase": "response", "label": "reported", "added": "2026-10-17T15:54:57Z", "text": "TimesLIVE reports that a panel of Gauteng High Court judges, appointed by Judge President Aubrey Ledwaba, will hear the government’s bid for court supervision of the asylum ruling on October 29; Kubayi says the hearing will consider submissions on how the ruling is implemented.", "sources": ["timesliveOct12"] },
+    { "date": "2026-10-13", "phase": "response", "label": "reported", "added": "2026-10-23T10:50:00Z", "text": "Three Ethiopian nationals, named by Briefly as Kebede Belachew, 38, Getachew Tirikaso, 48, and Wodaje Girma, 29, appear in the Durban Magistrate's Court on attempted murder and public violence charges over the October 8 assault, which police say happened as a group marched to join March and March members outside the Durban refugee office. Police allege the men beat a South African man with sticks, stones and a bushknife and broke both his legs, a different injury from the broken neck police described on October 8; the state says they intended to kill him. They are remanded in custody, with the case due back on October 19.", "sources": ["brieflyOct13ethiopians"] },
     { "date": "2026-10-13", "phase": "response", "label": "reported", "added": "2026-10-17T15:54:57Z", "text": "Lawyers for Human Rights says the government should not seek a supervisory order, arguing it waited months after the July ruling to seek legal advice, and says it is unclear whether papers have been filed, EWN reports.", "sources": ["ewnOct13"] },
     { "date": "2026-10-15", "phase": "response", "label": "confirmed", "added": "2026-10-17T14:36:15Z", "text": "The lawyer for March and March leader Jacinta Ngobese-Zuma says arrest warrants have been issued for her and for him; the movement calls it intimidation before the elections. The National Prosecuting Authority and KwaZulu-Natal police say no warrant or case exists.", "sources": ["timesliveOct15", "iolOct17", "citizenOct15"] },
     { "date": "2026-10-16", "phase": "response", "label": "reported", "added": "2026-10-17T14:36:15Z", "text": "IOL reports that 19 people linked to the movement appear in Durban Magistrate's Court on charges linked to public violence.", "sources": ["iolOct17"] },
@@ -87,6 +88,7 @@
     { "date": "Oct 11", "action": "Supervisory order on implementing the ruling to be sought from the courts", "by": "Inter-ministerial committee on migration", "label": "confirmed" },
     { "date": "Oct 12", "action": "24 accused appear in court; two granted bail with conditions", "by": "Durban Magistrate's Court", "label": "confirmed" },
     { "date": "Oct 12", "action": "Hearing on the government’s bid for court supervision of the asylum ruling set for October 29 (TimesLIVE)", "by": "Gauteng High Court panel", "label": "reported" },
+    { "date": "Oct 13", "action": "Three named Ethiopian nationals charged with attempted murder and public violence over the October 8 assault; remanded in custody to October 19", "by": "Durban Magistrate's Court", "label": "reported" },
     { "date": "Oct 16", "action": "19 people linked to March and March appear on charges linked to public violence", "by": "Durban Magistrate's Court", "label": "reported" },
     { "date": "Oct 22", "action": "Murder case opened over the mob killing of an unidentified man in central Durban", "by": "KwaZulu-Natal police", "label": "reported" }
   ],
@@ -104,7 +106,7 @@
   "gaps": [
     "A full count of injuries in October, beyond the killing confirmed on October 22",
     "The identity of the man killed in central Durban on October 22, and whether anyone has been arrested over his death",
-    "Who fired shots on October 8, and the condition of the injured protester",
+    "Who fired shots on October 8, and the condition of the injured protester; reconciling the broken-neck and broken-legs descriptions of his injuries, and the outcome of the October 19 court date for the three men charged",
     "Number of troops deployed and for how long",
     "What asylum arrangements apply now that the directive is withdrawn",
     "Whether court papers for the supervisory order have been filed, and the outcome of the October 29 hearing",
@@ -115,7 +117,7 @@
   "sourceGroups": [
     ["The ruling and the directive", ["ajJul2", "irishJul1", "mgOct9", "dmOct13", "ewnOct7", "sanewsImc"]],
     ["The riots and the police response", ["apOct8", "ajOct8", "afpOct9", "africanInsiderOct9", "dmOct9", "ewnOct9", "timesliveOct10", "anaLive", "dmOct11"]],
-    ["Latest", ["xinhuaOct11", "thisdayOct12", "groundupOct13", "iolOct13", "timesliveOct15", "citizenOct15", "iolOct17", "timesliveOct12", "ewnOct13", "iolOct20anc", "dmOct22kill"]]
+    ["Latest", ["xinhuaOct11", "thisdayOct12", "groundupOct13", "iolOct13", "timesliveOct15", "citizenOct15", "iolOct17", "timesliveOct12", "ewnOct13", "iolOct20anc", "dmOct22kill", "brieflyOct13ethiopians"]]
   ],
   "sources": {
     "ajJul2": ["Al Jazeera", "https://aljazeera.com/news/2026/7/2/more-than-900-arrested-during-south-africas-antimigrant-protests"],
@@ -143,7 +145,8 @@
     "timesliveOct12": ["TimesLIVE", "https://www.timeslive.co.za/news/south-africa/2026-10-12-court-to-hear-governments-bid-on-asylum-seeker-supervision-on-october-29/"],
     "ewnOct13": ["EWN", "https://www.ewn.co.za/2026/10/13/lhr-questions-states-plan-to-seek-concourt-supervisory-order-on-refugee-act"],
     "iolOct20anc": ["IOL", "https://iol.co.za/news/politics/2026-10-20-ramaphosa-rejects-claim-anc-is-registering-asylum-seekers-to-vote/"],
-    "dmOct22kill": ["Daily Maverick (GroundUp)", "https://www.dailymaverick.co.za/article/2026-10-22-mob-beats-immigrant-man-to-death-in-central-durban/"]
+    "dmOct22kill": ["Daily Maverick (GroundUp)", "https://www.dailymaverick.co.za/article/2026-10-22-mob-beats-immigrant-man-to-death-in-central-durban/"],
+    "brieflyOct13ethiopians": ["Briefly", "https://briefly.co.za/south-africa/255817-durban-unrest-3-ethiopians-face-attempted-murder-charges-allegedly-assaulting-south-african/"]
   },
-  "checkedAt": "2026-10-23T06:27:32Z"
+  "checkedAt": "2026-10-23T10:50:00Z"
 }
