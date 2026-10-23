@@ -40,7 +40,7 @@ async function gemini(prompt) {
   for (const m of MODELS) {
     const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
       method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": KEY },
-      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }], tools: [{ google_search: {} }], generationConfig: { temperature: 0.2 } }),
+      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { temperature: 0.2 } }),
     });
     if (!r.ok) { say(`model ${m}: HTTP ${r.status} ${((await r.text()).match(/"message": "([^"]{0,160})/) || [])[1] || ""}`); continue; }
     const j = await r.json();
@@ -64,25 +64,49 @@ const overlap = (a, b) => { const A = words(a), B = words(b); let n = 0; for (co
 const now = new Date().toISOString().replace(/\.\d+Z$/, "Z");
 const report = [];
 
+/* Recent articles about a story from GDELT (free, no key): real article addresses, so nothing is invented. */
+async function articles(s, h) {
+  const q = (JSON.parse(readFileSync("tools/watch.json", "utf8"))[s.slug] || s.title.replace(/'s\b/g, "")).split(/\s+/).slice(0, 4).join(" ");
+  const since = Date.parse(s.updatedAt || s.updated);
+  let list = [];
+  try {
+    const r = await fetch(`https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(q)}&mode=artlist&format=json&maxrecords=25&timespan=2d&sort=datedesc`, { signal: AbortSignal.timeout(20000) });
+    list = ((await r.json()).articles || []).filter((a) => Date.parse(a.seendate.replace(/^(\d{4})(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)Z$/, "$1-$2-$3T$4:$5:$6Z")) > since);
+  } catch (e) { say(`${s.slug}: GDELT unavailable (${e.message})`); }
+  const out = [];
+  for (const a of list) {
+    if (out.length >= 5) break;
+    if (out.some((o) => o.domain === a.domain)) continue;      // one article per outlet
+    try {
+      const html = await (await fetch(a.url, { headers: { "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(15000) })).text();
+      const text = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map((p) => p.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;|&[lr]dquo;/g, '"').replace(/\s+/g, " ").trim()).filter((t) => t.length > 60).join("\n").slice(0, 5000);
+      if (text.length > 500) out.push({ url: a.url, domain: a.domain.replace(/^www\./, ""), title: a.title, text });
+    } catch {}
+  }
+  return out;
+}
+
 for (const { f, s, h } of hot.slice(0, 3)) {
   const newest = [...s.events].sort((a, b) => b.date.localeCompare(a.date))[0];
   const recent = [...s.events].sort((a, b) => (b.added || b.date).localeCompare(a.added || a.date)).slice(0, 6);
+  const arts = await articles(s, h);
+  if (!arts.length) { report.push(`- ${s.slug}: fresh headlines, but no readable articles found`); continue; }
   const prompt = `You help a careful, neutral news tracker called Unowned. Story: "${s.title}". ${s.dek}
 
 Already published (newest first):
 ${recent.map((e) => `- ${e.date} [${e.label}] ${e.text}`).join("\n")}
 
-New headlines seen since our last update:
-${h.slice(0, 8).map((x) => `- ${x.title}`).join("\n")}
+New articles (numbered):
+${arts.map((a, i) => `[${i + 1}] ${a.domain}: ${a.title}\n${a.text}`).join("\n\n")}
 
-Use Google Search to find what is genuinely NEW since ${newest.date} (not already published above). Read the articles.
-Return ONLY a JSON object, no other text: {"items":[{"date":"YYYY-MM-DD","label":"confirmed|reported|disputed|alleged","text":"...","sources":[{"outlet":"...","url":"https://..."}]}]}
+Using ONLY these articles, list developments that are genuinely NEW (not already published above).
+Return ONLY a JSON object, no other text: {"items":[{"date":"YYYY-MM-DD","label":"confirmed|reported|disputed|alleged","text":"...","articles":[1,2]}]}
 Rules:
-- At most 3 items, only real developments (court decisions, arrests, official statements, protests, figures). Return {"items":[]} if nothing new.
-- "text": one or two neutral sentences, paraphrased, attributed ("police say", "the ministry says", "<outlet> reports"), under 60 words. No opinion, no graphic detail.
+- At most 3 items, only real developments (court decisions, arrests, official statements, protests, figures). Return {"items":[]} if nothing is new or the articles are not about this story.
+- "date": the day the development happened, as stated in the article.
+- "text": one or two neutral sentences in English, paraphrased, attributed ("police say", "the ministry says", "<outlet> reports"), under 60 words. No opinion, no graphic detail.
 - NEVER name private people (anyone arrested, charged, injured, killed, victims, witnesses, minors, ordinary protesters). Describe them instead ("a 24-year-old man"). Only public officials, politicians and organisations may be named.
-- "confirmed" only if two independent outlets did their own reporting (not the same wire story); one outlet = "reported"; conflicting accounts = "disputed" with both sides; one side's claim = "alleged".
-- "sources": the actual article URLs you read, with the outlet name. Never invent a URL.`;
+- "articles": the numbers of the articles that report it. "confirmed" only if two of them did their own reporting (not the same wire story); one article = "reported"; conflicting accounts = "disputed" with both sides; one side's claim = "alleged".`;
   const out = await gemini(prompt);
   let items = [];
   try { items = JSON.parse(out.slice(out.indexOf("{"), out.lastIndexOf("}") + 1)).items || []; } catch { say(`${s.slug}: could not read the reply`); }
@@ -94,13 +118,11 @@ Rules:
     if (!it.text || it.text.length > 450) why.push("text missing or too long");
     if (UNSAFE.test(it.text || "")) why.push("may name a private person or contain graphic detail");
     if (s.events.some((e) => overlap(e.text, it.text || "") > 0.6)) why.push("already published");
-    const srcs = [];
-    for (const src of (it.sources || []).slice(0, 4)) { const u = src.url && await resolve(src.url); if (u) srcs.push({ outlet: String(src.outlet || new URL(u).hostname).slice(0, 60), url: u }); }
-    if (!srcs.length) why.push("no source link that loads");
+    const srcs = [...new Set(it.articles || [])].map((n) => arts[n - 1]).filter(Boolean).map((a) => ({ outlet: a.domain, url: a.url }));
+    if (!srcs.length) why.push("no article cited");
     if (why.length) { report.push(`- ${s.slug}: skipped "${(it.text || "").slice(0, 80)}…" (${why.join(", ")})`); continue; }
     let label = it.label;
-    const hosts = new Set(srcs.map((x) => new URL(x.url).hostname.replace(/^www\./, "")));
-    if (label === "confirmed" && hosts.size < 2) label = "reported";
+    if (label === "confirmed" && srcs.length < 2) label = "reported";
     const keys = srcs.map((x, i) => { const k = `bk${now.replace(/\D/g, "").slice(4, 12)}${added.length}${i}`; s.sources[k] = [x.outlet, x.url]; return k; });
     const group = s.sourceGroups[s.sourceGroups.length - 1];
     (Array.isArray(group) ? group[1] : group.keys || group.sources || []).push(...keys);
@@ -125,7 +147,7 @@ sh(`git config user.name "Unowned" && git config user.email "Unownednews2026@gma
 sh(`git checkout -q -b ${branch} && git add content/stories && git commit -q -m "Backup desk draft: ${now}" && git push -q origin ${branch}`);
 const body = `Drafted by the free backup desk (Google Gemini) because the Claude news desk has not logged a run for ${MISSED_HOURS}+ hours.
 
-**Not published. Every item must be checked before it goes live.** Links were checked to load; labels were capped (one site = "reported").
+**Not published. Every item must be checked before it goes live.** Sources are real articles found through GDELT and read by the backup desk; labels were capped (one article = "reported").
 
 ${report.join("\n\n")}
 
