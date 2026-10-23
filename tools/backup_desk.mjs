@@ -44,6 +44,7 @@ async function gemini(prompt) {
     });
     if (!r.ok) { say(`model ${m}: HTTP ${r.status} ${((await r.text()).match(/"message": "([^"]{0,160})/) || [])[1] || ""}`); continue; }
     const j = await r.json();
+    say(`model ${m} answered`);
     return (j.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
   }
   return "";
@@ -69,10 +70,29 @@ async function articles(s, h) {
   const q = (JSON.parse(readFileSync("tools/watch.json", "utf8"))[s.slug] || s.title.replace(/'s\b/g, "")).split(/\s+/).slice(0, 4).join(" ");
   const since = Date.parse(s.updatedAt || s.updated);
   let list = [];
-  try {
-    const r = await fetch(`https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(q)}&mode=artlist&format=json&maxrecords=25&timespan=2d&sort=datedesc`, { signal: AbortSignal.timeout(20000) });
-    list = ((await r.json()).articles || []).filter((a) => Date.parse(a.seendate.replace(/^(\d{4})(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)Z$/, "$1-$2-$3T$4:$5:$6Z")) > since);
-  } catch (e) { say(`${s.slug}: GDELT unavailable (${e.message})`); }
+  // GDELT allows one request every 5 seconds.
+  for (let attempt = 0; attempt < 2 && !list.length; attempt++) {
+    await new Promise((r) => setTimeout(r, 6000));
+    try {
+      const r = await fetch(`https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(q)}&mode=artlist&format=json&maxrecords=25&timespan=2d&sort=datedesc`, { signal: AbortSignal.timeout(25000) });
+      list = ((await r.json()).articles || []).filter((a) => Date.parse(a.seendate.replace(/^(\d{4})(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)Z$/, "$1-$2-$3T$4:$5:$6Z")) > since);
+      break;
+    } catch (e) { say(`${s.slug}: GDELT unavailable (${e.message.slice(0, 60)})`); }
+  }
+  // Fallback: Bing News RSS, whose links carry the real article address.
+  if (!list.length) {
+    try {
+      const xml = await (await fetch(`https://www.bing.com/news/search?q=${encodeURIComponent(q)}&format=rss&setlang=en`, { headers: { "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(20000) })).text();
+      for (const it of xml.split("<item>").slice(1)) {
+        const link = (it.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || "";
+        const url = decodeURIComponent((link.replace(/&amp;/g, "&").match(/[?&]url=([^&]+)/) || [])[1] || link);
+        const pub = Date.parse((it.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [])[1] || "");
+        const title = ((it.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || "").replace(/&amp;/g, "&");
+        if (/^https?:\/\//.test(url) && pub > since) list.push({ url, title, domain: new URL(url).hostname });
+      }
+      say(`${s.slug}: ${list.length} article(s) from Bing News`);
+    } catch (e) { say(`${s.slug}: Bing News unavailable (${e.message.slice(0, 60)})`); }
+  }
   const out = [];
   for (const a of list) {
     if (out.length >= 5) break;
