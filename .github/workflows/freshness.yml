@@ -1,6 +1,7 @@
 # Freshness watchdog: no AI, no cost. Every hour it checks when the news desk last published an update or
 # recorded a check for news ("checkedAt"). If neither has happened for 12 hours it opens a "Freshness alert" issue (GitHub emails the repository owner)
-# and marks the run as failed (GitHub also emails a failed-run notice). It closes the issue once updates resume.
+# and marks that one run as failed (GitHub also emails a failed-run notice). Later runs stay quiet while the alert is open,
+# and the issue closes itself once updates resume.
 name: Freshness check
 on:
   schedule:
@@ -43,11 +44,12 @@ jobs:
                 "What you can do: keep Claude chats short until the limit resets, or check the news desk's recent runs under scheduled tasks in the Claude app." "" \
                 "This issue closes itself when updates resume." > /tmp/alert.md
               gh issue create --title "Freshness alert: no updates for $age hours" --body-file /tmp/alert.md
+              echo "::error::No story updates or checks for $age hours (newest: $newest)."
+              exit 1
             else
-              echo "Alert already open (#$open)."
+              # Already alerted once: stay quiet (no hourly failure emails) until updates resume.
+              echo "::warning::Still no story updates or checks for $age hours (newest: $newest). Alert #$open is open."
             fi
-            echo "::error::No story updates or checks for $age hours (newest: $newest)."
-            exit 1
           elif [ -n "$open" ]; then
             gh issue close "$open" --comment "Updates resumed: newest at $newest UTC."
           fi
