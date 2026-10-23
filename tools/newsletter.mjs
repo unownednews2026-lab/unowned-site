@@ -11,11 +11,13 @@ export function loadNewsletter() {
   return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : { enabled: false };
 }
 
-/* The sign-up form posts straight to Buttondown; nothing is loaded from another site. */
+/* The sign-up form posts straight to Buttondown (their documented embed form, including embed=1); nothing is loaded from another site.
+   It opens in the same tab so Buttondown's CAPTCHA or confirmation step can show; readers come back from Buttondown's page. */
 export function signupBox(nl, { esc, heading = "Get the daily email" } = {}) {
   if (!nl.enabled || !nl.username) return "";
   const u = encodeURIComponent(nl.username);
-  return `<form class="signup" action="https://buttondown.com/api/emails/embed-subscribe/${u}" method="post" target="_blank">
+  return `<form class="signup" action="https://buttondown.com/api/emails/embed-subscribe/${u}" method="post">
+  <input type="hidden" name="embed" value="1">
   <label for="signup-email"><strong>${heading}</strong> <span class="hint">One short email each morning: what changed, with labels and sources. Unsubscribe any time.</span></label>
   <div class="signup-row"><input id="signup-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com"><button class="primary" type="submit">Sign up</button></div>
 </form>`;
