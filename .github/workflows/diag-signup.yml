@@ -1,0 +1,24 @@
+name: Diagnose sign-up
+on:
+  push:
+    branches: [diag-signup]
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+    steps:
+      - name: Call Buttondown
+        run: |
+          H="Authorization: Token $KEY"
+          echo "== key length: ${#KEY}"
+          echo "== GET newsletters"; curl -s -o /tmp/n.json -w '%{http_code}\n' -H "$H" https://api.buttondown.com/v1/newsletters; head -c 600 /tmp/n.json; echo
+          echo "== GET subscribers"; curl -s -w '\n%{http_code}\n' -H "$H" 'https://api.buttondown.com/v1/subscribers?page_size=5' | head -c 1500; echo
+          ADDR="podcast+diag$(date +%s)@unownednews.com"
+          for B in true none; do
+            echo "== POST unactivated bypass=$B"
+            if [ "$B" = true ]; then X="X-Buttondown-Bypass-Firewall: true"; else X="X-Noop: 1"; fi
+            curl -s -w '\n%{http_code}\n' -X POST -H "$H" -H "$X" -H 'Content-Type: application/json' -d "{\"email_address\":\"$ADDR\",\"type\":\"unactivated\"}" https://api.buttondown.com/v1/subscribers | head -c 1500; echo
+          done
+          echo "== DELETE test"; curl -s -o /dev/null -w '%{http_code}\n' -X DELETE -H "$H" "https://api.buttondown.com/v1/subscribers/$ADDR"
