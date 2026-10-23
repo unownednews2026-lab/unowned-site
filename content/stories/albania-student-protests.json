@@ -11,7 +11,7 @@
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
   "updated": "2026-10-23",
-  "updatedAt": "2026-10-23T12:31:00Z",
+  "updatedAt": "2026-10-23T22:20:50Z",
   "summary": [
     "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
     "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days. The interior minister says 156 people were injured over four days, including 97 police officers and 45 protesters.",
@@ -93,7 +93,8 @@
     { "date": "2026-10-20", "phase": "spread", "label": "reported", "added": "2026-10-20T12:30:00Z", "text": "Speaking at the education ministry, Rama holds up a stone to argue thrown objects can become weapons, separates violence from the right to protest, and calls the unrest “hybrid warfare” fuelled by genuine grievances over housing and jobs; he repeats unproven claims that some media outlets and unnamed foreign actors have a financial and political interest in stoking the unrest. He renews his dialogue offer and places chairs outside his office, which protesters overturn and damage while continuing to demand his resignation. University lecturers and parents join the protests, and the SPUSH academic staff union marches from Tirana Polytechnic University to the prime minister's office over separate pay demands dating to March.", "sources": ["argumentumOct20"] },
     { "date": "2026-10-21", "phase": "spread", "label": "reported", "added": "2026-10-22T00:30:00Z", "text": "Speaking to police chiefs, Rama again rules out negotiating with protesters involved in violence, saying “the moment the state negotiates with this, the state has fallen.” The health ministry's injury toll stands at 295, including 186 police officers, before Monday's violence, and rights lawyer Gentian Sejrani says he is now providing legal aid to more than 100 people who have been arrested, The Nation (Pakistan) reports.", "sources": ["nationPkOct21"] },
     { "date": "2026-10-21", "phase": "spread", "label": "pending", "added": "2026-10-22T00:30:00Z", "text": "Whether talks between students and the government begin despite Rama's renewed offer, a reconciled arrest and detention total for the weekend's violence, any response from President Begaj to the protesters' demands, and evidence for the explosives-laden drone the prime minister says was neutralised. Still being checked.", "sources": ["nationPkOct21"] },
-    { "date": "2026-10-22", "phase": "spread", "label": "reported", "added": "2026-10-23T12:31:00Z", "text": "A Tirana court rules that 18 arrests from the protests were unlawful and orders the release of 27 people, rejecting prosecutors' requests to impose security measures on them; nine others are ordered to report periodically to the Judicial Police, and two people whose arrests were ruled lawful must do the same, Albanian Daily News reports, citing the court record. Those involved were accused of organising or taking part in unlawful gatherings, resisting police, or property damage; the published decision gives no reasoning for the unlawful-arrest finding, and no second outlet has reported it yet.", "sources": ["albDailyOct22"] }
+    { "date": "2026-10-22", "phase": "spread", "label": "reported", "added": "2026-10-23T12:31:00Z", "text": "A Tirana court rules that 18 arrests from the protests were unlawful and orders the release of 27 people, rejecting prosecutors' requests to impose security measures on them; nine others are ordered to report periodically to the Judicial Police, and two people whose arrests were ruled lawful must do the same, Albanian Daily News reports, citing the court record. Those involved were accused of organising or taking part in unlawful gatherings, resisting police, or property damage; the published decision gives no reasoning for the unlawful-arrest finding, and no second outlet has reported it yet.", "sources": ["albDailyOct22"] },
+    { "date": "2026-10-22", "phase": "spread", "label": "reported", "added": "2026-10-23T22:20:50Z", "text": "Parliamentary leaders reject an opposition request to debate the student protests, now in their tenth day; opposition MPs block the podium and bang on desks while other lawmakers keep voting on legislation, holding up photos of students they say were injured by police in earlier clashes, Euronews reports.", "sources": ["euronewsOct23parl"] }
   ],
   "claims": [
     { "title": "Who is behind the violence?", "label": "disputed", "a": "Rama says the unrest is not a student phenomenon and blames foreign hands and the opposition, which he says is using masked people. Police urge peaceful protesters to distance themselves from masked agitators.", "aSrc": ["ajOct16", "dwOct16", "occrpOct"], "b": "Students say they are protesting university conditions, costs and job prospects after months of ignored peaceful protest. Opposition leader Sali Berisha denies the opposition is involved in the violence.", "bSrc": ["reutersOct14", "reutersOct16", "dwOct16"], "status": "Open. Neither side has published evidence; police investigations are under way." },
@@ -140,13 +141,14 @@
     "Evidence for, and any police statement on, the explosives-laden drone the prime minister says was neutralised",
     "Reconciling differing single-day injury figures reported by different outlets on the same date",
     "Evidence for claims of foreign or opposition involvement, including the specific claims against Iran and Russia",
-    "Arrest and detention figures for the weekend's violence (Sunday and Monday)"
+    "Arrest and detention figures for the weekend's violence (Sunday and Monday)",
+    "A second source for the October 22 parliament scuffle over debating the protests"
   ],
   "corrections": [],
   "sourceGroups": [
     ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
     ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
-    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy", "afpOct18", "euroAlDrone", "kohaDrone", "ajOct18sixth", "srpskeOct18", "euronewsOct19vid", "euronewsOct19", "dailySabahOct19", "inAlbaniaOct20", "anewsOct20", "argumentumOct20", "nationPkOct21", "albDailyOct22"]]
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy", "afpOct18", "euroAlDrone", "kohaDrone", "ajOct18sixth", "srpskeOct18", "euronewsOct19vid", "euronewsOct19", "dailySabahOct19", "inAlbaniaOct20", "anewsOct20", "argumentumOct20", "nationPkOct21", "albDailyOct22", "euronewsOct23parl"]]
   ],
   "sources": {
     "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
@@ -194,7 +196,8 @@
     "argumentumOct20": ["Argumentum", "https://www.argumentum.al/en/albania-protests-enter-eighth-day-as-demonstrators-demand-prime-minister-ramas-resignation/"],
     "nationPkOct21": ["The Nation (Pakistan)", "https://www.nation.com.pk/21-Oct-2026/seventh-day-violent-clashes-albanian-protesters-police"],
     "inAlbaniaOct20": ["inAlbania.info", "https://www.inalbania.info/ombudsman-reports-overcrowding-and-rights-concerns-after-tirana-protests/"],
-    "albDailyOct22": ["Albanian Daily News", "https://albaniandailynews.com/news/tirana-court-orders-release-of-27-protesters-rules-18-arrests-illegal"]
+    "albDailyOct22": ["Albanian Daily News", "https://albaniandailynews.com/news/tirana-court-orders-release-of-27-protesters-rules-18-arrests-illegal"],
+    "euronewsOct23parl": ["Euronews", "https://www.euronews.com/video/2026/10/23/albania-parliament-descends-into-chaos-as-mps-clash-over-protests"]
   },
   "checkedAt": "2026-10-23T18:25:00Z"
 }
