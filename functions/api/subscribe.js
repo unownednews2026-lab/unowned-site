@@ -41,13 +41,23 @@ export async function onRequestPost({ request, env }) {
   const email = String(form.get("email") || "").trim().toLowerCase();
   if (!EMAIL.test(email) || email.length > 254) return reply(request, 400, "That doesn't look like an email address. Please check it and try again.");
 
+  // Buttondown's firewall judges sign-ups by IP address. We never send readers' IP addresses, so every request would
+  // look like it came from one Cloudflare server and could be blocked. Instead we ask Buttondown to skip the firewall
+  // (allowed for trusted server-side sign-ups, up to 5 an hour); the honeypot above and Buttondown's confirmation
+  // email (double opt-in) still stop fake sign-ups. If that hourly allowance is used up, we try once without it.
+  const send = (bypass) => fetch("https://api.buttondown.com/v1/subscribers", {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${env.BUTTONDOWN_API_KEY}`,
+      "Content-Type": "application/json",
+      ...(bypass ? { "X-Buttondown-Bypass-Firewall": "true" } : {}),
+    },
+    body: JSON.stringify({ email_address: email, type: "unactivated" }),
+  });
   let res;
   try {
-    res = await fetch("https://api.buttondown.com/v1/subscribers", {
-      method: "POST",
-      headers: { Authorization: `Token ${env.BUTTONDOWN_API_KEY}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ email_address: email, type: "unactivated" }),
-    });
+    res = await send(true);
+    if (res.status === 429) res = await send(false);
   } catch {
     return reply(request, 502, "We couldn't reach our email provider. Please try again in a minute.");
   }
@@ -59,7 +69,7 @@ export async function onRequestPost({ request, env }) {
     return reply(request, 200, "You're already on the list, or a confirmation email is on its way. Check your inbox (and spam).");
   }
   if (res.status === 400 && /suppress|unsubscribed|blocked/i.test(text)) {
-    return reply(request, 400, "This address unsubscribed earlier, so we can't add it again from here. Use the link in any past Unowned email to resubscribe.");
+    return reply(request, 400, "We couldn't add this address from here: it may have unsubscribed before, or our email provider's spam filter held it. Email podcast@unownednews.com and we'll sort it out.");
   }
-  return reply(request, 502, "Sign-up didn't work this time. Please try again later.");
+  return reply(request, 502, `Sign-up didn't work this time (code ${res.status}). Please try again later.`);
 }
