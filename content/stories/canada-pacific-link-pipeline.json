@@ -10,12 +10,12 @@
   "kicker": "Story tracker · Canada",
   "dek": "Ottawa's first use of its fast-track major-projects law, for an oil pipeline from Alberta to the B.C. coast, the First Nations court challenge and consultation dispute that followed, and the new bill that would widen the law.",
   "status": "Ongoing",
-  "updated": "2026-10-20",
-  "updatedAt": "2026-10-20T17:53:24Z",
+  "updated": "2026-10-23",
+  "updatedAt": "2026-10-23T18:25:00Z",
   "summary": [
     "In June 2025 Parliament passed Bill C-5, whose Building Canada Act lets the federal cabinet designate projects as being in the national interest and fast-track their approval. In November 2025 Prime Minister Mark Carney and Alberta Premier Danielle Smith signed an agreement backing a new oil pipeline to the B.C. coast. Alberta applied in July 2026 for a route from Bruderheim, near Edmonton, to the southwest B.C. coast near Delta, largely following the Trans Mountain corridor, and Ottawa agreed with B.C. to keep the north coast oil tanker ban.",
     "On October 1, 2026, Ottawa designated the pipeline, now called Pacific Link, as the first project of national interest. The government says it would carry an extra one million barrels of crude a day, be owned equally by Canada and Alberta with Pembina Pipeline as a private partner, and offer Indigenous communities at least a 10% stake. The Major Projects Office aims to set the conditions for construction by September 1, 2027. On October 7 Cold Lake First Nations asked the Federal Court to quash the designation, saying it was not consulted.",
-    "The Union of BC Indian Chiefs, the BC Assembly of First Nations and several nations along the route say consultation was rushed and that the designation overrides their rights; at least one oilsands-region chief says he welcomes the equity stake. The federal government says it consulted more than 130 communities and that the duty to consult is unchanged. A second bill, C-39, which would extend fast-track powers, passed second reading on October 8 and is before a House committee. B.C. votes on October 24, and First Nations leaders meet the prime minister and premiers in Ottawa on October 26."
+    "The Union of BC Indian Chiefs, the BC Assembly of First Nations and several nations along the route say consultation was rushed and that the designation overrides their rights; at least one oilsands-region chief says he welcomes the equity stake. The federal government says it consulted more than 130 communities and that the duty to consult is unchanged. A second bill, C-39, which would extend fast-track powers, passed second reading on October 8 and is before a House committee. B.C. votes on October 24, and First Nations leaders meet the prime minister and premiers in Ottawa on October 26. Washington state officials and tribes have separately raised concerns about the pipeline's planned tanker traffic through the Salish Sea."
   ],
   "ground": [],
   "timelineChart": {
@@ -63,6 +63,7 @@
     { "date": "2026-10-14", "phase": "pushback", "label": "reported", "added": "2026-10-20T17:53:24Z", "text": "The BC Assembly of First Nations meeting passes a resolution calling on Carney to halt the Building Canada Act and to repeal Bill C-39 if it passes, The Canadian Press reports.", "sources": ["castanetOct14"] },
     { "date": "2026-10-15", "phase": "pushback", "label": "reported", "added": "2026-10-20T17:53:24Z", "text": "AFN B.C. Regional Chief Terry Teegee calls Pacific Link \"a pipeline to more litigation\" and says it has divided First Nations that would benefit from those that would not, APTN reports.", "sources": ["aptnOct15"] },
     { "date": "2026-10-19", "phase": "pushback", "label": "reported", "added": "2026-10-20T17:53:24Z", "text": "Ministers Dominic LeBlanc and Steven MacKinnon defend Bill C-39 at a House of Commons committee; LeBlanc says it does not lessen the duty to consult. The Narwhal reports the government aims to pass the bill by the end of 2026.", "sources": ["yahooOct19", "narwhalOct19"] },
+    { "date": "2026-10-20", "phase": "pushback", "label": "reported", "added": "2026-10-23T18:25:00Z", "text": "Washington state officials and tribes step up opposition to Pacific Link's planned tanker traffic through the Salish Sea: Gov. Bob Ferguson and state ecology director Casey Sixkiller say they are \"disappointed\" by the fast-tracking and want Canada to commit to stronger spill-response capacity; the Swinomish Indian Tribal Community's chairman calls the added shipping an \"existential threat\" to treaty fishing rights and salmon; the Affiliated Tribes of Northwest Indians pass a resolution against the project; and San Juan County officials and Rep. Rick Larsen (D-Wash.) raise vessel-traffic and spill-response concerns, Cascadia Daily and the Washington State Standard report.", "sources": ["cascadiaOct20", "wastandardOct2"] },
     { "date": "2026-10-24", "phase": "pushback", "label": "pending", "added": "2026-10-20T17:53:24Z", "text": "B.C. provincial election on October 24, in which the pipeline has been a campaign issue. Still being checked.", "sources": ["coastOct3", "cp24Oct1"] },
     { "date": "2026-10-26", "phase": "pushback", "label": "pending", "added": "2026-10-20T17:53:24Z", "text": "First Nations–First Ministers meeting in Ottawa on October 26, after a day of ceremony on October 25; a National Day of Action is planned at the venue. Still being checked.", "sources": ["afnAug21", "pbiOct17", "castanetOct14"] }
   ],
@@ -97,7 +98,7 @@
     "The federal government's response to Cold Lake First Nations' application, and any hearing date",
     "Whether other First Nations have filed or will file challenges; the AFN B.C. regional chief referred to a Coldwater challenge that we could not confirm",
     "How many First Nations support the pipeline or intend to take up the equity stake",
-    "The exact route, terminal design and expected tanker traffic in the Salish Sea",
+    "The exact route, terminal design and expected tanker traffic in the Salish Sea, and Canada's response to Washington state officials' call for stronger spill-response commitments",
     "The status of the 2025 Ontario First Nations' challenge to Bill C-5",
     "Positions of Métis governments along the route",
     "Outcomes of the October 24 B.C. election and the October 26 meeting in Ottawa"
@@ -107,7 +108,8 @@
     ["The law and the Ottawa–Alberta deal", ["cbcJun26", "gcJun26", "ctvJul15", "nnlJul16", "tyeeNov27", "globalNov27"]],
     ["Application, B.C. agreement and Bill C-39", ["victoriaJul2", "globalJul2", "bcgovJul2", "tfnJul3", "advisorSep22", "torysSep"]],
     ["The designation and reactions", ["pmoOct1", "cp24Oct1", "aptnOct1a", "aptnOct1b", "energynowOct1", "ubcicOct1", "globalOct1"]],
-    ["Court challenge and latest", ["globalOct8", "clfnOct8", "mltOct13", "aptnOct8", "deepdiveOct9", "castanetOct14", "aptnOct15", "yahooOct19", "narwhalOct19", "coastOct3", "afnAug21", "pbiOct17"]]
+    ["Court challenge and latest", ["globalOct8", "clfnOct8", "mltOct13", "aptnOct8", "deepdiveOct9", "castanetOct14", "aptnOct15", "yahooOct19", "narwhalOct19", "coastOct3", "afnAug21", "pbiOct17"]],
+    ["U.S. opposition to tanker traffic", ["cascadiaOct20", "wastandardOct2"]]
   ],
   "sources": {
     "cbcJun26": ["CBC News", "https://www.cbc.ca/1.7572005"],
@@ -140,7 +142,9 @@
     "coastOct3": ["My Coast Now", "https://www.mycoastnow.com/94979/news/elections/2026-bc-election/eby-emphasizes-b-c-projects-amid-pipeline-debate/"],
     "afnAug21": ["Assembly of First Nations (bulletin)", "https://afn.ca/all-news/bulletins/assembly-of-first-nations-afn-bulletin-first-nations-first-ministers-meeting-fnfmm-on-october-26-2026/"],
     "pbiOct17": ["Peace Brigades International Canada", "https://pbicanada.org/2026/10/17/indigenous-rights-defenders-mobilize-for-national-day-of-action-at-first-nations-first-ministers-meeting-in-ottawa-october-26/"],
-    "clfnOct8": ["Cold Lake First Nations (statement)", "https://lakelandconnect.net/2026/10/08/cold-lake-first-nations-files-judicial-review-over-pacific-link-pipeline-decision/"]
+    "clfnOct8": ["Cold Lake First Nations (statement)", "https://lakelandconnect.net/2026/10/08/cold-lake-first-nations-files-judicial-review-over-pacific-link-pipeline-decision/"],
+    "cascadiaOct20": ["Cascadia Daily News", "https://www.cascadiadaily.com/2026/oct/20/objections-mount-in-washington-state-to-proposed-canadian-pipeline-tanker-traffic/"],
+    "wastandardOct2": ["Washington State Standard", "https://washingtonstatestandard.com/?p=17331"]
   },
-  "checkedAt": "2026-10-23T12:31:00Z"
+  "checkedAt": "2026-10-23T18:25:00Z"
 }
