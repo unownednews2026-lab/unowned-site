@@ -31,6 +31,19 @@ def make_cover(path="static/briefings/cover.png"):
     img.save(path, optimize=True)
     print("made cover")
 make_cover()
+# Words the voice gets wrong. Only the audio uses these; the written transcript is untouched.
+# "read" (past tense) is spoken "reed", so the spoken line says "narrated" instead.
+SAY = [("It's read by", "It's narrated by"), ("it's read by", "it's narrated by"), ("is read by", "is narrated by"), ("was read by", "was narrated by")]
+def spoken(text):
+    for a, b in SAY:
+        text = text.replace(a, b)
+    return text
+
+# Bump this when SAY changes: every briefing is then recorded again with the fixes.
+VOICE_VERSION = "2"
+vfile = "static/briefings/voice-version.txt"
+redo = not os.path.exists(vfile) or open(vfile).read().strip() != VOICE_VERSION
+
 k = Kokoro(model, voices)
 made = 0
 for name in sorted(os.listdir("content/briefings")):
@@ -38,16 +51,17 @@ for name in sorted(os.listdir("content/briefings")):
         continue
     date = name[:-5]
     out = f"static/briefings/{date}.mp3"
-    if os.path.exists(out):
+    if os.path.exists(out) and not redo:
         continue
     b = json.load(open(f"content/briefings/{name}"))
     parts, sr = [], 24000
     for para in b["script"]:
-        audio, sr = k.create(para, voice="af_heart", speed=1.0, lang="en-us")
+        audio, sr = k.create(spoken(para), voice="af_heart", speed=1.0, lang="en-us")
         parts += [audio, np.zeros(int(sr * 0.45), dtype=audio.dtype)]
     with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
         sf.write(wav.name, np.concatenate(parts), sr)
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", wav.name, "-ar", "44100", "-ac", "2", "-codec:a", "libmp3lame", "-b:a", "128k", out], check=True)
     made += 1
     print("made", out)
+open(vfile, "w").write(VOICE_VERSION + "\n")
 print(f"{made} new briefing(s)")
