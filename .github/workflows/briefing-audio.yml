@@ -3,7 +3,7 @@ name: Briefing audio
 on:
   push:
     branches: [main]
-    paths: ["content/briefings/*.json"]
+    paths: ["content/briefings/*.json", "tools/briefing_audio.py"]
   workflow_dispatch:
 permissions:
   contents: write
