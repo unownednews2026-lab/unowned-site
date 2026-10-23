@@ -18,7 +18,7 @@ if (!KEY) { say("no GEMINI_API_KEY secret yet; skipping"); process.exit(0); }
 /* 1. Is the Claude desk running? It comments on issue #2 after every run. */
 const since = new Date(Date.now() - MISSED_HOURS * 36e5).toISOString();
 const recentLogs = JSON.parse(sh(`gh api "repos/${REPO}/issues/2/comments?since=${since}&per_page=5"`));
-if (recentLogs.length) { say(`Claude desk logged a run in the last ${MISSED_HOURS} hours; nothing to do`); process.exit(0); }
+if (recentLogs.length && process.env.BACKUP_FORCE !== "true") { say(`Claude desk logged a run in the last ${MISSED_HOURS} hours; nothing to do`); process.exit(0); }
 
 /* 2. Only one backup draft at a time. */
 const open = JSON.parse(sh(`gh api "repos/${REPO}/pulls?state=open&per_page=100"`)).filter((p) => p.title.startsWith("HOLD: Backup desk"));
