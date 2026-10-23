@@ -178,7 +178,7 @@ try {
   say(`opened #${pr.number}`);
 } catch (e) {
   // If GitHub doesn't let workflows open pull requests, leave an issue pointing at the branch instead.
-  writeFileSync("/tmp/pr.md", body + `\n\nBranch: https://github.com/${REPO}/compare/main...${branch}`);
+  writeFileSync("/tmp/pr.md", body.replace("then retitle this pull request without \"HOLD:\" and merge it", "then open a pull request from the branch below and merge it") + `\n\nBranch: https://github.com/${REPO}/compare/main...${branch}`);
   sh(`gh issue create --title "HOLD: Backup desk draft ${now.slice(0, 16).replace("T", " ")} UTC" --body-file /tmp/pr.md`);
   say("opened an issue (pull requests from workflows are turned off)");
 }
