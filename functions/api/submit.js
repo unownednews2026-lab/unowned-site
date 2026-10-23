@@ -66,7 +66,7 @@ export async function onRequestPost({ request, env }) {
   const details = clean(form.get("details"), MAX.details);
   const item = clean(form.get("item"), MAX.item);
 
-  if (type !== "link" && type !== "correction") {
+  if (type !== "link" && type !== "correction" && type !== "context") {
     return reply(request, 400, { error: "Unknown form. Reload the page and try again." });
   }
   if (story && !STORY_SLUG.test(story)) {
@@ -81,7 +81,10 @@ export async function onRequestPost({ request, env }) {
   if (type === "correction" && details.length < 10) {
     return reply(request, 400, { error: "Tell us what is wrong, in a sentence or two." });
   }
-  if (type === "correction" && url && !isPublicLink(url)) {
+  if (type === "context" && (!story || details.length < 10)) {
+    return reply(request, 400, { error: "Tell us what we're missing, in a sentence or two." });
+  }
+  if ((type === "correction" || type === "context") && url && !isPublicLink(url)) {
     return reply(request, 400, { error: "The supporting link should start with https://" });
   }
 
@@ -92,7 +95,7 @@ export async function onRequestPost({ request, env }) {
   await env.SUBMISSIONS.put(id, JSON.stringify(record), { expirationTtl: 60 * 60 * 24 * 180 });
 
   return reply(request, 200, {
-    message: "Received. Thank you. A person will review it before anything is published. We kept no record of who sent it.",
+    message: "Received. Thank you. It will be checked against public reporting before anything is published. We kept no record of who sent it.",
   });
 }
 
