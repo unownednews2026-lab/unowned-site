@@ -47,7 +47,7 @@ export function homePlayer(b, { esc, long }) {
   <h2 id="brief-home-h">🎧 Daily audio briefing <span class="brief-meta">${esc(long(b.date).replace(/, \d{4}$/, ""))} · ${mmss(b.seconds)}</span></h2>
   <p class="brief-title-full">${esc(b.title)}</p>
   <audio controls preload="metadata" src="${b.audio}"></audio>
-  <p class="brief-listen"><a class="listen-btn" href="https://open.spotify.com/show/4EUJj9NhyL3hpcKi9QUszE" rel="noopener">Listen on Spotify</a><a class="listen-btn" href="https://podcasts.apple.com/us/podcast/unowned-daily-briefing/id6824657998" rel="noopener">Listen on Apple Podcasts</a></p>
+  <p class="brief-listen"><a class="listen-btn sp" href="https://open.spotify.com/show/4EUJj9NhyL3hpcKi9QUszE" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="12" fill="#1DB954"/><path d="M6 9.5c4-1.3 8.5-1 12 1M7 12.8c3.3-1 7-.7 10 .9M8 15.8c2.7-.7 5.5-.5 8 .7" stroke="#000" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Listen on Spotify</a><a class="listen-btn ap" href="https://podcasts.apple.com/us/podcast/unowned-daily-briefing/id6824657998" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="6" fill="#9933CC"/><circle cx="12" cy="10" r="2.4" fill="#fff"/><path d="M12 13.5v5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M7.5 14.5a6 6 0 1 1 9 0" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>Listen on Apple Podcasts</a></p>
   <p class="brief-links"><a href="/briefing/">Read the transcript</a></p>
 </section>`;
 }
