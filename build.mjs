@@ -314,6 +314,22 @@ ${groundHtml ? `<section id="ground" aria-labelledby="h-ground">
   <p class="note">Spot something wrong? <a href="/submit/">Tell us</a>. No name needed.</p>
 </section>
 
+<section id="add-context" aria-labelledby="h-context">
+  <h2 id="h-context">Add context</h2>
+  <details class="fold"><summary>Know something this page is missing? Tell us</summary>
+  <p class="src">Point us to public reporting, an official statement or a side of the story we haven't shown. Every note is checked against public reporting before anything is published, and nothing is posted under your name. No name or email needed; we don't store your IP address. Please don't include anyone's private details.</p>
+  <form class="contribute" method="post" action="/api/submit" data-label="Send note">
+    <input type="hidden" name="type" value="context">
+    <input type="hidden" name="story" value="${st.slug}">
+    <div class="hp" aria-hidden="true"><label for="website-c">Leave this empty</label><input id="website-c" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+    <div class="field"><label for="details-c">What are we missing?</label><textarea id="details-c" name="details" required maxlength="2000"></textarea></div>
+    <div class="field"><label for="url-c">Link to public reporting (optional, but it helps)</label><input id="url-c" name="url" type="url" inputmode="url" placeholder="https://" autocomplete="off"></div>
+    <button class="primary" type="submit">Send note</button>
+    <p class="form-msg" role="status" hidden></p>
+  </form>
+  </details>
+</section>
+
 <section id="sources" aria-labelledby="h-sources">
   <h2 id="h-sources">Sources</h2>
   <details class="fold"><summary>Show all ${Object.keys(S).length} sources</summary><div class="srclist">${srcHtml}</div></details>
@@ -326,7 +342,7 @@ ${groundHtml ? `<section id="ground" aria-labelledby="h-ground">
     description: st.dek,
     path,
     body,
-    scripts: ["/assets/story.js", "/assets/votes.js", "/assets/live.js", "/assets/catchup.js", "/assets/briefing.js"],
+    scripts: ["/assets/story.js", "/assets/votes.js", "/assets/live.js", "/assets/catchup.js", "/assets/briefing.js", "/assets/submit.js"],
     og: existsSync(`static/assets/og-${st.slug}.png`) ? `/assets/og-${st.slug}.png` : "/assets/og-default.png",
     type: "article",
   }));
@@ -440,7 +456,7 @@ function build() {
   <p class="form-msg" role="status" hidden></p>
 </form>`, ["/assets/submit.js"]);
 
-  simple("/thanks/", "Thank you", "Your contribution was received.", `<div class="prose"><p>Received. A person will review it before anything is published. We kept no record of who sent it.</p><p><a href="/">Back to Unowned</a></p></div>`);
+  simple("/thanks/", "Thank you", "Your contribution was received.", `<div class="prose"><p>Received. It will be checked against public reporting before anything is published. We kept no record of who sent it.</p><p><a href="/">Back to Unowned</a></p></div>`);
 
   simple("/how-we-work/", "How we work", "Unowned's standards for sourcing, labelling, fairness and corrections.", `<div class="prose">
 <p>Unowned turns scattered reports and footage into a clear, checked record. These are the rules every item follows.</p>
