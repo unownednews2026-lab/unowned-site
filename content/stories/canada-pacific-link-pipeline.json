@@ -11,7 +11,7 @@
   "dek": "Ottawa's first use of its fast-track major-projects law, for an oil pipeline from Alberta to the B.C. coast, the First Nations court challenge and consultation dispute that followed, and the new bill that would widen the law.",
   "status": "Ongoing",
   "updated": "2026-10-24",
-  "updatedAt": "2026-10-24T02:35:00Z",
+  "updatedAt": "2026-10-24T12:30:00Z",
   "summary": [
     "In June 2025 Parliament passed Bill C-5, whose Building Canada Act lets the federal cabinet designate projects as being in the national interest and fast-track their approval. In November 2025 Prime Minister Mark Carney and Alberta Premier Danielle Smith signed an agreement backing a new oil pipeline to the B.C. coast. Alberta applied in July 2026 for a route from Bruderheim, near Edmonton, to the southwest B.C. coast near Delta, largely following the Trans Mountain corridor, and Ottawa agreed with B.C. to keep the north coast oil tanker ban.",
     "On October 1, 2026, Ottawa designated the pipeline, now called Pacific Link, as the first project of national interest. The government says it would carry an extra one million barrels of crude a day, be owned equally by Canada and Alberta with Pembina Pipeline as a private partner, and offer Indigenous communities at least a 10% stake. The Major Projects Office aims to set the conditions for construction by September 1, 2027. On October 7 Cold Lake First Nations asked the Federal Court to quash the designation, saying it was not consulted.",
@@ -68,6 +68,7 @@
     { "date": "2026-10-24", "phase": "pushback", "label": "pending", "added": "2026-10-20T17:53:24Z", "text": "B.C. provincial election on October 24, in which the pipeline has been a campaign issue. Still being checked.", "sources": ["coastOct3", "cp24Oct1"] },
     { "date": "2026-10-23", "phase": "pushback", "label": "reported", "added": "2026-10-24T02:35:00Z", "text": "Cold Lake First Nations Chief Kelsey Jacko says \"a lot of conflict\" has surrounded which Alberta chiefs will attend Monday's First Nations-First Ministers meeting, since Alberta has no AFN regional chief; three Cree Nations, Onion Lake, Tsuut'ina and Saddle Lake, issue cease-and-desist notices telling the Assembly of First Nations not to speak for them, APTN reports. Jacko says he is attending because \"nobody is going to be speaking for me, for our rights or for our people,\" and that his nation remains in court with Alberta Premier Danielle Smith.", "sources": ["aptnJackoOct23"] },
     { "date": "2026-10-23", "phase": "pushback", "label": "reported", "added": "2026-10-24T02:35:00Z", "text": "AFN National Chief Cindy Woodhouse Nepinak says the agenda for Monday's meeting with Carney and the premiers is still being negotiated and calls the relationship with Ottawa \"very fragile\"; only the opening prayer and remarks will be livestreamed, APTN reports. Onion Lake Cree Nation plans a National Day of Action outside the Ottawa venue on Monday, and AFN has circulated a draft proposal for a First Nations-controlled sovereign wealth fund that Woodhouse Nepinak says carries \"no commitment yet.\"", "sources": ["aptnFewDetailsOct23"] },
+    { "date": "2026-10-24", "phase": "pushback", "label": "reported", "added": "2026-10-24T12:30:00Z", "text": "The Canadian Press reports Monday's meeting would be the first gathering of its kind since the 2005 Kelowna meeting between First Nations and Ottawa. Jeff Copenace, of Ojibways of Onigaming First Nation, says he worries a focus on economic development will crowd out action on addictions, homelessness and suicide; longtime AFN critic Russ Diabo says he distrusts the Assembly and is organising a separate meeting and protest, saying he fears the outcome is predetermined.", "sources": ["cpOct24fn"] },
     { "date": "2026-10-26", "phase": "pushback", "label": "pending", "added": "2026-10-24T02:35:00Z", "text": "The outcome of the October 24 B.C. election, the October 26 First Nations-First Ministers meeting and the National Day of Action planned outside it, and whether Premier Smith attends after Cold Lake's Chief Jacko questioned how much Alberta First Nations will benefit. Still being checked.", "sources": ["afnAug21", "pbiOct17", "castanetOct14", "aptnJackoOct23", "aptnFewDetailsOct23"] }
   ],
   "claims": [
@@ -111,7 +112,7 @@
     ["The law and the Ottawa–Alberta deal", ["cbcJun26", "gcJun26", "ctvJul15", "nnlJul16", "tyeeNov27", "globalNov27"]],
     ["Application, B.C. agreement and Bill C-39", ["victoriaJul2", "globalJul2", "bcgovJul2", "tfnJul3", "advisorSep22", "torysSep"]],
     ["The designation and reactions", ["pmoOct1", "cp24Oct1", "aptnOct1a", "aptnOct1b", "energynowOct1", "ubcicOct1", "globalOct1"]],
-    ["Court challenge and latest", ["globalOct8", "clfnOct8", "mltOct13", "aptnOct8", "deepdiveOct9", "castanetOct14", "aptnOct15", "yahooOct19", "narwhalOct19", "coastOct3", "afnAug21", "pbiOct17", "yahooMetisOct13", "aptnJackoOct23", "aptnFewDetailsOct23"]],
+    ["Court challenge and latest", ["globalOct8", "clfnOct8", "mltOct13", "aptnOct8", "deepdiveOct9", "castanetOct14", "aptnOct15", "yahooOct19", "narwhalOct19", "coastOct3", "afnAug21", "pbiOct17", "yahooMetisOct13", "aptnJackoOct23", "aptnFewDetailsOct23", "cpOct24fn"]],
     ["U.S. opposition to tanker traffic", ["cascadiaOct20", "wastandardOct2"]]
   ],
   "sources": {
@@ -150,7 +151,8 @@
     "wastandardOct2": ["Washington State Standard", "https://washingtonstatestandard.com/?p=17331"],
     "yahooMetisOct13": ["Yahoo News Canada", "https://ca.news.yahoo.com/alberta-m-tis-leaders-oppose-140534496.html"],
     "aptnJackoOct23": ["APTN News", "https://www.aptnnews.ca/national-news/cold-lake-first-nations-chief-acknowledges-conflict-as-he-heads-to-first-nations-meeting-in-ottawa/"],
-    "aptnFewDetailsOct23": ["APTN News", "https://www.aptnnews.ca/national-news/few-details-released-as-first-nations-first-ministers-meeting-approaches-afn/"]
+    "aptnFewDetailsOct23": ["APTN News", "https://www.aptnnews.ca/national-news/few-details-released-as-first-nations-first-ministers-meeting-approaches-afn/"],
+    "cpOct24fn": ["The Canadian Press (via Lethbridge Herald)", "https://lethbridgeherald.com/news/national-news/2026/10/24/first-nations-prepare-for-historic-meeting-with-carney-and-the-premiers/"]
   },
-  "checkedAt": "2026-10-24T10:30:00Z"
+  "checkedAt": "2026-10-24T12:30:00Z"
 }
