@@ -63,7 +63,9 @@ function why(S, label, keys, where) {
 /* "Checked for news 1 hour ago": shown when the news desk has looked for new developments since the last published update. */
 const checkedNote = (st) => st.checkedAt && st.checkedAt > (st.updatedAt || "") ? `<span class="checked">Checked for news <time class="ago" datetime="${st.checkedAt}">${long(st.checkedAt.slice(0, 10))}</time></span>` : "";
 const newestAdded = (st) => st.events.reduce((m, e) => (e.added && e.added > m ? e.added : m), st.updatedAt || "");
-const firstSentence = (t, max) => { const f = t.split(". ")[0].replace(/\.$/, ""); return f.length > max ? f.slice(0, f.lastIndexOf(" ", max)) + "…" : f + "."; };
+// First sentence, without breaking at abbreviations such as "B.C.", "U.S.", "Dr." or "no. 190".
+const SENTENCE_END = /(?<!\b(?:[A-Z]|[A-Z]\.[A-Z]|Dr|Mr|Mrs|Ms|St|[Nn]o|Gov|Gen|Lt|Col|Sgt|vs|Jr|Sr|Inc|Co|Corp|Ltd|approx|Mt|Ft))\.\s+(?=["“A-Z0-9])/;
+const firstSentence = (t, max) => { const m = t.match(SENTENCE_END); const f = (m ? t.slice(0, m.index) : t).replace(/\.$/, ""); return f.length > max ? f.slice(0, f.lastIndexOf(" ", max)) + "…" : f + "."; };
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
 function write(path, content) {
