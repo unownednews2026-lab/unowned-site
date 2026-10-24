@@ -3,7 +3,10 @@
   "title": "Canada's Pacific Link pipeline fight",
   "nav": "Pacific Link pipeline",
   "region": "Canada",
-  "topics": ["Indigenous rights", "Energy"],
+  "topics": [
+    "Indigenous rights",
+    "Energy"
+  ],
   "kicker": "Story tracker · Canada",
   "dek": "Ottawa's first use of its fast-track major-projects law, for an oil pipeline from Alberta to the B.C. coast, the First Nations court challenge and consultation dispute that followed, and the new bill that would widen the law.",
   "status": "Ongoing",
@@ -92,7 +95,7 @@
   ],
   "figures": {
     "reviews": { "type": "bar", "title": "Review stages under Bill C-39, in days", "rows": [["Pipeline, now", 450], ["Pipeline, C-39", 300], ["IAAC report, now", 600], ["IAAC report, C-39", 300]], "max": 650, "unit": " days", "caption": "Source: Torys LLP's analysis of the bill as tabled. Pipeline: Canada Energy Regulator certification. IAAC report: the Impact Assessment Agency's report stage. Extensions and suspensions remain possible.", "aria": "Under Bill C-39, pipeline certification would fall from 450 to 300 days and the impact assessment report stage from 600 to 300 days" },
-    "vote": { "type": "bar", "title": "Bill C-39 second reading vote, October 8", "rows": [["For", 296], ["Against", 26]], "max": 320, "unit": "", "caption": "Source: The Deep Dive. Liberals and Conservatives voted for; the Bloc Québécois, NDP and Greens against; 10 members were paired.", "aria": "Bill C-39 passed second reading by 296 votes to 26" }
+    "vote": { "type": "bar", "title": "Bill C-39 second reading vote, October 8", "rows": [["For", 296], ["Against", 26]], "max": 320, "unit": "", "caption": "Source: The Deep Dive. Liberals and Conservatives voted for; the Bloc Québécois, NDP and Greens against; 10 members were paired.", "aria": "Bill C-39 second reading vote passed 296 votes to 26" }
   },
   "gaps": [
     "The federal government's response to Cold Lake First Nations' application, and any hearing date",
@@ -149,5 +152,5 @@
     "aptnJackoOct23": ["APTN News", "https://www.aptnnews.ca/national-news/cold-lake-first-nations-chief-acknowledges-conflict-as-he-heads-to-first-nations-meeting-in-ottawa/"],
     "aptnFewDetailsOct23": ["APTN News", "https://www.aptnnews.ca/national-news/few-details-released-as-first-nations-first-ministers-meeting-approaches-afn/"]
   },
-  "checkedAt": "2026-10-24T06:30:00Z"
+  "checkedAt": "2026-10-24T08:30:00Z"
 }
