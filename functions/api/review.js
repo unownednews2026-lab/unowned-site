@@ -10,7 +10,7 @@ function json(status, body) {
   return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" } });
 }
 function allowed(request, env) {
-  const want = String(env.REVIEW_TOKEN || "").trim();
+  const want = String(env.REVIEW_KEY || env.REVIEW_TOKEN || "").trim();
   const got = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "").trim();
   if (want.length < 24 || got.length !== want.length) return false;
   let diff = 0;
@@ -21,7 +21,7 @@ export async function onRequestGet({ request, env }) {
   if (!env.SUBMISSIONS || !allowed(request, env)) {
     // Temporary setup check: says only whether the secret is present and its length, never its value.
     const r = json(404, { error: "Not found" });
-    r.headers.set("X-Setup", `kv=${!!env.SUBMISSIONS} secret_len=${String(env.REVIEW_TOKEN || "").trim().length}`);
+    r.headers.set("X-Setup", `kv=${!!env.SUBMISSIONS} secret_len=${String(env.REVIEW_KEY || env.REVIEW_TOKEN || "").trim().length}`);
     return r;
   }
   const out = [];
