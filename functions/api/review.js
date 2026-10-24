@@ -10,8 +10,8 @@ function json(status, body) {
   return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" } });
 }
 function allowed(request, env) {
-  const want = env.REVIEW_TOKEN || "";
-  const got = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  const want = String(env.REVIEW_TOKEN || "").trim();
+  const got = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "").trim();
   if (want.length < 24 || got.length !== want.length) return false;
   let diff = 0;
   for (let i = 0; i < want.length; i++) diff |= want.charCodeAt(i) ^ got.charCodeAt(i);
