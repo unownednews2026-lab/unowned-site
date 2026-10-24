@@ -96,8 +96,7 @@ jobs:
           # Reader links, corrections and context notes are stored privately on Cloudflare. This copies new ones into the
           # private "Reader submissions" issue, where the news desk checks them. Off until the REVIEW_TOKEN secret exists.
           [ -n "$REVIEW_TOKEN" ] || { echo "no REVIEW_TOKEN yet; skipping"; exit 0; }
-          setup=$(curl -s -o /dev/null -D - -H "Authorization: Bearer $REVIEW_TOKEN" https://unownednews.com/api/review | grep -i '^x-setup' | tr -d '\r')
-          curl -sf -H "Authorization: Bearer $REVIEW_TOKEN" https://unownednews.com/api/review > /tmp/subs.json || { echo "::warning::github_len=${#REVIEW_TOKEN} cloudflare: $setup. Reader review feed not reachable (check REVIEW_TOKEN matches in Cloudflare and GitHub)"; exit 0; }
+          curl -sf -H "Authorization: Bearer $REVIEW_TOKEN" https://unownednews.com/api/review > /tmp/subs.json || { echo "::warning::Reader review feed not reachable (check REVIEW_TOKEN matches in Cloudflare and GitHub)"; exit 0; }
           count=$(jq '.submissions | length' /tmp/subs.json); echo "::notice::Reader review feed OK: $count new submission(s)"
           [ "$count" -gt 0 ] || exit 0
           n=$(gh api "repos/${{ github.repository }}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="Reader submissions")][0].number // empty')

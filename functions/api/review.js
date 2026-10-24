@@ -18,12 +18,7 @@ function allowed(request, env) {
   return diff === 0;
 }
 export async function onRequestGet({ request, env }) {
-  if (!env.SUBMISSIONS || !allowed(request, env)) {
-    // Temporary setup check: says only whether the secret is present and its length, never its value.
-    const r = json(404, { error: "Not found" });
-    r.headers.set("X-Setup", `kv=${!!env.SUBMISSIONS} secret_len=${String(env.REVIEW_KEY || env.REVIEW_TOKEN || "").trim().length}`);
-    return r;
-  }
+  if (!env.SUBMISSIONS || !allowed(request, env)) return json(404, { error: "Not found" });
   const out = [];
   let cursor;
   do {
