@@ -4,8 +4,8 @@
   "kicker": "Story tracker · India",
   "dek": "What happened, what is confirmed, and where the accounts disagree, from the exam leak in May to the protests against the Election Commission in October.",
   "status": "Season 2 active",
-  "updated": "2026-10-23",
-  "updatedAt": "2026-10-23T22:20:50Z",
+  "updated": "2026-10-24",
+  "updatedAt": "2026-10-24T08:30:00Z",
   "summary": [
     "The Cockroach Janta Party (CJP) began on May 16 as a satirical online response to remarks by Chief Justice Surya Kant, a day after he reportedly likened some unemployed youth to cockroaches. Anger over the cancelled NEET medical entrance exam turned it into a street movement.",
     "After a 36-day protest in Delhi, including a July 20 march met with tear gas and batons, Education Minister Dharmendra Pradhan resigned on July 25 and the CJP called off its protest, saying its demands had been accepted. From August, the CJP said the government had not honoured those commitments, chiefly withdrawing criminal cases against protesters and compensating families of students who died by suicide.",
@@ -85,7 +85,8 @@
     { "date": "2026-10-17", "phase": "s2", "label": "reported", "added": "2026-10-19T22:26:38Z", "text": "The Foreigners Regional Registration Office separately issued Khan a show-cause notice on October 17 asking why his Overseas Citizen of India registration should not be cancelled under Section 7D of the Citizenship Act; Khan has not challenged that notice in his court petition, Bollywood Hungama reports.", "sources": ["bbhKhanOct19"] },
     { "date": "2026-10-19", "phase": "s2", "label": "confirmed", "added": "2026-10-19T22:50:00Z", "text": "A Special Executive Magistrate court in Delhi extends the judicial custody of CJP spokespeople Saurav Das and Ashutosh Ranka by two days after their initial five-day remand ends, following a request from Delhi Police; the order's basis has not been made public, The South First and ThePrint report.", "sources": ["southfirstOct19", "theprintOct19b"] },
     { "date": "2026-10-19", "phase": "s2", "label": "reported", "added": "2026-10-19T22:50:00Z", "text": "CJP legal head Ratna Singh calls the extension \"absurd\" and accuses Delhi Police and prosecutors of \"deliberate delay tactics,\" saying a hearing set for noon was repeatedly postponed until about 5:30pm, The South First reports.", "sources": ["southfirstOct19"] },
-    { "date": "2026-10-19", "phase": "s2", "label": "reported", "added": "2026-10-19T22:50:00Z", "text": "Defence lawyer Pushp Sharma says the magistrate questioned sureties alone and rejected one over what he calls a \"hypertechnical\" passport-photo mismatch; senior advocate Vikas Pahwa calls the continued detention \"illegal custody,\" arguing the law cited has no provision for holding someone over an already-filed bond, ThePrint reports.", "sources": ["theprintOct19b"] }
+    { "date": "2026-10-19", "phase": "s2", "label": "reported", "added": "2026-10-19T22:50:00Z", "text": "Defence lawyer Pushp Sharma says the magistrate questioned sureties alone and rejected one over what he calls a \"hypertechnical\" passport-photo mismatch; senior advocate Vikas Pahwa calls the continued detention \"illegal custody,\" arguing the law cited has no provision for holding someone over an already-filed bond, ThePrint reports.", "sources": ["theprintOct19b"] },
+    { "date": "2026-10-21", "phase": "s2", "label": "confirmed", "added": "2026-10-24T08:30:00Z", "text": "UN human rights experts call on India to immediately stop using \"excessive force\" against CJP-led protesters, saying police have used lathi charges against unarmed students and voicing particular concern about reports of sexual violence and gender-based abuse; they urge an impartial investigation and an end to blanket assembly bans and internet disruptions, Reuters and Al Jazeera report. India has dismissed the criticism as interference in its internal affairs.", "sources": ["reutersUNExcessive", "ajUNExcessive"] }
   ],
   "claims": [
     { "title": "What the Chief Justice meant", "label": "disputed", "a": "Reports and critics: he likened unemployed youth to cockroaches and parasites.", "aSrc": ["fpj"], "b": "The Chief Justice: he was misquoted and meant people entering professions with fake degrees.", "bSrc": ["quint"], "status": "Both accounts are on record." },
@@ -184,7 +185,7 @@
     ["Return and July protests", ["etvReturn", "mooknayakReturn", "reutersProfile", "kaumudiProfile", "ktJul19", "apJul20", "ajJul20", "apJul21", "cgfoe", "npr", "apJul25", "ajJul25"]],
     ["August and September", ["reutersParty", "ktSep5", "weekSep5", "sentinel", "kaumudiLatur", "awaaz"]],
     ["Season 2", ["prothom", "uni", "print", "btFlight", "telangana", "qatar", "ktSecond", "ktRelease", "printFuneral", "apOct14", "afpOct14", "ajOct16", "diOct16", "dawnOct16", "gulfOct16", "ptiOct16", "etvOct16", "printOct16", "weekOct16", "tribuneOct16", "aniOct16"]],
-    ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16", "ptiOct17", "iansOct17", "statesmanOct17", "hansOct17", "barandbenchOct17", "livelawOct17", "aajtakOct17", "reutersOct17", "weekOct17", "dcAniOct15", "ttIansOct15", "reutersKhanOct15", "dcPtiOct15", "bbKhanOct15", "weekKhanOct17", "hawkIansOct17", "bbhKhanOct19", "daijiKhanOct19", "southfirstOct19", "theprintOct19b", "opindiaOct20", "aniOct20b", "statesmanOct20", "organiserOct21", "thewireOct21", "iansOct21", "barandbenchOct21", "onmanoramaOct21", "aniOct21release", "indiatvOct21release", "oneindiaOct21release", "theprintOct22", "deccanOct22", "fpjOct22", "thewireOct22", "aniOct22b", "aniOct23sem", "siasatOct23", "apnliveOct23"]]
+    ["From the ground", ["printStalin", "uniOct14", "weekAug7", "siasatOct16", "dcOct16", "ptiOct17", "iansOct17", "statesmanOct17", "hansOct17", "barandbenchOct17", "livelawOct17", "aajtakOct17", "reutersOct17", "weekOct17", "dcAniOct15", "ttIansOct15", "reutersKhanOct15", "dcPtiOct15", "bbKhanOct15", "weekKhanOct17", "hawkIansOct17", "bbhKhanOct19", "daijiKhanOct19", "southfirstOct19", "theprintOct19b", "opindiaOct20", "aniOct20b", "statesmanOct20", "organiserOct21", "thewireOct21", "iansOct21", "barandbenchOct21", "onmanoramaOct21", "aniOct21release", "indiatvOct21release", "oneindiaOct21release", "theprintOct22", "deccanOct22", "fpjOct22", "thewireOct22", "aniOct22b", "aniOct23sem", "siasatOct23", "apnliveOct23", "reutersUNExcessive", "ajUNExcessive"]]
   ],
   "sources": {
     "newslaundry": ["Newslaundry", "https://www.newslaundry.com/amp/story/2026%2F05%2F12%2Fwhy-neet-ug-2026-has-been-cancelled"],
@@ -285,7 +286,9 @@
     "aniOct22b": ["ANI", "https://aninews.in/news/national/general-news/cjp-activists-saurabh-das-ashutosh-ranka-skip-crime-branch-questioning-seek-more-time20261022135539/"],
     "aniOct23sem": ["ANI", "https://www.aninews.in/news/national/politics/sem-court-verifies-securities-of-cjp-activists-ranka-sourav-das-ajinkya-shinde-hearing-in-november-third-week20261023180543/"],
     "siasatOct23": ["Siasat", "https://www.siasat.com/delhi-hc-rejects-neha-bora-plea-over-police-notice-on-peace-bond-3563317/"],
-    "apnliveOct23": ["APN Live", "https://apnlive.com/india-news/delhi-high-court-neha-bora-peace-bond-plea/"]
+    "apnliveOct23": ["APN Live", "https://apnlive.com/india-news/delhi-high-court-neha-bora-peace-bond-plea/"],
+    "reutersUNExcessive": ["Internazionale (Reuters)", "https://www.internazionale.it/ultime-notizie-reuters/2026/10/21/un-experts-urge-indian-authorities-to-cease-use-of-excessive-force-to-curb-protests"],
+    "ajUNExcessive": ["Al Jazeera", "https://www.aljazeera.com/news/2026/10/21/un-experts-call-on-india-to-stop-using-excessive-force-against-protesters"]
   },
   "nav": "Cockroach movement",
   "region": "India",
