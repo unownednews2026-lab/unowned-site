@@ -544,7 +544,7 @@ ${items.map(({ s, e }) => `<item><title>${esc(`${long(e.date)}: ${e.text.split("
   buildBriefing({ briefings, stories, write, simple, esc, long, SITE });
   const urls = ["/", ...stories.map((s) => `/${s.slug}/`), ...(briefings.length ? ["/briefing/"] : []), "/submit/", "/how-we-work/", "/who-owns-unowned/", "/privacy/", "/corrections/"];
   write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE}${u}</loc></url>`).join("")}</urlset>\n`);
-  write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
+  write("robots.txt", `User-agent: *\nAllow: /\nDisallow: /kit/\nSitemap: ${SITE}/sitemap.xml\n`);
   console.log(`Built ${stories.length} story page(s) and ${urls.length} pages into ./${OUT}`);
   if (LABEL_WARNINGS.length) console.warn(`LABEL CHECK: ${LABEL_WARNINGS.length} item(s) need attention\n` + LABEL_WARNINGS.map((w) => "  - " + w).join("\n"));
   else console.log("LABEL CHECK: every confirmed item has two or more independent sources");
