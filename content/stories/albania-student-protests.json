@@ -3,10 +3,7 @@
   "title": "Albania's student protests",
   "nav": "Albania protests",
   "region": "Albania",
-  "topics": [
-    "Protest",
-    "Education"
-  ],
+  "topics": ["Protest", "Education"],
   "kicker": "Story tracker · Albania",
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
@@ -204,5 +201,5 @@
     "albDailyOct21Reject": ["Albanian Daily News", "https://albaniandailynews.com/news/demonstrators-announce-new-rally-outside-parliament"],
     "courthouseOct23": ["Courthouse News", "https://www.courthousenews.com/in-albania-a-protest-movement-faces-a-defiant-prime-minister/"]
   },
-  "checkedAt": "2026-10-24T02:35:00Z"
+  "checkedAt": "2026-10-24T06:30:00Z"
 }
