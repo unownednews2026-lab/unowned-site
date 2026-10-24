@@ -11,7 +11,7 @@
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
   "updated": "2026-10-24",
-  "updatedAt": "2026-10-24T08:30:00Z",
+  "updatedAt": "2026-10-24T10:30:00Z",
   "summary": [
     "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
     "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days. The interior minister says 156 people were injured over four days, including 97 police officers and 45 protesters.",
@@ -98,7 +98,8 @@
     { "date": "2026-10-22", "phase": "spread", "label": "reported", "added": "2026-10-23T22:20:50Z", "text": "Parliamentary leaders reject an opposition request to debate the student protests, now in their tenth day; opposition MPs block the podium and bang on desks while other lawmakers keep voting on legislation, holding up photos of students they say were injured by police in earlier clashes, Euronews reports.", "sources": ["euronewsOct23parl"] },
     { "date": "2026-10-23", "phase": "spread", "label": "reported", "added": "2026-10-24T04:30:00Z", "text": "In a video message on Friday, Rama calls the protesters \"criminals, communists, political opponents\" and says enemies in Serbia, Greece, Russia and Iran are stoking the unrest, widening the blame beyond the Iran and Russia claims he made on October 19. He spends part of the video reading out alleged criminal records, without naming them, for men he describes as mostly in their 30s who were arrested over the past ten days, Courthouse News reports.", "sources": ["courthouseOct23"] },
     { "date": "2026-10-24", "phase": "spread", "label": "reported", "added": "2026-10-24T04:30:00Z", "text": "Another mass protest is planned outside the prime minister's building for Saturday, October 24, Courthouse News reports, as the movement enters its twelfth day.", "sources": ["courthouseOct23"] },
-    { "date": "2026-10-24", "phase": "spread", "label": "reported", "added": "2026-10-24T08:30:00Z", "text": "Demonstrators reject Prime Minister Rama's offer of dialogue at Saturday's rally outside his office in Tirana, overturning concrete blocks painted with the word \"dialogue\"; medical students and healthcare workers join the protest, TVP World reports.", "sources": ["tvpOct24"] }
+    { "date": "2026-10-24", "phase": "spread", "label": "reported", "added": "2026-10-24T08:30:00Z", "text": "Demonstrators reject Prime Minister Rama's offer of dialogue at Saturday's rally outside his office in Tirana, overturning concrete blocks painted with the word \"dialogue\"; medical students and healthcare workers join the protest, TVP World reports.", "sources": ["tvpOct24"] },
+    { "date": "2026-10-24", "phase": "spread", "label": "confirmed", "added": "2026-10-24T10:30:00Z", "text": "Trade unions, university lecturers, doctors and a cultural workers' union join Saturday's rally outside the prime minister's office in Tirana, alongside students from other cities and members of Albania's diaspora, Albanian Daily News and Albeu.com report. The opposition Democratic Party also urges its members to support the demonstration.", "sources": ["albDailyOct24Unions", "albeuOct24Day12"] }
   ],
   "claims": [
     { "title": "Who is behind the violence?", "label": "disputed", "a": "Rama says the unrest is not a student phenomenon and blames foreign hands and the opposition, which he says is using masked people. Police urge peaceful protesters to distance themselves from masked agitators.", "aSrc": ["ajOct16", "dwOct16", "occrpOct"], "b": "Students say they are protesting university conditions, costs and job prospects after months of ignored peaceful protest. Opposition leader Sali Berisha denies the opposition is involved in the violence.", "bSrc": ["reutersOct14", "reutersOct16", "dwOct16"], "status": "Open. Neither side has published evidence; police investigations are under way." },
@@ -152,7 +153,7 @@
   "sourceGroups": [
     ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
     ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
-    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy", "afpOct18", "euroAlDrone", "kohaDrone", "ajOct18sixth", "srpskeOct18", "euronewsOct19vid", "euronewsOct19", "dailySabahOct19", "inAlbaniaOct20", "anewsOct20", "argumentumOct20", "albDailyOct21Reject", "nationPkOct21", "albDailyOct22", "euronewsOct23parl", "courthouseOct23", "tvpOct24"]]
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy", "afpOct18", "euroAlDrone", "kohaDrone", "ajOct18sixth", "srpskeOct18", "euronewsOct19vid", "euronewsOct19", "dailySabahOct19", "inAlbaniaOct20", "anewsOct20", "argumentumOct20", "albDailyOct21Reject", "nationPkOct21", "albDailyOct22", "euronewsOct23parl", "courthouseOct23", "tvpOct24", "albDailyOct24Unions", "albeuOct24Day12"]]
   ],
   "sources": {
     "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
@@ -204,7 +205,9 @@
     "euronewsOct23parl": ["Euronews", "https://www.euronews.com/video/2026/10/23/albania-parliament-descends-into-chaos-as-mps-clash-over-protests"],
     "albDailyOct21Reject": ["Albanian Daily News", "https://albaniandailynews.com/news/demonstrators-announce-new-rally-outside-parliament"],
     "courthouseOct23": ["Courthouse News", "https://www.courthousenews.com/in-albania-a-protest-movement-faces-a-defiant-prime-minister/"],
-    "tvpOct24": ["TVP World", "https://tvpworld.com/96102933/albania-protests-students-reject-rama-talks-on-day-11"]
+    "tvpOct24": ["TVP World", "https://tvpworld.com/96102933/albania-protests-students-reject-rama-talks-on-day-11"],
+    "albDailyOct24Unions": ["Albanian Daily News", "https://albaniandailynews.com/news/protests-enter-day-12-as-nationwide-demonstration-draws-support-from-unions-doctors-and-artists"],
+    "albeuOct24Day12": ["Albeu.com", "https://albeu.com/english/day-12-of-the-student-protests-national-rally-today-lecturers-doctors-artists-and-students-from-across-albania-gather-in-tirana/1070852/"]
   },
   "checkedAt": "2026-10-24T06:30:00Z"
 }
