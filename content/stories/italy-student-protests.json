@@ -10,8 +10,8 @@
   "kicker": "Story tracker · Italy",
   "dek": "Students and cost-of-living protesters march against Giorgia Meloni's government, the clashes with police in Turin, Milan and Bologna, and the unions' call for a general strike.",
   "status": "Ongoing",
-  "updated": "2026-10-24",
-  "updatedAt": "2026-10-24T16:25:53Z",
+  "updated": "2026-10-25",
+  "updatedAt": "2026-10-25T08:33:00Z",
   "summary": [
     "On Friday, October 16, students marched in dozens of Italian cities on what organisers called \"No Meloni Day\", protesting run-down schools, a decree capping foreign pupils at 30% of a class, the cost of living and military spending. Organisers say more than 400,000 took part; the Education Ministry puts participation in the school strike at about 1%. Police used water cannon and tear gas in Turin, and bottles and firecrackers were thrown at police in Rome.",
     "On Saturday, October 17, cost-of-living marches called by the \"Italia in Piazza\" movement were held in several cities. In Milan, groups broke away and clashed with police around Piazza Duomo; Il Giorno, citing police and the prefecture, and ANSA report about 50 people detained; injury figures differ between reports. In Rome, the CGIL union held a separate rally and announced a general strike for November 20.",
@@ -71,6 +71,7 @@
     { "date": "2026-10-17", "phase": "costliving", "label": "reported", "added": "2026-10-17T22:25:35Z", "text": "Bologna mayor Matteo Lepore calls the scenes near the station unacceptable and says the march did not appear to have been authorised, AGI reports.", "sources": ["agiOct17"] },
     { "date": "2026-10-18", "phase": "next", "label": "confirmed", "added": "2026-10-19T21:58:23Z", "hot": true, "milestone": "Second night of unrest in Milan", "text": "For a second evening running, hooded groups described by police as mostly minors from Milan's outskirts loot stores and clash with police around Piazza Duomo and Via Torino, two days after the October 17 cost-of-living march, Il Post and ANSA report. A Carrefour supermarket, a Decathlon store and other shops are raided, windows are smashed near La Scala, and the Duomo metro station is shut again.", "sources": ["ilpostOct19", "ansaOct19a"] },
     { "date": "2026-10-18", "phase": "next", "label": "disputed", "added": "2026-10-19T21:58:23Z", "text": "Tolls for the two nights vary by outlet. ANSA, citing police sources, reports 271 people taken to police stations (220 of them minors), 32 arrests (23 minors, 13 foreign nationals), 28 people reported to prosecutors, 174 held under a new preventive-detention power, and 14 police officers injured on the Sunday. Fanpage, citing police figures, reports about 270 people stopped over the two days, 160 taken to a police station on the Sunday alone (about 80% minors), 16 arrests on the Saturday (11 of them minors), 22 people reported and 104 police officers injured on the Saturday.", "sources": ["ansaOct19a", "fanpageOct19"] },
+    { "date": "2026-10-18", "phase": "next", "label": "reported", "added": "2026-10-25T08:33:00Z", "text": "The Associated Press separately reports police arrested 45 people over the two nights of Milan violence, 34 of them minors, as roughly 2,000 very young people took part in the looting and clashes — a third, differing count alongside ANSA's and Fanpage's figures.", "sources": ["apOct24milan"] },
     { "date": "2026-10-19", "phase": "next", "label": "confirmed", "added": "2026-10-19T21:58:23Z", "text": "President Sergio Mattarella says \"every violence is unacceptable\" and calls for \"an intelligent, thorough analysis\" of what he calls \"unprecedented actors\" behind the unrest, while voicing \"full solidarity\" with police, ANSA and Il Fatto Quotidiano report.", "sources": ["ansaOct19b", "fattoOct19"] },
     { "date": "2026-10-19", "phase": "next", "label": "reported", "added": "2026-10-19T21:58:23Z", "text": "Luxury boutiques including Chanel, Hermès and Pomellato shut or lower their shutters on Via Montenapoleone, fearing further unrest, ANSA reports. A newly named \"Movimento 17 Ottobre\" announces weekly Saturday protests in Italian cities, starting in Milan, with the slogan \"until this thieving government falls\"; Mayor Giuseppe Sala says the tension is not over.", "sources": ["ansaOct19a"] },
     { "date": "2026-10-19", "phase": "next", "label": "confirmed", "added": "2026-10-21T08:24:14Z", "text": "Open and Avvenire report that Movimento 17 Ottobre's organisers remain anonymous, coordinating through an Instagram page and an invite-only Telegram channel (with a move to Signal under consideration) and sharing tips for hiding their identities from investigators. The group calls for a \"permanent mobilisation\" every Saturday at 15:00, naming Piazza Duomo in Milan, Piazza Nettuno in Bologna, Piazza Castello in Turin and Circo Massimo in Rome, plus Bari, Florence, Genoa and Padua with no square specified; Open reports the series is to start on October 24.", "sources": ["openOct19movimento", "avvenireOct19movimento"] },
@@ -143,7 +144,7 @@
     ["Background and the build-up", ["afpOct16"]],
     ["October 16: \"No Meloni Day\"", ["soleOct16", "avvenireOct16", "mirrorOct16", "repubblicaOct16"]],
     ["Latest", ["reutersOct17", "openOct17", "skyMilan", "ilgiornoOct17", "skyCgil", "ansaMilanOct17", "ansaOct17", "fattoOct17", "openMeloniOct17", "agiOct17", "orizzonteOct16"]],
-    ["October 18-19: second night in Milan", ["ilpostOct19", "ansaOct19a", "ansaOct19b", "fanpageOct19", "fattoOct19", "vistanetOct20", "ilsud24Oct20"]],
+    ["October 18-19: second night in Milan", ["apOct24milan", "ilpostOct19", "ansaOct19a", "ansaOct19b", "fanpageOct19", "fattoOct19", "vistanetOct20", "ilsud24Oct20"]],
     ["October 20: the decree", ["ilpostOct20decreto", "fattoOct20decreto", "fanpageOct20decreto", "juornoOct20decreto", "unioneSardaOct20decreto", "moneyOct21decreto"]],
     ["October 22: the decree published", ["soleOct22decreto", "scuolainformaOct23decreto"]],
     ["Movimento 17 Ottobre", ["openOct19movimento", "avvenireOct19movimento"]],
@@ -171,6 +172,7 @@
     "ilpostOct19": ["Il Post", "https://www.ilpost.it/2026/10/19/milano-devastazioni-saccheggi-scontri-negozi-polizia-manifestazione/"],
     "ansaOct19a": ["ANSA", "https://www.ansa.it/sito/notizie/cronaca/2026/10/19/paura-di-nuovi-disordini-a-milano-chiudono-i-negozi-del-lusso_0d0d286f-7f8f-420a-9737-2566da0ba8a2.html"],
     "ansaOct19b": ["ANSA", "https://www.ansa.it/sito/notizie/cronaca/2026/10/19/mattarella-a-milano-violenze-inaccettabili-serve-unanalisi-approfondita_397d8359-98ac-4ba2-840f-a55dcb988745.html"],
+    "apOct24milan": ["AP (via ABC News)", "https://abcnews.com/International/wireStory/hundreds-soldiers-milan-protests-planned-europe-137534380"],
     "fanpageOct19": ["Fanpage", "https://www.fanpage.it/milano/il-bilancio-degli-scontri-in-duomo-a-milano-oltre-270-in-questura-e-molti-sono-minorenni-piu-di-100-feriti/"],
     "fattoOct19": ["Il Fatto Quotidiano", "https://www.ilfattoquotidiano.it/2026/10/19/scontri-milano-mattarella-violenze-analisi-notizie/8543557/"],
     "vistanetOct20": ["Vistanet", "https://www.vistanet.it/cagliari/2026/10/20/giro-di-vite-del-governo-sulla-sicurezza-arriva-il-decreto-legge-con-fermo-dei-minori-arresto-differito-e-militari-a-milano/"],
@@ -192,5 +194,5 @@
     "euronewsOct24b": ["Euronews", "https://www.euronews.com/2026/10/24/italy-deploys-hundreds-of-soldiers-as-nationwide-protests-raise-fears-of-fresh-violence"],
     "soleOct24squares": ["Il Sole 24 Ore", "https://en.ilsole24ore.com/art/squares-cordoned-off-across-italia-protest-marches-in-rome-milan-and-turin-AJT6ndtB"]
   },
-  "checkedAt": "2026-10-25T02:23:37Z"
+  "checkedAt": "2026-10-25T08:35:00Z"
 }
