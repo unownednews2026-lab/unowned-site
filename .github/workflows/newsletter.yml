@@ -5,6 +5,7 @@ name: Daily email
 on:
   schedule:
     - cron: "35 6 * * *"
+    - cron: "5 8 * * *"    # retry: sends only if the 06:35 run didn't
   workflow_dispatch:
 permissions:
   contents: read
@@ -14,7 +15,7 @@ concurrency:
 jobs:
   send:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Send the daily email
