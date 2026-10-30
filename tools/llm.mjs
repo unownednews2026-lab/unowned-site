@@ -16,17 +16,21 @@ async function gemini(model, text, temperature) {
 async function openaiStyle(url, key, model, text, temperature) {
   if (!key) return { skip: true };
   const r = await fetch(url, {
-    method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+    method: "POST", headers: { "Content-Type": "application/json", Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", Authorization: `Bearer ${key}` },
     body: JSON.stringify({ model, temperature, messages: [{ role: "user", content: text }] }), signal: AbortSignal.timeout(150000),
   });
-  if (!r.ok) return { status: `${r.status} ${(await r.text()).slice(0, 120).replace(/\s+/g, " ")}` };
-  return { text: (await r.json()).choices?.[0]?.message?.content || "" };
+  const body = await r.text();
+  if (!r.ok) return { status: `${r.status} ${body.slice(0, 120).replace(/\s+/g, " ")}` };
+  try { return { text: JSON.parse(body).choices?.[0]?.message?.content || "" }; }
+  catch { return { status: `unreadable reply: ${body.slice(0, 80).replace(/\s+/g, " ")}` }; }
 }
 
 const PROVIDERS = [
   ["gemini-3.8-flash", (t, x) => gemini("gemini-3.8-flash", t, x)],
   ["gemini-flash-latest", (t, x) => gemini("gemini-flash-latest", t, x)],
   ["github:openai/gpt-4.1-mini", (t, x) => openaiStyle("https://models.github.ai/inference/chat/completions", process.env.GITHUB_TOKEN, "openai/gpt-4.1-mini", t, x)],
+  // Older GitHub Models address, same free allowance; used if the new one misbehaves.
+  ["github-azure:gpt-4o-mini", (t, x) => openaiStyle("https://models.inference.ai.azure.com/chat/completions", process.env.GITHUB_TOKEN, "gpt-4o-mini", t, x)],
   ["github:meta/Llama-3.3-70B-Instruct", (t, x) => openaiStyle("https://models.github.ai/inference/chat/completions", process.env.GITHUB_TOKEN, "meta/Llama-3.3-70B-Instruct", t, x)],
   ["groq:llama-3.3-70b-versatile", (t, x) => openaiStyle("https://api.groq.com/openai/v1/chat/completions", process.env.GROQ_API_KEY, "llama-3.3-70b-versatile", t, x)],
   ["gemini-flash-lite-latest", (t, x) => gemini("gemini-flash-lite-latest", t, x)],
