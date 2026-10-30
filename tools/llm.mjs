@@ -19,7 +19,7 @@ async function openaiStyle(url, key, model, text, temperature) {
     method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
     body: JSON.stringify({ model, temperature, messages: [{ role: "user", content: text }] }), signal: AbortSignal.timeout(150000),
   });
-  if (!r.ok) return { status: r.status };
+  if (!r.ok) return { status: `${r.status} ${(await r.text()).slice(0, 120).replace(/\s+/g, " ")}` };
   return { text: (await r.json()).choices?.[0]?.message?.content || "" };
 }
 
@@ -39,7 +39,7 @@ export async function ask(text, { temperature = 0.2, prefer = 0, log = console.l
   for (const [name, call] of order) {
     for (let tries = 0; tries < 2; tries++) {
       let res;
-      try { res = await call(text, temperature); } catch (e) { res = { status: e.name === "TimeoutError" ? "timeout" : "error" }; }
+      try { res = await call(text, temperature); } catch (e) { res = { status: e.name === "TimeoutError" ? "timeout" : `error ${String(e.cause?.code || e.message).slice(0, 80)}` }; }
       if (res.skip) break;
       if (res.text) { used.add(name); return res.text; }
       if ((res.status === 429 || res.status === 503) && tries === 0) { log(`${name}: busy (${res.status}), waiting 30s`); await wait(30000); continue; }
