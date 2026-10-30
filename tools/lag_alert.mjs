@@ -8,6 +8,7 @@ import { headlinesSince } from "./signals.mjs";
 const REPO = process.env.GITHUB_REPOSITORY;
 const OUTLETS = JSON.parse(readFileSync("tools/outlets.json", "utf8")).domains;
 const trusted = (h) => OUTLETS.some((d) => h === d || h.endsWith("." + d));
+const OPINION = /^(opinion|comment|editorial|analysis|letters?|column|explainer|podcast)\b|\b(opinion|editorial)\s*[:|]/i;
 const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 
 const behind = [];
@@ -15,7 +16,7 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
   const s = JSON.parse(readFileSync(`content/stories/${f}`, "utf8"));
   const age = (Date.now() - Date.parse(s.updatedAt || s.updated)) / 36e5;
   if (age < 12) continue;
-  const h = (await headlinesSince(s).catch(() => [])).filter((x) => x.domain && trusted(x.domain));
+  const h = (await headlinesSince(s).catch(() => [])).filter((x) => x.domain && trusted(x.domain) && !OPINION.test(x.title));
   if (h.length) behind.push(`- **${s.title}**: last update ${Math.round(age)} hours ago; ${h.length} newer headline(s) from established outlets, e.g. "${h[0].title}"`);
 }
 try {
