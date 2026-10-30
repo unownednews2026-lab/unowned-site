@@ -15,7 +15,7 @@ const REPO = process.env.GITHUB_REPOSITORY;
 const WRITER = [process.env.GEMINI_WRITER, "gemini-3.8-flash", "gemini-flash-latest"].filter(Boolean);
 const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-3.8-flash-lite", "gemini-flash-lite-latest"].filter(Boolean);
 const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
-const say = (m) => console.log(`backup desk: ${m}`);
+const say = (m) => console.log(/busy|: \d{3}|no answer|timeout|error/.test(m) ? `::notice::backup desk: ${m}` : `backup desk: ${m}`);
 // Any unexpected error is reported on the run page (as a note, so it never sends a failure email).
 for (const ev of ["uncaughtException", "unhandledRejection"]) process.on(ev, (e) => {
   console.log(`::warning::backup desk crashed: ${String(e && (e.stack || e.message || e)).replace(/\n/g, " | ").slice(0, 900)}`);
@@ -263,7 +263,10 @@ ${cited.map((a, i) => `[${i + 1}] ${a.domain}: ${a.title}\n${a.text}`).join("\n\
 for (const { f, h } of hot) {
   const s = JSON.parse(readFileSync(`content/stories/${f}`, "utf8"));
   if (published.includes(s.slug) || Date.now() - Date.parse(s.updatedAt || s.updated) < 8 * 36e5) continue;
-  const pick = (h || []).find((x) => x.domain && trusted(x.domain) && !/^(opinion|comment|editorial|analysis|letters?|column|explainer|podcast)\b|\b(opinion|editorial)\s*[:|]/i.test(x.title) && x.link && x.title && !UNSAFE.test(x.title) && !s.events.some((e) => overlap(e.text, x.title) > 0.5));
+  // The headline must mention the story itself, not just the country (e.g. an airport-delay headline is not about asylum unrest).
+  const watchWords = (JSON.parse(readFileSync("tools/watch.json", "utf8"))[s.slug] || s.title).toLowerCase().split(/[^a-zà-ÿ0-9]+/).filter((w) => w.length >= 4 && !(s.region || "").toLowerCase().includes(w) && !["south", "africa", "india", "italy", "france", "canada", "albania"].includes(w));
+  const onTopic = (title) => watchWords.some((w) => title.toLowerCase().includes(w.slice(0, Math.max(5, w.length - 2))));
+  const pick = (h || []).find((x) => onTopic(x.title) && x.domain && trusted(x.domain) && !/^(opinion|comment|editorial|analysis|letters?|column|explainer|podcast)\b|\b(opinion|editorial)\s*[:|]/i.test(x.title) && x.link && x.title && !UNSAFE.test(x.title) && !s.events.some((e) => overlap(e.text, x.title) > 0.5));
   if (!pick) { report.push(`- ${s.slug}: no update for 20+ hours, but no headline from an established outlet to use`); continue; }
   const headline = pick.title.replace(/\s+-\s+[^-]+$/, "").trim();            // Google News adds " - Outlet" at the end
   const outlet = pick.outlet || pick.domain;
