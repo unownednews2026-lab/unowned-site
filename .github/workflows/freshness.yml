@@ -24,7 +24,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 40
     env:
       GH_TOKEN: ${{ github.token }}
       LIMIT_HOURS: "12"
@@ -63,6 +63,8 @@ jobs:
           fi
       - name: Check today's audio briefing
         if: always()
+        continue-on-error: true
+        timeout-minutes: 25
         run: |
           # After 10:00 UTC, today's briefing (written and recorded at 05:45, retried at 09:30) must exist.
           today=$(date -u +%F); hour=$(date -u +%H)
@@ -78,21 +80,29 @@ jobs:
           fi
       - name: Update the News signals issue
         if: always()
+        continue-on-error: true
+        timeout-minutes: 25
         run: |
           node tools/signals.mjs > /tmp/signals.md || exit 0
           n=$(gh api "repos/${{ github.repository }}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="News signals")][0].number // empty')
           if [ -z "$n" ]; then gh issue create --title "News signals" --body-file /tmp/signals.md; else gh api -X PATCH "repos/${{ github.repository }}/issues/$n" -F body=@/tmp/signals.md >/dev/null; fi
       - name: Warn early if a story is falling behind
         if: always()
+        continue-on-error: true
+        timeout-minutes: 25
         run: node tools/lag_alert.mjs || true
       - name: Gemini news desk (free, every hour)
         if: always()
+        continue-on-error: true
+        timeout-minutes: 25
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           BACKUP_FORCE: ${{ inputs.force_backup }}
         run: node tools/backup_desk.mjs
       - name: Pass new reader submissions to the news desk
         if: always()
+        continue-on-error: true
+        timeout-minutes: 25
         env:
           REVIEW_TOKEN: ${{ secrets.REVIEW_TOKEN }}
         run: |

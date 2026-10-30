@@ -35,10 +35,15 @@ if (!hot.length) say("no fresh headlines for any story");
 
 async function gemini(prompt) {
   for (const m of MODELS) {
-    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
-      method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": KEY },
-      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { temperature: 0.2 } }),
-    });
+    let r = null;
+    for (let tries = 0; tries < 2; tries++) {
+      r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
+        method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": KEY },
+        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { temperature: 0.2 } }),
+      });
+      if (r.status !== 429 || tries) break;
+      say(`model ${m}: busy (429), waiting a minute`); await new Promise((x) => setTimeout(x, 60000));   // per-minute limit
+    }
     if (!r.ok) { say(`model ${m}: HTTP ${r.status} ${((await r.text()).match(/"message": "([^"]{0,160})/) || [])[1] || ""}`); continue; }
     const j = await r.json();
     say(`model ${m} answered`);

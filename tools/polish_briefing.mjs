@@ -26,17 +26,19 @@ const facts = stories.map((s) => {
 const source = b.script.join("\n") + "\n" + facts;
 const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean);
 async function ask(text, temperature) {
-  for (const m of MODELS) {
+  for (const m of MODELS) for (let tries = 0; tries < 2; tries++) {
     try {
       const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
         method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": KEY },
         body: JSON.stringify({ contents: [{ role: "user", parts: [{ text }] }], generationConfig: { temperature } }),
         signal: AbortSignal.timeout(90000),
       });
-      if (!r.ok) { say(`model ${m}: HTTP ${r.status}`); continue; }
+      if (r.status === 429 && tries === 0) { say(`model ${m}: busy (429), waiting a minute`); await new Promise((x) => setTimeout(x, 60000)); continue; }
+      if (!r.ok) { say(`model ${m}: HTTP ${r.status}`); break; }
       const out = ((await r.json()).candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
       if (out) return out;
-    } catch (e) { say(`model ${m}: ${e.message}`); }
+      break;
+    } catch (e) { say(`model ${m}: ${e.message}`); break; }
   }
   return "";
 }
@@ -67,9 +69,11 @@ MATERIAL:
 ${source}`;
 
 let script = [], feedback = "";
-for (let attempt = 1; attempt <= 2 && !script.length; attempt++) {
+for (let attempt = 1; attempt <= 3 && !script.length; attempt++) {
   const draft = (json(await ask(prompt + feedback, 0.3)).script || []).map((p) => String(p).replace(/\s+/g, " ").trim()).filter(Boolean);
   if (!draft.length) { say("no usable reply"); break; }
+  const n = draft.join(" ").split(/\s+/).length;
+  if (n > 470 || n < 300) { feedback = `\n\nYour previous draft was ${n} words. It MUST be between 340 and 430 words: ${n > 470 ? "shorten every segment, drop background detail, keep one line per headline" : "add one more detail to the busiest stories"}.`; say(`attempt ${attempt}: ${n} words, asking for 340 to 430`); continue; }
   // Independent second check by a separate request: does the draft stick to the material and our rules?
   const review = json(await ask(`You are a strict editor. Compare the DRAFT news script with the MATERIAL it must be based on.
 List every sentence in the DRAFT that: adds any fact, number, name, place or cause not in the MATERIAL; drops or changes attribution (who said or reported it); makes something sound more certain than its label in the MATERIAL; names a private person (arrested, charged, injured, killed, victims, witnesses, minors, ordinary protesters); or uses opinion, loaded or graphic wording.
