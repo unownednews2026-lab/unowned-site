@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths: ["content/briefings/*.json", "tools/briefing_audio.py"]
   schedule:
-    - cron: "45 5 * * *"   # 05:45 UTC every day: writes today's script from the published timelines and records it
+    - cron: "10 7 * * *"   # 07:10 UTC every day (just after Gemini's free daily allowance resets): writes, polishes and records today's script
     - cron: "30 9 * * *"   # 09:30 UTC retry, in case the first run failed or GitHub skipped it (does nothing if today's briefing exists)
   workflow_dispatch:
 permissions:
