@@ -16,7 +16,7 @@ concurrency:
 jobs:
   record:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -39,6 +39,8 @@ jobs:
       - name: Write today's script if it's missing
         run: node tools/auto_briefing.mjs --refresh
       - name: Polish today's script with Gemini (keeps the plain one if any check fails)
+        continue-on-error: true
+        timeout-minutes: 8
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node tools/polish_briefing.mjs || true
