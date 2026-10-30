@@ -61,6 +61,9 @@ async function resolve(url) {
   } catch { return null; }
 }
 
+// Sensitive developments are never published by Gemini alone: they go to the Claude editor's queue instead.
+const SENSITIVE = /\b(killed|dead|death|deaths|died|dies|murder\w*|rape\w*|sexual|suicide|shot dead|lynch\w*|accused of|charged with|alleged(ly)? (abuse|assault|corruption|fraud))\b/i;
+const queue = [];
 const UNSAFE = /\bnamed (by|as)\b|\bidentified (by|as)\b|\b(behead|dismember|decapitat|gore|graphic video)/i;
 const words = (t) => new Set(t.toLowerCase().match(/[a-z]{4,}/g) || []);
 const overlap = (a, b) => { const A = words(a), B = words(b); let n = 0; for (const w of A) if (B.has(w)) n++; return n / Math.max(1, Math.min(A.size, B.size)); };
@@ -189,6 +192,13 @@ Answer ONLY with JSON: {"ok": true|false, "reason": "..."}. "ok" is true ONLY if
       try { v = JSON.parse(verdict.slice(verdict.indexOf("{"), verdict.lastIndexOf("}") + 1)); } catch {}
       if (v.ok !== true) why.push(`fact-check: ${String(v.reason || "no clear yes").slice(0, 120)}`);
     }
+    if (!why.length && SENSITIVE.test(it.text)) {
+      queue.push(`**${s.slug}** — sensitive (deaths, abuse or accusations), needs the editor: "${it.text}"\n  Sources: ${cited.map((a) => a.url).join(" , ")}`);
+      report.push(`- ${s.slug}: sent to the editor queue (sensitive): "${it.text.slice(0, 80)}…"`); continue;
+    }
+    // Real news from 2+ established outlets that failed the automatic fact-check: worth a human-grade look.
+    if (why.some((w) => w.startsWith("fact-check")) && new Set(cited.map((a) => a.domain)).size >= 2)
+      queue.push(`**${s.slug}** — reported by ${cited.length} established outlets but failed the automatic fact-check (${why.join(", ").slice(0, 160)}): "${(it.text || "").slice(0, 200)}"\n  Sources: ${cited.map((a) => a.url).join(" , ")}`);
     if (why.length) { report.push(`- ${s.slug}: skipped "${(it.text || "").slice(0, 80)}…" (${why.join(", ")})`); continue; }
     // Labels are capped: "confirmed" needs two different established outlets; disputed/alleged stay as given.
     let label = it.label;
@@ -246,6 +256,16 @@ if (stamp) for (const { f } of stories) {
   s.checkedAt = now;
   writeFileSync(`content/stories/${f}`, JSON.stringify(s, null, 2));
   sh(`node tools/fmt.js content/stories/${f}`);
+}
+
+// Things only the Claude editor should decide go to the "Editor queue" issue; the editor runs only when this has something in it.
+if (queue.length) {
+  writeFileSync("/tmp/queue.md", `${now}\n\n${queue.join("\n\n")}`);
+  try {
+    const q = sh(`gh api "repos/${REPO}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="Editor queue")][0].number // empty'`);
+    if (q) sh(`gh issue comment ${q} --body-file /tmp/queue.md`);
+    else sh(`gh issue create --title "Editor queue" --body "Items the Gemini desk would not publish on its own. The Claude editor handles each one, then comments 'done'." && gh issue comment $(gh api "repos/${REPO}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="Editor queue")][0].number') --body-file /tmp/queue.md`);
+  } catch (e) { say(`editor queue: ${String(e.message).slice(0, 120)}`); }
 }
 
 if (!sh("git status --porcelain content/stories")) { say("nothing to publish"); console.log(report.join("\n")); process.exit(0); }
