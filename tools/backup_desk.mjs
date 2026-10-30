@@ -83,14 +83,34 @@ async function articles(s, h) {
   let out = await articlesFor(watchQ, s);
   if (!out.length && titleQ !== watchQ) out = await articlesFor(titleQ, s);   // second way in, if the first finds nothing readable
   // Third way in: the Google News headlines themselves point at articles; try the ones from established outlets.
-  if (!out.length) for (const x of (h || []).filter((x) => x.domain && trusted(x.domain)).slice(0, 4)) {
+  if (out.length < 3) for (const x of (h || []).filter((x) => x.domain && trusted(x.domain)).slice(0, 5)) {
+    if (out.length >= 5) break;
     const a = await readArticle(x.link, x.domain, x.title);
     if (a && !out.some((o) => o.domain === a.domain)) out.push(a);
   }
   return out;
 }
+/* Google News links don't redirect on their own; ask Google News for the real article address (the same call its web page makes). */
+async function realUrl(url) {
+  const id = (url.match(/news\.google\.com\/(?:rss\/)?articles\/([^?/]+)/) || [])[1];
+  if (!id) return url;
+  try {
+    const page = await (await fetch(`https://news.google.com/articles/${id}`, { headers: { "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(15000) })).text();
+    const sig = (page.match(/data-n-a-sg="([^"]+)"/) || [])[1], ts = (page.match(/data-n-a-ts="([^"]+)"/) || [])[1];
+    if (!sig || !ts) return null;
+    const req = [[["Fbv4je", JSON.stringify(["garturlreq", [["X", "X", ["X", "X"], null, null, 1, 1, "US:en", null, 1, null, null, null, null, null, 0, 1], "X", "X", 1, [1, 1, 1], 1, 1, null, 0, 0, null, 0], id, Number(ts), sig]), null, "generic"]]];
+    const r = await fetch("https://news.google.com/_/DotsSplashUi/data/batchexecute", {
+      method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8", "User-Agent": "Mozilla/5.0" },
+      body: "f.req=" + encodeURIComponent(JSON.stringify(req)), signal: AbortSignal.timeout(15000),
+    });
+    const m = (await r.text()).match(/\\"garturlres\\",\\"(https?:[^\\"]+)\\"/);
+    return m ? m[1] : null;
+  } catch { return null; }
+}
 async function readArticle(url, domain, title) {
   try {
+    url = await realUrl(url);
+    if (!url) return null;
     const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" }, redirect: "follow", signal: AbortSignal.timeout(15000) });
     const host = new URL(r.url).hostname.replace(/^www\./, "");
     if (!trusted(host)) return null;
@@ -143,6 +163,7 @@ for (const { f, s, h } of hot.slice(0, 3)) {
   const newest = [...s.events].sort((a, b) => b.date.localeCompare(a.date))[0];
   const recent = [...s.events].sort((a, b) => (b.added || b.date).localeCompare(a.added || a.date)).slice(0, 6);
   const arts = await articles(s, h);
+  console.log(`::notice::${s.slug}: ${h.length} headline(s), ${h.filter((x) => x.domain && trusted(x.domain)).length} from established outlets, ${arts.length} readable article(s)`);
   if (!arts.length) { report.push(`- ${s.slug}: fresh headlines, but no readable articles found`); continue; }
   const prompt = `You help a careful, neutral news tracker called Unowned. Story: "${s.title}". ${s.dek}
 
@@ -247,11 +268,11 @@ ${cited.map((a, i) => `[${i + 1}] ${a.domain}: ${a.title}\n${a.text}`).join("\n\
   report.push(`### ${s.title}\n` + added.map((a) => `- **${a.label}**: ${a.text}\n  Sources: ${a.cited.map((x) => `[${x.domain}](${x.url})`).join(", ")}`).join("\n"));
 }
 
-/* 24-hour safety net: a story with fresh headlines from established outlets but no update for 20+ hours gets a short,
+/* Safety net: a story with fresh headlines from established outlets but no update for 8+ hours gets a short,
    attributed headline item ("<Outlet> reports: ..."), so real news never waits more than a day. The Claude desk rewrites it later. */
 for (const { f, h } of hot) {
   const s = JSON.parse(readFileSync(`content/stories/${f}`, "utf8"));
-  if (published.includes(s.slug) || Date.now() - Date.parse(s.updatedAt || s.updated) < 20 * 36e5) continue;
+  if (published.includes(s.slug) || Date.now() - Date.parse(s.updatedAt || s.updated) < 8 * 36e5) continue;
   const pick = (h || []).find((x) => x.domain && trusted(x.domain) && !/^(opinion|comment|editorial|analysis|letters?|column|explainer|podcast)\b|\b(opinion|editorial)\s*[:|]/i.test(x.title) && x.link && x.title && !UNSAFE.test(x.title) && !s.events.some((e) => overlap(e.text, x.title) > 0.5));
   if (!pick) { report.push(`- ${s.slug}: no update for 20+ hours, but no headline from an established outlet to use`); continue; }
   const headline = pick.title.replace(/\s+-\s+[^-]+$/, "").trim();            // Google News adds " - Outlet" at the end
@@ -261,7 +282,7 @@ It belongs to the story "${s.title}". Answer ONLY with JSON {"ok": true|false, "
   let v = {}; try { v = JSON.parse(check.slice(check.indexOf("{"), check.lastIndexOf("}") + 1)); } catch {}
   if (v.ok !== true) { report.push(`- ${s.slug}: headline fallback skipped (${String(v.reason || "no clear yes").slice(0, 100)})`); continue; }
   const k = `bk${now.replace(/\D/g, "").slice(4, 12)}h`;
-  s.sources[k] = [outlet, pick.link];
+  s.sources[k] = [outlet, (await realUrl(pick.link)) || pick.link];
   const group = s.sourceGroups[s.sourceGroups.length - 1];
   (Array.isArray(group) ? group[1] : group.keys || group.sources || []).push(k);
   s.events.push({ date: new Date(pick.pub).toISOString().slice(0, 10), phase: s.phases[s.phases.length - 1].id, label: "reported", added: now, text: `${outlet} reports: "${headline}"`, sources: [k], desk: "backup", headline: true });
