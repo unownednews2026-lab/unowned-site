@@ -11,7 +11,7 @@ const KEY = process.env.GEMINI_API_KEY;
 const REPO = process.env.GITHUB_REPOSITORY;
 // Tried in order; the first one that answers is used. Older models get retired, so the newest come first.
 // Writing uses Google's strongest model that answers on the free tier (Pro first); checks use the fast model.
-const WRITER = [process.env.GEMINI_WRITER, "gemini-3.8-pro", "gemini-pro-latest", "gemini-3.8-flash", "gemini-flash-latest"].filter(Boolean);
+const WRITER = [process.env.GEMINI_WRITER, "gemini-3.8-flash", "gemini-flash-latest"].filter(Boolean);
 const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-3.8-flash-lite", "gemini-flash-lite-latest"].filter(Boolean);
 const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 const say = (m) => console.log(`backup desk: ${m}`);
