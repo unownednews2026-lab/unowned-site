@@ -18,7 +18,10 @@ export async function headlinesSince(s) {
   for (const it of xml.split("<item>").slice(1)) {
     const title = unent((it.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || "");
     const pub = Date.parse((it.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [])[1] || "");
-    if (pub > since) fresh.push({ title, pub });
+    const link = unent((it.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || "");
+    const src = it.match(/<source url="([^"]*)"[^>]*>([\s\S]*?)<\/source>/) || [];
+    let domain = ""; try { domain = new URL(src[1] || "").hostname.replace(/^www\./, ""); } catch {}
+    if (pub > since) fresh.push({ title, pub, link, outlet: unent(src[2] || ""), domain });
   }
   return fresh.sort((a, b) => b.pub - a.pub);
 }

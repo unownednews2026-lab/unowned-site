@@ -68,7 +68,28 @@ const published = [];
 
 /* Recent articles about a story from GDELT (free, no key): real article addresses, so nothing is invented. */
 async function articles(s, h) {
-  const q = (JSON.parse(readFileSync("tools/watch.json", "utf8"))[s.slug] || s.title.replace(/'s\b/g, "")).split(/\s+/).slice(0, 4).join(" ");
+  const watchQ = (JSON.parse(readFileSync("tools/watch.json", "utf8"))[s.slug] || s.title.replace(/'s\b/g, "")).split(/\s+/).slice(0, 4).join(" ");
+  const titleQ = s.title.replace(/'s\b/g, "").replace(/\b(the|and|of|fight|movement)\b/gi, "").replace(/\s+/g, " ").trim();
+  let out = await articlesFor(watchQ, s);
+  if (!out.length && titleQ !== watchQ) out = await articlesFor(titleQ, s);   // second way in, if the first finds nothing readable
+  // Third way in: the Google News headlines themselves point at articles; try the ones from established outlets.
+  if (!out.length) for (const x of (h || []).filter((x) => x.domain && trusted(x.domain)).slice(0, 4)) {
+    const a = await readArticle(x.link, x.domain, x.title);
+    if (a && !out.some((o) => o.domain === a.domain)) out.push(a);
+  }
+  return out;
+}
+async function readArticle(url, domain, title) {
+  try {
+    const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" }, redirect: "follow", signal: AbortSignal.timeout(15000) });
+    const host = new URL(r.url).hostname.replace(/^www\./, "");
+    if (!trusted(host)) return null;
+    const html = await r.text();
+    const text = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map((p) => p.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;|&[lr]dquo;/g, '"').replace(/\s+/g, " ").trim()).filter((t) => t.length > 60).join("\n").slice(0, 5000);
+    return text.length > 500 ? { url: r.url, domain: host, title, text } : null;
+  } catch { return null; }
+}
+async function articlesFor(q, s) {
   const since = Date.parse(s.updatedAt || s.updated);
   let list = [];
   // GDELT allows one request every 5 seconds.
@@ -178,6 +199,32 @@ Answer ONLY with JSON: {"ok": true|false, "reason": "..."}. "ok" is true ONLY if
   sh(`node tools/fmt.js content/stories/${f}`);
   published.push(s.slug);
   report.push(`### ${s.title}\n` + added.map((a) => `- **${a.label}**: ${a.text}\n  Sources: ${a.cited.map((x) => `[${x.domain}](${x.url})`).join(", ")}`).join("\n"));
+}
+
+/* 24-hour safety net: a story with fresh headlines from established outlets but no update for 20+ hours gets a short,
+   attributed headline item ("<Outlet> reports: ..."), so real news never waits more than a day. The Claude desk rewrites it later. */
+for (const { f, h } of hot) {
+  const s = JSON.parse(readFileSync(`content/stories/${f}`, "utf8"));
+  if (published.includes(s.slug) || Date.now() - Date.parse(s.updatedAt || s.updated) < 20 * 36e5) continue;
+  const pick = (h || []).find((x) => x.domain && trusted(x.domain) && x.link && x.title && !UNSAFE.test(x.title) && !s.events.some((e) => overlap(e.text, x.title) > 0.5));
+  if (!pick) { report.push(`- ${s.slug}: no update for 20+ hours, but no headline from an established outlet to use`); continue; }
+  const headline = pick.title.replace(/\s+-\s+[^-]+$/, "").trim();            // Google News adds " - Outlet" at the end
+  const outlet = pick.outlet || pick.domain;
+  const check = await gemini(`A neutral news site will publish this exactly: ${outlet} reports: "${headline}"
+It belongs to the story "${s.title}". Answer ONLY with JSON {"ok": true|false, "reason": "..."}. "ok" is true only if the headline is clearly about this story, names no private person (anyone arrested, charged, injured, killed, a victim, witness, minor or ordinary protester; public officials, politicians, movement leaders and organisations are fine), has no graphic detail, and is not opinion, hateful, sexual or defamatory.`);
+  let v = {}; try { v = JSON.parse(check.slice(check.indexOf("{"), check.lastIndexOf("}") + 1)); } catch {}
+  if (v.ok !== true) { report.push(`- ${s.slug}: headline fallback skipped (${String(v.reason || "no clear yes").slice(0, 100)})`); continue; }
+  const k = `bk${now.replace(/\D/g, "").slice(4, 12)}h`;
+  s.sources[k] = [outlet, pick.link];
+  const group = s.sourceGroups[s.sourceGroups.length - 1];
+  (Array.isArray(group) ? group[1] : group.keys || group.sources || []).push(k);
+  s.events.push({ date: new Date(pick.pub).toISOString().slice(0, 10), phase: s.phases[s.phases.length - 1].id, label: "reported", added: now, text: `${outlet} reports: "${headline}"`, sources: [k], desk: "backup", headline: true });
+  s.events.sort((a, b) => a.date.localeCompare(b.date));
+  s.updated = now.slice(0, 10); s.updatedAt = now;
+  writeFileSync(`content/stories/${f}`, JSON.stringify(s, null, 2));
+  sh(`node tools/fmt.js content/stories/${f}`);
+  published.push(s.slug);
+  report.push(`### ${s.title} (headline safety net)\n- **reported**: ${outlet} reports: "${headline}"\n  Source: ${pick.link}`);
 }
 
 /* Every story was checked for news this run, so refresh "Checked for news" (only every 4 hours, to keep rebuilds low). */
