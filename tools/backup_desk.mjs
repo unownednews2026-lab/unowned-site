@@ -206,7 +206,7 @@ Answer ONLY with JSON: {"ok": true|false, "reason": "..."}. "ok" is true ONLY if
 for (const { f, h } of hot) {
   const s = JSON.parse(readFileSync(`content/stories/${f}`, "utf8"));
   if (published.includes(s.slug) || Date.now() - Date.parse(s.updatedAt || s.updated) < 20 * 36e5) continue;
-  const pick = (h || []).find((x) => x.domain && trusted(x.domain) && x.link && x.title && !UNSAFE.test(x.title) && !s.events.some((e) => overlap(e.text, x.title) > 0.5));
+  const pick = (h || []).find((x) => x.domain && trusted(x.domain) && !/^(opinion|comment|editorial|analysis|letters?|column|explainer|podcast)\b|\b(opinion|editorial)\s*[:|]/i.test(x.title) && x.link && x.title && !UNSAFE.test(x.title) && !s.events.some((e) => overlap(e.text, x.title) > 0.5));
   if (!pick) { report.push(`- ${s.slug}: no update for 20+ hours, but no headline from an established outlet to use`); continue; }
   const headline = pick.title.replace(/\s+-\s+[^-]+$/, "").trim();            // Google News adds " - Outlet" at the end
   const outlet = pick.outlet || pick.domain;

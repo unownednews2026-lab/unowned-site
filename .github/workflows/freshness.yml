@@ -20,7 +20,7 @@ permissions:
   pull-requests: write
 concurrency:
   group: freshness
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   check:
     runs-on: ubuntu-latest
