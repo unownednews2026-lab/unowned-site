@@ -35,6 +35,7 @@ for (const x of stories) {
 hot.sort((a, b) => b.h.length - a.h.length);
 if (!hot.length) say("no fresh headlines for any story");
 
+const modelsUsed = new Set();
 async function gemini(prompt, models = MODELS) {
   for (const m of models) {
     let r = null;
@@ -50,6 +51,7 @@ async function gemini(prompt, models = MODELS) {
     if (!r.ok) { say(`model ${m}: HTTP ${r.status} ${((await r.text()).match(/"message": "([^"]{0,160})/) || [])[1] || ""}`); continue; }
     const j = await r.json();
     say(`model ${m} answered`);
+    modelsUsed.add(m);
     return (j.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
   }
   return "";
@@ -308,7 +310,7 @@ for (let i = 0; i < 3; i++) {
 say(published.length ? `published: ${published.join(", ")}` : "refreshed checked-for-news stamps");
 
 // Log in a separate issue (issue #2 is the Claude desk's own log, which this desk reads to see if Claude is running).
-writeFileSync("/tmp/log.md", `${now} — ${published.length ? "published" : "no new developments from established outlets"}\n\n${report.join("\n\n") || "(nothing to report)"}`);
+writeFileSync("/tmp/log.md", `${now} — ${published.length ? "published" : "no new developments from established outlets"} — models: ${[...modelsUsed].join(", ") || "none needed"}${queue.length ? ` — ${queue.length} item(s) sent to the Editor queue` : ""}\n\n${report.join("\n\n") || "(nothing to report)"}`);
 try {
   const n = sh(`gh api "repos/${REPO}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="Backup desk log")][0].number // empty'`);
   if (n) sh(`gh issue comment ${n} --body-file /tmp/log.md`);
