@@ -12,7 +12,9 @@ const unent = (s) => s.replace(/<!\[CDATA\[|\]\]>/g, "").replace(/&amp;/g, "&").
 export async function headlinesSince(s) {
   const q = watch[s.slug] || s.title.replace(/'s\b/g, "");
   const since = Date.parse(s.updatedAt || s.updated);
-  const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q + " when:2d")}&hl=en-US&gl=US&ceid=US:en`;
+  // Search Google News in the story's own country edition, so local established outlets (CBC, The Hindu, News24…) show up.
+  const ed = { Canada: ["en-CA", "CA"], India: ["en-IN", "IN"], "South Africa": ["en-ZA", "ZA"], "United Kingdom": ["en-GB", "GB"], Australia: ["en-AU", "AU"] }[s.region] || ["en-US", "US"];
+  const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q + " when:2d")}&hl=${ed[0]}&gl=${ed[1]}&ceid=${ed[1]}:en`;
   const xml = await (await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } })).text();
   const fresh = [];
   for (const it of xml.split("<item>").slice(1)) {
