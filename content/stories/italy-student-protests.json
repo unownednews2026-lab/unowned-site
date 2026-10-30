@@ -11,7 +11,7 @@
   "dek": "Students and cost-of-living protesters march against Giorgia Meloni's government, the clashes with police in Turin, Milan and Bologna, and the unions' call for a general strike.",
   "status": "Ongoing",
   "updated": "2026-10-30",
-  "updatedAt": "2026-10-30T03:24:32Z",
+  "updatedAt": "2026-10-30T11:30:00Z",
   "summary": [
     "On Friday, October 16, students marched in dozens of Italian cities on what organisers called \"No Meloni Day\", protesting run-down schools, a decree capping foreign pupils at 30% of a class, the cost of living and military spending. Organisers say more than 400,000 took part; the Education Ministry puts participation in the school strike at about 1%. Police used water cannon and tear gas in Turin, and bottles and firecrackers were thrown at police in Rome.",
     "On Saturday, October 17, cost-of-living marches called by the \"Italia in Piazza\" movement were held in several cities. In Milan, groups broke away and clashed with police around Piazza Duomo; Il Giorno, citing police and the prefecture, and ANSA report about 50 people detained; injury figures differ between reports. In Rome, the CGIL union held a separate rally and announced a general strike for November 20.",
@@ -96,9 +96,9 @@
     { "date": "2026-10-24", "phase": "next", "label": "reported", "added": "2026-10-24T16:25:53Z", "text": "In Rome, demonstrators enter the Colosseum and have a tense encounter with its security staff before leaving and facing police outside; a separate march under the banner \"Keep Italy out of the war\" protests military spending, Il Sole 24 Ore reports.", "sources": ["soleOct24squares"] },
     { "date": "2026-10-24", "phase": "next", "label": "reported", "added": "2026-10-24T16:25:53Z", "text": "In Bologna, about 1,000 people gather in Piazza del Nettuno and several hundred clash with police at close quarters. In Milan, an antifascist march sets off from Piazza Castello and a roughly 600-strong, mostly student march leaves the Politecnico after an earlier 500-person pro-Palestinian rally; some shops close. Marches of a few hundred to about 1,000 people are also reported in Genoa, Florence, Naples and Perugia, Il Sole 24 Ore reports.", "sources": ["soleOct24squares"] },
     { "date": "2026-10-24", "phase": "next", "label": "reported", "added": "2026-10-24T16:25:53Z", "text": "In Castel Volturno, near Naples, religious groups, charities, migrant organisations and agricultural workers back a protest against a planned 120-place migrant detention and repatriation centre, with thousands expected, Euronews and Il Sole 24 Ore report.", "sources": ["euronewsOct24b", "soleOct24squares"] },
-    { "date": "2026-10-24", "phase": "next", "label": "reported", "added": "2026-10-24T16:25:53Z", "text": "Interior Minister Matteo Piantedosi writes on social media that there will be \"no safe havens\" for anyone organising attacks or riots. Il Sole 24 Ore identifies Youssef Siher, 30, as the founder of Movimento 17 Ottobre and reports he has been placed under investigation for incitement over the group's Instagram and Telegram accounts.", "sources": ["soleOct24squares"] },
-    { "date": "2026-10-24", "phase": "next", "label": "pending", "added": "2026-10-24T16:25:53Z", "text": "A reconciled national total of arrests, detentions and injuries from the October 24 protests; the outcome in Castel Volturno and any further unrest later Saturday; the investigation into Youssef Siher; turnout on the October 30 strike; the CGIL's general strike called for November 20; and whether Parliament converts Decree-Law no. 190/2026 into law within 60 days. Still being checked.", "sources": ["euronewsOct24b", "soleOct24squares", "ilpostOct20decreto", "fattoOct20decreto"] },
-    { "date": "2026-10-28", "phase": "next", "label": "reported", "added": "2026-10-30T03:24:32Z", "text": "France 24 reports: \"Italian PM slams 'shameful' release of alleged protest organiser\"", "sources": ["bk10300324h"], "desk": "backup", "headline": true }
+    { "date": "2026-10-24", "phase": "next", "label": "reported", "added": "2026-10-24T16:25:53Z", "text": "Interior Minister Matteo Piantedosi writes on social media that there will be \"no safe havens\" for anyone organising attacks or riots. Il Sole 24 Ore reports that the alleged founder of Movimento 17 Ottobre has been placed under investigation for incitement over the group's Instagram and Telegram accounts.", "sources": ["soleOct24squares"] },
+    { "date": "2026-10-24", "phase": "next", "label": "pending", "added": "2026-10-24T16:25:53Z", "text": "A reconciled national total of arrests, detentions and injuries from the October 24 protests; the outcome in Castel Volturno and any further unrest later Saturday; the investigation into the group's alleged founder; turnout on the October 30 strike; the CGIL's general strike called for November 20; and whether Parliament converts Decree-Law no. 190/2026 into law within 60 days. Still being checked.", "sources": ["euronewsOct24b", "soleOct24squares", "ilpostOct20decreto", "fattoOct20decreto"] },
+    { "date": "2026-10-28", "phase": "next", "label": "reported", "added": "2026-10-30T03:24:32Z", "text": "A Milan judge orders the release of the alleged administrator of the Movimento 17 Ottobre Telegram group, held since October 24 on suspicion of incitement, saying there are no serious grounds to believe he committed the offences; Prime Minister Giorgia Meloni calls the decision \"shameful\", Reuters reports. The court's president calls her remarks \"unacceptable\".", "sources": ["reutersOct28release"], "desk": "reviewed" }
   ],
   "claims": [
     { "title": "What are the protests about?", "label": "disputed", "a": "The government condemns the violence. Meloni says she welcomes peaceful mobilisation; Valditara calls the violence political hooliganism with nothing to do with students' rights, and Tajani accuses part of the opposition of fuelling the unrest.", "aSrc": ["avvenireOct16", "soleOct16", "skyMilan"], "b": "Students and unions say the protests are about crumbling schools, the school decree, low wages, rising prices and military spending. The CGIL says Italy is in a dramatic economic and social crisis.", "bSrc": ["soleOct16", "avvenireOct16", "afpOct16"], "status": "Open. Both positions are on record." },
@@ -112,7 +112,8 @@
     { "date": "Oct 17", "action": "About 50 people detained in Milan, almost half of them minors (preliminary figure)", "by": "Police and prefecture (figure via Il Giorno); also reported by ANSA", "label": "confirmed" },
     { "date": "Oct 17", "action": "Four minors arrested for resisting officers and seven people reported in Bologna", "by": "Police (figures via ANSA)", "label": "reported" },
     { "date": "Oct 18-19", "action": "271 people taken to police stations (220 minors), 32 arrests (23 minors, 13 foreign nationals), 28 reported to prosecutors, 174 held under a new preventive-detention power, in Milan (ANSA figures; Fanpage reports different totals)", "by": "Police (figures via ANSA and Fanpage)", "label": "disputed" },
-    { "date": "Oct 24", "action": "Two people detained for questioning in Turin; investigation opened into Movimento 17 Ottobre founder Youssef Siher for incitement", "by": "Police / prosecutors (via Il Sole 24 Ore)", "label": "reported" }
+    { "date": "Oct 24", "action": "Two people detained for questioning in Turin; investigation opened into the alleged founder of Movimento 17 Ottobre for incitement", "by": "Police / prosecutors (via Il Sole 24 Ore)", "label": "reported" },
+    { "date": "Oct 28", "action": "Milan judge orders release of the alleged Movimento 17 Ottobre administrator, finding no serious grounds to believe he committed the offences charged", "by": "Milan court (via Reuters)", "label": "reported" }
   ],
   "places": [
     { "name": "Milan", "lat": 45.46, "lon": 9.19, "desc": "Clashes and looting on Oct 17 and 18; over 270 taken to police stations by Oct 19 (figures vary by outlet)", "r": 9, "anchor": "end", "dx": -12, "dy": -4 },
@@ -136,10 +137,11 @@
     "Whether the government changes the school decree or responds to protesters' demands",
     "Whether students follow through on October 30: the strike is now confirmed as scheduled by USB and other base unions, with Collettivo Osa and Turin students saying they will join, but turnout is not yet known",
     "The exact minimum age, if any, for \"fermo preventivo\" applied to minors, as distinct from the 14-year-old threshold the published decree sets for a questore's gathering ban, and whether Parliament converts Decree-Law no. 190/2026 into law within 60 days",
-    "Identity and legal outcome for Youssef Siher, named by Il Sole 24 Ore as Movimento 17 Ottobre's founder, and whether others are investigated"
+    "Whether prosecutors appeal the release of the alleged Movimento 17 Ottobre administrator, and whether others are investigated"
   ],
   "corrections": [
-    { "date": "2026-10-17", "text": "An earlier version said police made seven arrests in Bologna, as Reuters reported citing ANSA. A later ANSA report, citing police, says four people were arrested and seven reported to judicial authorities; the item has been updated." }
+    { "date": "2026-10-17", "text": "An earlier version said police made seven arrests in Bologna, as Reuters reported citing ANSA. A later ANSA report, citing police, says four people were arrested and seven reported to judicial authorities; the item has been updated." },
+    { "date": "2026-10-30", "text": "Earlier entries named a private individual who was placed under investigation; the name has been removed in line with our policy of not naming people accused of offences." }
   ],
   "sourceGroups": [
     ["Background and the build-up", ["afpOct16"]],
@@ -151,7 +153,7 @@
     ["Movimento 17 Ottobre", ["openOct19movimento", "avvenireOct19movimento"]],
     ["The October 30 strike", ["studentiOct20sciopero"]],
     ["October 23-24: raids and the fourth Saturday", ["ansaOct23raids", "euronewsOct24", "afpOct24"]],
-    ["October 24: the fourth Saturday unfolds", ["euronewsOct24b", "soleOct24squares", "bk10300324h"]]
+    ["October 24: the fourth Saturday unfolds", ["euronewsOct24b", "soleOct24squares", "reutersOct28release"]]
   ],
   "sources": {
     "afpOct16": ["AFP (via The Local Italy)", "https://www.thelocal.it/20261016/italy-braces-for-autumn-of-discontent-as-students-protest"],
@@ -194,7 +196,7 @@
     "afpOct24": ["AFP (via Malay Mail)", "https://www.malaymail.com/news/world/2026/10/24/rome-and-milan-send-in-more-soldiers-tells-shops-to-stay-open-as-italy-braces-for-fresh-protests/240375"],
     "euronewsOct24b": ["Euronews", "https://www.euronews.com/2026/10/24/italy-deploys-hundreds-of-soldiers-as-nationwide-protests-raise-fears-of-fresh-violence"],
     "soleOct24squares": ["Il Sole 24 Ore", "https://en.ilsole24ore.com/art/squares-cordoned-off-across-italia-protest-marches-in-rome-milan-and-turin-AJT6ndtB"],
-    "bk10300324h": ["France 24", "https://news.google.com/rss/articles/CBMirgFBVV95cUxQWHNyWEJXUGo4YTdiUUl5Q01VRXRLc3AzbFIzQWhlQkRVWi1MN0VkZDVMcG5oZktkblNYYjdfWHJISUNsdjdQUXNmenNJUnFQQXZURzA4YzJaUmxLenRlVzEwSW5iN3Z3YTdKWFRlc3ZRY21qTmk2RFVPamhMS2hjZkl3UnlQYmRsejNRczZLM0hjRW9zOXJaYl9wNXdWLVByVzVRWWYtNVNtU1AyV0E?oc=5"]
+    "reutersOct28release": ["Reuters (via Internazionale)", "https://www.internazionale.it/ultime-notizie-reuters/2026/10/28/meloni-furious-as-italian-judge-frees-man-accused-of-inciting-violent-protests"]
   },
   "checkedAt": "2026-10-30T07:41:34Z"
 }
