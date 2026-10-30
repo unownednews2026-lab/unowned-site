@@ -318,3 +318,5 @@ details.fold[open] > summary::after { content: " ▴"; }
   .key ul { display: flex; flex-wrap: nowrap; gap: 12px; }
   .key li, .key-title { flex: none; white-space: nowrap; }
 }
+.quiet-note { margin: 10px 0 0; padding: 8px 12px; border-left: 3px solid var(--accent); background: var(--surface); color: var(--muted); font-size: 0.9rem; border-radius: 0 8px 8px 0; }
+.quiet-note[hidden] { display: none; }

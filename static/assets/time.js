@@ -20,6 +20,12 @@
       el.title = abs;
     });
   }
-  run();
-  setInterval(run, 60000);
+  function quiet() {
+    document.querySelectorAll(".quiet-note[data-updated]").forEach(function (el) {
+      var t = Date.parse(el.getAttribute("data-updated"));
+      if (!isNaN(t)) el.hidden = Date.now() - t < 864e5;   // only after a full day without a new development
+    });
+  }
+  run(); quiet();
+  setInterval(function () { run(); quiet(); }, 60000);
 })();

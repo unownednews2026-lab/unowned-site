@@ -61,6 +61,9 @@ function why(S, label, keys, where) {
   return text ? `<p class="why">${text}${how}</p>` : "";
 }
 /* "Checked for news 1 hour ago": shown when the news desk has looked for new developments since the last published update. */
+/* "These are the latest reports": shown when a story has had no new development for a day, so readers know it's still being followed.
+   time.js shows or hides it as time passes between site updates; the build sets the starting state for readers without JavaScript. */
+const quietNote = (st) => { const old = st.updatedAt && Date.now() - Date.parse(st.updatedAt) > 864e5; return `<p class="quiet-note" data-updated="${st.updatedAt || ""}"${old ? "" : " hidden"}>No new developments in the last day: these are the latest reports. We check for news every few hours and will update as new events unfold.</p>`; };
 const checkedNote = (st) => st.checkedAt && st.checkedAt > (st.updatedAt || "") ? `<span class="checked">Checked for news <time class="ago" datetime="${st.checkedAt}">${long(st.checkedAt.slice(0, 10))}</time></span>` : "";
 const newestAdded = (st) => st.events.reduce((m, e) => (e.added && e.added > m ? e.added : m), st.updatedAt || "");
 // First sentence, without breaking at abbreviations such as "B.C.", "U.S.", "Dr." or "no. 190".
@@ -239,6 +242,7 @@ function storyPage(st, brief) {
   <h1>${esc(st.title)}</h1>
   <p class="lede">${esc(st.dek)}</p>
   <div class="meta-row"><span class="live">${esc(st.status)}</span><span>Updated ${st.updatedAt ? `<time class="ago" datetime="${st.updatedAt}">${long(st.updated)}</time>` : long(st.updated)}</span>${checkedNote(st)}</div>
+  ${quietNote(st)}
   ${voteWidget(st, "Want this followed closely? Upvote it.")}
   ${brief && (brief.stories || []).includes(st.slug) ? miniPlayer(brief, { esc, long, label: "This story is in the daily briefing" }) : ""}
 </header>
