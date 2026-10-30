@@ -3,12 +3,12 @@
    Strict checks: every number in the new script must appear in the source text, no private names, a sensible length,
    the opening and closing lines kept. If anything fails, the plain automatic script is kept, so the briefing never breaks.
    Usage: node tools/polish_briefing.mjs [YYYY-MM-DD]   (needs GEMINI_API_KEY; otherwise does nothing) */
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, unlinkSync } from "node:fs";
 
 const KEY = process.env.GEMINI_API_KEY;
 const date = process.argv[2] || new Date().toISOString().slice(0, 10);
 const file = `content/briefings/${date}.json`;
-const say = (m) => console.log(`polish briefing: ${m}`);
+const say = (m) => console.log(`::notice::polish briefing: ${m.replace(/\n/g, " ")}`);
 if (!KEY) { say("no GEMINI_API_KEY; keeping the plain script"); process.exit(0); }
 if (!existsSync(file)) { say("no script for today"); process.exit(0); }
 const b = JSON.parse(readFileSync(file, "utf8"));
@@ -118,4 +118,6 @@ script = script.map((p, i) => i === 0 || i === script.length - 1 ? p : p
   .replace(/\bB\.C\./g, "British Columbia"));
 
 writeFileSync(file, JSON.stringify({ ...b, script, polished: true }, null, 2) + "\n");
+const mp3 = `static/briefings/${date}.mp3`;
+if (existsSync(mp3)) unlinkSync(mp3);   // record the polished version
 say(`polished: ${words} words`);
