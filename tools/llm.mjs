@@ -84,3 +84,15 @@ export async function ask(text, { temperature = 0.2, prefer = 0, log = console.l
   return "";
 }
 export const GITHUB_PROVIDER = 2;   // index of the first non-Gemini provider (Groq), for independent checks   // index of the first non-Gemini provider, for independent checks
+
+/* For tools/llm_check.mjs: try each provider once with a tiny prompt. */
+export async function checkAll() {
+  const out = [];
+  for (const [name, call] of PROVIDERS) {
+    let res;
+    try { res = await call('Reply with the single word OK.', 0); } catch (e) { res = { status: `error ${e.message}` }; }
+    out.push([name, res.skip ? "no key" : res.text ? `answered (${String(res.text).trim().slice(0, 20)})${name === "groq" ? " via " + (picked.groq || "?") : name.startsWith("github") ? " via " + (picked[`github-${name.includes("gpt") ? "gpt-4.1-mini" : "llama-3.3-70b"}`] || "?") : ""}` : `failed: ${String(res.status).slice(0, 140)}`]);
+  }
+  for (const [k, v] of Object.entries(problems)) if (k.endsWith(":list")) out.push([k, v]);
+  return out;
+}

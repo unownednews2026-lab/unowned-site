@@ -9,6 +9,10 @@ on:
     - cron: "45 * * * *"
   workflow_dispatch:
     inputs:
+      check_ai:
+        description: "Test every free AI provider"
+        type: boolean
+        default: false
       force_backup:
         description: "Run the backup desk now even if the Claude desk is running (for testing)"
         type: boolean
@@ -92,6 +96,14 @@ jobs:
         continue-on-error: true
         timeout-minutes: 25
         run: node tools/lag_alert.mjs || true
+      - name: Test the free AI providers
+        if: ${{ inputs.check_ai }}
+        continue-on-error: true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tools/llm_check.mjs
       - name: Gemini news desk (free, every hour)
         if: always()
         continue-on-error: true
