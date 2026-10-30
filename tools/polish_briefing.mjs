@@ -4,12 +4,13 @@
    the opening and closing lines kept. If anything fails, the plain automatic script is kept, so the briefing never breaks.
    Usage: node tools/polish_briefing.mjs [YYYY-MM-DD]   (needs GEMINI_API_KEY; otherwise does nothing) */
 import { readFileSync, writeFileSync, existsSync, unlinkSync } from "node:fs";
+import { ask as askAny, used, GITHUB_PROVIDER } from "./llm.mjs";
 
 const KEY = process.env.GEMINI_API_KEY;
 const date = process.argv[2] || new Date().toISOString().slice(0, 10);
 const file = `content/briefings/${date}.json`;
 const say = (m) => console.log(`::notice::polish briefing: ${m.replace(/\n/g, " ")}`);
-if (!KEY) { say("no GEMINI_API_KEY; keeping the plain script"); process.exit(0); }
+if (!KEY && !process.env.GITHUB_TOKEN) { say("no AI provider; keeping the plain script"); process.exit(0); }
 if (!existsSync(file)) { say("no script for today"); process.exit(0); }
 const b = JSON.parse(readFileSync(file, "utf8"));
 if (!b.auto || b.polished) { say("nothing to polish"); process.exit(0); }
@@ -27,21 +28,9 @@ const source = b.script.join("\n") + "\n" + facts;
 const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean);
 let lastModel = "";
 async function ask(text, temperature) {
-  for (const m of MODELS) for (let tries = 0; tries < 2; tries++) {
-    try {
-      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
-        method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": KEY },
-        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text }] }], generationConfig: { temperature } }),
-        signal: AbortSignal.timeout(150000),
-      });
-      if (r.status === 429 && tries === 0) { say(`model ${m}: busy (429), waiting a minute`); await new Promise((x) => setTimeout(x, 60000)); continue; }
-      if (!r.ok) { say(`model ${m}: HTTP ${r.status}`); break; }   // 404 = not on this plan: try the next model
-      const out = ((await r.json()).candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
-      if (out) { lastModel = m; return out; }
-      break;
-    } catch (e) { say(`model ${m}: ${e.message}`); break; }
-  }
-  return "";
+  const out = await askAny(text, { temperature, prefer: temperature === 0 ? GITHUB_PROVIDER : 0, log: say });
+  lastModel = [...used].pop() || "";
+  return out;
 }
 const json = (t) => { try { return JSON.parse(t.slice(t.indexOf("{"), t.lastIndexOf("}") + 1)); } catch { return {}; } };
 

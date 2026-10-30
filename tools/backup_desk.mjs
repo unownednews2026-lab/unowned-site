@@ -6,6 +6,7 @@
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { headlinesSince } from "./signals.mjs";
+import { ask, used as llmUsed, GITHUB_PROVIDER } from "./llm.mjs";
 
 const KEY = process.env.GEMINI_API_KEY;
 const REPO = process.env.GITHUB_REPOSITORY;
@@ -16,7 +17,7 @@ const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-late
 const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 const say = (m) => console.log(`backup desk: ${m}`);
 
-if (!KEY) { say("no GEMINI_API_KEY secret yet; skipping"); process.exit(0); }
+if (!KEY && !process.env.GITHUB_TOKEN) { say("no AI provider available; skipping"); process.exit(0); }
 
 /* Since 2026-10-29 this Gemini desk is the MAIN hourly desk (founder decision: save the Claude plan for building the platform).
    The Claude desk runs twice a day as editor: it re-checks every "desk": "backup" item and digs deeper. */
@@ -35,26 +36,10 @@ for (const x of stories) {
 hot.sort((a, b) => b.h.length - a.h.length);
 if (!hot.length) say("no fresh headlines for any story");
 
-const modelsUsed = new Set();
+const modelsUsed = llmUsed;
+// Writing tries Gemini first; the fact-check starts with a DIFFERENT provider (GitHub Models), so a second model checks the first.
 async function gemini(prompt, models = MODELS) {
-  for (const m of models) {
-    let r = null;
-    for (let tries = 0; tries < 2; tries++) {
-      r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
-        method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": KEY },
-        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { temperature: 0.2 } }),
-      });
-      if (r.status !== 429 || tries) break;
-      say(`model ${m}: busy (429), waiting a minute`); await new Promise((x) => setTimeout(x, 60000));   // per-minute limit
-    }
-    if (!r.ok && (r.status === 404 || r.status === 400)) { say(`model ${m} not available`); continue; }
-    if (!r.ok) { say(`model ${m}: HTTP ${r.status} ${((await r.text()).match(/"message": "([^"]{0,160})/) || [])[1] || ""}`); continue; }
-    const j = await r.json();
-    say(`model ${m} answered`);
-    modelsUsed.add(m);
-    return (j.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
-  }
-  return "";
+  return ask(prompt, { temperature: 0.2, prefer: models === MODELS ? GITHUB_PROVIDER : 0, log: say });
 }
 
 /* Resolve each link for real; keep only ones that load, using the final article address. */

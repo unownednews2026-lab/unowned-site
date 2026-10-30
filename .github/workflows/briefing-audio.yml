@@ -10,6 +10,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  models: read
 concurrency:
   group: briefing-audio
   cancel-in-progress: false
@@ -43,6 +44,8 @@ jobs:
         timeout-minutes: 8
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: node tools/polish_briefing.mjs || true
       - name: Record new briefings
         run: python tools/briefing_audio.py model/kokoro.onnx model/voices.bin
