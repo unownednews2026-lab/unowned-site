@@ -24,7 +24,7 @@ const facts = stories.map((s) => {
     (next.length ? "\n" + next.map((e) => `- [coming up] ${e.date}: ${e.text}`).join("\n") : "");
 }).join("\n\n");
 const source = b.script.join("\n") + "\n" + facts;
-const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean);
+const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-pro", "gemini-pro-latest", "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean);
 async function ask(text, temperature) {
   for (const m of MODELS) for (let tries = 0; tries < 2; tries++) {
     try {
@@ -34,7 +34,7 @@ async function ask(text, temperature) {
         signal: AbortSignal.timeout(90000),
       });
       if (r.status === 429 && tries === 0) { say(`model ${m}: busy (429), waiting a minute`); await new Promise((x) => setTimeout(x, 60000)); continue; }
-      if (!r.ok) { say(`model ${m}: HTTP ${r.status}`); break; }
+      if (!r.ok) { say(`model ${m}: HTTP ${r.status}`); break; }   // 404 = not on this plan: try the next model
       const out = ((await r.json()).candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
       if (out) return out;
       break;
