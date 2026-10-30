@@ -16,6 +16,11 @@ const WRITER = [process.env.GEMINI_WRITER, "gemini-3.8-flash", "gemini-flash-lat
 const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-3.8-flash-lite", "gemini-flash-lite-latest"].filter(Boolean);
 const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 const say = (m) => console.log(`backup desk: ${m}`);
+// Any unexpected error is reported on the run page (as a note, so it never sends a failure email).
+for (const ev of ["uncaughtException", "unhandledRejection"]) process.on(ev, (e) => {
+  console.log(`::warning::backup desk crashed: ${String(e && (e.stack || e.message || e)).replace(/\n/g, " | ").slice(0, 900)}`);
+  process.exit(0);
+});
 
 if (!KEY && !process.env.GITHUB_TOKEN) { say("no AI provider available; skipping"); process.exit(0); }
 
