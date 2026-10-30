@@ -11,7 +11,7 @@
   "dek": "Students and cost-of-living protesters march against Giorgia Meloni's government, the clashes with police in Turin, Milan and Bologna, and the unions' call for a general strike.",
   "status": "Ongoing",
   "updated": "2026-10-30",
-  "updatedAt": "2026-10-30T17:21:39Z",
+  "updatedAt": "2026-10-30T21:40:36Z",
   "summary": [
     "On Friday, October 16, students marched in dozens of Italian cities on what organisers called \"No Meloni Day\", protesting run-down schools, a decree capping foreign pupils at 30% of a class, the cost of living and military spending. Organisers say more than 400,000 took part; the Education Ministry puts participation in the school strike at about 1%. Police used water cannon and tear gas in Turin, and bottles and firecrackers were thrown at police in Rome.",
     "On Saturday, October 17, cost-of-living marches called by the \"Italia in Piazza\" movement were held in several cities. In Milan, groups broke away and clashed with police around Piazza Duomo; Il Giorno, citing police and the prefecture, and ANSA report about 50 people detained; injury figures differ between reports. In Rome, the CGIL union held a separate rally and announced a general strike for November 20.",
@@ -98,7 +98,9 @@
     { "date": "2026-10-24", "phase": "next", "label": "reported", "added": "2026-10-24T16:25:53Z", "text": "In Castel Volturno, near Naples, religious groups, charities, migrant organisations and agricultural workers back a protest against a planned 120-place migrant detention and repatriation centre, with thousands expected, Euronews and Il Sole 24 Ore report.", "sources": ["euronewsOct24b", "soleOct24squares"] },
     { "date": "2026-10-24", "phase": "next", "label": "reported", "added": "2026-10-24T16:25:53Z", "text": "Interior Minister Matteo Piantedosi writes on social media that there will be \"no safe havens\" for anyone organising attacks or riots. Il Sole 24 Ore reports that the alleged founder of Movimento 17 Ottobre has been placed under investigation for incitement over the group's Instagram and Telegram accounts.", "sources": ["soleOct24squares"] },
     { "date": "2026-10-24", "phase": "next", "label": "pending", "added": "2026-10-24T16:25:53Z", "text": "A reconciled national total of arrests, detentions and injuries from the October 24 protests; the outcome in Castel Volturno and any further unrest later Saturday; the investigation into the group's alleged founder; turnout on the October 30 strike; the CGIL's general strike called for November 20; and whether Parliament converts Decree-Law no. 190/2026 into law within 60 days. Still being checked.", "sources": ["euronewsOct24b", "soleOct24squares", "ilpostOct20decreto", "fattoOct20decreto"] },
-    { "date": "2026-10-28", "phase": "next", "label": "reported", "added": "2026-10-30T03:24:32Z", "text": "A Milan judge orders the release of the alleged administrator of the Movimento 17 Ottobre Telegram group, held since October 24 on suspicion of incitement, saying there are no serious grounds to believe he committed the offences; Prime Minister Giorgia Meloni calls the decision \"shameful\", Reuters reports. The court's president calls her remarks \"unacceptable\".", "sources": ["reutersOct28release"], "desk": "reviewed" }
+    { "date": "2026-10-28", "phase": "next", "label": "reported", "added": "2026-10-30T03:24:32Z", "text": "A Milan judge orders the release of the alleged administrator of the Movimento 17 Ottobre Telegram group, held since October 24 on suspicion of incitement, saying there are no serious grounds to believe he committed the offences; Prime Minister Giorgia Meloni calls the decision \"shameful\", Reuters reports. The court's president calls her remarks \"unacceptable\".", "sources": ["reutersOct28release"], "desk": "reviewed" },
+    { "date": "2026-10-30", "phase": "next", "label": "reported", "added": "2026-10-30T21:40:36Z", "text": "The government announced it will deploy 500 army troops to assist police in Milan through the end of the year, and introduced new penalties that hold parents financially liable for children who commit vandalism, NBC News reports.", "sources": ["bk1030214000"], "desk": "backup" },
+    { "date": "2026-10-30", "phase": "next", "label": "reported", "added": "2026-10-30T21:40:36Z", "text": "The Unione Sindacale di Base and other trade unions called for a nationwide strike of public and private sector workers, NBC News reports.", "sources": ["bk1030214010"], "desk": "backup" }
   ],
   "claims": [
     { "title": "What are the protests about?", "label": "disputed", "a": "The government condemns the violence. Meloni says she welcomes peaceful mobilisation; Valditara calls the violence political hooliganism with nothing to do with students' rights, and Tajani accuses part of the opposition of fuelling the unrest.", "aSrc": ["avvenireOct16", "soleOct16", "skyMilan"], "b": "Students and unions say the protests are about crumbling schools, the school decree, low wages, rising prices and military spending. The CGIL says Italy is in a dramatic economic and social crisis.", "bSrc": ["soleOct16", "avvenireOct16", "afpOct16"], "status": "Open. Both positions are on record." },
@@ -153,7 +155,7 @@
     ["Movimento 17 Ottobre", ["openOct19movimento", "avvenireOct19movimento"]],
     ["The October 30 strike", ["studentiOct20sciopero"]],
     ["October 23-24: raids and the fourth Saturday", ["ansaOct23raids", "euronewsOct24", "afpOct24"]],
-    ["October 24: the fourth Saturday unfolds", ["euronewsOct24b", "soleOct24squares", "reutersOct28release"]]
+    ["October 24: the fourth Saturday unfolds", ["euronewsOct24b", "soleOct24squares", "reutersOct28release", "bk1030214000", "bk1030214010"]]
   ],
   "sources": {
     "afpOct16": ["AFP (via The Local Italy)", "https://www.thelocal.it/20261016/italy-braces-for-autumn-of-discontent-as-students-protest"],
@@ -196,7 +198,9 @@
     "afpOct24": ["AFP (via Malay Mail)", "https://www.malaymail.com/news/world/2026/10/24/rome-and-milan-send-in-more-soldiers-tells-shops-to-stay-open-as-italy-braces-for-fresh-protests/240375"],
     "euronewsOct24b": ["Euronews", "https://www.euronews.com/2026/10/24/italy-deploys-hundreds-of-soldiers-as-nationwide-protests-raise-fears-of-fresh-violence"],
     "soleOct24squares": ["Il Sole 24 Ore", "https://en.ilsole24ore.com/art/squares-cordoned-off-across-italia-protest-marches-in-rome-milan-and-turin-AJT6ndtB"],
-    "reutersOct28release": ["Reuters (via Internazionale)", "https://www.internazionale.it/ultime-notizie-reuters/2026/10/28/meloni-furious-as-italian-judge-frees-man-accused-of-inciting-violent-protests"]
+    "reutersOct28release": ["Reuters (via Internazionale)", "https://www.internazionale.it/ultime-notizie-reuters/2026/10/28/meloni-furious-as-italian-judge-frees-man-accused-of-inciting-violent-protests"],
+    "bk1030214000": ["nbcnews.com", "https://www.nbcnews.com/world/italy/italy-strikes-violent-protests-rome-colosseum-meloni-army-rome-milan-rcna606503"],
+    "bk1030214010": ["nbcnews.com", "https://www.nbcnews.com/world/italy/italy-strikes-violent-protests-rome-colosseum-meloni-army-rome-milan-rcna606503"]
   },
   "checkedAt": "2026-10-30T19:21:33Z"
 }
