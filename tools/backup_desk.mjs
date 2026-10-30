@@ -10,6 +10,8 @@ import { headlinesSince } from "./signals.mjs";
 const KEY = process.env.GEMINI_API_KEY;
 const REPO = process.env.GITHUB_REPOSITORY;
 // Tried in order; the first one that answers is used. Older models get retired, so the newest come first.
+// Writing uses Google's strongest model that answers on the free tier (Pro first); checks use the fast model.
+const WRITER = [process.env.GEMINI_WRITER, "gemini-3.8-pro", "gemini-pro-latest", "gemini-3.8-flash", "gemini-flash-latest"].filter(Boolean);
 const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-3.8-flash-lite", "gemini-flash-lite-latest"].filter(Boolean);
 const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 const say = (m) => console.log(`backup desk: ${m}`);
@@ -33,8 +35,8 @@ for (const x of stories) {
 hot.sort((a, b) => b.h.length - a.h.length);
 if (!hot.length) say("no fresh headlines for any story");
 
-async function gemini(prompt) {
-  for (const m of MODELS) {
+async function gemini(prompt, models = MODELS) {
+  for (const m of models) {
     let r = null;
     for (let tries = 0; tries < 2; tries++) {
       r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
@@ -44,6 +46,7 @@ async function gemini(prompt) {
       if (r.status !== 429 || tries) break;
       say(`model ${m}: busy (429), waiting a minute`); await new Promise((x) => setTimeout(x, 60000));   // per-minute limit
     }
+    if (!r.ok && (r.status === 404 || r.status === 400)) { say(`model ${m} not available`); continue; }
     if (!r.ok) { say(`model ${m}: HTTP ${r.status} ${((await r.text()).match(/"message": "([^"]{0,160})/) || [])[1] || ""}`); continue; }
     const j = await r.json();
     say(`model ${m} answered`);
@@ -160,7 +163,7 @@ Rules:
 - Labels: "confirmed" only if two or more cited articles did their OWN reporting — check bylines and credits: several outlets running the same Reuters, AFP, AP, PTI, ANSA or other agency story count as ONE source. One source = "reported"; conflicting accounts = "disputed" with both given; one side's claim = "alleged".
 - "articles": the numbers of every article that reports it.
 `;
-  const out = await gemini(prompt);
+  const out = await gemini(prompt, WRITER);
   let items = [];
   try { items = JSON.parse(out.slice(out.indexOf("{"), out.lastIndexOf("}") + 1)).items || []; } catch { say(`${s.slug}: could not read the reply`); }
   const added = [];
@@ -190,6 +193,27 @@ Answer ONLY with JSON: {"ok": true|false, "reason": "..."}. "ok" is true ONLY if
 5. It is about the story "${s.title}" and is a real development, not commentary or opinion.`);
       let v = {};
       try { v = JSON.parse(verdict.slice(verdict.indexOf("{"), verdict.lastIndexOf("}") + 1)); } catch {}
+      if (v.ok !== true && v.reason) {
+        // Like a desk editor sending copy back: one rewrite that fixes the problem, then the same check again.
+        const fixed = await gemini(`Rewrite this news item so it fixes the editor's problem, using ONLY facts in the articles. Keep it neutral, attributed, under 70 words, two sentences at most, no private names. Return ONLY the rewritten item text.
+
+Item: "${it.text}"
+Editor's problem: ${v.reason}
+
+Articles:
+${cited.map((a, i) => `[${i + 1}] ${a.domain}: ${a.title}\n${a.text}`).join("\n\n")}`, WRITER);
+        const text2 = fixed.replace(/^["'\s]+|["'\s]+$/g, "").replace(/\s+/g, " ").trim();
+        if (text2 && text2.length <= 450 && !UNSAFE.test(text2)) {
+          const again = await gemini(verdict === "" ? "" : `You are a strict fact-checker for a neutral news site. Answer ONLY with JSON {"ok": true|false, "reason": "..."}. "ok" is true only if every fact in the item is stated in the articles, claims are attributed, no private person is named, and it is neutral and about the story "${s.title}".
+
+Item: "${text2}"
+
+Articles:
+${cited.map((a, i) => `[${i + 1}] ${a.domain}: ${a.title}\n${a.text}`).join("\n\n")}`);
+          let v2 = {}; try { v2 = JSON.parse(again.slice(again.indexOf("{"), again.lastIndexOf("}") + 1)); } catch {}
+          if (v2.ok === true) { it.text = text2; v = v2; }
+        }
+      }
       if (v.ok !== true) why.push(`fact-check: ${String(v.reason || "no clear yes").slice(0, 120)}`);
     }
     if (!why.length && SENSITIVE.test(it.text)) {
