@@ -3,7 +3,7 @@
    only after a second, independent Gemini check of every item, and marks them "desk": "backup" so the Claude desk re-checks
    them when it is running again. Founder decision 2026-10-29: content must stay fresh even when the Claude plan runs out.
    Runs inside the hourly "Freshness check" workflow. Needs the GEMINI_API_KEY secret; without it, it does nothing. */
-import { readFileSync, readdirSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { headlinesSince } from "./signals.mjs";
 import { ask, used as llmUsed, problems as llmProblems, GITHUB_PROVIDER } from "./llm.mjs";
@@ -290,6 +290,16 @@ It belongs to the story "${s.title}". Answer ONLY with JSON {"ok": true|false, "
   published.push(s.slug);
   report.push(`### ${s.title} (headline safety net)\n- **reported**: ${outlet} reports: "${headline}"\n  Source: ${pick.link}`);
 }
+
+/* Tidy up: review packets older than 14 days are deleted (the editor has long since used them). */
+try {
+  for (const dir of readdirSync("review-packets", { withFileTypes: true }).filter((d) => d.isDirectory()))
+    for (const f of readdirSync(`review-packets/${dir.name}`)) {
+      const pth = `review-packets/${dir.name}/${f}`;
+      const added = Date.parse(JSON.parse(readFileSync(pth, "utf8")).added || 0);
+      if (Date.now() - added > 14 * 864e5) { rmSync(pth); sh(`git rm -q --cached ${pth} || true`); }
+    }
+} catch {}
 
 /* Every story was checked for news this run, so refresh "Checked for news" (only every 4 hours, to keep rebuilds low). */
 const newestCheck = stories.map(({ f }) => JSON.parse(readFileSync(`content/stories/${f}`, "utf8"))).flatMap((s) => [s.updatedAt, s.checkedAt]).filter(Boolean).sort().pop() || "";
