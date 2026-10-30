@@ -42,6 +42,23 @@ function speakable(t) {
 }
 const sentences = (t) => (t.match(/[^.!?]+[.!?]+["”’]?(?=\s|$)/g) || [t]).map((x) => x.replace(/^["”’\s]+/, "").trim()).filter(Boolean);
 const firstSentences = (t, n) => sentences(speakable(t)).slice(0, n).join(" ").trim();
+/* Our grade, said the way a newsreader would: the grade name, why it got that grade, and who reported it. Varied so it doesn't sound robotic. */
+const outletNames = (s, e) => [...new Set((e.sources || []).map((k) => (s.sources[k] || [])[0]).filter((n) => n && !/\.[a-z]{2,}$/i.test(n)).map((n) => n.replace(/\s*\(.*?\)\s*/g, "").trim()))].slice(0, 2);
+let gradeTurn = 0;
+function grade(s, e) {
+  const o = outletNames(s, e), t = gradeTurn++ % 2;
+  switch (e.label) {
+    case "confirmed": return o.length >= 2
+      ? (t ? `We grade that confirmed: ${o[0]} and ${o[1]} reported it independently.` : `Our grade: confirmed, with independent reporting from ${o[0]} and ${o[1]}.`)
+      : (t ? "We grade that confirmed: independent outlets report it." : "Our grade: confirmed by independent reporting.");
+    case "reported": return o.length
+      ? (t ? `We grade that reported: so far only ${o[0]} has it, and we're waiting for independent confirmation.` : `Our grade: reported. It rests on one source, ${o[0]}, and isn't yet confirmed by a second.`)
+      : (t ? "We grade that reported: one source so far, not yet independently confirmed." : "Our grade: reported, from a single source so far.");
+    case "disputed": return t ? "We grade that disputed: the accounts conflict, and our timeline sets out both." : "Our grade: disputed. The sides tell it differently, and both versions are on the story page.";
+    case "alleged": return t ? "We grade that alleged: it's one side's claim, not independently confirmed." : "Our grade: alleged. That's a claim by one side that no one has independently confirmed.";
+    default: return "";
+  }
+}
 const SHORT = { confirmed: "Confirmed by independent reports.", reported: "Reported so far by one source.", disputed: "Accounts differ.", alleged: "A claim, not yet confirmed." };
 const LABEL = {
   confirmed: "That's confirmed by independent reports.",
@@ -85,8 +102,9 @@ if (!picks.length) { console.log("no stories with recent items"); process.exit(0
 const region = (s) => s.region || s.title.replace(/'s .*/, "");
 const script = [
   `This is the Unowned briefing for ${weekday}, ${MONTHS[d.getUTCMonth()]} ${ordinal(d.getUTCDate())}. It's narrated by a synthetic voice, and every fact comes from our checked timelines.`,
+  "Every item carries our grade. Confirmed means independent outlets agree. Reported means only one source has it so far. Disputed means the accounts conflict. And alleged is one side's claim.",
   "Here are today's headlines.",
-  ...picks.map(({ s, ev }) => `${region(s)}. ${headline(ev[0])} ${SHORT[ev[0].label] || ""}`.trim()),
+  ...picks.map(({ s, ev }) => `${region(s)}. ${headline(ev[0])} ${grade(s, ev[0])}`.trim()),
 ];
 const said = new Set();
 let detailsStarted = false;
@@ -95,7 +113,7 @@ for (const { s, ev } of picks) {
   // The headline already gave the newest item; add up to two more recent developments, then what's coming up.
   const parts = [];
   const more = ev.slice(1).filter((e) => now - Date.parse(e.added) <= 3 * DAY).slice(0, 2);
-  for (const e of more) parts.push(firstSentences(e.text, 1), LABEL[e.label] || "");
+  for (const e of more) parts.push(firstSentences(e.text, 1), grade(s, e));
   const next = upcoming(s)[0];
   if (next) {
     said.add(next);

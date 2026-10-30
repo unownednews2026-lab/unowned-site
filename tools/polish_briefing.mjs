@@ -24,7 +24,7 @@ const facts = stories.map((s) => {
     (next.length ? "\n" + next.map((e) => `- [coming up] ${e.date}: ${e.text}`).join("\n") : "");
 }).join("\n\n");
 const source = b.script.join("\n") + "\n" + facts;
-const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-pro", "gemini-pro-latest", "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean);
+const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean);
 let lastModel = "";
 async function ask(text, temperature) {
   for (const m of MODELS) for (let tries = 0; tries < 2; tries++) {
@@ -32,7 +32,7 @@ async function ask(text, temperature) {
       const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
         method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": KEY },
         body: JSON.stringify({ contents: [{ role: "user", parts: [{ text }] }], generationConfig: { temperature } }),
-        signal: AbortSignal.timeout(90000),
+        signal: AbortSignal.timeout(150000),
       });
       if (r.status === 429 && tries === 0) { say(`model ${m}: busy (429), waiting a minute`); await new Promise((x) => setTimeout(x, 60000)); continue; }
       if (!r.ok) { say(`model ${m}: HTTP ${r.status}`); break; }   // 404 = not on this plan: try the next model
@@ -58,7 +58,7 @@ Strict rules:
 - Use ONLY facts in the material. Do not add facts, numbers, names, places, dates or causes. Do not speculate.
 - Only mention "coming up" items dated on or after ${date}.
 - Keep attribution exactly, in headlines too: who said or reported what ("police say", "the ministry says", "The Guardian reports").
-- Say how solid each development is, using these words: confirmed = "confirmed by independent reports"; reported = "reported so far by one source"; disputed = say the accounts differ and give both; alleged = "a claim, not yet confirmed". Never make anything sound more certain than its label.
+- OUR GRADE is the heart of Unowned. Keep the short line that explains the four grades near the top. For EVERY development, say its grade by name and why, naturally and briefly, the way a good newsreader would, and vary the wording so it never sounds repetitive. Examples: "Our grade: confirmed, with independent reporting from CBC and CTV." / "We grade that reported: so far only The Guardian has it." / "Disputed: police say 300, organisers say 2,000." / "Alleged: that's the ministry's claim, not independently confirmed." Use the outlet names given in the material; never invent one. Never make anything sound more certain than its grade.
 - Never name private people (anyone arrested, charged, injured, killed, victims, witnesses, minors, ordinary protesters). Public officials, politicians, movement leaders and organisations are fine.
 - Neutral wording: no opinion, no loaded or dramatic words, no graphic detail.
 - Write numbers as digits exactly as in the material (e.g. "45 people", "October 24"). Avoid abbreviations a voice might misread.
