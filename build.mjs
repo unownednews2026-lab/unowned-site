@@ -492,7 +492,7 @@ function build() {
 <li>We don't name ordinary protesters or private individuals.</li>
 </ul>
 <h2>How AI is used</h2>
-<p>AI finds, translates, sorts, checks and drafts our updates. Routine updates backed by published reporting are published automatically once they pass our written checks, without waiting for a person, so stories stay current. Anything sensitive waits for a person to approve it: an accusation against a named person, details that could identify a minor or a private individual, claims of deaths, or anything resting on a single unverified post. Mistakes are corrected in public on the <a href="/corrections/">corrections page</a>.</p>
+<p>AI finds, translates, sorts, checks and drafts our updates. Routine updates backed by published reporting are published automatically once they pass our written checks, without waiting for a person, so stories stay current. Anything sensitive waits for a person to approve it: an accusation against a named person, details that could identify a minor or a private individual, claims of deaths, or anything resting on a single unverified post. If our main desk is paused, a backup automated desk keeps stories current using only established news outlets, with every item checked a second time against its source; those entries are re-checked when the main desk resumes. Mistakes are corrected in public on the <a href="/corrections/">corrections page</a>.</p>
 <h2>Corrections</h2>
 <p>We correct mistakes quickly and in public. Every change made after publishing is listed with its date. <a href="/submit/">Report an error</a>.</p>
 </div>`);
