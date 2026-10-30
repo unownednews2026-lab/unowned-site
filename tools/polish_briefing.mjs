@@ -25,6 +25,7 @@ const facts = stories.map((s) => {
 }).join("\n\n");
 const source = b.script.join("\n") + "\n" + facts;
 const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-pro", "gemini-pro-latest", "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean);
+let lastModel = "";
 async function ask(text, temperature) {
   for (const m of MODELS) for (let tries = 0; tries < 2; tries++) {
     try {
@@ -36,7 +37,7 @@ async function ask(text, temperature) {
       if (r.status === 429 && tries === 0) { say(`model ${m}: busy (429), waiting a minute`); await new Promise((x) => setTimeout(x, 60000)); continue; }
       if (!r.ok) { say(`model ${m}: HTTP ${r.status}`); break; }   // 404 = not on this plan: try the next model
       const out = ((await r.json()).candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
-      if (out) return out;
+      if (out) { lastModel = m; return out; }
       break;
     } catch (e) { say(`model ${m}: ${e.message}`); break; }
   }
@@ -121,7 +122,7 @@ script = script.map((p, i) => i === 0 || i === script.length - 1 ? p : p
   .replace(new RegExp(`\\b(${MONTHS}) (\\d{1,2})\\b(?!,? \\d{4}|\\d)`, "g"), (_, m, n) => `${m} ${ordinal(Number(n))}`)
   .replace(/\bB\.C\./g, "British Columbia"));
 
-writeFileSync(file, JSON.stringify({ ...b, script, polished: true }, null, 2) + "\n");
+writeFileSync(file, JSON.stringify({ ...b, script, polished: true, polishedBy: lastModel }, null, 2) + "\n");
 const mp3 = `static/briefings/${date}.mp3`;
 if (existsSync(mp3)) unlinkSync(mp3);   // record the polished version
 say(`polished: ${words} words`);
