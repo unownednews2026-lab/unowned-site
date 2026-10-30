@@ -17,7 +17,9 @@
     "bbc.com",
     "bfmtv.com",
     "bloomberg.com",
+    "bnnbloomberg.ca",
     "businesslive.co.za",
+    "calgaryherald.com",
     "cbc.ca",
     "cbsnews.com",
     "citizen.co.za",
@@ -29,12 +31,14 @@
     "deccanherald.com",
     "dw.com",
     "economist.com",
+    "edmontonjournal.com",
     "enca.com",
     "euronews.al",
     "euronews.com",
     "ewn.co.za",
     "exit.al",
     "fanpage.it",
+    "financialpost.com",
     "firstpost.com",
     "france24.com",
     "francetvinfo.fr",
@@ -93,7 +97,9 @@
     "theglobeandmail.com",
     "theguardian.com",
     "thehindu.com",
+    "thenarwhal.ca",
     "theprint.in",
+    "theprovince.com",
     "thestar.com",
     "thetimes.co.uk",
     "thetimes.com",
@@ -106,6 +112,7 @@
     "tribuneindia.com",
     "vancouversun.com",
     "vox.com",
-    "washingtonpost.com"
+    "washingtonpost.com",
+    "windspeaker.com"
   ]
 }
