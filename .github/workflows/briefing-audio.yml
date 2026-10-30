@@ -37,14 +37,14 @@ jobs:
           [ -f model/kokoro.onnx ] || curl -sSL -o model/kokoro.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.int8.onnx
           [ -f model/voices.bin ] || curl -sSL -o model/voices.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
       - name: Write today's script if it's missing
-        run: node tools/auto_briefing.mjs
+        run: node tools/auto_briefing.mjs --refresh
       - name: Record new briefings
         run: python tools/briefing_audio.py model/kokoro.onnx model/voices.bin
       - name: Commit audio
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/briefings/ static/briefings/ || true
+          git add -A content/briefings/ static/briefings/ || true
           if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
           git commit -m "Briefing: $(ls content/briefings | tail -1 | sed 's/.json//')"
           git pull --rebase -q origin main

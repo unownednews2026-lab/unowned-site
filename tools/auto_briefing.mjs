@@ -2,11 +2,20 @@
    with no AI step, so the daily briefing never depends on anything outside this repository.
    It uses only text already published on the site, with the same labels. If today's script already exists, it does nothing.
    Usage: node tools/auto_briefing.mjs [YYYY-MM-DD]   (default: today, UTC) */
-import { readFileSync, readdirSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
+import { readFileSync, readdirSync, writeFileSync, existsSync, mkdirSync, unlinkSync } from "node:fs";
 
-const date = process.argv[2] || new Date().toISOString().slice(0, 10);
+const args = process.argv.slice(2);
+const refresh = args.includes("--refresh");          // morning run: rebuild an earlier automatic script with the latest news
+const date = args.find((a) => /^\d{4}-\d{2}-\d{2}$/.test(a)) || new Date().toISOString().slice(0, 10);
 const out = `content/briefings/${date}.json`;
-if (existsSync(out)) { console.log(`${out} already exists; nothing to do`); process.exit(0); }
+if (existsSync(out)) {
+  const old = JSON.parse(readFileSync(out, "utf8"));
+  const stale = refresh && old.auto && (!old.generated || Date.now() - Date.parse(old.generated) > 3 * 36e5);
+  if (!stale) { console.log(`${out} already exists; nothing to do`); process.exit(0); }
+  console.log(`${out} was written earlier; rebuilding it with the latest news`);
+  const mp3 = `static/briefings/${date}.mp3`;
+  if (existsSync(mp3)) unlinkSync(mp3);               // so the recorder makes new audio
+}
 
 const ONES = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
 const ORD = { one: "first", two: "second", three: "third", five: "fifth", eight: "eighth", nine: "ninth", twelve: "twelfth" };
@@ -31,8 +40,9 @@ function speakable(t) {
     .replace(/\s*\([^)]*\)/g, "")          // drop bracketed asides
     .replace(/\s+/g, " ").trim();
 }
-const sentences = (t) => t.match(/[^.!?]+[.!?]+(?=\s|$)/g) || [t];
+const sentences = (t) => (t.match(/[^.!?]+[.!?]+["”’]?(?=\s|$)/g) || [t]).map((x) => x.replace(/^["”’\s]+/, "").trim()).filter(Boolean);
 const firstSentences = (t, n) => sentences(speakable(t)).slice(0, n).join(" ").trim();
+const SHORT = { confirmed: "Confirmed by independent reports.", reported: "Reported so far by one source.", disputed: "Accounts differ.", alleged: "A claim, not yet confirmed." };
 const LABEL = {
   confirmed: "That's confirmed by independent reports.",
   reported: "That's reported so far by one source.",
@@ -42,42 +52,74 @@ const LABEL = {
 
 const now = Date.parse(date + "T23:59:59Z") > Date.now() ? Date.now() : Date.parse(date + "T06:00:00Z");
 const DAY = 864e5;
+const today = new Date(now).toISOString().slice(0, 10);
 const stories = readdirSync("content/stories").filter((f) => f.endsWith(".json"))
   .map((f) => JSON.parse(readFileSync(`content/stories/${f}`, "utf8")));
 
 // Safety net: never read aloud an item that names people the way outlets name private individuals.
 const unsafe = (e) => /\bnamed (by|as)\b|\bidentified (by|as)\b/i.test(e.text);
-const recent = (s, ms) => s.events.filter((e) => e.label !== "pending" && !unsafe(e) && e.added && now - Date.parse(e.added) <= ms && Date.parse(e.added) <= now);
-let picks = stories.map((s) => ({ s, ev: recent(s, DAY) })).filter((x) => x.ev.length)
-  .sort((a, b) => b.ev.length - a.ev.length || Date.parse(b.s.updatedAt) - Date.parse(a.s.updatedAt)).slice(0, 3);
-if (!picks.length) {   // quiet day: the most recently updated story, newest item
-  const s = [...stories].sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))[0];
-  const ev = s.events.filter((e) => e.label !== "pending" && e.added).sort((a, b) => b.added.localeCompare(a.added)).slice(0, 1);
-  picks = [{ s, ev }];
+const items = (s) => s.events.filter((e) => e.label !== "pending" && !unsafe(e) && e.added && Date.parse(e.added) <= now)
+  .sort((a, b) => b.added.localeCompare(a.added) || b.date.localeCompare(a.date));
+/* A short spoken headline: the first clause of the newest item, at most about 22 words. */
+function headline(e) {
+  let h = firstSentences(e.text, 1).replace(/[.;:]\s*$/, "");
+  const n = (t) => t.split(/\s+/).length;
+  if (n(h) > 40) h = h.split(/;\s*| — /)[0];
+  if (n(h) > 40) {
+    // Cut at a comma that leaves a whole thought (at least 12 words), never mid-list.
+    const parts = h.split(", "); let acc = parts[0];
+    for (let i = 1; i < parts.length && n(acc) < 12; i++) acc += ", " + parts[i];
+    for (let i = acc.split(", ").length; i < parts.length && n(acc + ", " + parts[i]) <= 40; i++) acc += ", " + parts[i];
+    h = acc;
+  }
+  return h.replace(/[,;]\s*$/, "") + ".";
 }
+const upcoming = (s) => s.events.filter((e) => e.label === "pending" && e.date >= today).sort((a, b) => a.date.localeCompare(b.date));
+const spokenDate = (iso) => { const x = new Date(iso + "T12:00:00Z"); return `${MONTHS[x.getUTCMonth()]} ${ordinal(x.getUTCDate())}`; };
 
+// Every story with something in the last week, most recently updated first.
+const picks = stories.map((s) => ({ s, ev: items(s) })).filter((x) => x.ev.length && now - Date.parse(x.ev[0].added) <= 7 * DAY)
+  .sort((a, b) => b.ev[0].added.localeCompare(a.ev[0].added));
+if (!picks.length) { console.log("no stories with recent items"); process.exit(0); }
+
+const region = (s) => s.region || s.title.replace(/'s .*/, "");
 const script = [
   `This is the Unowned briefing for ${weekday}, ${MONTHS[d.getUTCMonth()]} ${ordinal(d.getUTCDate())}. It's narrated by a synthetic voice, and every fact comes from our checked timelines.`,
+  "Here are today's headlines.",
+  ...picks.map(({ s, ev }) => `${region(s)}. ${headline(ev[0])} ${SHORT[ev[0].label] || ""}`.trim()),
 ];
+const said = new Set();
+let detailsStarted = false;
+// The details: for each story, the latest one or two developments with their labels, then what's coming up.
 for (const { s, ev } of picks) {
-  script.push(`${s.title}.`);
-  const newest = [...ev].sort((a, b) => b.added.localeCompare(a.added) || b.date.localeCompare(a.date)).slice(0, picks.length > 2 ? 1 : 2);
+  // The headline already gave the newest item; add up to two more recent developments, then what's coming up.
   const parts = [];
-  for (const e of newest) parts.push(firstSentences(e.text, 1), LABEL[e.label] || "");
-  const pend = s.events.filter((e) => e.label === "pending").sort((a, b) => (b.added || "").localeCompare(a.added || ""))[0];
-  if (pend) {
-    // Only the first thing being watched, so the briefing stays short (about 90 seconds).
-    let p = firstSentences(pend.text, 1).split(";")[0].replace(/[.;:]\s*$/, "");
+  const more = ev.slice(1).filter((e) => now - Date.parse(e.added) <= 3 * DAY).slice(0, 2);
+  for (const e of more) parts.push(firstSentences(e.text, 1), LABEL[e.label] || "");
+  const next = upcoming(s)[0];
+  if (next) {
+    said.add(next);
+    let p = firstSentences(next.text, 1).split(";")[0].replace(/[.;:]\s*$/, "").replace(/\s*Still being checked$/i, "");
     if (p.split(/\s+/).length > 22) p = p.split(", ")[0];
-    p = /^(whether|what|when|how|who|why|if)\b/i.test(p) ? `We're watching ${p[0].toLowerCase()}${p.slice(1)}.` : `What's next: ${p[0].toLowerCase()}${p.slice(1)}.`;
-    parts.push(p);
+    parts.push(`Coming up: ${p[0].toLowerCase()}${p.slice(1)}.`);
   }
+  if (!parts.length) continue;
+  if (!detailsStarted) { script.push("Now, more on those stories."); detailsStarted = true; }
+  parts.unshift(`${s.title}.`);
   script.push(parts.filter(Boolean).join(" "));
 }
+// What to watch across all stories in the coming days.
+const ahead = picks.flatMap(({ s }) => upcoming(s).slice(0, 3).map((e) => ({ s, e }))).filter(({ e }) => !said.has(e) && Date.parse(e.date) - now <= 10 * DAY)
+  .sort((a, b) => a.e.date.localeCompare(b.e.date)).slice(0, 4);
+if (ahead.length) script.push("Coming up in the days ahead. " + ahead.map(({ s, e }) => {
+  let p = firstSentences(e.text, 1).split(";")[0].replace(/[.;:]\s*$/, "");
+  if (p.split(/\s+/).length > 16) p = p.split(", ")[0];
+  return `${spokenDate(e.date)}, ${region(s)}: ${p[0].toLowerCase()}${p.slice(1)}.`;
+}).join(" "));
 script.push("That's the briefing. Full timelines, and every source, are at unowned news dot com.");
 
-const names = picks.map((p) => p.s.title.replace(/^(.*?)'s /, "$1's "));
+const names = picks.map((p) => region(p.s));
 const title = "Briefing: " + (names.length > 1 ? names.slice(0, -1).join(", ") + " and " + names.at(-1) : names[0]);
 mkdirSync("content/briefings", { recursive: true });
-writeFileSync(out, JSON.stringify({ title, stories: picks.map((p) => p.s.slug), script, auto: true }, null, 2) + "\n");
+writeFileSync(out, JSON.stringify({ title, stories: picks.map((p) => p.s.slug), script, auto: true, generated: new Date().toISOString() }, null, 2) + "\n");
 console.log(`wrote ${out}: ${picks.map((p) => p.s.slug).join(", ")}; ${script.join(" ").split(/\s+/).length} words`);
