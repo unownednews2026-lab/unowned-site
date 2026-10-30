@@ -57,9 +57,24 @@ async function github(t, x, prefs) {
   return openaiStyle("https://models.github.ai/inference/chat/completions", key, m, t, x);
 }
 
+/* Cloudflare Workers AI (free daily allowance on the account that hosts the site). Needs CF_AI_TOKEN; tries current models in turn. */
+async function cloudflare(t, x) {
+  const key = process.env.CF_AI_TOKEN, acct = process.env.CF_ACCOUNT_ID || "2ac7bebd258b2bbbaa72e1c834f7a623";
+  if (!key) return { skip: true };
+  const url = `https://api.cloudflare.com/client/v4/accounts/${acct}/ai/v1/chat/completions`;
+  let last = { status: "no model" };
+  for (const m of [picked.cloudflare, "@cf/openai/gpt-oss-120b", "@cf/meta/llama-3.3-70b-instruct-fp8-fast", "@cf/meta/llama-4-scout-17b-16e-instruct"].filter(Boolean)) {
+    last = await openaiStyle(url, key, m, t, x);
+    if (last.text) { picked.cloudflare = m; return last; }
+    if (!/^(400|404)/.test(String(last.status))) return last;   // only try another model if this one isn't available
+  }
+  return last;
+}
+
 const PROVIDERS = [
   // Groq (free; the strongest open model it lists) writes first: it answers reliably, while Gemini's free tier is often busy.
   ["groq", groq],
+  ["cloudflare", cloudflare],
   ["gemini-3.8-flash", (t, x) => gemini("gemini-3.8-flash", t, x)],
   ["gemini-flash-latest", (t, x) => gemini("gemini-flash-latest", t, x)],
   ["gemini-flash-lite-latest", (t, x) => gemini("gemini-flash-lite-latest", t, x)],
@@ -85,7 +100,7 @@ export async function ask(text, { temperature = 0.2, prefer = 0, log = console.l
   }
   return "";
 }
-export const GITHUB_PROVIDER = 1;   // fact-checks start with Gemini, a different model from the writer (Groq)   // index of the first non-Gemini provider, for independent checks
+export const GITHUB_PROVIDER = PROVIDERS.findIndex(([n]) => n.startsWith("gemini"));   // fact-checks start with Gemini, a different model from the writer   // index of the first non-Gemini provider, for independent checks
 
 /* For tools/llm_check.mjs: try each provider once with a tiny prompt. */
 export async function checkAll() {
