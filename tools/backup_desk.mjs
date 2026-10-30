@@ -87,7 +87,7 @@ async function readArticle(url, domain, title) {
     const host = new URL(r.url).hostname.replace(/^www\./, "");
     if (!trusted(host)) return null;
     const html = await r.text();
-    const text = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map((p) => p.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;|&[lr]dquo;/g, '"').replace(/\s+/g, " ").trim()).filter((t) => t.length > 60).join("\n").slice(0, 5000);
+    const text = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map((p) => p.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;|&[lr]dquo;/g, '"').replace(/\s+/g, " ").trim()).filter((t) => t.length > 60).join("\n").slice(0, 6000);
     return text.length > 500 ? { url: r.url, domain: host, title, text } : null;
   } catch { return null; }
 }
@@ -119,12 +119,12 @@ async function articlesFor(q, s) {
   }
   const out = [];
   for (const a of list) {
-    if (out.length >= 5) break;
+    if (out.length >= 6) break;
     if (out.some((o) => o.domain === a.domain.replace(/^www\./, ""))) continue;   // one article per outlet
     if (!trusted(a.domain)) continue;                                               // established outlets only
     try {
       const html = await (await fetch(a.url, { headers: { "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(15000) })).text();
-      const text = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map((p) => p.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;|&[lr]dquo;/g, '"').replace(/\s+/g, " ").trim()).filter((t) => t.length > 60).join("\n").slice(0, 5000);
+      const text = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map((p) => p.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;|&[lr]dquo;/g, '"').replace(/\s+/g, " ").trim()).filter((t) => t.length > 60).join("\n").slice(0, 6000);
       if (text.length > 500) out.push({ url: a.url, domain: a.domain.replace(/^www\./, ""), title: a.title, text });
     } catch {}
   }
@@ -144,14 +144,19 @@ ${recent.map((e) => `- ${e.date} [${e.label}] ${e.text}`).join("\n")}
 New articles (numbered):
 ${arts.map((a, i) => `[${i + 1}] ${a.domain}: ${a.title}\n${a.text}`).join("\n\n")}
 
-Using ONLY these articles, list developments that are genuinely NEW (not already published above).
+Using ONLY these articles, write the developments that are genuinely NEW (not already published above), to the standard of a careful wire-service editor.
 Return ONLY a JSON object, no other text: {"items":[{"date":"YYYY-MM-DD","label":"confirmed|reported|disputed|alleged","text":"...","articles":[1,2]}]}
 Rules:
-- At most 3 items, only real developments (court decisions, arrests, official statements, protests, figures). Return {"items":[]} if nothing is new or the articles are not about this story.
-- "date": the day the development happened, as stated in the article.
-- "text": one or two neutral sentences in English, paraphrased, attributed ("police say", "the ministry says", "<outlet> reports"), under 60 words. No opinion, no graphic detail.
-- NEVER name private people (anyone arrested, charged, injured, killed, victims, witnesses, minors, ordinary protesters). Describe them instead ("a 24-year-old man"). Only public officials, politicians and organisations may be named.
-- "articles": the numbers of the articles that report it. "confirmed" only if two of them did their own reporting (not the same wire story); one article = "reported"; conflicting accounts = "disputed" with both sides; one side's claim = "alleged".`;
+- At most 2 items: the most important real developments (court decisions, arrests, official statements, protests, figures, policy changes). Prefer one rich item over two thin ones. Return {"items":[]} if nothing is new or the articles are not about this story. Background or history is NOT a development.
+- Combine everything the articles say about the same development into one item, and cite every article that reports it.
+- Both sides: if the articles carry a response from the other side (government and protesters, police and organisers, company and critics), include it in the same item in one short clause. Never present one side's claim as fact.
+- Figures: if outlets or sides give different numbers, give both with who says what ("police say 300, organisers say 2,000").
+- "date": the day the development happened, as stated in the articles.
+- "text": two neutral sentences in English at most, under 70 words, paraphrased, with attribution ("police say", "the ministry says", "<outlet> reports"). The first sentence must stand alone as a headline. No opinion, no loaded words, no graphic detail.
+- NEVER name private people (anyone arrested, charged, injured, killed, victims, witnesses, minors, ordinary protesters). Describe them instead ("a 24-year-old man"). Only public officials, politicians, movement leaders and organisations may be named.
+- Labels: "confirmed" only if two or more cited articles did their OWN reporting — check bylines and credits: several outlets running the same Reuters, AFP, AP, PTI, ANSA or other agency story count as ONE source. One source = "reported"; conflicting accounts = "disputed" with both given; one side's claim = "alleged".
+- "articles": the numbers of every article that reports it.
+`;
   const out = await gemini(prompt);
   let items = [];
   try { items = JSON.parse(out.slice(out.indexOf("{"), out.lastIndexOf("}") + 1)).items || []; } catch { say(`${s.slug}: could not read the reply`); }
@@ -187,7 +192,10 @@ Answer ONLY with JSON: {"ok": true|false, "reason": "..."}. "ok" is true ONLY if
     if (why.length) { report.push(`- ${s.slug}: skipped "${(it.text || "").slice(0, 80)}…" (${why.join(", ")})`); continue; }
     // Labels are capped: "confirmed" needs two different established outlets; disputed/alleged stay as given.
     let label = it.label;
-    if (label === "confirmed" && new Set(cited.map((a) => a.domain)).size < 2) label = "reported";
+    // Independence check in code too: different outlets running the same agency story count once.
+    const WIRES = [["reuters", /\breuters\b/i], ["afp", /\b(afp|agence france-presse)\b/i], ["ap", /\b(associated press|\(ap\))\b/i], ["pti", /\b(pti|press trust of india)\b/i], ["ani", /\bANI\b/], ["ians", /\bIANS\b/], ["ansa", /\bANSA\b/], ["dpa", /\bdpa\b/], ["efe", /\bEFE\b/]];
+    const sourceOf = (a) => { const head = a.text.slice(0, 600); const w = WIRES.find(([, re]) => re.test(head)); return w ? `wire:${w[0]}` : a.domain; };
+    if (label === "confirmed" && new Set(cited.map(sourceOf)).size < 2) label = "reported";
     const keys = cited.map((a, i) => { const k = `bk${now.replace(/\D/g, "").slice(4, 12)}${added.length}${i}`; s.sources[k] = [a.domain, a.url]; return k; });
     const group = s.sourceGroups[s.sourceGroups.length - 1];
     (Array.isArray(group) ? group[1] : group.keys || group.sources || []).push(...keys);
