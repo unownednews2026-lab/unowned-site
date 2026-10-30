@@ -6,7 +6,7 @@
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { headlinesSince } from "./signals.mjs";
-import { ask, used as llmUsed, GITHUB_PROVIDER } from "./llm.mjs";
+import { ask, used as llmUsed, problems as llmProblems, GITHUB_PROVIDER } from "./llm.mjs";
 
 const KEY = process.env.GEMINI_API_KEY;
 const REPO = process.env.GITHUB_REPOSITORY;
@@ -324,7 +324,7 @@ for (let i = 0; i < 3; i++) {
 say(published.length ? `published: ${published.join(", ")}` : "refreshed checked-for-news stamps");
 
 // Log in a separate issue (issue #2 is the Claude desk's own log, which this desk reads to see if Claude is running).
-writeFileSync("/tmp/log.md", `${now} — ${published.length ? "published" : "no new developments from established outlets"} — models: ${[...modelsUsed].join(", ") || "none needed"}${queue.length ? ` — ${queue.length} item(s) sent to the Editor queue` : ""}\n\n${report.join("\n\n") || "(nothing to report)"}`);
+writeFileSync("/tmp/log.md", `${now} — ${published.length ? "published" : "no new developments from established outlets"} — models: ${[...modelsUsed].join(", ") || "none needed"}${Object.keys(llmProblems).length ? ` — provider problems: ${Object.entries(llmProblems).map(([k, v]) => `${k} (${v})`).join("; ")}` : ""}${queue.length ? ` — ${queue.length} item(s) sent to the Editor queue` : ""}\n\n${report.join("\n\n") || "(nothing to report)"}`);
 try {
   const n = sh(`gh api "repos/${REPO}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="Backup desk log")][0].number // empty'`);
   if (n) sh(`gh issue comment ${n} --body-file /tmp/log.md`);

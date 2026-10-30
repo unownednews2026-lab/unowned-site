@@ -3,6 +3,7 @@
    3. Groq (GROQ_API_KEY, optional)    Each answer records which model gave it. */
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 export const used = new Set();
+export const problems = {};   // provider -> last problem seen this run, for the run log
 
 async function gemini(model, text, temperature) {
   const key = process.env.GEMINI_API_KEY; if (!key) return { skip: true };
@@ -29,8 +30,6 @@ const PROVIDERS = [
   ["gemini-3.8-flash", (t, x) => gemini("gemini-3.8-flash", t, x)],
   ["gemini-flash-latest", (t, x) => gemini("gemini-flash-latest", t, x)],
   ["github:openai/gpt-4.1-mini", (t, x) => openaiStyle("https://models.github.ai/inference/chat/completions", process.env.GITHUB_TOKEN, "openai/gpt-4.1-mini", t, x)],
-  // Older GitHub Models address, same free allowance; used if the new one misbehaves.
-  ["github-azure:gpt-4o-mini", (t, x) => openaiStyle("https://models.inference.ai.azure.com/chat/completions", process.env.GITHUB_TOKEN, "gpt-4o-mini", t, x)],
   ["github:meta/Llama-3.3-70B-Instruct", (t, x) => openaiStyle("https://models.github.ai/inference/chat/completions", process.env.GITHUB_TOKEN, "meta/Llama-3.3-70B-Instruct", t, x)],
   ["groq:llama-3.3-70b-versatile", (t, x) => openaiStyle("https://api.groq.com/openai/v1/chat/completions", process.env.GROQ_API_KEY, "llama-3.3-70b-versatile", t, x)],
   ["gemini-flash-lite-latest", (t, x) => gemini("gemini-flash-lite-latest", t, x)],
@@ -47,6 +46,7 @@ export async function ask(text, { temperature = 0.2, prefer = 0, log = console.l
       if (res.skip) break;
       if (res.text) { used.add(name); return res.text; }
       if ((res.status === 429 || res.status === 503) && tries === 0) { log(`${name}: busy (${res.status}), waiting 30s`); await wait(30000); continue; }
+      problems[name] = String(res.status || "no answer").slice(0, 100);
       log(`${name}: ${res.status || "no answer"}`); break;
     }
   }
