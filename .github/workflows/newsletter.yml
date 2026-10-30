@@ -4,8 +4,8 @@
 name: Daily email
 on:
   schedule:
-    - cron: "35 6 * * *"
-    - cron: "5 8 * * *"    # retry: sends only if the 06:35 run didn't
+    - cron: "50 7 * * *"
+    - cron: "20 9 * * *"    # retry: sends only if the 07:50 run didn't
   workflow_dispatch:
 permissions:
   contents: read
