@@ -58,12 +58,14 @@ async function github(t, x, prefs) {
 }
 
 const PROVIDERS = [
+  // Groq (free; the strongest open model it lists) writes first: it answers reliably, while Gemini's free tier is often busy.
+  ["groq", groq],
   ["gemini-3.8-flash", (t, x) => gemini("gemini-3.8-flash", t, x)],
   ["gemini-flash-latest", (t, x) => gemini("gemini-flash-latest", t, x)],
-  ["groq", groq],
+  ["gemini-flash-lite-latest", (t, x) => gemini("gemini-flash-lite-latest", t, x)],
+  // GitHub Models: not enabled on this account yet (its API answers "OK" with no models); kept last in case it's switched on.
   ["github:gpt", (t, x) => github(t, x, ["gpt-4.1-mini", "gpt-4o-mini", "gpt-4.1", "gpt"])],
   ["github:llama", (t, x) => github(t, x, ["llama-3.3-70b", "llama-4", "llama"])],
-  ["gemini-flash-lite-latest", (t, x) => gemini("gemini-flash-lite-latest", t, x)],
 ];
 
 /* Ask the first provider that answers. `prefer` lets a caller start with a different provider (e.g. so a fact-check
@@ -83,7 +85,7 @@ export async function ask(text, { temperature = 0.2, prefer = 0, log = console.l
   }
   return "";
 }
-export const GITHUB_PROVIDER = 2;   // index of the first non-Gemini provider (Groq), for independent checks   // index of the first non-Gemini provider, for independent checks
+export const GITHUB_PROVIDER = 1;   // fact-checks start with Gemini, a different model from the writer (Groq)   // index of the first non-Gemini provider, for independent checks
 
 /* For tools/llm_check.mjs: try each provider once with a tiny prompt. */
 export async function checkAll() {
