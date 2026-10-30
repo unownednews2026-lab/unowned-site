@@ -24,19 +24,37 @@ const facts = stories.map((s) => {
     (next.length ? "\n" + next.map((e) => `- [coming up] ${e.date}: ${e.text}`).join("\n") : "");
 }).join("\n\n");
 const source = b.script.join("\n") + "\n" + facts;
+const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean);
+async function ask(text, temperature) {
+  for (const m of MODELS) {
+    try {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
+        method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": KEY },
+        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text }] }], generationConfig: { temperature } }),
+        signal: AbortSignal.timeout(90000),
+      });
+      if (!r.ok) { say(`model ${m}: HTTP ${r.status}`); continue; }
+      const out = ((await r.json()).candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
+      if (out) return out;
+    } catch (e) { say(`model ${m}: ${e.message}`); }
+  }
+  return "";
+}
+const json = (t) => { try { return JSON.parse(t.slice(t.indexOf("{"), t.lastIndexOf("}") + 1)); } catch { return {}; } };
 
 const prompt = `You write the script for "Unowned", a neutral, independent daily audio news briefing read by a synthetic voice.
-Rewrite the material below into one polished bulletin of 380 to 480 words (about three minutes).
+Rewrite the material below into one polished bulletin of 340 to 430 words (under three minutes).
 
 Structure:
 1. Keep this opening line exactly: "${b.script[0]}"
-2. "Here are today's headlines." then one crisp line per story (about 15 to 25 words), most important first, in the style of radio news headlines.
-3. Then, for each story, a short segment (2 to 4 sentences): what happened, why it matters in one plain line of context from the material, and what's coming up if given. For the two or three busiest stories, add one more detail. End some segments with a natural nudge such as "The full timeline, with every source, is on the story page."
+2. "Here are today's headlines." then one crisp line per story (about 15 to 25 words), most important first, in the style of radio news headlines. Each headline starts with the country (e.g. "In Albania, ...") and keeps the attribution ("The Guardian reports", "police say").
+3. Then, for each story, a short segment (2 to 4 sentences) that starts with the country or story name: what happened, why it matters in one plain line of context from the material, and what's coming up if given. For the two or three busiest stories, add one more detail. End some segments with a natural nudge such as "The full timeline, with every source, is on the story page."
 4. Keep this closing line exactly: "${b.script[b.script.length - 1]}"
 
 Strict rules:
 - Use ONLY facts in the material. Do not add facts, numbers, names, places, dates or causes. Do not speculate.
-- Keep attribution exactly: who said or reported what ("police say", "the ministry says", "The Guardian reports").
+- Only mention "coming up" items dated on or after ${date}.
+- Keep attribution exactly, in headlines too: who said or reported what ("police say", "the ministry says", "The Guardian reports").
 - Say how solid each development is, using these words: confirmed = "confirmed by independent reports"; reported = "reported so far by one source"; disputed = say the accounts differ and give both; alleged = "a claim, not yet confirmed". Never make anything sound more certain than its label.
 - Never name private people (anyone arrested, charged, injured, killed, victims, witnesses, minors, ordinary protesters). Public officials, politicians, movement leaders and organisations are fine.
 - Neutral wording: no opinion, no loaded or dramatic words, no graphic detail.
@@ -48,28 +66,33 @@ Return ONLY JSON: {"script": ["paragraph", "paragraph", ...]} with the opening l
 MATERIAL:
 ${source}`;
 
-const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"].filter(Boolean);
-let out = "";
-for (const m of MODELS) {
-  try {
-    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
-      method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": KEY },
-      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { temperature: 0.3 } }),
-      signal: AbortSignal.timeout(90000),
-    });
-    if (!r.ok) { say(`model ${m}: HTTP ${r.status}`); continue; }
-    out = ((await r.json()).candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
-    if (out) { say(`model ${m} answered`); break; }
-  } catch (e) { say(`model ${m}: ${e.message}`); }
+let script = [], feedback = "";
+for (let attempt = 1; attempt <= 2 && !script.length; attempt++) {
+  const draft = (json(await ask(prompt + feedback, 0.3)).script || []).map((p) => String(p).replace(/\s+/g, " ").trim()).filter(Boolean);
+  if (!draft.length) { say("no usable reply"); break; }
+  // Independent second check by a separate request: does the draft stick to the material and our rules?
+  const review = json(await ask(`You are a strict editor. Compare the DRAFT news script with the MATERIAL it must be based on.
+List every sentence in the DRAFT that: adds any fact, number, name, place or cause not in the MATERIAL; drops or changes attribution (who said or reported it); makes something sound more certain than its label in the MATERIAL; names a private person (arrested, charged, injured, killed, victims, witnesses, minors, ordinary protesters); or uses opinion, loaded or graphic wording.
+Answer ONLY with JSON {"ok": true|false, "problems": ["..."]}. "ok" is true only if there are no problems.
+
+DRAFT:
+${draft.join("\n")}
+
+MATERIAL:
+${source}`, 0));
+  if (review.ok === true) script = draft;
+  else {
+    const probs = (review.problems || []).slice(0, 8).map(String);
+    say(`attempt ${attempt}: editor found ${probs.length || "unclear"} problem(s): ${probs.join(" | ").slice(0, 400)}`);
+    feedback = `\n\nYour previous draft had these problems; fix them all:\n- ${probs.join("\n- ")}`;
+  }
 }
-let script = [];
-try { script = JSON.parse(out.slice(out.indexOf("{"), out.lastIndexOf("}") + 1)).script || []; } catch {}
-script = script.map((p) => String(p).replace(/\s+/g, " ").trim()).filter(Boolean);
+if (!script.length) { say("keeping the plain script (the editor check did not pass)"); process.exit(0); }
 
 // Checks. Any failure keeps the plain script.
 const problems = [];
 const words = script.join(" ").split(/\s+/).length;
-if (words < 300 || words > 560) problems.push(`length ${words} words`);
+if (words < 280 || words > 500) problems.push(`length ${words} words`);
 if (script[0] !== b.script[0]) problems.push("opening line changed");
 if (script.at(-1) !== b.script.at(-1)) problems.push("closing line changed");
 const srcNums = new Set((source.match(/\d[\d,.]*/g) || []).map((n) => n.replace(/[,.]+$/, "").replace(/,/g, "")));
