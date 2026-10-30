@@ -38,6 +38,10 @@ jobs:
           [ -f model/voices.bin ] || curl -sSL -o model/voices.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
       - name: Write today's script if it's missing
         run: node tools/auto_briefing.mjs --refresh
+      - name: Polish today's script with Gemini (keeps the plain one if any check fails)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node tools/polish_briefing.mjs || true
       - name: Record new briefings
         run: python tools/briefing_audio.py model/kokoro.onnx model/voices.bin
       - name: Commit audio

@@ -85,7 +85,7 @@ jobs:
       - name: Warn early if a story is falling behind
         if: always()
         run: node tools/lag_alert.mjs || true
-      - name: Backup desk (free, only when the Claude desk has missed runs)
+      - name: Gemini news desk (free, every hour)
         if: always()
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

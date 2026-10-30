@@ -1,4 +1,4 @@
-/* Backup news desk: free (Google Gemini free tier + GitHub Actions), used only when the Claude news desk has missed runs.
+/* Gemini news desk: free (Google Gemini free tier + GitHub Actions). Runs every hour.
    It keeps the site fresh on its own: it publishes new developments, but only from established outlets (tools/outlets.json),
    only after a second, independent Gemini check of every item, and marks them "desk": "backup" so the Claude desk re-checks
    them when it is running again. Founder decision 2026-10-29: content must stay fresh even when the Claude plan runs out.
@@ -11,16 +11,13 @@ const KEY = process.env.GEMINI_API_KEY;
 const REPO = process.env.GITHUB_REPOSITORY;
 // Tried in order; the first one that answers is used. Older models get retired, so the newest come first.
 const MODELS = [process.env.GEMINI_MODEL, "gemini-3.8-flash", "gemini-flash-latest", "gemini-3.8-flash-lite", "gemini-flash-lite-latest"].filter(Boolean);
-const MISSED_HOURS = 4;
 const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 const say = (m) => console.log(`backup desk: ${m}`);
 
 if (!KEY) { say("no GEMINI_API_KEY secret yet; skipping"); process.exit(0); }
 
-/* 1. Is the Claude desk running? It comments on issue #2 after every run. */
-const since = new Date(Date.now() - MISSED_HOURS * 36e5).toISOString();
-const recentLogs = JSON.parse(sh(`gh api "repos/${REPO}/issues/2/comments?since=${since}&per_page=5"`));
-if (recentLogs.length && process.env.BACKUP_FORCE !== "true") { say(`Claude desk logged a run in the last ${MISSED_HOURS} hours; nothing to do`); process.exit(0); }
+/* Since 2026-10-29 this Gemini desk is the MAIN hourly desk (founder decision: save the Claude plan for building the platform).
+   The Claude desk runs twice a day as editor: it re-checks every "desk": "backup" item and digs deeper. */
 
 const OUTLETS = JSON.parse(readFileSync("tools/outlets.json", "utf8")).domains;
 const trusted = (host) => { const h = host.replace(/^www\./, ""); return OUTLETS.some((d) => h === d || h.endsWith("." + d)); };
