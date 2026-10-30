@@ -26,12 +26,43 @@ async function openaiStyle(url, key, model, text, temperature) {
   catch { return { status: `unreadable reply: ${body.slice(0, 80).replace(/\s+/g, " ")}` }; }
 }
 
+/* Pick a current model from a provider's own list (model names change over time). */
+const picked = {};
+async function pickModel(name, listUrl, key, prefs) {
+  if (picked[name] !== undefined) return picked[name];
+  picked[name] = null;
+  try {
+    const r = await fetch(listUrl, { headers: { Authorization: `Bearer ${key}`, Accept: "application/json" }, signal: AbortSignal.timeout(20000) });
+    const body = await r.text();
+    let ids = [];
+    try { const j = JSON.parse(body); ids = (j.data || j.models || j || []).map((m) => m.id || m.name).filter(Boolean); } catch {}
+    if (!ids.length) { problems[`${name}:list`] = `${r.status} ${body.slice(0, 80).replace(/\s+/g, " ")}`; return null; }
+    for (const p of prefs) { const hit = ids.find((id) => id.toLowerCase().includes(p)); if (hit) return (picked[name] = hit); }
+    return (picked[name] = ids[0]);
+  } catch (e) { problems[`${name}:list`] = String(e.message).slice(0, 80); return null; }
+}
+async function groq(t, x) {
+  const key = process.env.GROQ_API_KEY; if (!key) return { skip: true };
+  const m = await pickModel("groq", "https://api.groq.com/openai/v1/models", key, ["llama-4-maverick", "llama-3.3-70b", "gpt-oss-120b", "llama-4", "70b", "qwen", "gpt-oss"]);
+  if (!m) return { status: "no model list" };
+  used.add(`groq:${m}`);
+  const res = await openaiStyle("https://api.groq.com/openai/v1/chat/completions", key, m, t, x);
+  if (!res.text) used.delete(`groq:${m}`);
+  return res;
+}
+async function github(t, x, prefs) {
+  const key = process.env.GITHUB_TOKEN; if (!key) return { skip: true };
+  const m = await pickModel(`github-${prefs[0]}`, "https://models.github.ai/catalog/models", key, prefs);
+  if (!m) return { status: "no model list" };
+  return openaiStyle("https://models.github.ai/inference/chat/completions", key, m, t, x);
+}
+
 const PROVIDERS = [
   ["gemini-3.8-flash", (t, x) => gemini("gemini-3.8-flash", t, x)],
   ["gemini-flash-latest", (t, x) => gemini("gemini-flash-latest", t, x)],
-  ["github:openai/gpt-4.1-mini", (t, x) => openaiStyle("https://models.github.ai/inference/chat/completions", process.env.GITHUB_TOKEN, "openai/gpt-4.1-mini", t, x)],
-  ["github:meta/Llama-3.3-70B-Instruct", (t, x) => openaiStyle("https://models.github.ai/inference/chat/completions", process.env.GITHUB_TOKEN, "meta/Llama-3.3-70B-Instruct", t, x)],
-  ["groq:llama-3.3-70b-versatile", (t, x) => openaiStyle("https://api.groq.com/openai/v1/chat/completions", process.env.GROQ_API_KEY, "llama-3.3-70b-versatile", t, x)],
+  ["groq", groq],
+  ["github:gpt", (t, x) => github(t, x, ["gpt-4.1-mini", "gpt-4o-mini", "gpt-4.1", "gpt"])],
+  ["github:llama", (t, x) => github(t, x, ["llama-3.3-70b", "llama-4", "llama"])],
   ["gemini-flash-lite-latest", (t, x) => gemini("gemini-flash-lite-latest", t, x)],
 ];
 
@@ -52,4 +83,4 @@ export async function ask(text, { temperature = 0.2, prefer = 0, log = console.l
   }
   return "";
 }
-export const GITHUB_PROVIDER = 2;   // index of the first non-Gemini provider, for independent checks
+export const GITHUB_PROVIDER = 2;   // index of the first non-Gemini provider (Groq), for independent checks   // index of the first non-Gemini provider, for independent checks
