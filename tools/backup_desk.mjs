@@ -3,7 +3,7 @@
    only after a second, independent Gemini check of every item, and marks them "desk": "backup" so the Claude desk re-checks
    them when it is running again. Founder decision 2026-10-29: content must stay fresh even when the Claude plan runs out.
    Runs inside the hourly "Freshness check" workflow. Needs the GEMINI_API_KEY secret; without it, it does nothing. */
-import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { readFileSync, readdirSync, writeFileSync, mkdirSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { headlinesSince } from "./signals.mjs";
 import { ask, used as llmUsed, problems as llmProblems, GITHUB_PROVIDER } from "./llm.mjs";
@@ -247,6 +247,10 @@ ${cited.map((a, i) => `[${i + 1}] ${a.domain}: ${a.title}\n${a.text}`).join("\n\
     const group = s.sourceGroups[s.sourceGroups.length - 1];
     (Array.isArray(group) ? group[1] : group.keys || group.sources || []).push(...keys);
     s.events.push({ date: it.date, phase: s.phases[s.phases.length - 1].id, label, added: now, text: it.text.trim(), sources: keys, desk: "backup" });
+    // Review packet for the Claude editor: the item plus the full text of the articles it rests on, so the editor can check it
+    // without searching or re-fetching (saves Claude usage). Kept in the private repository only; never published on the site.
+    mkdirSync(`review-packets/${s.slug}`, { recursive: true });
+    writeFileSync(`review-packets/${s.slug}/${keys[0]}.json`, JSON.stringify({ story: s.slug, added: now, label, text: it.text.trim(), sources: cited.map((a, i) => ({ key: keys[i], outlet: a.domain, url: a.url, title: a.title, articleText: a.text })) }, null, 2));
     added.push({ label, text: it.text.trim(), cited });
   }
   if (!added.length) continue;
@@ -316,7 +320,7 @@ if (/LABEL CHECK: \d+ item/.test(build) || /Error/.test(build)) {
   process.exit(0);
 }
 sh(`git config user.name "Unowned" && git config user.email "Unownednews2026@gmail.com"`);
-sh(`git add content/stories && git commit -q -m "${published.length ? `Backup desk: ${published.join(", ")}` : "Checked for news (backup desk)"} — ${now}"`);
+sh(`git add content/stories ${published.length ? "review-packets" : ""} && git commit -q -m "${published.length ? `Backup desk: ${published.join(", ")}` : "Checked for news (backup desk)"} — ${now}"`);
 for (let i = 0; i < 3; i++) {
   try { sh("git pull -q --rebase origin main && git push -q origin HEAD:main"); break; }
   catch (e) { if (i === 2) { say(`push failed: ${String(e.message).slice(0, 200)}`); process.exit(0); } await new Promise((r) => setTimeout(r, 10000)); }
