@@ -68,7 +68,7 @@ const published = [];
 
 /* Recent articles about a story from GDELT (free, no key): real article addresses, so nothing is invented. */
 async function articles(s, h) {
-  const watchQ = (JSON.parse(readFileSync("tools/watch.json", "utf8"))[s.slug] || s.title.replace(/'s\b/g, "")).split(/\s+/).slice(0, 4).join(" ");
+  const watchQ = (JSON.parse(readFileSync("tools/watch.json", "utf8"))[s.slug] || s.title.replace(/'s\b/g, "")).split(" OR ")[0].replace(/"/g, "").split(/\s+/).slice(0, 4).join(" ");
   const titleQ = s.title.replace(/'s\b/g, "").replace(/\b(the|and|of|fight|movement)\b/gi, "").replace(/\s+/g, " ").trim();
   let out = await articlesFor(watchQ, s);
   if (!out.length && titleQ !== watchQ) out = await articlesFor(titleQ, s);   // second way in, if the first finds nothing readable
