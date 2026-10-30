@@ -1,6 +1,6 @@
 # Freshness watchdog: no AI, no cost. Every hour it checks when the news desk last published an update or
 # recorded a check for news ("checkedAt"). If neither has happened for 12 hours it opens a "Freshness alert" issue (GitHub emails the repository owner)
-# and marks that one run as failed (GitHub also emails a failed-run notice). Later runs stay quiet while the alert is open,
+# The run itself never fails, so GitHub doesn't send "Run failed" emails. Later runs stay quiet while the alert is open,
 # and the issue closes itself once updates resume.
 # Also (same hourly job, to stay inside GitHub's free minutes): the News signals table, and the free backup desk.
 name: Freshness check
@@ -52,8 +52,8 @@ jobs:
                 "What you can do: keep Claude chats short until the limit resets, or check the news desk's recent runs under scheduled tasks in the Claude app." "" \
                 "This issue closes itself when updates resume." > /tmp/alert.md
               gh issue create --title "Freshness alert: no updates for $age hours" --body-file /tmp/alert.md
-              echo "::error::No story updates or checks for $age hours (newest: $newest)."
-              exit 1
+              # The issue above emails the owner once; the run itself stays green (no repeated "Run failed" emails).
+              echo "::warning::No story updates or checks for $age hours (newest: $newest)."
             else
               # Already alerted once: stay quiet (no hourly failure emails) until updates resume.
               echo "::warning::Still no story updates or checks for $age hours (newest: $newest). Alert #$open is open."
@@ -74,7 +74,7 @@ jobs:
             gh workflow run briefing-audio.yml || true
             printf '%s\n' "Today's audio briefing ($today) was not published by 10:00 UTC, so a third attempt has been started automatically." "" "This issue closes itself once the briefing is published." > /tmp/b.md
             gh issue create --title "Briefing alert: no briefing for $today" --body-file /tmp/b.md
-            echo "::error::No briefing for $today"; exit 1
+            echo "::warning::No briefing for $today"
           fi
       - name: Update the News signals issue
         if: always()
