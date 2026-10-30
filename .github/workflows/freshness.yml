@@ -82,6 +82,9 @@ jobs:
           node tools/signals.mjs > /tmp/signals.md || exit 0
           n=$(gh api "repos/${{ github.repository }}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="News signals")][0].number // empty')
           if [ -z "$n" ]; then gh issue create --title "News signals" --body-file /tmp/signals.md; else gh api -X PATCH "repos/${{ github.repository }}/issues/$n" -F body=@/tmp/signals.md >/dev/null; fi
+      - name: Warn early if a story is falling behind
+        if: always()
+        run: node tools/lag_alert.mjs || true
       - name: Backup desk (free, only when the Claude desk has missed runs)
         if: always()
         env:
