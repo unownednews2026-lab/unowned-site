@@ -198,14 +198,19 @@ Proposed item: "${it.text}"
 Cited articles:
 ${cited.map((a, i) => `[${i + 1}] ${a.domain}: ${a.title}\n${a.text}`).join("\n\n")}
 
-Answer ONLY with JSON: {"ok": true|false, "reason": "..."}. "ok" is true ONLY if ALL of these hold:
-1. Every fact in the item is clearly stated in the cited articles (numbers, dates, names and who said what match).
+Answer ONLY with JSON: {"evidence": ["exact sentence copied from an article that supports each fact, one per fact"], "ok": true|false, "reason": "..."}. "ok" is true ONLY if ALL of these hold:
+1. Every fact in the item is clearly stated in the cited articles (numbers, dates, names and who said what match). Check WHEN each thing was said or done: a new statement must not be mixed up with an earlier one, and a reply must not be presented as the original remark.
 2. Claims are attributed to whoever made them; nothing is stated as fact that the articles only report as a claim.
 3. It names no private person (anyone arrested, charged, injured, killed, a victim, witness, minor or ordinary protester). Public officials, politicians, movement leaders and organisations are fine.
 4. It is neutral (no opinion or loaded words), has no graphic detail, and is not hateful, sexual or defamatory.
 5. It is about the story "${s.title}" and is a real development, not commentary or opinion.`);
       let v = {};
       try { v = JSON.parse(verdict.slice(verdict.indexOf("{"), verdict.lastIndexOf("}") + 1)); } catch {}
+      // Code-level grounding: the checker must quote the articles, and every quote must really be in them.
+      const norm = (x) => String(x).toLowerCase().replace(/[^a-z0-9à-ÿ]+/g, " ").trim();
+      const corpus = norm(cited.map((a) => a.text).join(" "));
+      if (v.ok === true && (!Array.isArray(v.evidence) || !v.evidence.length || v.evidence.some((q) => !corpus.includes(norm(q).split(" ").slice(0, 6).join(" ")))))
+        v = { ok: false, reason: "the fact-check's supporting quotes were not found in the articles" };
       if (v.ok !== true && v.reason) {
         // Like a desk editor sending copy back: one rewrite that fixes the problem, then the same check again.
         const fixed = await gemini(`Rewrite this news item so it fixes the editor's problem, using ONLY facts in the articles. Keep it neutral, attributed, under 70 words, two sentences at most, no private names. Return ONLY the rewritten item text.
@@ -278,17 +283,26 @@ for (const { f, h } of hot) {
 It belongs to the story "${s.title}". Answer ONLY with JSON {"ok": true|false, "reason": "..."}. "ok" is true only if the headline is clearly about this story, names no private person (anyone arrested, charged, injured, killed, a victim, witness, minor or ordinary protester; public officials, politicians, movement leaders and organisations are fine), has no graphic detail, and is not opinion, hateful, sexual or defamatory.`);
   let v = {}; try { v = JSON.parse(check.slice(check.indexOf("{"), check.lastIndexOf("}") + 1)); } catch {}
   if (v.ok !== true) { report.push(`- ${s.slug}: headline fallback skipped (${String(v.reason || "no clear yes").slice(0, 100)})`); continue; }
+  // Paraphrase the headline into one calm, attributed sentence (tabloid wording like "plunges" is not our voice).
+  // Every name and number must come from the headline itself; if not, fall back to the quoted headline.
+  let line = `${outlet} reports: "${headline}"`;
+  try {
+    const para = (await gemini(`Rewrite this news headline as ONE neutral, plain sentence for a careful news site, starting with "${outlet} reports". Use only what the headline says, add nothing, drop dramatic or loaded words, no graphic detail. Return only the sentence.\n\nHeadline: ${headline}`, WRITER)).replace(/^["'\s]+|["'\s]+$/g, "").replace(/\s+/g, " ").trim();
+    const tokens = (x) => (x.match(/\b(?:[A-Z][\p{L}'’-]+|\d[\d,.]*)\b/gu) || []).filter((t) => !/^(The|A|An|In|On|At|As|After|Before|Over|With|Reports?)$/.test(t));
+    const src = (outlet + " " + headline).toLowerCase();
+    if (para && para.length < 300 && para.startsWith(outlet) && !UNSAFE.test(para) && tokens(para).every((t) => src.includes(t.toLowerCase()))) line = para.endsWith(".") ? para : para + ".";
+  } catch {}
   const k = `bk${now.replace(/\D/g, "").slice(4, 12)}h`;
   s.sources[k] = [outlet, (await realUrl(pick.link)) || pick.link];
   const group = s.sourceGroups[s.sourceGroups.length - 1];
   (Array.isArray(group) ? group[1] : group.keys || group.sources || []).push(k);
-  s.events.push({ date: new Date(pick.pub).toISOString().slice(0, 10), phase: s.phases[s.phases.length - 1].id, label: "reported", added: now, text: `${outlet} reports: "${headline}"`, sources: [k], desk: "backup", headline: true });
+  s.events.push({ date: new Date(pick.pub).toISOString().slice(0, 10), phase: s.phases[s.phases.length - 1].id, label: "reported", added: now, text: line, sources: [k], desk: "backup", headline: true });
   s.events.sort((a, b) => a.date.localeCompare(b.date));
   s.updated = now.slice(0, 10); s.updatedAt = now;
   writeFileSync(`content/stories/${f}`, JSON.stringify(s, null, 2));
   sh(`node tools/fmt.js content/stories/${f}`);
   published.push(s.slug);
-  report.push(`### ${s.title} (headline safety net)\n- **reported**: ${outlet} reports: "${headline}"\n  Source: ${pick.link}`);
+  report.push(`### ${s.title} (headline safety net)\n- **reported**: ${line}\n  Source: ${pick.link}`);
 }
 
 /* Tidy up: review packets older than 14 days are deleted (the editor has long since used them). */
