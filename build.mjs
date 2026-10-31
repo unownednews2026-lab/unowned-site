@@ -201,7 +201,7 @@ function storyPage(st, brief) {
     const items = rows.map((e) => {
       const post = `${long(e.date)}: ${e.text}\n\nFull timeline and sources on Unowned: ${SITE}${path}#${itemId(e)}`;
       const share = e.label === "pending" ? "" : `<button type="button" class="share" data-post="${esc(post)}" aria-label="Share the ${esc(short(e.date))} entry">Share</button>`;
-      return `<li id="${itemId(e)}" data-label="${e.label}"><span class="date">${short(e.date)}</span><div class="body"><div class="item-top">${stamp(e.label)}${share}</div><p>${esc(e.text)}</p>${srcLine(S, e.sources)}${why(S, e.label, e.sources, `${st.slug} ${e.date}`)}</div></li>`;
+      return `<li id="${itemId(e)}" data-label="${e.label}"><span class="date">${short(e.date)}</span><div class="body"><div class="item-top">${stamp(e.label)}${share}</div><p>${esc(e.text)}</p>${srcLine(S, e.sources)}${why(S, e.label, e.sources, `${st.slug} ${e.date}`)}${e.desk === "backup" ? `<p class="why">Automated update, checked against its source; our editor's second review is pending.</p>` : ""}</div></li>`;
     }).join("\n");
     return { n: rows.length, html: `<div class="phase-block"><div class="phase"><p class="eyebrow">${esc(p.when)}</p><h3>${esc(p.name)}</h3></div><ol class="timeline">${items}</ol></div>` };
   }).filter((b) => b && b.html);
@@ -510,7 +510,7 @@ function build() {
 <li>We don't name ordinary protesters or private individuals.</li>
 </ul>
 <h2>How AI is used</h2>
-<p>AI finds, translates, sorts, checks and drafts our updates. Every hour, our newsdesk reads reporting from established news outlets only and drafts updates; a second, different AI model checks each one against the articles it cites before it is published, so stories stay current. Within hours, a stronger AI editor re-checks every one of those updates against its sources, improving, correcting or removing anything that falls short. Anything sensitive is never published automatically: an accusation against a named person, details that could identify a minor or a private individual, claims of deaths, or anything resting on a single unverified post goes to that editor first, and is left out unless it meets our safety rules. Mistakes are corrected in public on the <a href="/corrections/">corrections page</a>.</p>
+<p>AI finds, translates, sorts, checks and drafts our updates. Every hour, our newsdesk reads reporting from established news outlets only and drafts updates; two further AI checks by different services, plus automatic checks that every quote, number and name appears in the cited articles, must all pass before an update is published, so stories stay current. Until our editor has re-checked an update, it says so under the item. Within hours (five times a day), a stronger AI editor re-checks every one of those updates against its sources, improving, correcting or removing anything that falls short. Anything sensitive is never published automatically: an accusation against a named person, details that could identify a minor or a private individual, claims of deaths, or anything resting on a single unverified post goes to that editor first, and is left out unless it meets our safety rules. Mistakes are corrected in public on the <a href="/corrections/">corrections page</a>.</p>
 <h2>Corrections</h2>
 <p>We correct mistakes quickly and in public. Every change made after publishing is listed with its date. <a href="/submit/">Report an error</a>.</p>
 </div>`);

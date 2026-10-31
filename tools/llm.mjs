@@ -100,6 +100,7 @@ export async function ask(text, { temperature = 0.2, prefer = 0, log = console.l
   }
   return "";
 }
+export const SECOND_CHECK = PROVIDERS.findIndex(([n]) => n === "cloudflare");   // second, independent fact-check: a different service from the first checker
 export const GITHUB_PROVIDER = PROVIDERS.findIndex(([n]) => n.startsWith("gemini"));   // fact-checks start with Gemini, a different model from the writer   // index of the first non-Gemini provider, for independent checks
 
 /* For tools/llm_check.mjs: try each provider once with a tiny prompt. */
