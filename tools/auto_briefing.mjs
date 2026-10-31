@@ -51,7 +51,9 @@ function grade(s, e) {
     case "confirmed": return o.length >= 2
       ? (t ? `We grade that confirmed: ${o[0]} and ${o[1]} reported it independently.` : `Our grade: confirmed, with independent reporting from ${o[0]} and ${o[1]}.`)
       : (t ? "We grade that confirmed: independent outlets report it." : "Our grade: confirmed by independent reporting.");
-    case "reported": return o.length
+    case "reported": return o.length >= 2
+      ? (t ? `We grade that reported: ${o[0]} and ${o[1]} carry it, but we haven't yet established that their reporting is independent.` : `Our grade: reported. ${o[0]} and ${o[1]} have it, but we can't yet count them as independent confirmation.`)
+      : o.length
       ? (t ? `We grade that reported: so far only ${o[0]} has it, and we're waiting for independent confirmation.` : `Our grade: reported. It rests on one source, ${o[0]}, and isn't yet confirmed by a second.`)
       : (t ? "We grade that reported: one source so far, not yet independently confirmed." : "Our grade: reported, from a single source so far.");
     case "disputed": return t ? "We grade that disputed: the accounts conflict, and our timeline sets out both." : "Our grade: disputed. The sides tell it differently, and both versions are on the story page.";
@@ -75,8 +77,9 @@ const stories = readdirSync("content/stories").filter((f) => f.endsWith(".json")
 
 // Safety net: never read aloud an item that names people the way outlets name private individuals.
 const unsafe = (e) => /\bnamed (by|as)\b|\bidentified (by|as)\b/i.test(e.text);
-const items = (s) => s.events.filter((e) => e.label !== "pending" && !unsafe(e) && e.added && Date.parse(e.added) <= now)
-  .sort((a, b) => b.added.localeCompare(a.added) || b.date.localeCompare(a.date));
+// Headline-only stopgap items ("<Outlet> reports …") are too thin to read aloud; the editor turns them into real items.
+const items = (s) => s.events.filter((e) => e.label !== "pending" && !e.headline && !unsafe(e) && e.added && Date.parse(e.added) <= now)
+  .sort((a, b) => b.date.localeCompare(a.date) || b.added.localeCompare(a.added));   // newest development first, not newest-added
 /* A short spoken headline: the first clause of the newest item, at most about 22 words. */
 function headline(e) {
   let h = firstSentences(e.text, 1).replace(/[.;:]\s*$/, "");
@@ -91,7 +94,9 @@ function headline(e) {
   }
   return h.replace(/[,;]\s*$/, "") + ".";
 }
-const upcoming = (s) => s.events.filter((e) => e.label === "pending" && e.date >= today).sort((a, b) => a.date.localeCompare(b.date));
+// Older developments get their date said aloud, so "on Saturday" in a week-old item isn't heard as today.
+const dated = (e, t) => e.date < new Date(now - DAY).toISOString().slice(0, 10) ? `On ${spokenDate(e.date)}, ${/^(The|A|An)\b/.test(t) ? t[0].toLowerCase() + t.slice(1) : t}` : t;
+const upcoming = (s) => s.events.filter((e) => e.label === "pending" && e.date > today).sort((a, b) => a.date.localeCompare(b.date));
 const spokenDate = (iso) => { const x = new Date(iso + "T12:00:00Z"); return `${MONTHS[x.getUTCMonth()]} ${ordinal(x.getUTCDate())}`; };
 
 // Every story with something in the last week, most recently updated first.
@@ -104,7 +109,7 @@ const script = [
   `This is the Unowned briefing for ${weekday}, ${MONTHS[d.getUTCMonth()]} ${ordinal(d.getUTCDate())}. It's narrated by a synthetic voice, and every fact comes from our checked timelines.`,
   "Every item carries our grade. Confirmed means independent outlets agree. Reported means only one source has it so far. Disputed means the accounts conflict. And alleged is one side's claim.",
   "Here are today's headlines.",
-  ...picks.map(({ s, ev }) => `${region(s)}. ${headline(ev[0])} ${grade(s, ev[0])}`.trim()),
+  ...picks.map(({ s, ev }) => `${region(s)}. ${dated(ev[0], headline(ev[0]))} ${grade(s, ev[0])}`.trim()),
 ];
 const said = new Set();
 let detailsStarted = false;
@@ -113,7 +118,7 @@ for (const { s, ev } of picks) {
   // The headline already gave the newest item; add up to two more recent developments, then what's coming up.
   const parts = [];
   const more = ev.slice(1).filter((e) => now - Date.parse(e.added) <= 3 * DAY).slice(0, 2);
-  for (const e of more) parts.push(firstSentences(e.text, 1), grade(s, e));
+  for (const e of more) parts.push(dated(e, firstSentences(e.text, 1)), grade(s, e));
   const next = upcoming(s)[0];
   if (next) {
     said.add(next);
