@@ -10,8 +10,8 @@
   "kicker": "Story tracker · Albania",
   "dek": "Students join months of protests against Prime Minister Edi Rama's government, the riots and arrests in Tirana, and the competing accounts of who is behind the violence.",
   "status": "Ongoing",
-  "updated": "2026-10-30",
-  "updatedAt": "2026-10-30T21:51:31Z",
+  "updated": "2026-10-31",
+  "updatedAt": "2026-10-31T13:28:54Z",
   "summary": [
     "Protests against Prime Minister Edi Rama's government began in late May 2026 over a luxury resort planned near the village of Zvërnec, beside a protected wetland on the southern coast. The project is backed by Jared Kushner, the son-in-law of US President Donald Trump. The movement, known as the Flamingo Revolution, held mostly peaceful rallies for months and widened into calls for Rama to resign over alleged corruption.",
     "In mid-October university students joined, protesting fees, run-down universities and dormitories, and poor job prospects. From October 13 protests in Tirana turned violent: the Education Ministry, the prime minister's office, other government buildings and bank branches were set on fire, and police used tear gas and water cannon. Protests spread to Elbasan, Shkodër, Korçë and Lezhë. Police say 152 people were arrested over three days. The interior minister says 156 people were injured over four days, including 97 police officers and 45 protesters.",
@@ -51,6 +51,7 @@
     { "date": "2026-05-30", "phase": "flamingo", "label": "reported", "added": "2026-10-17T02:35:00Z", "milestone": "Flamingo protests begin", "text": "In late May, demonstrators try to block construction of a resort near Zvërnec, beside the protected Vjosa wetlands. Protests soon spread to Tirana and other cities, and the movement becomes known as the Flamingo Revolution.", "sources": ["oswJun", "obctOct13", "dwOct16"] },
     { "date": "2026-06-10", "phase": "flamingo", "label": "reported", "added": "2026-10-17T02:35:00Z", "text": "Thousands march in Tirana in the largest protest yet against the Kushner-backed resort, chanting outside Rama's office. Rama tells Reuters the project will go ahead and be completed responsibly; protesters say it lacks transparency.", "sources": ["reutersJun10"] },
     { "date": "2026-06-12", "phase": "flamingo", "label": "reported", "added": "2026-10-17T02:35:00Z", "text": "Rama calls the protests genuine but says foreign groups with anti-American and antisemitic views are trying to use them against Albania's interests.", "sources": ["temaJun12"] },
+    { "date": "2026-10-09", "phase": "spread", "label": "reported", "added": "2026-10-31T13:28:54Z", "text": "Jared Kushner publicly defended the controversial luxury tourism development near the Vjosa‑Narta lagoon, denying political favoritism and saying the €230 million land purchase was a private transaction; he said the project could bring €4 billion in investment and meet high environmental standards, Tirana Times reports.", "sources": ["bk1031132800"], "desk": "backup" },
     { "date": "2026-10-13", "phase": "students", "label": "confirmed", "added": "2026-10-17T02:35:00Z", "milestone": "Students join", "text": "Students protesting university conditions, fees and job prospects rally outside the Education Ministry in Tirana. The protest turns violent: stones are thrown, fires are set at the city hall and on Durrës Street, and police use tear gas and water cannon.", "sources": ["obctOct13", "euroOct14", "occrpOct"] },
     { "date": "2026-10-14", "phase": "students", "label": "confirmed", "added": "2026-10-17T02:35:00Z", "text": "Police say protesters broke into the Education Ministry overnight and set a fire inside. Police report 16 arrests, 49 people facing criminal proceedings and six officers injured.", "sources": ["ajOct14", "euroOct14", "occrpOct"] },
     { "date": "2026-10-14", "phase": "students", "label": "confirmed", "added": "2026-10-17T02:35:00Z", "text": "Riots last more than eight hours. The prime minister's office, ministry buildings and bank branches are set alight, and protesters build barricades. The Albanian media report protests at universities in Elbasan and Shkodër.", "sources": ["apOct14", "reutersOct14", "ajWhy"] },
@@ -165,7 +166,7 @@
   "sourceGroups": [
     ["How it started", ["ajFeb11", "oswJun", "reutersJun10", "temaJun12"]],
     ["The Tirana riots and the police response", ["obctOct13", "ajOct14", "euroOct14", "apOct14", "reutersOct14", "occrpOct"]],
-    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy", "afpOct18", "euroAlDrone", "kohaDrone", "ajOct18sixth", "srpskeOct18", "euronewsOct19vid", "euronewsOct19", "dailySabahOct19", "inAlbaniaOct20", "anewsOct20", "argumentumOct20", "albDailyOct21Reject", "nationPkOct21", "albDailyOct22", "euronewsOct23parl", "courthouseOct23", "tvpOct24", "albDailyOct24Unions", "albeuOct24Day12", "albDailyOct24EduMin", "ajOct24rally", "euroAlOct24pillows", "bk1030014700", "bk1030014710", "albDailyOct28Fiscal", "bk1030215100"]]
+    ["Latest", ["ajWhy", "ajOct16", "reutersOct16", "dwOct16", "euroAlLive", "euroAlSusp", "topChSusp", "reutersOct17", "reutersOct17b", "afpOct17", "bulevardOct17", "cnaOct17", "kohanetOct17", "vizionHitaOct17", "kohajoneOct17", "topChLiveOct17", "topChBerishaOct17", "kohaHita167", "vizionHita132", "reutersPellets", "ajOct17", "news24BegajGsh", "gshUsEmbassy", "afpOct18", "euroAlDrone", "kohaDrone", "ajOct18sixth", "srpskeOct18", "euronewsOct19vid", "euronewsOct19", "dailySabahOct19", "inAlbaniaOct20", "anewsOct20", "argumentumOct20", "albDailyOct21Reject", "nationPkOct21", "albDailyOct22", "euronewsOct23parl", "courthouseOct23", "tvpOct24", "albDailyOct24Unions", "albeuOct24Day12", "albDailyOct24EduMin", "ajOct24rally", "euroAlOct24pillows", "bk1030014700", "bk1030014710", "albDailyOct28Fiscal", "bk1030215100", "bk1031132800"]]
   ],
   "sources": {
     "ajFeb11": ["Al Jazeera", "https://www.aljazeera.com/news/2026/2/11/antigovernment-protests-in-albania-turn-violent-at-least-13-arrested"],
@@ -226,7 +227,8 @@
     "bk1030014700": ["theguardian.com", "https://www.theguardian.com/world/2026/oct/29/albania-protest-attendance-fine-law?embed=true"],
     "bk1030014710": ["theguardian.com", "https://www.theguardian.com/world/2026/oct/29/albania-protest-attendance-fine-law?embed=true"],
     "albDailyOct28Fiscal": ["Albanian Daily News", "https://albaniandailynews.com/news/business-representatives-oppose-new-fiscal-package"],
-    "bk1030215100": ["Tirana Times", "https://www.tiranatimes.com/albanias-2027-fiscal-package-sparks-backlash-over-higher-taxes-and-investment-risks/"]
+    "bk1030215100": ["Tirana Times", "https://www.tiranatimes.com/albanias-2027-fiscal-package-sparks-backlash-over-higher-taxes-and-investment-risks/"],
+    "bk1031132800": ["tiranatimes.com", "https://www.tiranatimes.com/jared-kushner-defends-controversial-albania-resort-project/"]
   },
   "checkedAt": "2026-10-31T12:14:50Z"
 }
