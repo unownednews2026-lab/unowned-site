@@ -117,7 +117,7 @@ let detailsStarted = false;
 for (const { s, ev } of picks) {
   // The headline already gave the newest item; add up to two more recent developments, then what's coming up.
   const parts = [];
-  const more = ev.slice(1).filter((e) => now - Date.parse(e.added) <= 3 * DAY).slice(0, 2);
+  const more = ev.slice(1).filter((e) => now - Date.parse(e.added) <= 3 * DAY).slice(0, 1);   // one more development each keeps it near four minutes
   for (const e of more) parts.push(dated(e, firstSentences(e.text, 1)), grade(s, e));
   const next = upcoming(s)[0];
   if (next) {
