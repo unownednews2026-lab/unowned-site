@@ -96,6 +96,11 @@ jobs:
         continue-on-error: true
         timeout-minutes: 25
         run: node tools/lag_alert.mjs || true
+      - name: Site health (live site current, broken source links)
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 15
+        run: node tools/site_health.mjs || true
       - name: Test the free AI providers
         if: ${{ inputs.check_ai }}
         continue-on-error: true
