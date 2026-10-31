@@ -6,7 +6,7 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { headlinesSince } from "./signals.mjs";
-import { ask, used as llmUsed, problems as llmProblems, GITHUB_PROVIDER } from "./llm.mjs";
+import { ask, used as llmUsed, problems as llmProblems, GITHUB_PROVIDER, SECOND_CHECK } from "./llm.mjs";
 
 const KEY = process.env.GEMINI_API_KEY;
 const REPO = process.env.GITHUB_REPOSITORY;
@@ -45,6 +45,35 @@ const modelsUsed = llmUsed;
 // Writing tries Gemini first; the fact-check starts with a DIFFERENT provider (GitHub Models), so a second model checks the first.
 async function gemini(prompt, models = MODELS) {
   return ask(prompt, { temperature: 0.2, prefer: models === MODELS ? GITHUB_PROVIDER : 0, log: say });
+}
+
+/* Code checks that need no AI: quotes, numbers and names in an item must appear in the articles it cites.
+   This catches the commonest model mistakes (a changed figure, a made-up quote, a name from nowhere). */
+const MONTHS_DAYS = /^(january|february|march|april|may|june|july|august|september|october|november|december|monday|tuesday|wednesday|thursday|friday|saturday|sunday)$/i;
+function ungrounded(text, cited, extra = "") {
+  const fold = (x) => String(x).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[’‘]/g, "'");
+  const corpus = fold(cited.map((a) => `${a.title} ${a.text}`).join(" ") + " " + extra);
+  const flat = corpus.replace(/[^a-z0-9]+/g, " ");
+  const digits = corpus.replace(/(\d)[,\s.](?=\d{3}\b)/g, "$1");
+  const bad = [];
+  for (const q of String(text).match(/[“"]([^”"]{12,})[”"]/g) || []) {
+    const words = fold(q).replace(/[^a-z0-9]+/g, " ").trim();
+    if (words.split(" ").length >= 3 && !flat.includes(words)) bad.push(`quote not in the articles: ${q.slice(0, 60)}`);
+  }
+  for (const n of String(text).match(/\d[\d,.]*\d|\d+/g) || []) {
+    const v = n.replace(/[,.](?=\d{3}\b)/g, "");
+    if (v.length >= 2 && !digits.includes(v) && !digits.includes(n)) bad.push(`number not in the articles: ${n}`);
+  }
+  const sentences = String(text).split(/(?<=[.!?])\s+/);
+  for (const sent of sentences) {
+    const words = sent.split(/\s+/).slice(1);                      // skip the sentence's first word
+    for (const w of words) {
+      const t = w.replace(/^[^\p{L}]+|[^\p{L}'’-]+$/gu, "").replace(/['’]s$/, "");
+      if (t.length < 4 || !/^\p{Lu}/u.test(t) || MONTHS_DAYS.test(t)) continue;
+      if (!flat.includes(fold(t).replace(/[^a-z0-9]+/g, " ").trim())) bad.push(`name not in the articles: ${t}`);
+    }
+  }
+  return [...new Set(bad)];
 }
 
 /* Resolve each link for real; keep only ones that load, using the final article address. */
@@ -233,6 +262,22 @@ ${cited.map((a, i) => `[${i + 1}] ${a.domain}: ${a.title}\n${a.text}`).join("\n\
         }
       }
       if (v.ok !== true) why.push(`fact-check: ${String(v.reason || "no clear yes").slice(0, 120)}`);
+      // Code check: quotes, numbers and names must all be in the articles (or the story's own title and outlet names).
+      if (!why.length) {
+        const miss = ungrounded(it.text, cited, `${s.title} ${s.region || ""} ${cited.map((a) => a.domain).join(" ")} reports says said`);
+        if (miss.length) why.push(`fact-check: ${miss.slice(0, 3).join("; ")}`);
+      }
+      // Second, independent fact-check by a different AI service: both must agree before anything is published.
+      if (!why.length) {
+        const second = await ask(`You are a second, independent fact-checker. Read the articles, then the proposed item. Check each fact in the item: is it stated in the articles, attributed to the right person or body, and placed at the right time (not mixing up an earlier statement with a new one)? Answer ONLY with JSON {"ok": true|false, "reason": "..."}.
+
+Articles:
+${cited.map((a, i) => `[${i + 1}] ${a.domain}: ${a.title}\n${a.text}`).join("\n\n")}
+
+Proposed item: "${it.text}"`, { temperature: 0, prefer: SECOND_CHECK, log: say });
+        let v3 = {}; try { v3 = JSON.parse(second.slice(second.indexOf("{"), second.lastIndexOf("}") + 1)); } catch {}
+        if (v3.ok !== true) why.push(`second fact-check: ${String(v3.reason || "no clear yes").slice(0, 120)}`);
+      }
     }
     if (!why.length && SENSITIVE.test(it.text)) {
       queue.push(`**${s.slug}** — sensitive (deaths, abuse or accusations), needs the editor: "${it.text}"\n  Sources: ${cited.map((a) => a.url).join(" , ")}`);
