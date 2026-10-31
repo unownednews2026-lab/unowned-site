@@ -73,6 +73,9 @@ function ungrounded(text, cited, extra = "") {
       if (!flat.includes(fold(t).replace(/[^a-z0-9]+/g, " ").trim())) bad.push(`name not in the articles: ${t}`);
     }
   }
+  // Copying: 15 or more words in a row taken straight from an article is not paraphrase (quotes excepted).
+  const own = fold(String(text).replace(/[“"][^”"]*[”"]/g, " ")).replace(/[^a-z0-9]+/g, " ").trim().split(" ");
+  for (let i = 0; i + 15 <= own.length; i++) if (flat.includes(" " + own.slice(i, i + 15).join(" ") + " ")) { bad.push("copies a long passage word for word"); break; }
   return [...new Set(bad)];
 }
 
