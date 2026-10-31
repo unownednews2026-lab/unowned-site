@@ -85,7 +85,7 @@ const NAV = [
   ["/who-owns-unowned/", "Ownership"],
 ];
 
-function page({ title, description, path, body, scripts = [], og = "/assets/og-default.png", type = "website" }) {
+function page({ title, description, path, body, scripts = [], og = "/assets/og-default.png", type = "website", ld = null }) {
   const url = SITE + path;
   const nav = NAV.map(([href, label]) => `<a href="${href}"${href === path ? ' aria-current="page"' : ""}>${esc(label)}</a>`).join("");
   return `<!doctype html>
@@ -104,7 +104,7 @@ function page({ title, description, path, body, scripts = [], og = "/assets/og-d
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${SITE}${og}">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary_large_image">${ld ? `\n<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>` : ""}
 <meta name="twitter:site" content="@unownednews">
 <meta name="referrer" content="no-referrer">
 <link rel="stylesheet" href="/assets/site.css?v=${BUILD}">
@@ -351,6 +351,16 @@ ${groundHtml ? `<section id="ground" aria-labelledby="h-ground">
     scripts: ["/assets/story.js", "/assets/votes.js", "/assets/live.js", "/assets/catchup.js", "/assets/briefing.js", "/assets/submit.js"],
     og: existsSync(`static/assets/og-${st.slug}.png`) ? `/assets/og-${st.slug}.png` : "/assets/og-default.png",
     type: "article",
+    ld: {
+      "@context": "https://schema.org", "@type": "NewsArticle", headline: st.title, description: st.dek,
+      url: SITE + path, mainEntityOfPage: SITE + path,
+      image: [SITE + (existsSync(`static/assets/og-${st.slug}.png`) ? `/assets/og-${st.slug}.png` : "/assets/og-default.png")],
+      datePublished: (st.events.map((e) => e.added).filter(Boolean).sort()[0]) || `${st.events[0].date}T12:00:00Z`,
+      dateModified: st.updatedAt || `${st.updated}T12:00:00Z`,
+      contentLocation: st.region ? { "@type": "Place", name: st.region } : undefined,
+      author: { "@type": "Organization", name: "Unowned", url: SITE + "/" },
+      publisher: { "@type": "Organization", name: "Unowned", url: SITE + "/", logo: { "@type": "ImageObject", url: SITE + "/assets/unowned-mark.png" } },
+    },
   }));
   const shareData = { title: st.title, slug: st.slug, site: SITE.replace(/^https:\/\//, ""), cards: quickCards(st).map((c) => ({ ...c, lines: c.lines.map((l) => ({ ...l, date: l.date ? short(l.date) : undefined, label: l.label ? LABEL[l.label] : undefined })) })) };
   write(`${st.slug}/share/index.html`, page({
@@ -405,6 +415,10 @@ function build() {
     title: "Unowned",
     description: "News nobody owns. Verified, sourced reporting from the people who were there, with both sides shown.",
     path: "/",
+    ld: [
+      { "@context": "https://schema.org", "@type": "NewsMediaOrganization", name: "Unowned", url: SITE + "/", logo: SITE + "/assets/unowned-mark.png", slogan: "News nobody owns. Told by the people who were there.", publishingPrinciples: SITE + "/how-we-work/", correctionsPolicy: SITE + "/corrections/", ownershipFundingInfo: SITE + "/who-owns-unowned/" },
+      { "@context": "https://schema.org", "@type": "WebSite", name: "Unowned", url: SITE + "/" },
+    ],
     scripts: ["/assets/votes.js", "/assets/live.js", "/assets/catchup.js", "/assets/briefing.js"],
     body: `
 <header class="top">
@@ -547,7 +561,9 @@ ${items.map(({ s, e }) => `<item><title>${esc(`${long(e.date)}: ${e.text.split("
 
   buildBriefing({ briefings, stories, write, simple, esc, long, SITE });
   const urls = ["/", ...stories.map((s) => `/${s.slug}/`), ...(briefings.length ? ["/briefing/"] : []), "/submit/", "/how-we-work/", "/who-owns-unowned/", "/privacy/", "/corrections/"];
-  write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE}${u}</loc></url>`).join("")}</urlset>\n`);
+  const lastmod = Object.fromEntries(stories.map((s) => [`/${s.slug}/`, s.updatedAt || s.updated]));
+  lastmod["/"] = stories.map((s) => s.updatedAt || s.updated).sort().pop();
+  write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE}${u}</loc>${lastmod[u] ? `<lastmod>${lastmod[u]}</lastmod>` : ""}</url>`).join("")}</urlset>\n`);
   write("robots.txt", `User-agent: *\nAllow: /\nDisallow: /kit/\nSitemap: ${SITE}/sitemap.xml\n`);
   console.log(`Built ${stories.length} story page(s) and ${urls.length} pages into ./${OUT}`);
   if (LABEL_WARNINGS.length) console.warn(`LABEL CHECK: ${LABEL_WARNINGS.length} item(s) need attention\n` + LABEL_WARNINGS.map((w) => "  - " + w).join("\n"));
