@@ -311,7 +311,7 @@ ${groundHtml ? `<section id="ground" aria-labelledby="h-ground">
 <section id="method" aria-labelledby="h-method">
   <h2 id="h-method">How this page is made</h2>
   <details class="fold"><summary>Our method, corrections and open questions</summary>
-  <p>Only published reporting and publicly posted material. AI helps gather, check and organize it. Routine updates are published automatically once they pass our sourcing and fairness checks; anything sensitive waits for a person to approve it. <a href="/how-we-work/">Our full standards</a>.</p>
+  <p>Only published reporting and publicly posted material. AI helps gather, check and organize it. Routine updates are published automatically once they pass our sourcing and fairness checks; anything sensitive is held back for a stricter editorial review. <a href="/how-we-work/">Our full standards</a>.</p>
   <div class="two">
     <div class="panel"><h3>Corrections</h3>${corrHtml}</div>
     <div class="panel"><h3>Still being checked</h3><ul>${gapsHtml}</ul></div>
@@ -496,7 +496,7 @@ function build() {
 <li>We don't name ordinary protesters or private individuals.</li>
 </ul>
 <h2>How AI is used</h2>
-<p>AI finds, translates, sorts, checks and drafts our updates. Routine updates backed by published reporting are published automatically once they pass our written checks, without waiting for a person, so stories stay current. Anything sensitive waits for a person to approve it: an accusation against a named person, details that could identify a minor or a private individual, claims of deaths, or anything resting on a single unverified post. If our main desk is paused, a backup automated desk keeps stories current using only established news outlets, with every item checked a second time against its source; those entries are re-checked when the main desk resumes. Mistakes are corrected in public on the <a href="/corrections/">corrections page</a>.</p>
+<p>AI finds, translates, sorts, checks and drafts our updates. Every hour, our newsdesk reads reporting from established news outlets only and drafts updates; a second, different AI model checks each one against the articles it cites before it is published, so stories stay current. Within hours, a stronger AI editor re-checks every one of those updates against its sources, improving, correcting or removing anything that falls short. Anything sensitive is never published automatically: an accusation against a named person, details that could identify a minor or a private individual, claims of deaths, or anything resting on a single unverified post goes to that editor first, and is left out unless it meets our safety rules. Mistakes are corrected in public on the <a href="/corrections/">corrections page</a>.</p>
 <h2>Corrections</h2>
 <p>We correct mistakes quickly and in public. Every change made after publishing is listed with its date. <a href="/submit/">Report an error</a>.</p>
 </div>`);
