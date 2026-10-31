@@ -7,6 +7,7 @@ on:
   schedule:
     - cron: "10 7 * * *"   # 07:10 UTC every day (just after Gemini's free daily allowance resets): writes, polishes and records today's script
     - cron: "30 9 * * *"   # 09:30 UTC retry, in case the first run failed or GitHub skipped it (does nothing if today's briefing exists)
+    - cron: "0 13 * * *"   # 13:00 UTC: re-record after the editor's morning review, so the audio only uses checked items
   workflow_dispatch:
 permissions:
   contents: write

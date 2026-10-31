@@ -182,7 +182,7 @@ Rules:
   const added = [];
   for (const it of items.slice(0, 2)) {
     const why = [];
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(it.date || "") || it.date < newest.date.slice(0, 8) + "01" || it.date > now.slice(0, 10)) why.push("bad date");
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(it.date || "") || it.date < new Date(Date.now() - 4 * 864e5).toISOString().slice(0, 10) || it.date > now.slice(0, 10)) why.push("bad or old date (only developments from the last 4 days are new)");
     if (!["confirmed", "reported", "disputed", "alleged"].includes(it.label)) why.push("bad label");
     if (!it.text || it.text.length > 450) why.push("text missing or too long");
     if (UNSAFE.test(it.text || "")) why.push("may name a private person or contain graphic detail");
