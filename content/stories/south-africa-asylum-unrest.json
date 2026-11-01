@@ -73,7 +73,6 @@
     { "date": "2026-10-23", "phase": "response", "label": "reported", "added": "2026-10-23T22:20:50Z", "text": "A Durban Magistrate's Court bail hearing for three foreign nationals charged with attempted murder and public violence over the October 8 attack on a protester is adjourned to October 28 and the men remain in custody, IOL reports. The state says the man was left with fractures to both legs; it opposes bail, citing community anger, the seriousness of the charges and flight risk, while the defence disputes that its client took part in the violence.", "sources": ["iolOct23bail"] },
     { "date": "2026-10-23", "phase": "response", "label": "reported", "added": "2026-10-23T22:20:50Z", "text": "The Electoral Commission tightens security for the November 4 KwaZulu-Natal local elections, adding police and contracted guards at voting stations and material warehouses and saying protesters \"won't be tolerated anywhere near voting stations,\" TimesLive reports; the province has been on high alert for months over anti-migrant unrest, including the Durban killing reported on October 22.", "sources": ["timesliveOct23iec"] },
     { "date": "2026-10-23", "phase": "response", "label": "reported", "added": "2026-10-24T06:30:00Z", "text": "Police arrest five men, aged 19 to 46, outside the Home Affairs offices on Che Guevara Road in Umbilo as persons of interest in the murder, attempted murder and assault cases linked to the unrest, Netshiunda says, IOL reports.", "sources": ["iolOct24plunges"] },
-    { "date": "2026-11-01", "phase": "response", "label": "reported", "added": "2026-11-01T12:15:13Z", "text": "IOL reports that Durban has seen murder, looting and ransacked businesses as anti‑immigration protests escalate.", "sources": ["bk11011215h"], "desk": "backup", "headline": true },
     { "date": "2026-11-04", "phase": "response", "label": "pending", "added": "2026-10-17T15:54:57Z", "text": "Local government elections on November 4, the October 29 court hearing on the government's supervisory-order bid, and the new asylum appointment system due by November 10. Still being checked.", "sources": ["dmOct9", "xinhuaOct11", "timesliveOct12"] }
   ],
   "claims": [
@@ -126,7 +125,7 @@
   "sourceGroups": [
     ["The ruling and the directive", ["ajJul2", "irishJul1", "mgOct9", "dmOct13", "ewnOct7", "sanewsImc"]],
     ["The riots and the police response", ["apOct8", "ajOct8", "afpOct9", "africanInsiderOct9", "dmOct9", "ewnOct9", "timesliveOct10", "anaLive", "dmOct11"]],
-    ["Latest", ["xinhuaOct11", "thisdayOct12", "groundupOct13", "iolOct13", "timesliveOct15", "citizenOct15", "iolOct17", "timesliveOct12", "ewnOct13", "iolOct20anc", "dmOct22kill", "brieflyOct13ethiopians", "iolOct23bail", "timesliveOct23iec", "iolOct24plunges", "bk11011215h"]]
+    ["Latest", ["xinhuaOct11", "thisdayOct12", "groundupOct13", "iolOct13", "timesliveOct15", "citizenOct15", "iolOct17", "timesliveOct12", "ewnOct13", "iolOct20anc", "dmOct22kill", "brieflyOct13ethiopians", "iolOct23bail", "timesliveOct23iec", "iolOct24plunges"]]
   ],
   "sources": {
     "ajJul2": ["Al Jazeera", "https://aljazeera.com/news/2026/7/2/more-than-900-arrested-during-south-africas-antimigrant-protests"],
@@ -158,8 +157,7 @@
     "iolOct23bail": ["IOL (Sunday Tribune)", "https://iol.co.za/sunday-tribune/news/2026-10-23-durban-bail-hearing-postponed-to-october-28-for-three-ethiopian-nationals/"],
     "timesliveOct23iec": ["TimesLive", "https://www.timeslive.co.za/news/south-africa/2026-10-23-iec-tightens-kzn-election-security-and-upgrades-voting-devices/"],
     "brieflyOct13ethiopians": ["Briefly", "https://briefly.co.za/south-africa/255817-durban-unrest-3-ethiopians-face-attempted-murder-charges-allegedly-assaulting-south-african/"],
-    "iolOct24plunges": ["IOL (Sunday Tribune)", "https://iol.co.za/news/south-africa/kwazulu-natal/2026-10-24-durban-plunges-murder-looting-and-ransacked-businesses-as-violent-anti-immigration-protests-escalate/"],
-    "bk11011215h": ["IOL", "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOWTF2ZjBJTFBOUGFldVEyeEtteXBqbUt3MFBRcFhiM3pjVnV6R3ZzckZzYWlrY092Y3ZKT3BabUE2RjhBa01zWklDYUFTcDJ0WHZiMWpFVXJ0QXUwMmRwYkdRUUgzY180NjBpXzFxaGlaQldiXzBPZ0NXcEdla0ptVTFaSmg0Nkx1MjJPamFrX3RMU3dGbHRGekZ2NFhZMWdtc1ZkR1VkeDlhQWxydlRwV0ZyaTRxakdoNWZpdTg3Sk9vVW5ZTXZYVDNnSl9IcHczSjZqMDlobDdjSGMxTHA0NVhNOElMY0pMMWRNNU1TcFhrZ3Z4?oc=5"]
+    "iolOct24plunges": ["IOL (Sunday Tribune)", "https://iol.co.za/news/south-africa/kwazulu-natal/2026-10-24-durban-plunges-murder-looting-and-ransacked-businesses-as-violent-anti-immigration-protests-escalate/"]
   },
   "checkedAt": "2026-11-01T14:20:30Z"
 }
