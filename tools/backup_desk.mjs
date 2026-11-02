@@ -317,7 +317,9 @@ Proposed item: "${it.text}"`, { temperature: 0, prefer: SECOND_CHECK, log: say }
 
 /* Safety net: a story with fresh headlines from established outlets but no update for 8+ hours gets a short,
    attributed headline item ("<Outlet> reports: ..."), so real news never waits more than a day. The Claude desk rewrites it later. */
-for (const { f, h } of hot) {
+// Off by default (Nov 1): the editor removed most headline-only items as too thin to verify, and its five daily runs
+// now catch up stories that fall behind. Set HEADLINE_FALLBACK=1 to switch it back on.
+for (const { f, h } of process.env.HEADLINE_FALLBACK ? hot : []) {
   const s = JSON.parse(readFileSync(`content/stories/${f}`, "utf8"));
   if (published.includes(s.slug) || Date.now() - Date.parse(s.updatedAt || s.updated) < 8 * 36e5) continue;
   // The headline must mention the story itself, not just the country (e.g. an airport-delay headline is not about asylum unrest).
