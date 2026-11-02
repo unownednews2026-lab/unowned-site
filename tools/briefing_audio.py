@@ -53,9 +53,15 @@ for name in sorted(os.listdir("content/briefings")):
         continue
     date = name[:-5]
     out = f"static/briefings/{date}.mp3"
-    if os.path.exists(out) and not redo:
-        continue
     b = json.load(open(f"content/briefings/{name}"))
+    # Re-record when the script changed (the old recording stays live until the new one replaces it,
+    # so the site never falls back to an older day's briefing while a new one is being made).
+    import hashlib
+    sha = hashlib.sha256(json.dumps(b["script"]).encode()).hexdigest()[:16]
+    shafile = f"static/briefings/{date}.sha"
+    same = os.path.exists(shafile) and open(shafile).read().strip() == sha
+    if os.path.exists(out) and not redo and (same or date != newest):
+        continue
     parts, sr, durs = [], 24000, []
     for para in b["script"]:
         audio, sr = k.create(spoken(para), voice="af_heart", speed=1.0, lang="en-us")
@@ -64,6 +70,7 @@ for name in sorted(os.listdir("content/briefings")):
     with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
         sf.write(wav.name, np.concatenate(parts), sr)
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", wav.name, "-ar", "44100", "-ac", "2", "-codec:a", "libmp3lame", "-b:a", "128k", out], check=True)
+    open(shafile, "w").write(sha + "\n")
     made += 1
     print("made", out)
     if date == newest:

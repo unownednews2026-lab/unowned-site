@@ -13,8 +13,7 @@ if (existsSync(out)) {
   const stale = refresh && old.auto && (!old.generated || Date.now() - Date.parse(old.generated) > 3 * 36e5);
   if (!stale) { console.log(`${out} already exists; nothing to do`); process.exit(0); }
   console.log(`${out} was written earlier; rebuilding it with the latest news`);
-  const mp3 = `static/briefings/${date}.mp3`;
-  if (existsSync(mp3)) unlinkSync(mp3);               // so the recorder makes new audio
+  // The recorder notices the changed script and re-records; the current audio stays live meanwhile.
 }
 
 const ONES = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
