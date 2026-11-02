@@ -108,7 +108,11 @@ const script = [
   picks.length ? "Here are today's headlines." : "There are no new developments in our stories in the last three days that we have been able to confirm in published reporting.",
   ...picks.map(({ s, ev }) => `${region(s)}. ${dated(ev[0], headline(ev[0]))} ${grade(s, ev[0])}`.trim()),
 ];
-if (quiet.length) script.push(`${picks.length ? "Also on our watch, with no new reported developments in the last three days" : "Our latest reports"}: ${quiet.map(({ s, ev }) => `${region(s)}, last reported ${spokenDate(ev[0].date)}`).join("; ")}. We'll update those as soon as there's news.`);
+// Quiet stories are not skipped: we say plainly there is nothing new, then give the latest report, dated, with its grade.
+if (quiet.length && picks.length) script.push("On the stories with no new developments in the last three days, here are the latest reports.");
+if (!picks.length) script.push("Here are the latest reports on the stories we follow.");
+for (const { s, ev } of quiet) script.push(`${region(s)}. No new developments since ${spokenDate(ev[0].date)}. The latest report: ${headline(ev[0])} ${grade(s, ev[0])}`.trim());
+if (quiet.length) script.push("We'll bring you updates on those as soon as they become available.");
 const said = new Set();
 let detailsStarted = false;
 // The details: for each story, the latest one or two developments with their labels, then what's coming up.
