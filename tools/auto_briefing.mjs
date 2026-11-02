@@ -95,7 +95,7 @@ function headline(e) {
   return h.replace(/[,;]\s*$/, "") + ".";
 }
 // Older developments get their date said aloud, so "on Saturday" in a week-old item isn't heard as today.
-const dated = (e, t) => e.date < new Date(now - DAY).toISOString().slice(0, 10) ? `On ${spokenDate(e.date)}, ${/^(The|A|An)\b/.test(t) ? t[0].toLowerCase() + t.slice(1) : t}` : t;
+const dated = (e, t) => e.date < new Date(now - DAY).toISOString().slice(0, 10) ? `From ${spokenDate(e.date)}: ${t}` : t;
 const upcoming = (s) => s.events.filter((e) => e.label === "pending" && e.date > today).sort((a, b) => a.date.localeCompare(b.date));
 const spokenDate = (iso) => { const x = new Date(iso + "T12:00:00Z"); return `${MONTHS[x.getUTCMonth()]} ${ordinal(x.getUTCDate())}`; };
 
@@ -132,7 +132,7 @@ for (const { s, ev } of picks) {
   script.push(parts.filter(Boolean).join(" "));
 }
 // What to watch across all stories in the coming days.
-const ahead = picks.flatMap(({ s }) => upcoming(s).slice(0, 3).map((e) => ({ s, e }))).filter(({ e }) => !said.has(e) && Date.parse(e.date) - now <= 10 * DAY)
+const ahead = stories.map((s) => ({ s })).flatMap(({ s }) => upcoming(s).slice(0, 3).map((e) => ({ s, e }))).filter(({ e }) => !said.has(e) && Date.parse(e.date) - now <= 10 * DAY)
   .sort((a, b) => a.e.date.localeCompare(b.e.date)).slice(0, 4);
 if (ahead.length) script.push("Coming up in the days ahead. " + ahead.map(({ s, e }) => {
   let p = firstSentences(e.text, 1).split(";")[0].replace(/[.;:]\s*$/, "");

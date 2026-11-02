@@ -16,3 +16,7 @@
   Cache-Control: no-cache
 /stories.json
   Cache-Control: no-cache
+/briefings/latest-video.mp4
+  Cache-Control: no-cache
+/briefings/latest-video.json
+  Cache-Control: no-cache
