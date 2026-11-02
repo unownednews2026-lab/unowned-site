@@ -86,8 +86,9 @@ def card(F, kicker, title=None, body=None, grade=None, note=None, rows=None):
 def make_video(date, b, durs, mp3):
     script = b["script"]
     # The headline section starts after the grades explainer and runs until "Now, more on those stories." (or the end).
-    start = next((i for i, p in enumerate(script) if p.startswith(("Here are today's headlines", "There are no new developments"))), 2)
-    end = next((i for i, p in enumerate(script) if p.startswith("Now, more on those stories")), len(script) - 1)
+    start = next((i for i, p in enumerate(script) if p.startswith(("Here are the top stories", "Here are today's headlines", "There are no new developments"))), 2)
+    end = next((i for i, p in enumerate(script) if p.startswith(("Now the details", "Now, more on those stories"))), len(script) - 1)
+    details = {p.split(". ", 1)[0]: p for p in script[end + 1:] if re.match(r"^[A-Z][^.]{1,40}\. ", p)}
     F = fonts()
     y, m, dd = map(int, date.split("-"))
     import datetime
@@ -99,20 +100,24 @@ def make_video(date, b, durs, mp3):
     if start >= 2:   # the grades explainer paragraph
         rows = [("confirmed", "Independent outlets agree."), ("reported", "One source so far."), ("disputed", "The accounts conflict."), ("alleged", "One side's claim.")]
         cards.append((card(F, "How we grade", rows=rows), sum(durs[1:start])))
-    cards.append((card(F, "Today's headlines" if script[start].startswith("Here are") else "No new developments", " · ".join(regions)), durs[start]))
+    cards.append((card(F, "Top stories" if script[start].startswith("Here are") else "No new developments", " · ".join(regions)), durs[start]))
     for i in range(start + 1, end):
         h = script[i]
         if not is_story(h):                      # a linking sentence: keep the current card on screen while it's read
             img, d = cards[-1]; cards[-1] = (img, d + durs[i]); continue
         region, rest = (h.split(". ", 1) + [""])[:2]
+        text_shown = rest
+        if region in details:                    # the grade and sourcing are read in the details: show them on the card
+            rest = details[region].split(". ", 1)[1]
         g = re.search(r"\b(?:grade(?: that)?:?|grade for [^.]*? is)\s+(confirmed|reported|disputed|alleged)\b", rest)
         grade = g.group(1) if g else None
         text = re.split(r"\s+(?:Our grade|We grade)", rest)[0].strip()
         tail = rest[g.end():] if g else ""
         note = re.sub(r"^[\s.,:;]+", "", tail).strip()
+        note = re.split(r"(?<=[.!?])\s+", note)[0] if note else ""
         note = re.sub(r"^(because|as|resting on)\s+", "", note)
         note = note[:1].upper() + note[1:] if note else ""
-        cards.append((card(F, region, text, grade=grade, note=note), durs[i]))
+        cards.append((card(F, region, text_shown.strip(), grade=grade, note=note), durs[i]))
     total = sum(d for _, d in cards)
     tmp = tempfile.mkdtemp()
     lst = []

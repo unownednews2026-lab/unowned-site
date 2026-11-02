@@ -31,6 +31,7 @@ const weekday = d.toLocaleDateString("en-GB", { weekday: "long", timeZone: "UTC"
 /* Make published text easier for a synthetic voice, without changing its meaning. */
 function speakable(t) {
   return t
+    .replace(/\b(Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\.? (?=\d)/g, (m, a) => ({ Jan: "January", Feb: "February", Mar: "March", Apr: "April", Jun: "June", Jul: "July", Aug: "August", Sep: "September", Sept: "September", Oct: "October", Nov: "November", Dec: "December" })[a] + " ")
     .replace(new RegExp(`\\b(${MONTHS.join("|")}) (\\d{1,2})[–-](\\d{1,2})\\b`, "g"), (_, m, a, b) => `${m} ${ordinal(Number(a))} to ${ordinal(Number(b))}`)
     .replace(new RegExp(`\\b(${MONTHS.join("|")}) (\\d{1,2})\\b(?!,? \\d{4}|\\d)`, "g"), (_, m, n) => `${m} ${ordinal(Number(n))}`)
     .replace(/\bB\.C\./g, "British Columbia").replace(/\bGov\. /g, "Governor ").replace(/\bno\. (?=\d)/gi, "number ")
@@ -110,25 +111,42 @@ const quiet = all.filter((x) => !recent(x.ev[0])).sort((a, b) => b.ev[0].date.lo
 if (!all.length) { console.log("no stories with items"); process.exit(0); }
 
 const region = (s) => s.region || s.title.replace(/'s .*/, "");
+const when = (iso) => { const w = whenSaid(iso); return w === "Today" ? "today" : w.startsWith("Yesterday") ? "yesterday" : now - Date.parse(iso + "T12:00:00Z") < 6 * DAY ? `on ${WEEKDAYS[new Date(iso + "T12:00:00Z").getUTCDay()]}` : `on ${spokenDate(iso)}`; };
+const dayLine = `${weekday}, ${MONTHS[d.getUTCMonth()]} ${ordinal(d.getUTCDate())}`;
+
+/* Short broadcast headlines (about 8 to 18 words) for the top of the show, written by a free AI model from the item's
+   own text and then checked in code: every name and number must come from the item, or we use the item's first
+   sentence instead. The full, attributed sentence and its grade are always read in the details. */
+const fold = (x) => String(x).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+async function shortHeadline(e, s) {
+  // If no checked short headline can be made, a plain teaser; the full sentence follows in the details either way.
+  const full = `new developments in ${s.title.replace(/^(\p{Lu})/u, (c) => (/^(The|A|An)\b/.test(s.title) ? c.toLowerCase() : c))}.`;
+  if (!process.env.GROQ_API_KEY && !process.env.GEMINI_API_KEY && !process.env.CF_AI_TOKEN) return full;
+  try {
+    const { ask } = await import("./llm.mjs");
+    const out = (await ask(`Write ONE radio news headline of 8 to 16 words for this item from a story about ${s.title}. Use only facts in the item, keep who said or did it, present tense, no quotes, no dates, no opinion, no added words like "breaking". Return only the headline.\n\nItem: ${e.text}`, { temperature: 0.2, log: () => {} }))
+      .replace(/^["'\s]+|["'\s.]+$/g, "").replace(/\s+/g, " ").trim();
+    const n = out.split(/\s+/).length, src = fold(`${s.title} ${s.region || ""} ${e.text}`);
+    const tokens = out.match(/\b(?:[A-Z][\p{L}'’.-]+|\d[\d,.%]*)\b/gu) || [];
+    const ok = n >= 6 && n <= 20 && !/[“"]/.test(out) && tokens.every((x, i) => (i === 0 && !/\d/.test(x) && /^(The|A|An|In|On|At|After|Police|Students|Protesters|Thousands|Hundreds|Government|Opposition|Young)$/.test(x)) || src.includes(fold(x).replace(/[.,]$/, "")));
+    return ok ? out + "." : full;
+  } catch { return full; }
+}
+
 const script = [
-  `This is the Unowned briefing for ${weekday}, ${MONTHS[d.getUTCMonth()]} ${ordinal(d.getUTCDate())}. It's narrated by a synthetic voice, and every fact comes from our checked timelines.`,
-  "Every item carries our grade. Confirmed means independent outlets agree. Reported means only one source has it so far. Disputed means the accounts conflict. And alleged is one side's claim.",
-  picks.length ? "Here are today's headlines." : "There are no new developments in our stories in the last three days that we have been able to confirm in published reporting.",
-  ...picks.map(({ s, ev }) => `${region(s)}. ${dated(ev[0], headline(ev[0]))} ${grade(s, ev[0])}`.trim()),
+  `Good morning. It's ${dayLine}, and this is the Unowned briefing: the stories that matter, checked and graded. It's read by a synthetic voice, and every fact comes from our published timelines.`,
+  "Every item carries our grade. Confirmed means independent outlets agree. Reported means one source so far. Disputed means the accounts conflict. And alleged is one side's claim.",
+  picks.length ? "Here are the top stories." : "There are no new developments in our stories in the last three days that we have been able to confirm in published reporting.",
 ];
-// Quiet stories are not skipped: we say plainly there is nothing new, then give the latest report, dated, with its grade.
-if (quiet.length && picks.length) script.push("On the stories with no new developments in the last three days, here are the latest reports.");
-if (!picks.length) script.push("Here are the latest reports on the stories we follow.");
-for (const { s, ev } of quiet) script.push(`${region(s)}. No new developments since ${spokenDate(ev[0].date)}. The latest report, ${whenSaid(ev[0].date).replace(/^On /, "from ").replace(/^Yesterday/, "from yesterday")}: ${headline(ev[0])} ${grade(s, ev[0])}`.trim());
-if (quiet.length) script.push("We'll bring you updates on those as soon as they become available.");
+// 1. Headlines: every story we follow, newest first, each with when it happened.
+for (const { s, ev } of picks) script.push(`${region(s)}. ${when(ev[0].date)[0].toUpperCase() + when(ev[0].date).slice(1)}: ${await shortHeadline(ev[0], s)}`);
+for (const { s, ev } of quiet) script.push(`${region(s)}. No new developments since ${when(ev[0].date).replace(/^on /, "")}, ${spokenDate(ev[0].date)}.`.replace(/(yesterday|today), [^.]*\./i, "$1."));
+// 2. The details: the newest development in full, dated, attributed and graded, then anything else that day and what's next.
 const said = new Set();
-let detailsStarted = false;
-// The details: for each story, the latest one or two developments with their labels, then what's coming up.
+if (picks.length) script.push("Now the details.");
 for (const { s, ev } of picks) {
-  // The headline already gave the newest item; add up to two more recent developments, then what's coming up.
-  const parts = [];
-  const more = ev.slice(1).filter((e) => e.date === ev[0].date).slice(0, 1);   // only the newest day's news: once there is a newer update, older items are not read again
-  for (const e of more) parts.push(dated(e, firstSentences(e.text, 1)), grade(s, e));
+  const parts = [`${region(s)}.`, dated(ev[0], firstSentences(ev[0].text, 2)), grade(s, ev[0])];
+  for (const e of ev.slice(1).filter((e) => e.date === ev[0].date).slice(0, 1)) parts.push(`Also ${when(e.date)}: ${firstSentences(e.text, 1)}`, grade(s, e));
   const next = upcoming(s)[0];
   if (next) {
     said.add(next);
@@ -136,20 +154,23 @@ for (const { s, ev } of picks) {
     if (p.split(/\s+/).length > 22) p = p.split(", ")[0];
     parts.push(`Coming up: ${p}.`);
   }
-  if (!parts.length) continue;
-  if (!detailsStarted) { script.push("Now, more on those stories."); detailsStarted = true; }
-  parts.unshift(`${s.title}.`);
   script.push(parts.filter(Boolean).join(" "));
 }
-// What to watch across all stories in the coming days.
+// 3. Quiet stories: nothing new, so the latest report, dated and graded.
+if (quiet.length) {
+  script.push(picks.length ? "Also on our watch, with no new developments in the last three days." : "Here are the latest reports on the stories we follow.");
+  for (const { s, ev } of quiet) script.push(`${region(s)}. The latest report, from ${WEEKDAYS[new Date(ev[0].date + "T12:00:00Z").getUTCDay()]}, ${spokenDate(ev[0].date)}: ${headline(ev[0])} ${grade(s, ev[0])}`.trim());
+  script.push("We'll bring you updates on those as soon as they become available.");
+}
+// 4. What to watch in the coming days.
 const ahead = stories.map((s) => ({ s })).flatMap(({ s }) => upcoming(s).slice(0, 3).map((e) => ({ s, e }))).filter(({ e }) => !said.has(e) && Date.parse(e.date) - now <= 10 * DAY)
   .sort((a, b) => a.e.date.localeCompare(b.e.date)).slice(0, 4);
 if (ahead.length) script.push("Coming up in the days ahead. " + ahead.map(({ s, e }) => {
   let p = firstSentences(e.text, 1).split(";")[0].replace(/[.;:]\s*$/, "");
   if (p.split(/\s+/).length > 16) p = p.split(", ")[0];
-  return `${spokenDate(e.date)}, ${region(s)}: ${p}.`;
+  return `${WEEKDAYS[new Date(e.date + "T12:00:00Z").getUTCDay()]}, ${spokenDate(e.date)}, ${region(s)}: ${p}.`;
 }).join(" "));
-script.push("That's the briefing. Full timelines, and every source, are at unowned news dot com.");
+script.push(`That's the Unowned briefing for ${dayLine}. Full timelines, and every source, are at unowned news dot com. Thanks for listening.`);
 
 const names = (picks.length ? picks : quiet).map((p) => region(p.s));
 const title = "Briefing: " + (names.length > 1 ? names.slice(0, -1).join(", ") + " and " + names.at(-1) : names[0]);
