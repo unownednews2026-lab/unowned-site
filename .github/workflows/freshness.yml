@@ -77,7 +77,7 @@ jobs:
           if [ -f "static/briefings/$today.mp3" ]; then
             [ -n "$open" ] && gh issue close "$open" --comment "Briefing for $today is published."
             echo "Briefing for $today is published."
-          elif [ "$hour" -ge 10 ] && [ -z "$open" ]; then
+          elif [ "$hour" -ge 8 ] && [ -z "$open" ]; then
             gh workflow run briefing-audio.yml || true
             printf '%s\n' "Today's audio briefing ($today) was not published by 10:00 UTC, so a third attempt has been started automatically." "" "This issue closes itself once the briefing is published." > /tmp/b.md
             gh issue create --title "Briefing alert: no briefing for $today" --body-file /tmp/b.md
