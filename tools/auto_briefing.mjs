@@ -88,7 +88,15 @@ function headline(e) {
   return h.replace(/[,;]\s*$/, "") + ".";
 }
 // Older developments get their date said aloud, so "on Saturday" in a week-old item isn't heard as today.
-const dated = (e, t) => e.date < new Date(now - DAY).toISOString().slice(0, 10) ? `From ${spokenDate(e.date)}: ${t}` : t;
+// Every development is dated aloud, the way broadcast news does: "Today", "Yesterday, Sunday, November 1st",
+// or "On Friday, October 30th". The listener always knows when it happened.
+const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const whenSaid = (iso) => {
+  const day = new Date(now).toISOString().slice(0, 10), yday = new Date(now - DAY).toISOString().slice(0, 10);
+  const wd = WEEKDAYS[new Date(iso + "T12:00:00Z").getUTCDay()];
+  return iso === day ? "Today" : iso === yday ? `Yesterday, ${wd}, ${spokenDate(iso)}` : `On ${wd}, ${spokenDate(iso)}`;
+};
+const dated = (e, t) => `${whenSaid(e.date)}: ${t}`;
 const upcoming = (s) => s.events.filter((e) => e.label === "pending" && e.date > today).sort((a, b) => a.date.localeCompare(b.date));
 const spokenDate = (iso) => { const x = new Date(iso + "T12:00:00Z"); return `${MONTHS[x.getUTCMonth()]} ${ordinal(x.getUTCDate())}`; };
 
@@ -111,7 +119,7 @@ const script = [
 // Quiet stories are not skipped: we say plainly there is nothing new, then give the latest report, dated, with its grade.
 if (quiet.length && picks.length) script.push("On the stories with no new developments in the last three days, here are the latest reports.");
 if (!picks.length) script.push("Here are the latest reports on the stories we follow.");
-for (const { s, ev } of quiet) script.push(`${region(s)}. No new developments since ${spokenDate(ev[0].date)}. The latest report: ${headline(ev[0])} ${grade(s, ev[0])}`.trim());
+for (const { s, ev } of quiet) script.push(`${region(s)}. No new developments since ${spokenDate(ev[0].date)}. The latest report, ${whenSaid(ev[0].date).replace(/^On /, "from ").replace(/^Yesterday/, "from yesterday")}: ${headline(ev[0])} ${grade(s, ev[0])}`.trim());
 if (quiet.length) script.push("We'll bring you updates on those as soon as they become available.");
 const said = new Set();
 let detailsStarted = false;
