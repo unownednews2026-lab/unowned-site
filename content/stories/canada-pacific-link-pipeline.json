@@ -10,8 +10,8 @@
   "kicker": "Story tracker · Canada",
   "dek": "Ottawa's first use of its fast-track major-projects law, for an oil pipeline from Alberta to the B.C. coast, the First Nations court challenge and consultation dispute that followed, and the new bill that would widen the law.",
   "status": "Ongoing",
-  "updated": "2026-11-02",
-  "updatedAt": "2026-11-02T20:05:00Z",
+  "updated": "2026-11-01",
+  "updatedAt": "2026-11-01T16:15:38Z",
   "summary": [
     "In June 2025 Parliament passed Bill C-5, whose Building Canada Act lets the federal cabinet designate projects as being in the national interest and fast-track their approval. In November 2025 Prime Minister Mark Carney and Alberta Premier Danielle Smith signed an agreement backing a new oil pipeline to the B.C. coast. Alberta applied in July 2026 for a route from Bruderheim, near Edmonton, to the southwest B.C. coast near Delta, largely following the Trans Mountain corridor, and Ottawa agreed with B.C. to keep the north coast oil tanker ban.",
     "On October 1, 2026, Ottawa designated the pipeline, now called Pacific Link, as the first project of national interest. The government says it would carry an extra one million barrels of crude a day, be owned equally by Canada and Alberta with Pembina Pipeline as a private partner, and offer Indigenous communities at least a 10% stake. The Major Projects Office aims to set the conditions for construction by September 1, 2027. On October 7 Cold Lake First Nations asked the Federal Court to quash the designation, saying it was not consulted.",
@@ -71,7 +71,6 @@
     { "date": "2026-10-24", "phase": "pushback", "label": "reported", "added": "2026-10-24T12:30:00Z", "text": "The Canadian Press reports Monday's meeting would be the first gathering of its kind since the 2005 Kelowna meeting between First Nations and Ottawa. Jeff Copenace, of Ojibways of Onigaming First Nation, says he worries a focus on economic development will crowd out action on addictions, homelessness and suicide; longtime AFN critic Russ Diabo says he distrusts the Assembly and is organising a separate meeting and protest, saying he fears the outcome is predetermined.", "sources": ["cpOct24fn"] },
     { "date": "2026-10-26", "phase": "pushback", "label": "reported", "added": "2026-10-31T18:45:00Z", "text": "Carney, most premiers and Assembly of First Nations leaders held their first such meeting since 2005; Carney said ministers will work with First Nations on moving beyond the Indian Act. National Chief Cindy Woodhouse Nepinak said it \"can't just be about ramming through major projects as fast as we can,\" while young protesters outside said major projects need their \"free, prior and informed consent,\" The Canadian Press reports.", "sources": ["cpOct26mtg", "tinOct28"], "desk": "reviewed" },
     { "date": "2026-10-30", "phase": "pushback", "label": "reported", "added": "2026-10-30T21:51:31Z", "text": "Imperial Oil's chief executive said he is encouraged by progress toward a binding Pathways carbon-storage agreement with Ottawa and Alberta, a condition for the Pacific Link pipeline, though \"there's still a lot of work left to do,\" BNN Bloomberg reports. A non-binding July memorandum set a Nov. 15 target for binding agreements; he described recent production problems as one-offs.", "sources": ["bk1030215100"], "desk": "reviewed" },
-    { "date": "2026-10-30", "phase": "pushback", "label": "reported", "added": "2026-11-02T20:05:00Z", "text": "Tsartlip First Nation, on Vancouver Island, files for judicial review in the Federal Court of the Pacific Link national-interest designation, saying federal consultation was rushed and ignored its treaty rights, CTV News reports. The report says Ottawa did not respond before publication; the designation came on October 1, less than two weeks after the nation set out its concerns.", "sources": ["ctvNov2tsartlip"] },
     { "date": "2026-10-31", "phase": "pushback", "label": "pending", "added": "2026-10-31T18:45:00Z", "text": "Whether Pacific Link was raised inside the closed-door October 26 meeting, why Premier Smith did not attend and how Alberta chiefs responded, final B.C. election seat totals, and the incoming B.C. Conservative government's stance on the pipeline. Still being checked.", "sources": ["afnAug21", "pbiOct17", "castanetOct14", "aptnJackoOct23", "aptnFewDetailsOct23"] }
   ],
   "claims": [
@@ -102,7 +101,7 @@
     "vote": { "type": "bar", "title": "Bill C-39 second reading vote, October 8", "rows": [["For", 296], ["Against", 26]], "max": 320, "unit": "", "caption": "Source: The Deep Dive. Liberals and Conservatives voted for; the Bloc Québécois, NDP and Greens against; 10 members were paired.", "aria": "Bill C-39 passed second reading by 296 votes to 26" }
   },
   "gaps": [
-    "The federal government's response to the Cold Lake First Nations and Tsartlip First Nation applications, and any hearing dates",
+    "The federal government's response to Cold Lake First Nations' application, and any hearing date",
     "Whether other First Nations have filed or will file challenges; the AFN B.C. regional chief referred to a Coldwater challenge that we could not confirm",
     "How many First Nations support the pipeline or intend to take up the equity stake",
     "The exact route, terminal design and expected tanker traffic in the Salish Sea, and Canada's response to Washington state officials' call for stronger spill-response commitments",
@@ -115,7 +114,7 @@
     ["The law and the Ottawa–Alberta deal", ["cbcJun26", "gcJun26", "ctvJul15", "nnlJul16", "tyeeNov27", "globalNov27"]],
     ["Application, B.C. agreement and Bill C-39", ["victoriaJul2", "globalJul2", "bcgovJul2", "tfnJul3", "advisorSep22", "torysSep"]],
     ["The designation and reactions", ["pmoOct1", "cp24Oct1", "aptnOct1a", "aptnOct1b", "energynowOct1", "ubcicOct1", "globalOct1"]],
-    ["Court challenge and latest", ["globalOct8", "clfnOct8", "mltOct13", "aptnOct8", "deepdiveOct9", "castanetOct14", "aptnOct15", "yahooOct19", "narwhalOct19", "coastOct3", "afnAug21", "pbiOct17", "yahooMetisOct13", "aptnJackoOct23", "aptnFewDetailsOct23", "cpOct24fn", "ctvBCElection", "cbcBCElection", "cpBCElection", "ctvNov2tsartlip"]],
+    ["Court challenge and latest", ["globalOct8", "clfnOct8", "mltOct13", "aptnOct8", "deepdiveOct9", "castanetOct14", "aptnOct15", "yahooOct19", "narwhalOct19", "coastOct3", "afnAug21", "pbiOct17", "yahooMetisOct13", "aptnJackoOct23", "aptnFewDetailsOct23", "cpOct24fn", "ctvBCElection", "cbcBCElection", "cpBCElection"]],
     ["U.S. opposition to tanker traffic", ["cascadiaOct20", "wastandardOct2", "bk1030215100", "cpOct26mtg", "tinOct28"]]
   ],
   "sources": {
@@ -161,8 +160,7 @@
     "cpBCElection": ["The Canadian Press", "https://www.thecanadianpressnews.ca/national/b-c-election-latest-conservatives-win-majority-in-election-eby-resigns-as-leader/article_c4d351a5-553d-51a5-beae-dca19000cedc.html"],
     "bk1030215100": ["BNN Bloomberg", "https://www.bnnbloomberg.ca/business/company-news/2026/10/30/imperial-oil-ceo-optimistic-on-progress-toward-firming-up-pathways-agreement/"],
     "cpOct26mtg": ["CP24 (The Canadian Press)", "https://www.cp24.com/news/canada/2026/10/26/pm-carney-says-its-time-to-move-beyond-indian-act/"],
-    "tinOct28": ["Turtle Island News", "https://theturtleislandnews.com/index.php/2026/10/28/carney-premiers-kick-off-meeting-with-first-nations-leaders-in-ottawa/"],
-    "ctvNov2tsartlip": ["CTV News (via BNN Bloomberg)", "https://www.bnnbloomberg.ca/business/2026/11/02/first-nation-takes-ottawa-to-court-over-bc-pipeline-alleging-failure-to-consult/"]
+    "tinOct28": ["Turtle Island News", "https://theturtleislandnews.com/index.php/2026/10/28/carney-premiers-kick-off-meeting-with-first-nations-leaders-in-ottawa/"]
   },
   "checkedAt": "2026-11-02T18:32:22Z"
 }
