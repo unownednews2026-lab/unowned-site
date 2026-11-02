@@ -393,7 +393,8 @@ function build() {
   const built = stories.map((st) => storyPage(st, brief));
 
   /* Home */
-  const byUpdate = [...built].sort((a, b) => (b.st.updatedAt || b.st.updated).localeCompare(a.st.updatedAt || a.st.updated));
+  // Freshest news first: ordered by the date of each story's newest development, not by when the page was edited.
+  const byUpdate = [...built].sort((a, b) => newestEvent(b.st).localeCompare(newestEvent(a.st)) || (b.st.updatedAt || b.st.updated).localeCompare(a.st.updatedAt || a.st.updated));
   const cards = byUpdate.map(({ st, latest }, i) => `<li class="trend" data-story="${st.slug}" data-order="${i}">
     <span class="rank" aria-hidden="true">${i + 1}</span>
     <div class="trend-body">
@@ -406,13 +407,14 @@ function build() {
     </div>
   </li>`).join("\n");
   write("stories.json", JSON.stringify(stories.map((s) => s.slug)));
-  write("live.json", JSON.stringify(stories.flatMap((st) => st.events.filter((e) => e.added && e.label !== "pending").map((e) => ({ story: st.slug, storyTitle: st.title, id: e.id, label: e.label, added: e.added, text: e.text.split(". ")[0] }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)).slice(0, 30)));
+  write("live.json", JSON.stringify(stories.flatMap((st) => st.events.filter((e) => e.added && e.label !== "pending" && Date.parse(e.date + "T23:59:59Z") > Date.now() - 4 * 864e5).map((e) => ({ story: st.slug, storyTitle: st.title, id: e.id, label: e.label, added: e.added, text: e.text.split(". ")[0] }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)).slice(0, 30)));
   /* "Since your last visit": every published item added in the last 14 days, read once per page by catchup.js. */
   const since = new Date(Date.now() - 14 * 864e5).toISOString().slice(0, 19) + "Z";
   write("updates.json", JSON.stringify({ since, items: stories.flatMap((st) => st.events.filter((e) => e.added && e.added >= since && e.label !== "pending").map((e) => ({ story: st.slug, id: e.id, label: e.label, added: e.added, date: e.date, text: e.text.split(". ")[0] }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)) }));
   const regions = [...new Set(byUpdate.map(({ st }) => st.region))];
+  // "Live updates": the newest developments by the date they happened (an old event added late is not "live").
   const live = stories.flatMap((st) => st.events.filter((e) => e.label !== "pending").map((e, i) => ({ st, e, i })))
-    .sort((a, b) => (b.e.added || b.e.date).localeCompare(a.e.added || a.e.date) || b.e.date.localeCompare(a.e.date) || b.i - a.i).slice(0, 6);
+    .sort((a, b) => b.e.date.localeCompare(a.e.date) || (b.e.added || "").localeCompare(a.e.added || "") || b.i - a.i).slice(0, 6);
   const liveHtml = live.map(({ st, e }) => `<li><a href="/${st.slug}/#${itemId(e)}"><span class="when">${short(e.date)} ${stamp(e.label)} ${added(e)}</span><span class="what">${esc(e.text.split(". ")[0].replace(/\.$/, ""))}.</span><span class="story">${esc(st.title)}</span></a></li>`).join("\n");
   write("index.html", page({
     title: "Unowned",

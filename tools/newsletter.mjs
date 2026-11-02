@@ -40,7 +40,7 @@ export function buildEmail(stories, briefing, now = new Date()) {
   const since = new Date(now.getTime() - 24 * 3600e3).toISOString();
   const day = `${MONTHS[now.getUTCMonth()]} ${now.getUTCDate()}`;
   const withId = (st) => { const seen = {}; return st.events.map((e) => { seen[e.date] = (seen[e.date] || 0) + 1; return { ...e, id: seen[e.date] === 1 ? `e-${e.date}` : `e-${e.date}-${seen[e.date]}` }; }); };
-  const groups = stories.map((st) => ({ st, items: withId(st).filter((e) => e.added && e.added >= since && LABEL[e.label]).sort((a, b) => b.added.localeCompare(a.added)) }))
+  const groups = stories.map((st) => ({ st, items: withId(st).filter((e) => e.added && e.added >= since && LABEL[e.label] && Date.parse(e.date + "T23:59:59Z") > now.getTime() - 3 * 864e5).sort((a, b) => b.added.localeCompare(a.added)) }))
     .filter((g) => g.items.length).sort((a, b) => b.items.length - a.items.length).slice(0, 3);
   const lines = [`Good morning. Here is what changed in the last 24 hours on the stories Unowned follows. Every item is labelled, and every source is on the site.`, ""];
   if (briefing) lines.push(`**Listen:** [today's briefing, about 90 seconds](${SITE}/briefing/)`, "");
