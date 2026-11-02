@@ -395,7 +395,12 @@ function build() {
   /* Home */
   // Freshest news first: ordered by the date of each story's newest development, not by when the page was edited.
   const byUpdate = [...built].sort((a, b) => newestEvent(b.st).localeCompare(newestEvent(a.st)) || (b.st.updatedAt || b.st.updated).localeCompare(a.st.updatedAt || a.st.updated));
-  const cards = byUpdate.map(({ st, latest }, i) => `<li class="trend" data-story="${st.slug}" data-order="${i}">
+  // A story with no development for 10+ days and nothing scheduled in the next 10 days moves to "Quiet for now";
+  // the newsdesk keeps checking it and it returns to the top as soon as there is news.
+  const isQuiet = (st) => { const d = newestEvent(st); const soon = st.events.some((e) => e.label === "pending" && Date.parse(e.date) >= Date.now() - 864e5 && Date.parse(e.date) <= Date.now() + 10 * 864e5); return d && Date.now() - Date.parse(d + "T23:59:59Z") > 10 * 864e5 && !soon; };
+  const quietOnes = byUpdate.filter(({ st }) => isQuiet(st));
+  const quietHtml = quietOnes.length ? `<section aria-labelledby="h-quiet"><div class="section-head"><h2 id="h-quiet">Quiet for now</h2><p>No new developments for 10 days or more. We still check these every hour and bring them back as soon as there is news.</p></div><ul class="quiet-list">${quietOnes.map(({ st }) => `<li><a href="/${st.slug}/"><strong>${esc(st.title)}</strong> <span>Latest development: ${long(newestEvent(st))}</span></a></li>`).join("")}</ul></section>` : "";
+  const cards = byUpdate.filter(({ st }) => !isQuiet(st)).map(({ st, latest }, i) => `<li class="trend" data-story="${st.slug}" data-order="${i}">
     <span class="rank" aria-hidden="true">${i + 1}</span>
     <div class="trend-body">
       <a class="story-card" href="/${st.slug}/">
@@ -436,6 +441,7 @@ function build() {
 
 
 <section aria-labelledby="h-stories"><div class="section-head"><h2 id="h-stories">Trending now</h2><p>You decide the order: tap <strong>▲ Upvote</strong> on the stories you care about most.</p></div><ol class="trending">${cards}</ol></section>
+${quietHtml}
 <section aria-labelledby="h-live"><div class="section-head"><h2 id="h-live"><span class="live-dot" aria-hidden="true"></span>Live updates</h2><p>Newest first, from every story.</p></div>${keyStrip()}<ol class="livefeed" data-live-story="" data-newest="${stories.map(newestAdded).sort().pop()}">${liveHtml}</ol></section>
 <section aria-labelledby="h-how">
   <h2 id="h-how">Why Unowned</h2>
