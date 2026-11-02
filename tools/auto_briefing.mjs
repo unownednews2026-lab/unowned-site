@@ -124,12 +124,15 @@ async function shortHeadline(e, s) {
   if (!process.env.GROQ_API_KEY && !process.env.GEMINI_API_KEY && !process.env.CF_AI_TOKEN) return full;
   try {
     const { ask } = await import("./llm.mjs");
-    const out = (await ask(`Write ONE radio news headline of 8 to 16 words for this item from a story about ${s.title}. Use only facts in the item, keep who said or did it, present tense, no quotes, no dates, no opinion, no added words like "breaking". Return only the headline.\n\nItem: ${e.text}`, { temperature: 0.2, log: () => {} }))
+    for (let attempt = 0; attempt < 2; attempt++) {
+    const out = (await ask(`Write ONE radio news headline of 8 to 16 words for this item from a story about ${s.title}. Use only facts in the item, keep who said or did it, present tense, no quotes, no dates, no opinion, no added words like "breaking". Return only the headline.\n\nItem: ${e.text}`, { temperature: attempt ? 0.5 : 0.2, prefer: attempt, log: () => {} }))
       .replace(/^["'\s]+|["'\s.]+$/g, "").replace(/\s+/g, " ").trim();
     const n = out.split(/\s+/).length, src = fold(`${s.title} ${s.region || ""} ${e.text}`);
     const tokens = out.match(/\b(?:[A-Z][\p{L}'’.-]+|\d[\d,.%]*)\b/gu) || [];
     const ok = n >= 6 && n <= 20 && !/[“"]/.test(out) && tokens.every((x, i) => (i === 0 && !/\d/.test(x) && /^(The|A|An|In|On|At|After|Police|Students|Protesters|Thousands|Hundreds|Government|Opposition|Young)$/.test(x)) || src.includes(fold(x).replace(/[.,]$/, "")));
-    return ok ? out + "." : full;
+    if (ok) return out + ".";
+    }                                    // second try: a fresh answer often passes the check
+    return full;
   } catch { return full; }
 }
 
