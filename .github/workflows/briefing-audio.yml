@@ -49,5 +49,6 @@ jobs:
           git add -A content/briefings/ static/briefings/ || true
           if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
           git commit -m "Briefing: $(ls content/briefings | tail -1 | sed 's/.json//')"
-          git pull --rebase -q origin main
-          git push
+          # If another run pushed a recording meanwhile, keep this run's newer files rather than failing.
+          for i in 1 2 3; do git fetch -q origin main && git rebase -q -X theirs origin/main && git push && exit 0; git rebase --abort 2>/dev/null; sleep 10; done
+          echo "::warning::Could not push the recording after 3 tries"
