@@ -31,3 +31,45 @@
     });
   });
 })();
+
+/* Today's briefing video: caption from latest-video.json; share the MP4 straight to TikTok, Instagram or YouTube from a phone. */
+(function () {
+  "use strict";
+  var box = document.getElementById("video"); if (!box) return;
+  var cap = box.querySelector("textarea"), msg = box.querySelector(".msg"), vid = box.querySelector("video");
+  var say = function (t) { msg.textContent = t; };
+  var file = null, name = "unowned-briefing.mp4";
+  fetch("/briefings/latest-video.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (j) {
+    cap.value = j.caption; name = "unowned-briefing-" + j.date + ".mp4";
+    vid.src = "/briefings/latest-video.mp4?v=" + j.date;
+    box.querySelector("h2").textContent = "Briefing video · " + j.date + " · " + j.seconds + " s";
+    return fetch("/briefings/latest-video.mp4?v=" + j.date).then(function (r) { return r.blob(); });
+  }).then(function (b) { file = new File([b], name, { type: "video/mp4" }); }).catch(function () { cap.value = "No video yet today."; });
+  box.querySelector(".vcopy").addEventListener("click", function () {
+    var done = function () { say("Caption copied. Now tap 2 · Share video and pick TikTok, Instagram or YouTube."); };
+    if (navigator.clipboard) navigator.clipboard.writeText(cap.value).then(done, function () { cap.select(); document.execCommand("copy"); done(); });
+    else { cap.select(); document.execCommand("copy"); done(); }
+  });
+  box.querySelector(".vshare").addEventListener("click", function () {
+    if (!file) { say("The video is still loading. Try again in a few seconds."); return; }
+    if (navigator.canShare && navigator.canShare({ files: [file] })) navigator.share({ files: [file] }).then(function () { say("Shared. Paste the caption in the app and post."); }).catch(function () {});
+    else say("Sharing a video isn't supported here (it works on phones). Use Download video instead.");
+  });
+  box.querySelector(".vdl").addEventListener("click", function () {
+    var a = document.createElement("a"); a.href = vid.src; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    say("Downloading. Upload it as a Reel, a TikTok and a YouTube Short.");
+  });
+})();
+
+/* Profile kit: copy buttons for the bios. */
+(function () {
+  "use strict";
+  document.querySelectorAll(".profile .pcopy").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = b.parentNode.previousElementSibling, msg = b.closest(".profile").querySelector(".msg");
+      var done = function () { msg.textContent = "Copied."; };
+      if (navigator.clipboard) navigator.clipboard.writeText(t.value).then(done, function () { t.select(); document.execCommand("copy"); done(); });
+      else { t.select(); document.execCommand("copy"); done(); }
+    });
+  });
+})();

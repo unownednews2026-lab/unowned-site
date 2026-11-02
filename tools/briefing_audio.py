@@ -45,6 +45,8 @@ vfile = "static/briefings/voice-version.txt"
 redo = not os.path.exists(vfile) or open(vfile).read().strip() != VOICE_VERSION
 
 k = Kokoro(model, voices)
+newest = max((n[:-5] for n in os.listdir("content/briefings") if n.endswith(".json")), default="")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 made = 0
 for name in sorted(os.listdir("content/briefings")):
     if not name.endswith(".json"):
@@ -54,14 +56,21 @@ for name in sorted(os.listdir("content/briefings")):
     if os.path.exists(out) and not redo:
         continue
     b = json.load(open(f"content/briefings/{name}"))
-    parts, sr = [], 24000
+    parts, sr, durs = [], 24000, []
     for para in b["script"]:
         audio, sr = k.create(spoken(para), voice="af_heart", speed=1.0, lang="en-us")
         parts += [audio, np.zeros(int(sr * 0.45), dtype=audio.dtype)]
+        durs.append(len(audio) / sr + 0.45)
     with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
         sf.write(wav.name, np.concatenate(parts), sr)
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", wav.name, "-ar", "44100", "-ac", "2", "-codec:a", "libmp3lame", "-b:a", "128k", out], check=True)
     made += 1
     print("made", out)
+    if date == newest:
+        try:
+            from briefing_video import make_video
+            make_video(date, b, durs, out)
+        except Exception as e:
+            print(f"video skipped: {e}")
 open(vfile, "w").write(VOICE_VERSION + "\n")
 print(f"{made} new briefing(s)")

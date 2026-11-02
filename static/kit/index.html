@@ -10,11 +10,21 @@
 </head>
 <body>
 <main>
-  <h1>Instagram post kit</h1>
+  <h1>Post kit</h1>
   <p class="how"><strong>On your phone:</strong> for each post, tap <b>1 · Copy caption</b>, then <b>2 · Share to Instagram</b>, pick Instagram → Feed, and paste the caption. On a computer, use <b>Download images</b> instead.</p>
 
+  <section class="video" id="video">
+    <p class="when">Every day · Reels, TikTok, YouTube Shorts</p>
+    <h2>Today's briefing video</h2>
+    <p class="how">Made automatically each morning from the checked audio briefing: every headline with its grade. Post the same video to all three apps.</p>
+    <video controls playsinline preload="metadata" src="/briefings/latest-video.mp4"></video>
+    <textarea readonly rows="6" aria-label="Video caption">Loading today's caption…</textarea>
+    <div class="btns"><button class="vcopy">1 · Copy caption</button><button class="vshare">2 · Share video</button><button class="vdl">Download video</button></div>
+    <p class="msg" role="status"></p>
+  </section>
+
   <section class="post" data-key="grades" data-n="5">
-    <p class="when">New · post first (pin it to your profile)</p>
+    <p class="when">Posted Nov 1 · pin it from the Instagram app (⋯ → Pin to your profile)</p>
     <h2>How we grade the news</h2>
     <div class="strip"></div>
     <textarea readonly rows="8">Most news tells you what happened. We also tell you how sure anyone actually is.
@@ -77,6 +87,22 @@ Full timeline and sources: unownednews.com/albania-student-protests
 
 #Albania #Tirana #News</textarea>
     <div class="btns"><button class="copy">1 · Copy caption</button><button class="share">2 · Share to Instagram</button><button class="dl">Download images</button></div>
+    <p class="msg" role="status"></p>
+  </section>
+
+  <section class="video profile">
+    <p class="when">Account setup · use the same handle everywhere: @unownednews</p>
+    <h2>Profile kit</h2>
+    <p class="how">Profile picture: <a href="/kit/profile.png" download>profile.png</a> (all apps) · YouTube banner: <a href="/kit/banner-youtube.png" download>banner-youtube.png</a> · X header: <a href="/kit/header-x.png" download>header-x.png</a>. Website link everywhere: https://unownednews.com</p>
+    <h3>TikTok bio (80 characters max)</h3>
+    <textarea readonly rows="2">News nobody owns. Every claim graded. Daily world briefing.</textarea>
+    <div class="btns"><button class="pcopy">Copy</button></div>
+    <h3>YouTube channel description</h3>
+    <textarea readonly rows="5">Unowned is news nobody owns. A short daily world briefing on the stories the world skims past: student protests, pipeline fights, asylum unrest and youth movements. Every claim is graded: confirmed (two or more independent sources), reported (one source), disputed (both sides shown) or alleged (one side's claim). The narration is an AI voice; every fact links to its sources at unownednews.com.</textarea>
+    <div class="btns"><button class="pcopy">Copy</button></div>
+    <h3>Bluesky / Threads / X bio (160 characters max)</h3>
+    <textarea readonly rows="3">News nobody owns. Living timelines on the stories the world skims past. Every claim graded: confirmed, reported, disputed or alleged. unownednews.com</textarea>
+    <div class="btns"><button class="pcopy">Copy</button></div>
     <p class="msg" role="status"></p>
   </section>
 </main>
