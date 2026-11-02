@@ -116,7 +116,7 @@ let detailsStarted = false;
 for (const { s, ev } of picks) {
   // The headline already gave the newest item; add up to two more recent developments, then what's coming up.
   const parts = [];
-  const more = ev.slice(1).filter(recent).slice(0, 1);   // only other recent developments, never older background
+  const more = ev.slice(1).filter((e) => e.date === ev[0].date).slice(0, 1);   // only the newest day's news: once there is a newer update, older items are not read again
   for (const e of more) parts.push(dated(e, firstSentences(e.text, 1)), grade(s, e));
   const next = upcoming(s)[0];
   if (next) {
