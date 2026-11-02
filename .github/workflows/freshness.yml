@@ -96,6 +96,11 @@ jobs:
         continue-on-error: true
         timeout-minutes: 25
         run: node tools/lag_alert.mjs || true
+      - name: Freshness guard (every surface current; repairs or flags)
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 10
+        run: node tools/freshness_guard.mjs || true
       - name: Site health (live site current, broken source links)
         if: always()
         continue-on-error: true
