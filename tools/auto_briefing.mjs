@@ -80,18 +80,12 @@ const unsafe = (e) => /\bnamed (by|as)\b|\bidentified (by|as)\b/i.test(e.text);
 // Headline-only stopgap items ("<Outlet> reports …") are too thin to read aloud; the editor turns them into real items.
 const items = (s) => s.events.filter((e) => e.label !== "pending" && !e.headline && !unsafe(e) && e.added && Date.parse(e.added) <= now)
   .sort((a, b) => b.date.localeCompare(a.date) || b.added.localeCompare(a.added));   // newest development first, not newest-added
-/* A short spoken headline: the first clause of the newest item, at most about 22 words. */
+/* The spoken headline: the item's first sentence, or its first clause when that is a whole sentence on its own.
+   Never cut at a comma: a cut can drop the verb and leave a fragment (Nov 2). */
 function headline(e) {
   let h = firstSentences(e.text, 1).replace(/[.;:]\s*$/, "");
   const n = (t) => t.split(/\s+/).length;
-  if (n(h) > 40) h = h.split(/;\s*| — /)[0];
-  if (n(h) > 40) {
-    // Cut at a comma that leaves a whole thought (at least 12 words), never mid-list.
-    const parts = h.split(", "); let acc = parts[0];
-    for (let i = 1; i < parts.length && n(acc) < 12; i++) acc += ", " + parts[i];
-    for (let i = acc.split(", ").length; i < parts.length && n(acc + ", " + parts[i]) <= 40; i++) acc += ", " + parts[i];
-    h = acc;
-  }
+  if (n(h) > 40) { const first = h.split(/;\s*| — /)[0]; if (n(first) >= 8) h = first; }
   return h.replace(/[,;]\s*$/, "") + ".";
 }
 // Older developments get their date said aloud, so "on Saturday" in a week-old item isn't heard as today.
@@ -99,25 +93,30 @@ const dated = (e, t) => e.date < new Date(now - DAY).toISOString().slice(0, 10) 
 const upcoming = (s) => s.events.filter((e) => e.label === "pending" && e.date > today).sort((a, b) => a.date.localeCompare(b.date));
 const spokenDate = (iso) => { const x = new Date(iso + "T12:00:00Z"); return `${MONTHS[x.getUTCMonth()]} ${ordinal(x.getUTCDate())}`; };
 
-// Every story with something in the last week, most recently updated first.
-const picks = stories.map((s) => ({ s, ev: items(s) })).filter((x) => x.ev.length && now - Date.parse(x.ev[0].added) <= 7 * DAY)
-  .sort((a, b) => b.ev[0].added.localeCompare(a.ev[0].added));
-if (!picks.length) { console.log("no stories with recent items"); process.exit(0); }
+// Only current news is read as news: developments dated today or in the two days before. A story with nothing that
+// recent is not presented as a headline; it gets one honest line saying when we last had a report.
+const cutoff = new Date(now - 2 * DAY).toISOString().slice(0, 10);
+const recent = (e) => e.date >= cutoff;
+const all = stories.map((s) => ({ s, ev: items(s) })).filter((x) => x.ev.length);
+const picks = all.filter((x) => recent(x.ev[0])).sort((a, b) => b.ev[0].date.localeCompare(a.ev[0].date) || b.ev[0].added.localeCompare(a.ev[0].added));
+const quiet = all.filter((x) => !recent(x.ev[0])).sort((a, b) => b.ev[0].date.localeCompare(a.ev[0].date));
+if (!all.length) { console.log("no stories with items"); process.exit(0); }
 
 const region = (s) => s.region || s.title.replace(/'s .*/, "");
 const script = [
   `This is the Unowned briefing for ${weekday}, ${MONTHS[d.getUTCMonth()]} ${ordinal(d.getUTCDate())}. It's narrated by a synthetic voice, and every fact comes from our checked timelines.`,
   "Every item carries our grade. Confirmed means independent outlets agree. Reported means only one source has it so far. Disputed means the accounts conflict. And alleged is one side's claim.",
-  "Here are today's headlines.",
+  picks.length ? "Here are today's headlines." : "There are no new developments in our stories in the last three days that we have been able to confirm in published reporting.",
   ...picks.map(({ s, ev }) => `${region(s)}. ${dated(ev[0], headline(ev[0]))} ${grade(s, ev[0])}`.trim()),
 ];
+if (quiet.length) script.push(`${picks.length ? "Also on our watch, with no new reported developments in the last three days" : "Our latest reports"}: ${quiet.map(({ s, ev }) => `${region(s)}, last reported ${spokenDate(ev[0].date)}`).join("; ")}. We'll update those as soon as there's news.`);
 const said = new Set();
 let detailsStarted = false;
 // The details: for each story, the latest one or two developments with their labels, then what's coming up.
 for (const { s, ev } of picks) {
   // The headline already gave the newest item; add up to two more recent developments, then what's coming up.
   const parts = [];
-  const more = ev.slice(1).filter((e) => now - Date.parse(e.added) <= 3 * DAY).slice(0, 1);   // one more development each keeps it near four minutes
+  const more = ev.slice(1).filter(recent).slice(0, 2);   // only other recent developments, never older background
   for (const e of more) parts.push(dated(e, firstSentences(e.text, 1)), grade(s, e));
   const next = upcoming(s)[0];
   if (next) {
@@ -141,7 +140,7 @@ if (ahead.length) script.push("Coming up in the days ahead. " + ahead.map(({ s, 
 }).join(" "));
 script.push("That's the briefing. Full timelines, and every source, are at unowned news dot com.");
 
-const names = picks.map((p) => region(p.s));
+const names = (picks.length ? picks : quiet).map((p) => region(p.s));
 const title = "Briefing: " + (names.length > 1 ? names.slice(0, -1).join(", ") + " and " + names.at(-1) : names[0]);
 mkdirSync("content/briefings", { recursive: true });
 writeFileSync(out, JSON.stringify({ title, stories: picks.map((p) => p.s.slug), script, auto: true, generated: new Date().toISOString() }, null, 2) + "\n");
