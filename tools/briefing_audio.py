@@ -57,7 +57,7 @@ for name in sorted(os.listdir("content/briefings")):
     # Re-record when the script changed (the old recording stays live until the new one replaces it,
     # so the site never falls back to an older day's briefing while a new one is being made).
     import hashlib
-    sha = hashlib.sha256(json.dumps(b["script"]).encode()).hexdigest()[:16]
+    sha = hashlib.sha256(json.dumps(b["script"], ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()[:16]   # same as JSON.stringify in tools/freshness_guard.mjs
     shafile = f"static/briefings/{date}.sha"
     same = os.path.exists(shafile) and open(shafile).read().strip() == sha
     if os.path.exists(out) and not redo and (same or date != newest):
