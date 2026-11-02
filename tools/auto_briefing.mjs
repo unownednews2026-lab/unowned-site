@@ -123,7 +123,7 @@ for (const { s, ev } of picks) {
     said.add(next);
     let p = firstSentences(next.text, 1).split(";")[0].replace(/[.;:]\s*$/, "").replace(/\s*Still being checked$/i, "");
     if (p.split(/\s+/).length > 22) p = p.split(", ")[0];
-    parts.push(`Coming up: ${p[0].toLowerCase()}${p.slice(1)}.`);
+    parts.push(`Coming up: ${p}.`);
   }
   if (!parts.length) continue;
   if (!detailsStarted) { script.push("Now, more on those stories."); detailsStarted = true; }
@@ -136,7 +136,7 @@ const ahead = stories.map((s) => ({ s })).flatMap(({ s }) => upcoming(s).slice(0
 if (ahead.length) script.push("Coming up in the days ahead. " + ahead.map(({ s, e }) => {
   let p = firstSentences(e.text, 1).split(";")[0].replace(/[.;:]\s*$/, "");
   if (p.split(/\s+/).length > 16) p = p.split(", ")[0];
-  return `${spokenDate(e.date)}, ${region(s)}: ${p[0].toLowerCase()}${p.slice(1)}.`;
+  return `${spokenDate(e.date)}, ${region(s)}: ${p}.`;
 }).join(" "));
 script.push("That's the briefing. Full timelines, and every source, are at unowned news dot com.");
 
