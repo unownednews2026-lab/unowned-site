@@ -59,7 +59,7 @@ def card(F, kicker, title=None, body=None, grade=None, note=None, rows=None):
     y = 360
     d.text((x, y), kicker.upper(), font=F["M"](36), fill=MUTED); y += 80
     if title:
-        f, lines, size = fit(d, title, F["A"], width, 760, 108, 60)
+        f, lines, size = fit(d, title, F["A"], width, 900, 108, 46)
         for ln in lines:
             d.text((x, y), ln, font=f, fill=FG); y += int(size * 1.18)
         y += 40
@@ -95,6 +95,8 @@ def make_video(date, b, durs, mp3):
     import datetime
     weekday = datetime.date(y, m, dd).strftime("%A")
     heads = script[start + 1:end]
+    quiet_n = sum(1 for h in heads if h.startswith(("Also on our watch", "Our latest reports")))
+    heads = [h for h in heads if not h.startswith(("Also on our watch", "Our latest reports"))]
     regions = [h.split(". ", 1)[0] for h in heads]
     cards = [(card(F, "Daily audio briefing", f"{weekday}, {MONTHS[m - 1]} {dd}", body=f"{len(heads)} stories, every claim graded."), durs[0])]
     if start >= 2:   # the grades explainer paragraph

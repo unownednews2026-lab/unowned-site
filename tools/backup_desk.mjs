@@ -6,6 +6,7 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { headlinesSince } from "./signals.mjs";
+const readFails = [];   // why articles could not be read, for the run log
 import { ask, used as llmUsed, problems as llmProblems, GITHUB_PROVIDER, SECOND_CHECK } from "./llm.mjs";
 
 const KEY = process.env.GEMINI_API_KEY;
@@ -132,14 +133,31 @@ async function realUrl(url) {
 async function readArticle(url, domain, title) {
   try {
     url = await realUrl(url);
-    if (!url) return null;
-    const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" }, redirect: "follow", signal: AbortSignal.timeout(15000) });
-    const host = new URL(r.url).hostname.replace(/^www\./, "");
-    if (!trusted(host)) return null;
-    const html = await r.text();
-    const text = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map((p) => p.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;|&[lr]dquo;/g, '"').replace(/\s+/g, " ").trim()).filter((t) => t.length > 60).join("\n").slice(0, 6000);
-    return text.length > 500 ? { url: r.url, domain: host, title, text } : null;
-  } catch { return null; }
+    if (!url) { readFails.push(`${domain}: link not resolved`); return null; }
+    let final = url, text = "", status = 0;
+    try {
+      const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36", "Accept-Language": "en" }, redirect: "follow", signal: AbortSignal.timeout(15000) });
+      status = r.status; final = r.url;
+      if (r.ok) {
+        const html = await r.text();
+        text = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map((p) => p.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;|&[lr]dquo;/g, '"').replace(/\s+/g, " ").trim()).filter((t) => t.length > 60).join("\n").slice(0, 6000);
+      }
+    } catch (e) { status = e.name === "TimeoutError" ? "timeout" : "error"; }
+    const host = new URL(final).hostname.replace(/^www\./, "");
+    if (!trusted(host)) { readFails.push(`${host}: not an established outlet`); return null; }
+    // Many news sites block plain requests or build the page with scripts. A free reader service (r.jina.ai) fetches
+    // the page as a browser would and returns its text; we only use it for established outlets.
+    if (text.length <= 500) {
+      try {
+        const r = await fetch(`https://r.jina.ai/${final}`, { headers: { "X-Return-Format": "text", "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(30000) });
+        if (r.ok) text = (await r.text()).split("\n").map((t) => t.replace(/\s+/g, " ").trim()).filter((t) => t.length > 60 && !/^(Title|URL Source|Published Time|Markdown Content):/.test(t)).join("\n").slice(0, 6000);
+        else status = `${status}; reader ${r.status}`;
+      } catch (e) { status = `${status}; reader ${e.name === "TimeoutError" ? "timeout" : "error"}`; }
+    }
+    if (text.length > 500) return { url: final, domain: host, title, text };
+    readFails.push(`${host}: ${status || "too little text"}`);
+    return null;
+  } catch { readFails.push(`${domain}: error`); return null; }
 }
 async function articlesFor(q, s) {
   const since = Date.parse(s.updatedAt || s.updated);
@@ -172,11 +190,8 @@ async function articlesFor(q, s) {
     if (out.length >= 6) break;
     if (out.some((o) => o.domain === a.domain.replace(/^www\./, ""))) continue;   // one article per outlet
     if (!trusted(a.domain)) continue;                                               // established outlets only
-    try {
-      const html = await (await fetch(a.url, { headers: { "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(15000) })).text();
-      const text = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map((p) => p.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;|&[lr]dquo;/g, '"').replace(/\s+/g, " ").trim()).filter((t) => t.length > 60).join("\n").slice(0, 6000);
-      if (text.length > 500) out.push({ url: a.url, domain: a.domain.replace(/^www\./, ""), title: a.title, text });
-    } catch {}
+    const art = await readArticle(a.url, a.domain.replace(/^www\./, ""), a.title);   // same reader, with the fallback
+    if (art) out.push(art);
   }
   return out;
 }
@@ -186,7 +201,7 @@ for (const { f, s, h } of hot.slice(0, 3)) {
   const recent = [...s.events].sort((a, b) => (b.added || b.date).localeCompare(a.added || a.date)).slice(0, 6);
   const arts = await articles(s, h);
   console.log(`::notice::${s.slug}: ${h.length} headline(s), ${h.filter((x) => x.domain && trusted(x.domain)).length} from established outlets, ${arts.length} readable article(s)`);
-  if (!arts.length) { report.push(`- ${s.slug}: fresh headlines, but no readable articles found`); continue; }
+  if (!arts.length) { report.push(`- ${s.slug}: fresh headlines, but no readable articles found (${[...new Set(readFails.splice(0))].slice(0, 4).join("; ") || "no article links"})`); continue; }
   const prompt = `You help a careful, neutral news tracker called Unowned. Story: "${s.title}". ${s.dek}
 
 Already published (newest first):
