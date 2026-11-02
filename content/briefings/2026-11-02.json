@@ -1,29 +1,21 @@
 {
-  "title": "Briefing: Albania, France, India, Canada and Italy",
+  "title": "Briefing: Albania and India",
   "stories": [
     "albania-student-protests",
-    "france-school-protests",
-    "cockroach-movement",
-    "canada-pacific-link-pipeline",
-    "italy-student-protests"
+    "cockroach-movement"
   ],
   "script": [
     "This is the Unowned briefing for Monday, November second. It's narrated by a synthetic voice, and every fact comes from our checked timelines.",
     "Every item carries our grade. Confirmed means independent outlets agree. Reported means only one source has it so far. Disputed means the accounts conflict. And alleged is one side's claim.",
     "Here are today's headlines.",
-    "Albania. From October twenty-ninth: Albania’s Council of Ministers has approved a police-run electronic register of people referred to prosecutors or under investigation for violent offences at demonstrations, the Albanian Daily News reports. Our grade: reported. Albanian Daily News and Tirana Times have it, but we can't yet count them as independent confirmation.",
-    "France. From October twenty-seventh: French student and pupil organisations say the government's October twenty-sixth education measures fall short and vow to keep mobilising, AFP reports. We grade that reported: LCP and La Dernière Heure carry it, but we haven't yet established that their reporting is independent.",
-    "India. From October thirty-first: Cockroach Janta Party founder Abhijeet Dipke said the party backs the INDIA bloc's November first Ramlila Maidan rally against Chief Election Commissioner Gyanesh Kumar but will not take part, calling the CJP \"a neutral platform\", Hindustan Times. Our grade: confirmed, with independent reporting from Hindustan Times and Outlook India.",
-    "Canada. From October thirtieth: Imperial Oil's chief executive said he is encouraged by progress toward a binding Pathways carbon-storage agreement with Ottawa and Alberta, a condition for the Pacific Link pipeline, though \"there's still a lot of work left to do,\" BNN Bloomberg reports. We grade that reported: so far only BNN Bloomberg has it, and we're waiting for independent confirmation.",
-    "Italy. From October thirtieth: Tens of thousands marched in Rome, Milan and other Italian cities on Friday against the cost of living and military spending, NBC News reports, as the USB union and others called public- and private-sector strikes. Our grade: reported. It rests on one source, NBC News, and isn't yet confirmed by a second.",
+    "Albania. Tirana Mayor Erion Veliaj, held in pre-trial detention on corruption charges he denies, accused Prime Minister Edi Rama of orchestrating his Oct 28 transfer to Fier prison and of using Justice Minister Toni Gogu to demand he give up control of the city, Tirana Times reports. Our grade: disputed. The sides tell it differently, and both versions are on the story page.",
+    "India. From October thirty-first: Cockroach Janta Party founder Abhijeet Dipke said the party backs the INDIA bloc's November first Ramlila Maidan rally against Chief Election Commissioner Gyanesh Kumar but will not take part, calling the CJP \"a neutral platform\", Hindustan Times, Outlook India and The Tribune report. We grade that confirmed: Hindustan Times and Outlook India reported it independently.",
+    "Also on our watch, with no new reported developments in the last three days: Canada, last reported October thirtieth; Italy, last reported October thirtieth; France, last reported October twenty-seventh; South Africa, last reported October twenty-third. We'll update those as soon as there's news.",
     "Now, more on those stories.",
-    "Albania's student protests. From October twenty-eighth: Albania's government has presented its 2027 tax package, dropping an earlier plan to raise corporate income tax, cutting VAT on 54 basic foods from 20% to 6% while raising the standard rate to 21%, and adding a 30% rate on monthly salaries above 700,000 lek, Tirana Times reports. We grade that reported: so far only Tirana Times has it, and we're waiting for independent confirmation.",
-    "France's high school protests. From October twenty-sixth: The government announces it will cancel the 836 secondary-education post cuts planned in the 2027 budget and add 500 teaching posts in public lycées, AFP reports via La Dernière Heure and LCP. Our grade: reported. La Dernière Heure and LCP have it, but we can't yet count them as independent confirmation.",
-    "The Cockroach Janta Party movement. From October thirty-first: Cockroach Janta Party president Abhijeet Dipke posted an Instagram note to singer Diljit Dosanjh saying he was hurt by the singer's June comments on the protests and asking to end the row, News18, Hindustan Times and The Tribune report. We grade that confirmed: Hindustan Times and News18 reported it independently.",
-    "Canada's Pacific Link pipeline fight. From October twenty-sixth: Carney, most premiers and Assembly of First Nations leaders held their first such meeting since 2005; Carney said ministers will work with First Nations on moving beyond the Indian Act. Our grade: reported. CP24 and Turtle Island News have it, but we can't yet count them as independent confirmation.",
+    "The Cockroach Janta Party movement. From October thirty-first: Cockroach Janta Party president Abhijeet Dipke posted an Instagram note to singer Diljit Dosanjh saying he was hurt by the singer's June comments on the protests and asking to end the row, News18, Hindustan Times and The Tribune report. Our grade: confirmed, with independent reporting from Hindustan Times and News18.",
     "Coming up in the days ahead. November fourth, South Africa: local government elections on November fourth.",
     "That's the briefing. Full timelines, and every source, are at unowned news dot com."
   ],
   "auto": true,
-  "generated": "2026-11-02T13:58:24.846Z"
+  "generated": "2026-11-02T19:40:00.612Z"
 }
