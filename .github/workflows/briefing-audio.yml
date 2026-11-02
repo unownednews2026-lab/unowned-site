@@ -39,6 +39,10 @@ jobs:
           [ -f model/kokoro.onnx ] || curl -sSL -o model/kokoro.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.int8.onnx
           [ -f model/voices.bin ] || curl -sSL -o model/voices.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
       - name: Write today's script if it's missing
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          CF_AI_TOKEN: ${{ secrets.CF_AI_TOKEN }}
         run: node tools/auto_briefing.mjs --refresh
       - name: Record new briefings
         run: python tools/briefing_audio.py model/kokoro.onnx model/voices.bin
