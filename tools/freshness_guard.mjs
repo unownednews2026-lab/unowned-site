@@ -41,6 +41,15 @@ if (hour >= 8) {
     const v = existsSync("static/briefings/latest-video.json") ? JSON.parse(readFileSync("static/briefings/latest-video.json", "utf8")) : {};
     if (v.date !== today) issues.push(`the briefing video is from ${v.date || "an unknown date"}, not today`);
   }
+  // News that breaks during the day: if a story has a new development since the briefing was written (and the
+  // briefing is 3+ hours old), rebuild and re-record it, so the briefing always carries the latest updates.
+  if (!issues.length && existsSync(json) && hour <= 23) {
+    const b = JSON.parse(readFileSync(json, "utf8"));
+    const gen = Date.parse(b.generated || 0), cutoff = new Date(Date.now() - 2 * DAY).toISOString().slice(0, 10);
+    const fresh = readdirSync("content/stories").filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(`content/stories/${f}`, "utf8")))
+      .filter((s) => s.events.some((e) => e.label !== "pending" && e.desk !== "backup" && e.date >= cutoff && e.added && Date.parse(e.added) > gen));
+    if (fresh.length && Date.now() - gen > 3 * 36e5) issues.push(`new developments since it was written (${fresh.map((s) => s.region || s.slug).join(", ")})`);
+  }
   if (issues.length) rerun("briefing-audio.yml", `Briefing: ${issues.join("; ")}`);
   else if (hour >= 9) {
     const st = await head(`${SITE}/briefings/${today}.mp3`);
