@@ -44,10 +44,12 @@ async function pageText(url) {
 
 /* The scraping service costs money per post, so each account is scraped at most every few hours (default 3). */
 async function scrapeEvery(src, platform, handle) {
-  const k = `scraped:${platform}:${handle}`, hours = src.everyHours || 3;
+  // Cost control (the scraper charges per post): X every 3 h; Instagram/TikTok every 6 h; accounts found automatically
+  // on official websites every 8 h. Breaking news is still caught within minutes by the news scanners.
+  const k = `scraped:${platform}:${handle}`, hours = src.everyHours || (src.discovered ? 8 : platform === "x" ? 3 : 6);
   if (!DRY && seen[k] && Date.now() - Date.parse(seen[k]) < hours * 36e5) return [];
   seen[k] = now;
-  return scrape(platform, handle, { count: src.count || 6, config: (registry._scrapers || {})[platform] || {} });
+  return scrape(platform, handle, { count: src.count || (platform === "x" ? 6 : 4), config: (registry._scrapers || {})[platform] || {} });
 }
 
 /* Each source type returns [{url, title, date, text}] (newest first). */
@@ -259,7 +261,7 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
   const sources = [];
   for (const src of registry[s.slug] || []) {
     if (src.type !== "discover") { sources.push(src); continue; }
-    try { for (const f of await readSource(src)) if (!sources.concat(registry[s.slug]).some((x) => x.type === f.type && (x.handle || x.channelId || x.channel || "").toLowerCase() === (f.handle || f.channelId || f.channel || "").toLowerCase())) sources.push(f); }
+    try { for (const f of (await readSource(src)).map((x) => ({ ...x, discovered: true }))) if (!sources.concat(registry[s.slug]).some((x) => x.type === f.type && (x.handle || x.channelId || x.channel || "").toLowerCase() === (f.handle || f.channelId || f.channel || "").toLowerCase())) sources.push(f); }
     catch (e) { report.push(`- ${s.slug}: could not read ${src.url} to find its channels (${String(e.message).slice(0, 60)})`); }
   }
   if (!sources.length) continue;
