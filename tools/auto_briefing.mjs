@@ -134,7 +134,7 @@ async function shortHeadline(e, s) {
     const n = out.split(/\s+/).length, src = fold(`${s.title} ${s.region || ""} ${e.text}`);
     const tokens = out.match(/\b(?:[A-Z][\p{L}'’.-]+|\d[\d,.%]*)\b/gu) || [];
     const ok = n >= 6 && n <= 20 && !/[“"]/.test(out) && tokens.every((x, i) => (i === 0 && !/\d/.test(x) && /^(The|A|An|In|On|At|After|Police|Students|Protesters|Thousands|Hundreds|Government|Opposition|Young)$/.test(x)) || src.includes(fold(x).replace(/[.,]$/, "")));
-    if (ok) return out + ".";
+    if (ok) return speakable(out) + ".";
     }                                    // second try: a fresh answer often passes the check
     return full;
   } catch { return full; }
