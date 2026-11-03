@@ -13,7 +13,7 @@
    Every item says who said it and where ("said in a statement", "said on YouTube"), goes through the same code checks
    as news items (names, numbers, quotes must be in the source), a second AI fact-check, and is reviewed by the editor
    ("desk": "backup"). Items are marked "via": "official" or "social" so the site can label them. */
-import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { ungrounded } from "./grounding.mjs";
 import { realUrl } from "./gnews.mjs";
@@ -301,6 +301,9 @@ Text: ${x.text.slice(0, 7000)}`, { temperature: 0.1, log: () => {} });
         s.events.push({ date, phase: s.phases[s.phases.length - 1].id, label, added: now, text: it.text.trim(), sources: [key], desk: "backup", via });
         s.events.sort((a, b) => a.date.localeCompare(b.date));
       }
+      // Review packet for the editor: the post exactly as read, with its transcript and image text.
+      mkdirSync(`review-packets/${s.slug}`, { recursive: true });
+      writeFileSync(`review-packets/${s.slug}/${key}.json`, JSON.stringify({ story: s.slug, added: now, label, via, kind: it.kind, text: it.text.trim(), sources: [{ key, outlet: src.who, url: x.url, platform: src.type, verified: src.verified, published: x.date, media: x.media || [], articleText: x.text }] }, null, 2));
       s.updated = now.slice(0, 10); s.updatedAt = now;
       writeFileSync(`content/stories/${f}`, JSON.stringify(s, null, 2));
       sh(`node tools/fmt.js content/stories/${f}`);
@@ -342,7 +345,7 @@ if (published.length) {
   if (/LABEL CHECK: \d+ item/.test(build) || /Error/.test(build)) { say("build check failed; not publishing"); process.exit(0); }
 }
 sh(`git config user.name "Unowned" && git config user.email "Unownednews2026@gmail.com"`);
-sh(`git add content/stories content/primary-seen.json && git commit -q -m "${published.length ? `Primary sources: ${[...new Set(published)].join(", ")}` : "Primary sources checked"} — ${now}"`);
+sh(`git add content/stories content/primary-seen.json ${published.length ? "review-packets" : ""} && git commit -q -m "${published.length ? `Primary sources: ${[...new Set(published)].join(", ")}` : "Primary sources checked"} — ${now}"`);
 for (let i = 0; i < 3; i++) {
   try { sh("git pull -q --rebase origin main && git push -q origin HEAD:main"); break; }
   catch (e) { if (i === 2) { say(`push failed: ${String(e.message).slice(0, 200)}`); process.exit(0); } await new Promise((r) => setTimeout(r, 10000)); }
