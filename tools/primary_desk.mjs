@@ -114,7 +114,11 @@ async function readSource(src) {
       try { const html = await get(`https://syndication.twitter.com/srv/timeline-profile/screen-name/${h}`, 20000); let n = 0;
         if (new RegExp(`"screen_name":"${h}"`, "i").test(html)) for (const m of html.matchAll(/"id_str":"(\d{15,20})"/g)) { if (!ids.has(m[1])) n++; ids.add(m[1]); }
         routes.push(`timeline ${n}`); } catch (e) { routes.push(`timeline ${e.message.slice(0, 20)}`); }
-      try { grab(await get(`https://r.jina.ai/https://x.com/${h}`, 40000), "reader"); } catch (e) { routes.push(`reader ${e.message.slice(0, 20)}`); }
+      for (const [route, u] of [["reader", `https://r.jina.ai/https://x.com/${h}`], ["reader-tw", `https://r.jina.ai/https://twitter.com/${h}`], ["reader-search", `https://r.jina.ai/https://x.com/search?q=from%3A${h}&f=live`]]) {
+        if (ids.size >= 3) break;
+        try { const md = await get(u, 45000); const before = ids.size; grab(md, route); if (ids.size === before && DRY) say(`   ${route} for @${h} returned: ${md.replace(/\s+/g, " ").slice(0, 200)}`); }
+        catch (e) { routes.push(`${route} ${e.message.slice(0, 20)}`); }
+      }
     }
     if (ids.size < 3) for (const site of ["x.com", "twitter.com"]) {
       try { grab(await get(`https://www.bing.com/search?q=${encodeURIComponent(`site:${site}/${h}/status`)}&format=rss&filters=${encodeURIComponent('ex1:"ez2"')}`, 20000), `bing:${site}`); } catch (e) { routes.push(`bing ${e.message.slice(0, 20)}`); }
