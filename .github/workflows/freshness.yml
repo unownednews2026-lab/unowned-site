@@ -33,7 +33,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 55
     env:
       GH_TOKEN: ${{ github.token }}
       LIMIT_HOURS: "12"
@@ -133,11 +133,12 @@ jobs:
       - name: Primary-source desk (official statements and movements' own channels, strictly graded)
         if: always()
         continue-on-error: true
-        timeout-minutes: 15
+        timeout-minutes: 25
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           CF_AI_TOKEN: ${{ secrets.CF_AI_TOKEN }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           pip install -q --user youtube-transcript-api==1.2.4 yt-dlp || true
