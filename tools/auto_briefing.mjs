@@ -53,6 +53,7 @@ function grade(s, e) {
   const o = outletNames(s, e), t = gradeTurn++ % 2;
   // Their own words: say plainly where it comes from and that no independent outlet has reported it yet.
   if (e.via === "official") return e.label === "alleged" ? "That's the authority's own claim, from its official statement, and we grade it alleged until independent reporting backs it up." : "That comes from their official statement; we grade it reported, and it isn't yet independently confirmed.";
+  if (e.via === "journalist") return e.label === "alleged" ? "That comes from a reporter's post, and we grade it alleged." : "That's from a reporter's own post; we grade it reported, one source so far.";
   if (e.via === "social") return e.label === "alleged" ? "That's their own claim, posted on their channel, and we grade it alleged." : "They announced that on their own channel; we grade it reported, not yet independently confirmed.";
   switch (e.label) {
     case "confirmed": return o.length >= 2

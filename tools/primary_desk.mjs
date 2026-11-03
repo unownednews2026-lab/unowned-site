@@ -18,7 +18,7 @@ import { execSync } from "node:child_process";
 import { ungrounded } from "./grounding.mjs";
 import { realUrl } from "./gnews.mjs";
 import { mediaText, youtubeText } from "./media.mjs";
-import { scrape } from "./social_scrape.mjs";
+import { scrape, searchX } from "./social_scrape.mjs";
 import { ask, problems as llmProblems, SECOND_CHECK, GITHUB_PROVIDER, geminiVideo } from "./llm.mjs";
 
 const DRY = process.argv.includes("--dry");                  // list what would be read, publish nothing
@@ -223,8 +223,39 @@ const published = [], report = [], queue = [];
 const mark = (x) => { seen[x.key || x.url] = now; };
 const newestDev = (s) => s.events.filter((e) => e.label !== "pending").reduce((m, e) => (e.date > m ? e.date : m), "");
 
+/* Topic discovery, like a feed: who on X is posting about each story right now. Every 4 hours per story (paid
+   scraper). Accounts with real reach (10,000+ followers, or verified organisations and governments) are counted in
+   content/network.json and, once they come up 3+ times, proposed to the editor for verification by tools/track_record.mjs.
+   Nothing they post is published until the editor has verified the account. */
+const watchTerms = existsSync("tools/watch.json") ? JSON.parse(readFileSync("tools/watch.json", "utf8")) : {};
+async function topicDiscovery(s) {
+  if (!process.env.APIFY_TOKEN) return;
+  const w = watchTerms[s.slug]; if (!w) return;
+  const k = `topic:${s.slug}`;
+  if (!DRY && seen[k] && Date.now() - Date.parse(seen[k]) < 4 * 36e5) return;
+  seen[k] = now;
+  const q = (typeof w === "string" ? w : w.en).replace(/\bwhen:\S+/g, "").trim();
+  try {
+    const items = await searchX(`${q} -filter:replies`, 25, (registry._scrapers || {}).x || {});
+    let n = 0;
+    for (const it of items) {
+      const reach = (it.followers || 0) >= 10000 || ["Government", "Business"].includes(it.verifiedType);
+      if (!it.author || !reach) continue;
+      const key = `x:${it.author.toLowerCase()}`;
+      if (seen[`topicpost:${it.url}`]) continue;
+      seen[`topicpost:${it.url}`] = now;
+      const c = (net.counts[key] = net.counts[key] || { n: 0, from: {}, stories: {}, last: "" });
+      c.n++; c.from["topic search"] = (c.from["topic search"] || 0) + 1; c.stories[s.slug] = 1; c.last = now;
+      c.profile = { name: it.authorName, followers: it.followers, verified: it.verifiedType || (it.blue ? "blue" : "") };
+      n++;
+    }
+    say(`${s.slug}: topic search on X found ${items.length} post(s), ${n} from accounts with real reach`);
+  } catch (e) { say(`${s.slug}: topic search on X failed (${String(e.message).slice(0, 80)})`); }
+}
+
 for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json"))) {
   const s = JSON.parse(readFileSync(`content/stories/${f}`, "utf8"));
+  await topicDiscovery(s);
   const sources = [];
   for (const src of registry[s.slug] || []) {
     if (src.type !== "discover") { sources.push(src); continue; }
@@ -277,9 +308,9 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
       if (!["x", "instagram", "tiktok"].includes(src.type) && (!x.text || x.text.length < 200)) x.text = `${x.text}\n${await pageText(x.url)}`.trim();
       if (src.type === "gnews" && x.text.length < 60) x.text = `${x.title}. ${x.text}`.trim();   // site blocks readers: its own headline is the statement
       if (x.text.length < 40) continue;
-      const via = src.kind === "official" ? "official" : "social";
+      const via = src.kind === "official" ? "official" : src.kind === "journalist" ? "journalist" : "social";
       const where = src.type === "youtube" ? "in a YouTube video" : src.type === "instagram" ? (x.video ? "in a video on Instagram" : "on Instagram") : src.type === "tiktok" ? "in a TikTok video" : src.type === "x" ? (x.video ? "in a video on X" : "on X") : src.type === "telegram" ? "on Telegram" : src.type === "bluesky" ? "on Bluesky" : via === "official" ? "in a statement" : "on its website";
-      const out = await ask(`You write for a strict, neutral news site. Below is a ${via === "official" ? "statement published by an official body" : "post published by a movement or organisation"}: ${src.who}. It may be in any language; write in English.
+      const out = await ask(`You write for a strict, neutral news site. Below is a ${via === "official" ? "statement published by an official body" : via === "journalist" ? "post by a professional news reporter" : "post published by a movement or organisation"}: ${src.who}. It may be in any language; write in English.
 Story: "${s.title}". Today is ${now.slice(0, 10)}. Return ONLY JSON: {"relevant": true|false, "date": "YYYY-MM-DD", "kind": "own_action"|"claim"|"footage", "eventDate": "YYYY-MM-DD or empty", "text": "..."}
 - relevant: true only if it reports something NEW and specific about this story (not background, not promotion).
 - kind: "own_action" = the publisher announces or describes its OWN decision, action or plan; "claim" = it says something about others, accuses anyone, or gives figures about events; "footage" = mainly photos/video of an event.
@@ -301,7 +332,9 @@ Text: ${x.text.slice(0, 7000)}`, { temperature: 0.1, log: () => {} });
       if (SENSITIVE.test(it.text) || SENSITIVE.test(x.title)) { queue.push(`**${s.slug}** — from ${src.who} (${via}), sensitive, needs the editor: "${it.text}"\n  Source: ${x.url}`); report.push(`- ${s.slug}: sent to the editor (sensitive): "${it.text.slice(0, 70)}…"`); continue; }
       // The grade, decided in code. Own announcements are "reported" (we can confirm they said it, from their own channel);
       // anything about others is "alleged". Never "confirmed" from a single primary source.
-      let label = it.kind === "own_action" && !CLAIMWORDS.test(it.text) ? "reported" : "alleged";
+      // A professional reporter's own reporting counts like one outlet: "reported" (one source), never "confirmed" alone.
+      // What a reporter relays from someone else ("X accused Y") is still that person's claim, attributed in the text.
+      let label = via === "journalist" ? (it.kind === "footage" ? "alleged" : "reported") : it.kind === "own_action" && !CLAIMWORDS.test(it.text) ? "reported" : "alleged";
       let date = /^\d{4}-\d{2}-\d{2}$/.test(it.date || "") && it.date <= now.slice(0, 10) ? it.date : (x.date || now).slice(0, 10);
       // An announced FUTURE event (e.g. a protest called for Sunday) goes on the timeline as "pending", dated on the day it is
       // due, so readers know before it happens. After that day the editor and the freshness guard replace it with what happened.
