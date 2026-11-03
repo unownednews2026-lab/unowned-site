@@ -2,9 +2,18 @@
   "albania-student-protests": "Albania protests Tirana students",
   "canada-pacific-link-pipeline": "\"Pacific Link\" OR \"Cold Lake First Nations\" OR \"Bill C-5\" OR \"Building Canada Act\"",
   "cockroach-movement": "Cockroach Janta Party",
-  "france-school-protests": "France lycéens blocus manifestation",
-  "italy-student-protests": "Italy protests Meloni students strike",
+  "france-school-protests": {
+    "en": "France students protest blockade OR \"France strike\" schools",
+    "local": "lycéens blocus OR mobilisation lycéenne OR grève 5 novembre"
+  },
+  "italy-student-protests": {
+    "en": "Italy student protests Meloni",
+    "local": "studenti cortei OR sciopero scuola OR \"No Meloni\""
+  },
   "south-africa-asylum-unrest": "South Africa asylum Durban unrest",
   "serbia-student-movement": "Serbia students \"Student List\" OR \"Novi Sad\" canopy",
-  "germany-gen-z-protests": "\"Gen Z regelt\" OR \"Gen Z protests\" Germany"
+  "germany-gen-z-protests": {
+    "en": "\"Gen Z regelt\" OR Germany Gen Z protests",
+    "local": "\"Gen Z regelt\" OR Schülerstreik OR Jugendprotest"
+  }
 }

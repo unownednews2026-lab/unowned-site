@@ -10,20 +10,28 @@ const unent = (s) => s.replace(/<!\[CDATA\[|\]\]>/g, "").replace(/&amp;/g, "&").
 
 /* Google News headlines about a story published after its last update, newest first. Throws if Google News can't be reached. */
 export async function headlinesSince(s) {
-  const q = watch[s.slug] || s.title.replace(/'s\b/g, "");
-  const since = Date.parse(s.updatedAt || s.updated);
-  // Search Google News in the story's own country edition, so local established outlets (CBC, The Hindu, News24…) show up.
-  const ed = { Canada: ["en-CA", "CA"], India: ["en-IN", "IN"], "South Africa": ["en-ZA", "ZA"], "United Kingdom": ["en-GB", "GB"], Australia: ["en-AU", "AU"] }[s.region] || ["en-US", "US"];
-  const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q + " when:2d")}&hl=${ed[0]}&gl=${ed[1]}&ceid=${ed[1]}:en`;
+  // A story can be watched in English and in its own language: {"en": "...", "local": "..."} in watch.json (or one string).
+  const w = watch[s.slug] || s.title.replace(/'s\b/g, "");
+  const en = typeof w === "string" ? w : w.en, local = typeof w === "string" ? "" : w.local;
+  // Only headlines newer than the story's newest DEVELOPMENT count (editing a page must not hide news).
+  const newest = s.events.filter((e) => e.label !== "pending").reduce((m, e) => (e.date > m ? e.date : m), "");
+  const since = Math.max(Date.parse(newest + "T00:00:00Z") || 0, Date.now() - 3 * 864e5);
+  // English edition for the country where there is one (local established outlets show up), plus the local-language edition.
+  const EN = { Canada: ["en-CA", "CA"], India: ["en-IN", "IN"], "South Africa": ["en-ZA", "ZA"], "United Kingdom": ["en-GB", "GB"], Australia: ["en-AU", "AU"] }[s.region] || ["en-US", "US"];
+  const LOCAL = { France: ["fr", "FR", "FR:fr"], Italy: ["it", "IT", "IT:it"], Germany: ["de", "DE", "DE:de"] }[s.region];
+  const urls = [`https://news.google.com/rss/search?q=${encodeURIComponent(en + " when:2d")}&hl=${EN[0]}&gl=${EN[1]}&ceid=${EN[1]}:en`];
+  if (local && LOCAL) urls.push(`https://news.google.com/rss/search?q=${encodeURIComponent(local + " when:2d")}&hl=${LOCAL[0]}&gl=${LOCAL[1]}&ceid=${LOCAL[2]}`);
+  const fresh = [], seen = new Set();
+  for (const url of urls) {
   const xml = await (await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } })).text();
-  const fresh = [];
   for (const it of xml.split("<item>").slice(1)) {
     const title = unent((it.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || "");
     const pub = Date.parse((it.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [])[1] || "");
     const link = unent((it.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || "");
     const src = it.match(/<source url="([^"]*)"[^>]*>([\s\S]*?)<\/source>/) || [];
     let domain = ""; try { domain = new URL(src[1] || "").hostname.replace(/^www\./, ""); } catch {}
-    if (pub > since) fresh.push({ title, pub, link, outlet: unent(src[2] || ""), domain });
+    if (pub > since && !seen.has(title)) { seen.add(title); fresh.push({ title, pub, link, outlet: unent(src[2] || ""), domain }); }
+  }
   }
   return fresh.sort((a, b) => b.pub - a.pub);
 }
