@@ -71,6 +71,7 @@ const checkedNote = (st) => st.checkedAt && st.checkedAt > (st.updatedAt || "") 
 const newestAdded = (st) => st.events.reduce((m, e) => (e.added && e.added > m ? e.added : m), st.updatedAt || "");
 // First sentence, without breaking at abbreviations such as "B.C.", "U.S.", "Dr." or "no. 190".
 const SENTENCE_END = /(?<!\b(?:[A-Z]|[A-Z]\.[A-Z]|Dr|Mr|Mrs|Ms|St|[Nn]o|Gov|Gen|Lt|Col|Sgt|vs|Jr|Sr|Inc|Co|Corp|Ltd|approx|Mt|Ft))\.\s+(?=["“A-Z0-9])/;
+const sentenceOne = (t) => { const m = t.match(SENTENCE_END); return (m ? t.slice(0, m.index) : t).replace(/\.$/, ""); };   // abbreviation-safe ("B.C.", "J.P.")
 const firstSentence = (t, max) => { const m = t.match(SENTENCE_END); const f = (m ? t.slice(0, m.index) : t).replace(/\.$/, ""); return f.length > max ? f.slice(0, f.lastIndexOf(" ", max)) + "…" : f + "."; };
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
@@ -414,15 +415,16 @@ function build() {
     </div>
   </li>`).join("\n");
   write("stories.json", JSON.stringify(stories.map((s) => s.slug)));
-  write("live.json", JSON.stringify(stories.flatMap((st) => st.events.filter((e) => e.added && e.label !== "pending" && e.date === newestEvent(st) && Date.parse(e.date + "T23:59:59Z") > Date.now() - 4 * 864e5).map((e) => ({ story: st.slug, storyTitle: st.title, id: e.id, label: e.label, added: e.added, text: e.text.split(". ")[0] }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)).slice(0, 30)));
+  write("version.json", JSON.stringify({ built: new Date().toISOString(), commit: process.env.CF_PAGES_COMMIT_SHA || "" }));
+  write("live.json", JSON.stringify(stories.flatMap((st) => st.events.filter((e) => e.added && e.label !== "pending" && e.date === newestEvent(st) && Date.parse(e.date + "T23:59:59Z") > Date.now() - 4 * 864e5).map((e) => ({ story: st.slug, storyTitle: st.title, id: e.id, label: e.label, added: e.added, text: sentenceOne(e.text) }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)).slice(0, 30)));
   /* "Since your last visit": every published item added in the last 14 days, read once per page by catchup.js. */
   const since = new Date(Date.now() - 14 * 864e5).toISOString().slice(0, 19) + "Z";
-  write("updates.json", JSON.stringify({ since, items: stories.flatMap((st) => st.events.filter((e) => e.added && e.added >= since && e.label !== "pending").map((e) => ({ story: st.slug, id: e.id, label: e.label, added: e.added, date: e.date, text: e.text.split(". ")[0] }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)) }));
+  write("updates.json", JSON.stringify({ since, items: stories.flatMap((st) => st.events.filter((e) => e.added && e.added >= since && e.label !== "pending").map((e) => ({ story: st.slug, id: e.id, label: e.label, added: e.added, date: e.date, text: sentenceOne(e.text) }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)) }));
   const regions = [...new Set(byUpdate.map(({ st }) => st.region))];
   // "Live updates": the newest developments by the date they happened (an old event added late is not "live").
   const live = stories.flatMap((st) => st.events.filter((e) => e.label !== "pending" && e.date === newestEvent(st)).map((e, i) => ({ st, e, i })))
     .sort((a, b) => b.e.date.localeCompare(a.e.date) || (b.e.added || "").localeCompare(a.e.added || "") || b.i - a.i).slice(0, 6);
-  const liveHtml = live.map(({ st, e }) => `<li><a href="/${st.slug}/#${itemId(e)}"><span class="when">${short(e.date)} ${stamp(e.label)} ${added(e)}</span><span class="what">${esc(e.text.split(". ")[0].replace(/\.$/, ""))}.</span><span class="story">${esc(st.title)}</span></a></li>`).join("\n");
+  const liveHtml = live.map(({ st, e }) => `<li><a href="/${st.slug}/#${itemId(e)}"><span class="when">${short(e.date)} ${stamp(e.label)} ${added(e)}</span><span class="what">${esc(sentenceOne(e.text))}.</span><span class="story">${esc(st.title)}</span></a></li>`).join("\n");
   write("index.html", page({
     title: "Unowned",
     description: "News nobody owns. Verified, sourced reporting from the people who were there, with both sides shown.",
@@ -568,7 +570,7 @@ ${privacyLine(loadNewsletter())}
   write("feed.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
 <title>Unowned</title><link>${SITE}/</link><description>News nobody owns. Told by the people who were there.</description><language>en</language>
-${items.map(({ s, e }) => `<item><title>${esc(`${long(e.date)}: ${e.text.split(". ")[0]}`)}</title><link>${SITE}/${s.slug}/#${itemId(e)}</link><guid isPermaLink="true">${SITE}/${s.slug}/#${itemId(e)}</guid><pubDate>${new Date(e.added || e.date + "T12:00:00Z").toUTCString()}</pubDate><description>${esc(`[${LABEL[e.label]}] ${e.text}`)}</description></item>`).join("\n")}
+${items.map(({ s, e }) => `<item><title>${esc(`${long(e.date)}: ${sentenceOne(e.text)}`)}</title><link>${SITE}/${s.slug}/#${itemId(e)}</link><guid isPermaLink="true">${SITE}/${s.slug}/#${itemId(e)}</guid><pubDate>${new Date(e.added || e.date + "T12:00:00Z").toUTCString()}</pubDate><description>${esc(`[${LABEL[e.label]}] ${e.text}`)}</description></item>`).join("\n")}
 </channel></rss>
 `);
 

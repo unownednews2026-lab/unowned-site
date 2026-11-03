@@ -20,3 +20,5 @@
   Cache-Control: no-cache
 /briefings/latest-video.json
   Cache-Control: no-cache
+/version.json
+  Cache-Control: no-cache
