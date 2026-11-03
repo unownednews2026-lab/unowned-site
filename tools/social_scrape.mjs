@@ -6,7 +6,7 @@
 
 const DEFAULTS = {
   x: { actor: "apidojo~tweet-scraper", input: (h, n) => ({ twitterHandles: [h], maxItems: n, sort: "Latest" }) },
-  instagram: { actor: "apify~instagram-post-scraper", input: (h, n) => ({ username: [h], resultsLimit: n }) },
+  instagram: { actor: "apify~instagram-scraper", input: (h, n) => ({ directUrls: [`https://www.instagram.com/${h}/`], resultsType: "posts", resultsLimit: n, addParentData: false }) },
   tiktok: { actor: "clockworks~tiktok-scraper", input: (h, n) => ({ profiles: [h], resultsPerPage: n, shouldDownloadVideos: true, shouldDownloadCovers: false }) },
 };
 
