@@ -27,6 +27,11 @@ jobs:
           restore-keys: breaking-state-
       - name: Scan
         run: node tools/breaking.mjs || true
+      - name: Quality and freshness scorecard (once an hour)
+        if: always()
+        run: |
+          m=$(date -u +%M)
+          if [ "$m" -ge 30 ] && [ "$m" -lt 45 ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then node tools/scorecard.mjs || true; fi
       - uses: actions/cache/save@v4
         if: always()
         with:
