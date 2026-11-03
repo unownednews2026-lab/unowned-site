@@ -100,7 +100,14 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
   for (const src of sources) {
     let items = [];
     try { items = await readSource(src); } catch (e) { report.push(`- ${s.slug}: ${src.who} (${src.type}) could not be read: ${String(e.message).slice(0, 80)}`); continue; }
-    const fresh = items.filter((x) => x.url && !seen[x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
+    if (!items.length) report.push(`- ${s.slug}: ${src.who} (${src.type}): nothing could be read (empty feed or page)`);
+    // First time we read a source: everything already there is old news. Remember it, publish nothing.
+    const first = !seen[`source:${src.type}:${src.url || src.handle}`];
+    const old = (t) => !t || Date.now() - Date.parse(t) > 7 * DAY;     // refresh weekly only, so routine checks make no commit
+    if (old(seen[`source:${src.type}:${src.url || src.handle}`])) seen[`source:${src.type}:${src.url || src.handle}`] = now;
+    if (first) { for (const x of items) if (x.url) seen[x.url] = now; say(`${s.slug}: ${src.who}: first read, ${items.length} existing item(s) recorded as already seen`); if (!DRY) continue; }
+    for (const x of items) if (x.url && seen[x.url] && old(seen[x.url])) seen[x.url] = now;   // still listed: keep remembering it
+    const fresh = first ? [] : items.filter((x) => x.url && !seen[x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
     say(`${s.slug}: ${src.who}: ${items.length} item(s), ${fresh.length} new and relevant`);
     if (DRY) { for (const x of fresh.slice(0, 3)) say(`   ${x.date?.slice(0, 16) || "?"} ${x.title || x.text.slice(0, 80)} ${x.url}`); continue; }
     for (const x of fresh.slice(0, 2)) {
@@ -132,6 +139,11 @@ Text: ${x.text.slice(0, 4000)}`, { temperature: 0.1, log: () => {} });
       // anything about others is "alleged". Never "confirmed" from a single primary source.
       const label = it.kind === "own_action" && !CLAIMWORDS.test(it.text) ? "reported" : "alleged";
       const date = /^\d{4}-\d{2}-\d{2}$/.test(it.date || "") && it.date <= now.slice(0, 10) ? it.date : (x.date || now).slice(0, 10);
+      // Only genuinely new statements: never older than 3 days, never older than the story's newest development minus a day.
+      const floor = new Date(Math.max(Date.now() - 3 * DAY, (Date.parse(newestDev(s) + "T00:00:00Z") || 0) - DAY)).toISOString().slice(0, 10);
+      const urlDate = (x.url.match(/(\d{1,2})-(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*-(20\d\d)/i) || []);
+      const fromUrl = urlDate.length ? new Date(`${urlDate[2]} ${urlDate[1]} ${urlDate[3]} UTC`).toISOString().slice(0, 10) : "";
+      if (date < floor || (fromUrl && fromUrl < floor)) { report.push(`- ${s.slug}: ${src.who}: skipped, not new (dated ${fromUrl || date}): ${(x.title || x.url).slice(0, 70)}`); continue; }
       const key = `pr${now.replace(/\D/g, "").slice(4, 12)}${published.length}`;
       s.sources[key] = [`${src.who}${via === "official" ? "" : ""}`, x.url];
       const g = s.sourceGroups[s.sourceGroups.length - 1];
@@ -154,7 +166,7 @@ Text: ${x.text.slice(0, 4000)}`, { temperature: 0.1, log: () => {} });
 if (DRY) {
   try { writeFileSync("/tmp/pdry.md", `Primary-source desk — dry run (nothing published)\n\n${[...dryLog, ...report].map((l) => `- ${l.replace(/^- /, "")}`).join("\n")}`);
     const n = sh(`gh api "repos/${REPO}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="Backup desk log")][0].number // empty'`);
-    if (n) sh(`gh issue comment ${n} --body-file /tmp/pdry.md`); } catch {}
+    if (n) sh(`gh issue comment ${n} --body-file /tmp/pdry.md`); else console.log("dry run: log issue not found"); } catch (e) { console.log(`dry run: could not post (${String(e.message).slice(0, 150)})`); }
   process.exit(0);
 }
 writeFileSync(seenPath, JSON.stringify(Object.fromEntries(Object.entries(seen).filter(([, t]) => Date.now() - Date.parse(t) < 30 * DAY)), null, 2));
