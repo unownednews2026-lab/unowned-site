@@ -17,7 +17,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { ungrounded } from "./grounding.mjs";
 import { realUrl } from "./gnews.mjs";
-import { ask, problems as llmProblems, SECOND_CHECK, GITHUB_PROVIDER } from "./llm.mjs";
+import { ask, problems as llmProblems, SECOND_CHECK, GITHUB_PROVIDER, geminiVideo } from "./llm.mjs";
 
 const DRY = process.argv.includes("--dry");                  // list what would be read, publish nothing
 const REPO = process.env.GITHUB_REPOSITORY;
@@ -110,17 +110,31 @@ async function readSource(src) {
       if (ids.size >= 6) break;
       try { grab(await get(url, 15000), route); } catch (e) { routes.push(`${route} ${e.message.slice(0, 20)}`); }
     }
+    if (ids.size < 3) {   // the public embedded-timeline service, and the reader service
+      try { const html = await get(`https://syndication.twitter.com/srv/timeline-profile/screen-name/${h}`, 20000); let n = 0;
+        if (new RegExp(`"screen_name":"${h}"`, "i").test(html)) for (const m of html.matchAll(/"id_str":"(\d{15,20})"/g)) { if (!ids.has(m[1])) n++; ids.add(m[1]); }
+        routes.push(`timeline ${n}`); } catch (e) { routes.push(`timeline ${e.message.slice(0, 20)}`); }
+      try { grab(await get(`https://r.jina.ai/https://x.com/${h}`, 40000), "reader"); } catch (e) { routes.push(`reader ${e.message.slice(0, 20)}`); }
+    }
     if (ids.size < 3) for (const site of ["x.com", "twitter.com"]) {
       try { grab(await get(`https://www.bing.com/search?q=${encodeURIComponent(`site:${site}/${h}/status`)}&format=rss&filters=${encodeURIComponent('ex1:"ez2"')}`, 20000), `bing:${site}`); } catch (e) { routes.push(`bing ${e.message.slice(0, 20)}`); }
     }
     const out = [];
     for (const id of [...ids].sort((a, b) => (BigInt(b) > BigInt(a) ? 1 : -1)).slice(0, 8)) {
       const url = `https://x.com/${h}/status/${id}`;
-      try {   // the embed service only answers for real, public posts, and says who wrote them
+      const date = new Date(Number(BigInt(id) >> 22n) + 1288834974657).toISOString();   // the post's exact time is encoded in its id
+      try {   // X's embed services only answer for real, public posts, and say who wrote them
         const j = JSON.parse(await get(`https://publish.twitter.com/oembed?url=${encodeURIComponent(`https://twitter.com/${h}/status/${id}`)}&omit_script=1&dnt=true`, 15000));
         if (!new RegExp(`/${h}$`, "i").test(j.author_url || "")) continue;
         const p = (j.html.match(/<p[^>]*>([\s\S]*?)<\/p>/) || [])[1] || "";
-        out.push({ url, title: "", date: new Date(Number(BigInt(id) >> 22n) + 1288834974657).toISOString(), text: unent(p.replace(/<a[^>]*>pic\.twitter\.com[^<]*<\/a>/g, "")), video: /pic\.twitter\.com/.test(p) });
+        out.push({ url, title: "", date, text: unent(p.replace(/<a[^>]*>pic\.twitter\.com[^<]*<\/a>/g, "")), video: /pic\.twitter\.com/.test(p) });
+        continue;
+      } catch {}
+      try {
+        const token = ((Number(id) / 1e15) * Math.PI).toString(36).replace(/(0+|\.)/g, "");
+        const j = JSON.parse(await get(`https://cdn.syndication.twimg.com/tweet-result?id=${id}&token=${token}`, 15000));
+        if ((j.user?.screen_name || "").toLowerCase() !== h.toLowerCase()) continue;
+        out.push({ url, title: "", date, text: unent(j.text || ""), video: !!(j.mediaDetails || []).some((m) => m.type === "video") });
       } catch {}
     }
     if (DRY || !out.length) say(`X @${h}: ${routes.join(", ")}; ${out.length} post(s) confirmed by X`);
@@ -202,7 +216,11 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
         if (!x.date) { report.push(`- ${s.slug}: ${src.who}: skipped a video with no readable date (${x.url})`); continue; }
         if (Date.parse(x.date) <= since) continue;
       }
-      if (vid) { const t = sh(`timeout 60 python3 tools/yt_transcript.py ${vid} 2>/dev/null || true`); if (t.length > 100) x.text = `${x.text}\n${t}`.trim(); }
+      if (vid) {   // transcript: YouTube's captions first, then Gemini watching the video itself
+        let t = sh(`timeout 60 python3 tools/yt_transcript.py ${vid} 2>/dev/null || true`);
+        if (t.length < 100) t = await geminiVideo(`https://www.youtube.com/watch?v=${vid}`);
+        if (t.length > 100) x.text = `${x.text}\n${t}`.trim(); else report.push(`- ${s.slug}: ${src.who}: no transcript for ${x.url}; judged on its title and description only`);
+      }
       if (src.type !== "x" && (!x.text || x.text.length < 200)) x.text = `${x.text}\n${await pageText(x.url)}`.trim();
       if (src.type === "gnews" && x.text.length < 60) x.text = `${x.title}. ${x.text}`.trim();   // site blocks readers: its own headline is the statement
       if (x.text.length < 40) continue;
@@ -258,7 +276,12 @@ Text: ${x.text.slice(0, 7000)}`, { temperature: 0.1, log: () => {} });
 if (DRY) {
   // Can this server read YouTube transcripts? Test on a public news video, so we know before a movement posts one.
   let t = ""; try { t = execSync("timeout 90 python3 tools/yt_transcript.py JbT8LXzTNf8 2>&1", { encoding: "utf8" }); } catch (e) { t = String(e.stdout || e.message); }
-  say(`transcript test on a public video: ${t.trim().slice(0, 200) || "nothing returned"}`);
+  say(`transcript test on a public video (captions): ${t.trim().slice(0, 160) || "nothing returned"}`);
+  for (const [name, u] of [["X embed", "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Fjack%2Fstatus%2F20&omit_script=1"], ["X syndication", "https://cdn.syndication.twimg.com/tweet-result?id=20&token=a"]]) {
+    try { say(`${name} test: ${(await get(u, 15000)).slice(0, 120)}`); } catch (e) { say(`${name} test: failed (${e.message})`); }
+  }
+  const g = await geminiVideo("https://www.youtube.com/watch?v=JbT8LXzTNf8");
+  say(`transcript test on a public video (Gemini watching it): ${g ? g.slice(0, 220) : `failed (${Object.entries(llmProblems).filter(([k]) => k.includes("video")).map(([k, v]) => `${k} ${v}`).join("; ") || "no answer"})`}`);
   try { writeFileSync("/tmp/pdry.md", `Primary-source desk — dry run (nothing published)\n\n${[...dryLog, ...report].map((l) => `- ${l.replace(/^- /, "")}`).join("\n")}`);
     const n = sh(`gh api "repos/${REPO}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="Backup desk log")][0].number // empty'`);
     if (n) sh(`gh issue comment ${n} --body-file /tmp/pdry.md`); else console.log("dry run: log issue not found"); } catch (e) { console.log(`dry run: could not post (${String(e.message).slice(0, 150)})`); }
