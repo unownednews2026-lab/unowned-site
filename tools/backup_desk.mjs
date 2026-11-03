@@ -51,6 +51,9 @@ async function gemini(prompt, models = MODELS) {
 /* Code checks that need no AI: quotes, numbers and names in an item must appear in the articles it cites.
    This catches the commonest model mistakes (a changed figure, a made-up quote, a name from nowhere). */
 const MONTHS_DAYS = /^(january|february|march|april|may|june|july|august|september|october|november|december|monday|tuesday|wednesday|thursday|friday|saturday|sunday)$/i;
+// Nationality and language words are written differently in a French, Italian or German article ("français", "italiano").
+const DEMONYM = /^(French|German|Germans|Italian|Italians|Albanian|Albanians|Indian|Indians|Canadian|Canadians|Serbian|Serbians|Serb|Serbs|South|African|Africans|European|Europeans|English|Muslim|Muslims|Christian|Christians|Hindu|Hindus|Paris|Parisian|Federal|National|Minister|Ministry|President|Prime|Government|Parliament|Police|Interior|Education|University|Universities|Students|Union|Unions)$/;
+const ALIASES = { Hesse: ["Hessen"], Cologne: ["Köln", "Koln"], Munich: ["München", "Munchen"], Nuremberg: ["Nürnberg", "Nurnberg"], Bavaria: ["Bayern"], Saxony: ["Sachsen"], Lower: ["Nieder"], Rome: ["Roma"], Milan: ["Milano"], Turin: ["Torino"], Florence: ["Firenze"], Naples: ["Napoli"], Venice: ["Venezia"], Genoa: ["Genova"], Padua: ["Padova"], Sicily: ["Sicilia"], Lombardy: ["Lombardia"], Tuscany: ["Toscana"], Marseille: ["Marseilles"], Lyon: ["Lyons"], Brittany: ["Bretagne"], Normandy: ["Normandie"], Belgrade: ["Beograd"], Durres: ["Durrës"], Vlore: ["Vlorë"] };
 function ungrounded(text, cited, extra = "") {
   const fold = (x) => String(x).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[’‘]/g, "'");
   const corpus = fold(cited.map((a) => `${a.title} ${a.text}`).join(" ") + " " + extra);
@@ -70,8 +73,10 @@ function ungrounded(text, cited, extra = "") {
     const words = sent.split(/\s+/).slice(1);                      // skip the sentence's first word
     for (const w of words) {
       const t = w.replace(/^[^\p{L}]+|[^\p{L}'’-]+$/gu, "").replace(/['’]s$/, "");
-      if (t.length < 4 || !/^\p{Lu}/u.test(t) || MONTHS_DAYS.test(t)) continue;
-      if (!flat.includes(fold(t).replace(/[^a-z0-9]+/g, " ").trim())) bad.push(`name not in the articles: ${t}`);
+      if (t.length < 4 || !/^\p{Lu}/u.test(t) || MONTHS_DAYS.test(t) || DEMONYM.test(t)) continue;
+      // Articles in French, Italian or German spell some places differently ("Hessen" for Hesse): accept either form.
+      const forms = [t, ...(ALIASES[t] || [])].map((x) => fold(x).replace(/[^a-z0-9]+/g, " ").trim());
+      if (!forms.some((f) => flat.includes(f))) bad.push(`name not in the articles: ${t}`);
     }
   }
   // Copying: 15 or more words in a row taken straight from an article is not paraphrase (quotes excepted).
