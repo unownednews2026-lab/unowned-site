@@ -17,6 +17,8 @@ import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { ungrounded } from "./grounding.mjs";
 import { realUrl } from "./gnews.mjs";
+import { mediaText, youtubeText } from "./media.mjs";
+import { scrape } from "./social_scrape.mjs";
 import { ask, problems as llmProblems, SECOND_CHECK, GITHUB_PROVIDER, geminiVideo } from "./llm.mjs";
 
 const DRY = process.argv.includes("--dry");                  // list what would be read, publish nothing
@@ -38,6 +40,14 @@ const BLOCKED = /Just a moment\.\.\.|Enable JavaScript and cookies|Attention Req
 async function pageText(url) {
   try { const html = await get(url); const t = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map(unent).filter((x) => x.length > 40).join("\n"); if (t.length > 300 && !BLOCKED.test(t.slice(0, 500))) return t.slice(0, 6000); } catch {}
   try { const t = (await get(`https://r.jina.ai/${url}`, 30000)).split("\n").map((x) => x.trim()).filter((x) => x.length > 40 && !/^(Title|URL Source|Published Time|Markdown Content):/.test(x)).join("\n"); return BLOCKED.test(t.slice(0, 500)) ? "" : t.slice(0, 6000); } catch { return ""; }
+}
+
+/* The scraping service costs money per post, so each account is scraped at most every few hours (default 3). */
+async function scrapeEvery(src, platform, handle) {
+  const k = `scraped:${platform}:${handle}`, hours = src.everyHours || 3;
+  if (!DRY && seen[k] && Date.now() - Date.parse(seen[k]) < hours * 36e5) return [];
+  seen[k] = now;
+  return scrape(platform, handle, { count: src.count || 6, config: (registry._scrapers || {})[platform] || {} });
 }
 
 /* Each source type returns [{url, title, date, text}] (newest first). */
@@ -82,12 +92,14 @@ async function readSource(src) {
     return html.split('class="tgme_widget_message ').slice(1).map((b) => ({
       url: `https://t.me/${(b.match(/data-post="([^"]+)"/) || [])[1] || src.channel}`, title: "",
       date: (b.match(/datetime="([^"]+)"/) || [])[1] || "", text: unent((b.match(/tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>/) || [])[1]),
-      video: /tgme_widget_message_(video|photo)/.test(b),
+      video: /tgme_widget_message_video/.test(b),
+      media: [...b.matchAll(/tgme_widget_message_photo_wrap[^>]*background-image:url\('([^']+)'\)/g)].slice(0, 3).map((m) => ({ type: "image", url: m[1] })),
     })).reverse();
   }
   if (src.type === "bluesky") {
     const j = JSON.parse(await get(`https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=${src.handle}&limit=20`));
-    return (j.feed || []).filter((f) => !f.reason).map((f) => ({ url: `https://bsky.app/profile/${src.handle}/post/${f.post.uri.split("/").pop()}`, title: "", date: f.post.record.createdAt, text: f.post.record.text || "", video: !!f.post.embed }));
+    return (j.feed || []).filter((f) => !f.reason).map((f) => ({ url: `https://bsky.app/profile/${src.handle}/post/${f.post.uri.split("/").pop()}`, title: "", date: f.post.record.createdAt, text: f.post.record.text || "", video: /video/.test(f.post.embed?.$type || ""),
+      media: [...(f.post.embed?.images || []).map((i) => ({ type: "image", url: i.fullsize })), ...(f.post.embed?.playlist ? [] : [])] }));
   }
   if (src.type === "web") {   // a listing page of statements: links whose address matches pathMatch
     let html;   // some government sites refuse cloud servers: then read the page through the free reader service, as HTML
@@ -127,22 +139,36 @@ async function readSource(src) {
     for (const id of [...ids].sort((a, b) => (BigInt(b) > BigInt(a) ? 1 : -1)).slice(0, 8)) {
       const url = `https://x.com/${h}/status/${id}`;
       const date = new Date(Number(BigInt(id) >> 22n) + 1288834974657).toISOString();   // the post's exact time is encoded in its id
-      try {   // X's embed services only answer for real, public posts, and say who wrote them
+      try {   // X's own embed services only answer for real, public posts, and say who wrote them. This one also lists photos and videos.
+        const token = ((Number(id) / 1e15) * Math.PI).toString(36).replace(/(0+|\.)/g, "");
+        const j = JSON.parse(await get(`https://cdn.syndication.twimg.com/tweet-result?id=${id}&token=${token}`, 15000));
+        if ((j.user?.screen_name || "").toLowerCase() !== h.toLowerCase()) continue;
+        const media = (j.mediaDetails || []).map((m) => {
+          const v = (m.video_info?.variants || []).filter((x) => /mp4/.test(x.content_type || "")).sort((a, b) => (a.bitrate || 0) - (b.bitrate || 0));
+          return v.length ? { type: "video", url: v[Math.min(1, v.length - 1)].url } : { type: "image", url: m.media_url_https };
+        }).filter((m) => m.url);
+        out.push({ url, title: "", date, text: unent(j.text || "").replace(/https:\/\/t\.co\/\w+$/, "").trim(), video: media.some((m) => m.type === "video"), media });
+        continue;
+      } catch {}
+      try {
         const j = JSON.parse(await get(`https://publish.twitter.com/oembed?url=${encodeURIComponent(`https://twitter.com/${h}/status/${id}`)}&omit_script=1&dnt=true`, 15000));
         if (!new RegExp(`/${h}$`, "i").test(j.author_url || "")) continue;
         const p = (j.html.match(/<p[^>]*>([\s\S]*?)<\/p>/) || [])[1] || "";
         out.push({ url, title: "", date, text: unent(p.replace(/<a[^>]*>pic\.twitter\.com[^<]*<\/a>/g, "")), video: /pic\.twitter\.com/.test(p) });
-        continue;
       } catch {}
-      try {
-        const token = ((Number(id) / 1e15) * Math.PI).toString(36).replace(/(0+|\.)/g, "");
-        const j = JSON.parse(await get(`https://cdn.syndication.twimg.com/tweet-result?id=${id}&token=${token}`, 15000));
-        if ((j.user?.screen_name || "").toLowerCase() !== h.toLowerCase()) continue;
-        out.push({ url, title: "", date, text: unent(j.text || ""), video: !!(j.mediaDetails || []).some((m) => m.type === "video") });
-      } catch {}
+    }
+    // X hides some accounts' posts from readers who aren't signed in: then use the signed-in scraping service.
+    if (!out.length && process.env.APIFY_TOKEN) {
+      try { const got = await scrapeEvery(src, "x", h); out.push(...got); routes.push(`scraper ${got.length}`); } catch (e) { routes.push(`scraper: ${String(e.message).slice(0, 80)}`); }
     }
     if (DRY || !out.length) say(`X @${h}: ${routes.join(", ")}; ${out.length} post(s) confirmed by X`);
     return out;
+  }
+  if (src.type === "instagram" || src.type === "tiktok") {   // only through the signed-in scraping service
+    if (!process.env.APIFY_TOKEN) { if (DRY || new Date().getUTCHours() === 5) say(`${src.type} @${src.handle}: needs the APIFY_TOKEN secret to be read`); return []; }
+    const got = await scrapeEvery(src, src.type, src.handle);
+    if (DRY) say(`${src.type} @${src.handle}: ${got.length} post(s) from the scraper`);
+    return got;
   }
   if (src.type === "gnews") {   // an official website's own pages, found through Google News (works even when the site blocks automated readers)
     const [gl, hl] = (src.edition || "US:en").split(":");
@@ -170,6 +196,8 @@ async function readSource(src) {
     for (const m of page.matchAll(/youtube\.com\/(?:@([\w.-]{3,})|channel\/(UC[\w-]{22}))/gi)) add({ ...base, type: "youtube", handle: m[1], channelId: m[2], who: `${src.name} (YouTube)` });
     for (const m of page.matchAll(/(?:\/\/|\b)(?:www\.)?(?:x|twitter)\.com\/(?!intent|share|home|i\/|hashtag|search)(\w{2,15})\b/gi)) add({ ...base, type: "x", handle: m[1], who: `${src.name} (X)` });
     for (const m of page.matchAll(/t\.me\/(?!share|joinchat|\+)(\w{4,})/gi)) add({ ...base, type: "telegram", channel: m[1], who: `${src.name} (Telegram)` });
+    for (const m of page.matchAll(/instagram\.com\/(?!p\/|reel\/|explore|accounts|stories)([\w.]{2,30})/gi)) add({ ...base, type: "instagram", handle: m[1].replace(/\.$/, ""), who: `${src.name} (Instagram)` });
+    for (const m of page.matchAll(/tiktok\.com\/@([\w.]{2,30})/gi)) add({ ...base, type: "tiktok", handle: m[1], who: `${src.name} (TikTok)` });
     for (const m of page.matchAll(/bsky\.app\/profile\/([\w.-]+)/gi)) add({ ...base, type: "bluesky", handle: m[1], who: `${src.name} (Bluesky)` });
     say(`${src.name}: its website links to ${found.map((f) => `${f.type} ${f.handle || f.channelId || f.channel}`).join(", ") || "no readable social accounts"}`);
     return found;
@@ -224,14 +252,16 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
       }
       if (vid) {   // transcript: YouTube's captions first, then Gemini watching the video itself
         let t = sh(`timeout 60 python3 tools/yt_transcript.py ${vid} 2>/dev/null || true`);
-        if (t.length < 100) t = await geminiVideo(`https://www.youtube.com/watch?v=${vid}`);
+        if (t.length < 100) t = await youtubeText(`https://www.youtube.com/watch?v=${vid}`);
         if (t.length > 100) x.text = `${x.text}\n${t}`.trim(); else report.push(`- ${s.slug}: ${src.who}: no transcript for ${x.url}; judged on its title and description only`);
       }
-      if (src.type !== "x" && (!x.text || x.text.length < 200)) x.text = `${x.text}\n${await pageText(x.url)}`.trim();
+      // Photos and videos in the post become text: videos transcribed and translated, images read (OCR) and described.
+      if (x.media?.length) { const mt = await mediaText(x.media, (m) => report.push(`- ${s.slug}: ${src.who}: ${m}`)); if (mt) x.text = `${x.text}\n\n${mt}`.trim(); }
+      if (!["x", "instagram", "tiktok"].includes(src.type) && (!x.text || x.text.length < 200)) x.text = `${x.text}\n${await pageText(x.url)}`.trim();
       if (src.type === "gnews" && x.text.length < 60) x.text = `${x.title}. ${x.text}`.trim();   // site blocks readers: its own headline is the statement
       if (x.text.length < 40) continue;
       const via = src.kind === "official" ? "official" : "social";
-      const where = src.type === "youtube" ? "in a YouTube video" : src.type === "x" ? "on X" : src.type === "telegram" ? "on Telegram" : src.type === "bluesky" ? "on Bluesky" : via === "official" ? "in a statement" : "on its website";
+      const where = src.type === "youtube" ? "in a YouTube video" : src.type === "instagram" ? (x.video ? "in a video on Instagram" : "on Instagram") : src.type === "tiktok" ? "in a TikTok video" : src.type === "x" ? (x.video ? "in a video on X" : "on X") : src.type === "telegram" ? "on Telegram" : src.type === "bluesky" ? "on Bluesky" : via === "official" ? "in a statement" : "on its website";
       const out = await ask(`You write for a strict, neutral news site. Below is a ${via === "official" ? "statement published by an official body" : "post published by a movement or organisation"}: ${src.who}. It may be in any language; write in English.
 Story: "${s.title}". Return ONLY JSON: {"relevant": true|false, "date": "YYYY-MM-DD", "kind": "own_action"|"claim"|"footage", "text": "..."}
 - relevant: true only if it reports something NEW and specific about this story (not background, not promotion).
@@ -266,7 +296,7 @@ Text: ${x.text.slice(0, 7000)}`, { temperature: 0.1, log: () => {} });
       (Array.isArray(g) ? g[1] : g.keys || g.sources).push(key);
       if (it.kind === "footage" && via === "social") {
         s.ground = s.ground || [];
-        s.ground.push({ date, added: now, platform: src.type === "youtube" ? "YouTube" : src.type === "x" ? "X" : src.type === "telegram" ? "Telegram" : src.type === "bluesky" ? "Bluesky" : "Website", who: src.who, shows: it.text, label: "alleged", check: `Posted by ${src.who}; ${src.verified}. Not independently verified: the date, place and context of the footage.`, sources: [key], desk: "backup", via });
+        s.ground.push({ date, added: now, platform: src.type === "youtube" ? "YouTube" : src.type === "instagram" ? "Instagram" : src.type === "tiktok" ? "TikTok" : src.type === "x" ? "X" : src.type === "telegram" ? "Telegram" : src.type === "bluesky" ? "Bluesky" : "Website", who: src.who, shows: it.text, label: "alleged", check: `Posted by ${src.who}; ${src.verified}. Not independently verified: the date, place and context of the footage.`, sources: [key], desk: "backup", via });
       } else {
         s.events.push({ date, phase: s.phases[s.phases.length - 1].id, label, added: now, text: it.text.trim(), sources: [key], desk: "backup", via });
         s.events.sort((a, b) => a.date.localeCompare(b.date));
@@ -286,6 +316,11 @@ if (DRY) {
   for (const [name, u] of [["X embed", "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Fjack%2Fstatus%2F20&omit_script=1"], ["X syndication", "https://cdn.syndication.twimg.com/tweet-result?id=20&token=a"]]) {
     try { say(`${name} test: ${(await get(u, 15000)).slice(0, 120)}`); } catch (e) { say(`${name} test: failed (${e.message})`); }
   }
+  const ocr = await mediaText([{ type: "image", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/STOP_sign.jpg/320px-STOP_sign.jpg" }], (m) => say(`   ${m}`));
+  say(`image reading (OCR) test: ${ocr ? ocr.replace(/\s+/g, " ").slice(0, 200) : "failed"}`);
+  const vt = await mediaText([{ type: "video", url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" }], (m) => say(`   ${m}`));
+  say(`video file test: ${vt ? vt.replace(/\s+/g, " ").slice(0, 200) : "failed"}`);
+  say(`scraping service: ${process.env.APIFY_TOKEN ? "APIFY_TOKEN is set" : "APIFY_TOKEN not set yet (X fallback, Instagram and TikTok wait for it)"}`);
   const g = await geminiVideo("https://www.youtube.com/watch?v=JbT8LXzTNf8");
   say(`transcript test on a public video (Gemini watching it): ${g ? g.slice(0, 220) : `failed (${Object.entries(llmProblems).filter(([k]) => k.includes("video")).map(([k, v]) => `${k} ${v}`).join("; ") || "no answer"})`}`);
   try { writeFileSync("/tmp/pdry.md", `Primary-source desk — dry run (nothing published)\n\n${[...dryLog, ...report].map((l) => `- ${l.replace(/^- /, "")}`).join("\n")}`);
