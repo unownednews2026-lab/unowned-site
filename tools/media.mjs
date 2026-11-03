@@ -12,7 +12,7 @@ const VIDEO_PROMPT = "Transcribe everything said in this video. If it is not in 
 const IMAGE_PROMPT = "Read ALL text visible in this image (OCR), exactly, in its original language, then give an English translation if it is not in English. Then, on a line starting 'Shows:', one plain sentence on what the image shows. Report only what is visible; no guesses about who, where or when unless written in the image.";
 
 async function download(url) {
-  const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" }, redirect: "follow", signal: AbortSignal.timeout(90000) });
+  const r = await fetch(url, { headers: { "User-Agent": "UnownedNewsBot/1.0 (+https://unownednews.com; news verification)" }, redirect: "follow", signal: AbortSignal.timeout(90000) });
   if (!r.ok) throw new Error(`download HTTP ${r.status}`);
   const len = Number(r.headers.get("content-length") || 0);
   if (len > MAX) throw new Error(`too large (${Math.round(len / 1e6)} MB)`);
@@ -22,13 +22,14 @@ async function download(url) {
 }
 
 async function gemini(parts, label) {
+  const cfg = label === "video" ? { temperature: 0, mediaResolution: "MEDIA_RESOLUTION_LOW" } : { temperature: 0 };
   const key = process.env.GEMINI_API_KEY; if (!key) return "";
   for (const model of ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-3.8-flash"]) {
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
           method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-          body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { temperature: 0, mediaResolution: "MEDIA_RESOLUTION_LOW" } }),
+          body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: cfg }),
           signal: AbortSignal.timeout(180000),
         });
         if (r.status === 429 || r.status >= 500) { problems[`${model} (${label})`] = r.status; await wait(15000); continue; }
@@ -38,6 +39,24 @@ async function gemini(parts, label) {
         break;
       } catch (e) { problems[`${model} (${label})`] = String(e.message).slice(0, 60); }
     }
+  }
+  return "";
+}
+
+/* Groq's free vision model: the backup reader for images. */
+async function groqVision(buf, mime) {
+  const key = process.env.GROQ_API_KEY; if (!key) return "";
+  for (const model of ["meta-llama/llama-4-scout-17b-16e-instruct", "meta-llama/llama-4-maverick-17b-128e-instruct"]) {
+    try {
+      const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+        body: JSON.stringify({ model, temperature: 0, messages: [{ role: "user", content: [{ type: "text", text: IMAGE_PROMPT }, { type: "image_url", image_url: { url: `data:${mime || "image/jpeg"};base64,${buf.toString("base64")}` } }] }] }),
+        signal: AbortSignal.timeout(120000),
+      });
+      if (!r.ok) { problems[`groq vision ${model.split("/")[1]}`] = `${r.status} ${(await r.text()).slice(0, 80)}`; continue; }
+      const t = ((await r.json()).choices?.[0]?.message?.content || "").trim();
+      if (t.length > 10) return `${t}\n(read by Groq ${model.split("/")[1]})`;
+    } catch (e) { problems["groq vision"] = String(e.message).slice(0, 60); }
   }
   return "";
 }
@@ -78,7 +97,9 @@ export async function mediaText(media = [], log = () => {}) {
         if (!t) t = await whisper(buf, mime);
         if (t) out.push(`[What is said in the video] ${t}`); else log(`could not transcribe a video (${m.url.slice(0, 80)})`);
       } else {
-        const t = await gemini([{ inlineData: { mimeType: /^image\//.test(mime) ? mime : "image/jpeg", data: buf.toString("base64") } }, { text: IMAGE_PROMPT }], "image");
+        const im = /^image\//.test(mime) ? mime : "image/jpeg";
+        let t = await gemini([{ inlineData: { mimeType: im, data: buf.toString("base64") } }, { text: IMAGE_PROMPT }], "image");
+        if (!t && buf.length < 4e6) t = await groqVision(buf, im);
         if (t) out.push(`[Text and content of the image] ${t}`); else log(`could not read an image (${m.url.slice(0, 80)})`);
       }
     } catch (e) { log(`media skipped (${String(e.message).slice(0, 60)}): ${m.url.slice(0, 80)}`); }

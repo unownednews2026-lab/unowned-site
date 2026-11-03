@@ -319,8 +319,8 @@ if (DRY) {
   for (const [name, u] of [["X embed", "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Fjack%2Fstatus%2F20&omit_script=1"], ["X syndication", "https://cdn.syndication.twimg.com/tweet-result?id=20&token=a"]]) {
     try { say(`${name} test: ${(await get(u, 15000)).slice(0, 120)}`); } catch (e) { say(`${name} test: failed (${e.message})`); }
   }
-  const ocr = await mediaText([{ type: "image", url: "https://pbs.twimg.com/profile_banners/783214/1646075315/1500x500" }], (m) => say(`   ${m}`));
-  say(`image reading (OCR) test: ${ocr ? ocr.replace(/\s+/g, " ").slice(0, 200) : "failed"}`);
+  const ocr = await mediaText([{ type: "image", url: "https://upload.wikimedia.org/wikipedia/commons/f/f9/STOP_sign.jpg" }], (m) => say(`   ${m}`));
+  say(`image reading (OCR) test: ${ocr ? ocr.replace(/\s+/g, " ").slice(0, 200) : `failed (${Object.entries(llmProblems).filter(([k]) => /image|vision/.test(k)).map(([k, v]) => `${k} ${v}`).join("; ") || "no answer"})`}`);
   const vt = await mediaText([{ type: "video", url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" }], (m) => say(`   ${m}`));
   say(`video file test: ${vt ? vt.replace(/\s+/g, " ").slice(0, 200) : "failed"}`);
   say(`scraping service: ${process.env.APIFY_TOKEN ? "APIFY_TOKEN is set" : "APIFY_TOKEN not set yet (X fallback, Instagram and TikTok wait for it)"}`);
