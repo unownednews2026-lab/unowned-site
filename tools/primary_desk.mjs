@@ -21,7 +21,8 @@ import { ask, problems as llmProblems, SECOND_CHECK, GITHUB_PROVIDER } from "./l
 const DRY = process.argv.includes("--dry");                  // list what would be read, publish nothing
 const REPO = process.env.GITHUB_REPOSITORY;
 const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
-const say = (m) => console.log(`primary desk: ${m}`);
+const dryLog = [];
+const say = (m) => { console.log(`primary desk: ${m}`); dryLog.push(m); };
 const now = new Date().toISOString().slice(0, 19) + "Z";
 const DAY = 864e5;
 const UA = { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36" };
@@ -150,7 +151,12 @@ Text: ${x.text.slice(0, 4000)}`, { temperature: 0.1, log: () => {} });
     }
   }
 }
-if (DRY) process.exit(0);
+if (DRY) {
+  try { writeFileSync("/tmp/pdry.md", `Primary-source desk — dry run (nothing published)\n\n${[...dryLog, ...report].map((l) => `- ${l.replace(/^- /, "")}`).join("\n")}`);
+    const n = sh(`gh api "repos/${REPO}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="Backup desk log")][0].number // empty'`);
+    if (n) sh(`gh issue comment ${n} --body-file /tmp/pdry.md`); } catch {}
+  process.exit(0);
+}
 writeFileSync(seenPath, JSON.stringify(Object.fromEntries(Object.entries(seen).filter(([, t]) => Date.now() - Date.parse(t) < 30 * DAY)), null, 2));
 
 if (queue.length) try {
