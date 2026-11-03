@@ -322,7 +322,7 @@ if (DRY) {
   const ocr = await mediaText([{ type: "image", url: "https://upload.wikimedia.org/wikipedia/commons/f/f9/STOP_sign.jpg" }], (m) => say(`   ${m}`));
   say(`image reading (OCR) test: ${ocr ? ocr.replace(/\s+/g, " ").slice(0, 200) : `failed (${Object.entries(llmProblems).filter(([k]) => /image|vision/.test(k)).map(([k, v]) => `${k} ${v}`).join("; ") || "no answer"})`}`);
   const vt = await mediaText([{ type: "video", url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" }], (m) => say(`   ${m}`));
-  say(`video file test: ${vt ? vt.replace(/\s+/g, " ").slice(0, 200) : "failed"}`);
+  say(`video file test: ${vt ? vt.replace(/\s+/g, " ").slice(0, 200) : `failed (${Object.entries(llmProblems).filter(([k]) => /video|whisper/.test(k)).map(([k, v]) => `${k} ${v}`).join("; ") || "no answer"})`}`);
   say(`scraping service: ${process.env.APIFY_TOKEN ? "APIFY_TOKEN is set" : "APIFY_TOKEN not set yet (X fallback, Instagram and TikTok wait for it)"}`);
   const g = await geminiVideo("https://www.youtube.com/watch?v=JbT8LXzTNf8");
   say(`transcript test on a public video (Gemini watching it): ${g ? g.slice(0, 220) : `failed (${Object.entries(llmProblems).filter(([k]) => k.includes("video")).map(([k, v]) => `${k} ${v}`).join("; ") || "no answer"})`}`);
