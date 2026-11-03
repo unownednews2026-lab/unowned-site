@@ -9,6 +9,13 @@
       "verified": "the Government of India's official press office"
     },
     {
+      "type": "discover",
+      "url": "https://cockroachjantaparty.co",
+      "name": "Cockroach Janta Party",
+      "kind": "movement",
+      "note": "every social account the party's own website links to is read as its verified channel"
+    },
+    {
       "type": "youtube",
       "handle": "CockroachJantaParty",
       "who": "Cockroach Janta Party (official YouTube)",
@@ -22,6 +29,14 @@
       "who": "Cockroach Janta Party (official website)",
       "kind": "movement",
       "verified": "the party's own website"
+    },
+    {
+      "type": "x",
+      "handle": "ECISVEEP",
+      "who": "Election Commission of India (official X)",
+      "kind": "official",
+      "match": "SIR|Special Intensive Revision|electoral roll|voter list|enumeration|claims and objections",
+      "verified": "the Election Commission of India's official X account"
     }
   ],
   "south-africa-asylum-unrest": [
@@ -33,6 +48,104 @@
       "kind": "official",
       "match": "asylum|refugee|Durban|migrant|immigra|directive|March and March|Constitutional Court",
       "verified": "published on gov.za, the South African government's official website"
+    },
+    {
+      "type": "x",
+      "handle": "HomeAffairsSA",
+      "who": "Department of Home Affairs (South Africa, official X)",
+      "kind": "official",
+      "match": "asylum|refugee|Durban|migrant|immigra|Lindela|deport|Constitutional Court",
+      "verified": "the Department of Home Affairs' official X account"
+    }
+  ],
+  "france-school-protests": [
+    {
+      "kind": "official",
+      "type": "gnews",
+      "site": "education.gouv.fr",
+      "edition": "FR:fr",
+      "who": "French Ministry of National Education",
+      "match": "lycée|lycéen|blocage|mobilisation|grève|manifest|élèves|postes|budget|Parcoursup|sécurité",
+      "verified": "published on education.gouv.fr, the ministry's official website"
+    },
+    {
+      "kind": "official",
+      "type": "x",
+      "handle": "education_gouv",
+      "who": "French Ministry of National Education (official X)",
+      "match": "lycée|lycéen|blocage|mobilisation|grève|manifest|élèves|postes|budget|sécurité",
+      "verified": "the ministry's official X account"
+    }
+  ],
+  "albania-student-protests": [
+    {
+      "kind": "official",
+      "type": "gnews",
+      "site": "kryeministria.al",
+      "who": "Office of the Prime Minister of Albania",
+      "match": "student|studen|protest|universit|Tiran|violence|dhun",
+      "verified": "published on kryeministria.al, the Albanian prime minister's official website"
+    }
+  ],
+  "canada-pacific-link-pipeline": [
+    {
+      "kind": "official",
+      "type": "gnews",
+      "site": "canada.ca",
+      "query": "pipeline",
+      "who": "Government of Canada",
+      "match": "Pacific Link|pipeline|Major Projects|Building Canada|First Nation",
+      "verified": "published on canada.ca, the Government of Canada's official website"
+    },
+    {
+      "kind": "official",
+      "type": "gnews",
+      "site": "news.gov.bc.ca",
+      "query": "pipeline",
+      "who": "Government of British Columbia",
+      "match": "Pacific Link|pipeline|First Nation|coast|tanker",
+      "verified": "published on news.gov.bc.ca, the B.C. government's official newsroom"
+    }
+  ],
+  "germany-gen-z-protests": [
+    {
+      "kind": "official",
+      "type": "gnews",
+      "site": "bundesregierung.de",
+      "edition": "DE:de",
+      "who": "Federal Government of Germany",
+      "match": "Gen Z|Jugend|junge Menschen|Protest|Demonstr|Wehrdienst|Wehrpflicht|Bildung",
+      "verified": "published on bundesregierung.de, the German federal government's official website"
+    }
+  ],
+  "italy-student-protests": [
+    {
+      "kind": "official",
+      "type": "gnews",
+      "site": "governo.it",
+      "edition": "IT:it",
+      "who": "Italian Government (Palazzo Chigi)",
+      "match": "student|scuol|sciopero|manifest|piazza|scontri|universit",
+      "verified": "published on governo.it, the Italian government's official website"
+    },
+    {
+      "kind": "official",
+      "type": "gnews",
+      "site": "mim.gov.it",
+      "edition": "IT:it",
+      "who": "Italian Ministry of Education and Merit",
+      "match": "student|scuol|sciopero|manifest|occupaz|universit",
+      "verified": "published on mim.gov.it, the ministry's official website"
+    }
+  ],
+  "serbia-student-movement": [
+    {
+      "kind": "official",
+      "type": "gnews",
+      "site": "srbija.gov.rs",
+      "who": "Government of Serbia",
+      "match": "student|Novi Sad|nadstreš|canopy|izbor|election|vlad",
+      "verified": "published on srbija.gov.rs, the Serbian government's official website"
     }
   ]
 }
