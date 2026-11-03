@@ -56,15 +56,16 @@ async function readSource(src) {
     try {
       const xml = await get(`https://www.youtube.com/feeds/videos.xml?channel_id=${id}`);
       list = xml.split("<entry>").slice(1).map((it) => ({ url: (it.match(/<link rel="alternate" href="([^"]+)"/) || [])[1], title: tag(it, "title"), date: tag(it, "published"), text: tag(it, "media:description"), video: true }));
+      if (!list.length) say(`YouTube feed for ${src.handle} (${id}): ${xml.length} characters, no videos (${unent(xml).slice(0, 120)})`);
     } catch (e) { say(`YouTube feed for ${src.handle} (${id}) could not be read: ${e.message}`); }
     if (!list.length && src.handle) {   // feed empty or refused: read the channel's videos page through the reader service
       try {
         const md = await get(`https://r.jina.ai/https://www.youtube.com/@${src.handle}/videos`, 40000), seenIds = new Set();
-        for (const m of md.matchAll(/\[([^\]]{10,200})\]\((https:\/\/www\.youtube\.com\/watch\?v=([\w-]{11}))[^)]*\)/g)) {
-          if (seenIds.has(m[3])) continue; seenIds.add(m[3]);
-          list.push({ url: m[2], title: unent(m[1]).replace(/^!?Image \d+:?\s*/, ""), date: "", text: "", video: true });
+        for (const m of md.matchAll(/\[([^\]]{0,200})\]\(https:\/\/(?:www\.|m\.)?youtube\.com\/(?:watch\?v=|shorts\/)([\w-]{11})[^)]*\)/g)) {
+          if (seenIds.has(m[2])) continue; seenIds.add(m[2]);
+          list.push({ url: `https://www.youtube.com/watch?v=${m[2]}`, title: unent(m[1]).replace(/^!?Image \d+:?\s*/, ""), date: "", text: "", video: true });
         }
-        say(`YouTube ${src.handle}: feed (channel ${id}) was empty; ${list.length} video(s) from the channel page`);
+        say(`YouTube ${src.handle}: feed (channel ${id}) was empty; ${list.length} video(s) from the channel page (${md.length} characters: ${md.replace(/\s+/g, " ").slice(0, 160)})`);
       } catch (e) { say(`YouTube ${src.handle}: channel page could not be read either (${e.message})`); }
     }
     return list.slice(0, 12);
@@ -97,6 +98,7 @@ async function readSource(src) {
       if (seen.has(u) || title.length < 20 || (src.pathMatch && !u.includes(src.pathMatch))) continue;
       seen.add(u); out.push({ url: u, title, date: "", text: "" });
     }
+    if (!out.length) say(`${src.url}: ${html.length} characters, ${(html.match(/<a[\s>]/gi) || []).length} links, none usable (${unent(html).slice(0, 140)})`);
     return out.slice(0, 12);
   }
   throw new Error(`unknown source type ${src.type}`);
