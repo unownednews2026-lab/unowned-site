@@ -11,7 +11,7 @@
   "dek": "Students and cost-of-living protesters march against Giorgia Meloni's government, the clashes with police in Turin, Milan and Bologna, and the unions' call for a general strike.",
   "status": "Ongoing",
   "updated": "2026-11-03",
-  "updatedAt": "2026-11-03T17:14:05Z",
+  "updatedAt": "2026-11-03T19:45:00Z",
   "summary": [
     "On Friday, October 16, students marched in dozens of Italian cities on what organisers called \"No Meloni Day\", protesting run-down schools, a decree capping foreign pupils at 30% of a class, the cost of living and military spending. Organisers say more than 400,000 took part; the Education Ministry puts participation in the school strike at about 1%. Police used water cannon and tear gas in Turin, and bottles and firecrackers were thrown at police in Rome.",
     "On Saturday, October 17, cost-of-living marches called by the \"Italia in Piazza\" movement were held in several cities. In Milan, groups broke away and clashed with police around Piazza Duomo; Il Giorno, citing police and the prefecture, and ANSA report about 50 people detained; injury figures differ between reports. In Rome, the CGIL union held a separate rally and announced a general strike for November 20.",
@@ -101,7 +101,7 @@
     { "date": "2026-10-30", "phase": "next", "label": "reported", "added": "2026-10-30T21:40:36Z", "text": "Tens of thousands marched in Rome, Milan and other Italian cities on Friday against the cost of living and military spending, NBC News reports, as the USB union and others called public- and private-sector strikes. The government said it will deploy 500 army troops alongside police in Milan until the end of the year, after introducing tougher penalties for rioters, including financial liability for parents of children who take part in vandalism or looting. The demonstrations were largely peaceful, but an NBC News crew saw police use a water cannon on protesters in Rome and charge groups to disperse them.", "sources": ["bk1030214000", "bk1031121400"], "desk": "reviewed" },
     { "date": "2026-10-30", "phase": "next", "label": "reported", "added": "2026-11-02T20:05:00Z", "text": "Organisers and police give very different counts for the October 30 general strike marches, LaPresse reports: the USB union claims 1.5 to 2 million people nationwide, and in Milan over 100,000 against a police estimate of 30,000. In Rome police used a water cannon and baton charges and eight people were stopped; in Turin police used tear gas after bottles were thrown.", "sources": ["lapresseOct30"] },
     { "date": "2026-11-01", "phase": "next", "label": "reported", "added": "2026-11-02T20:05:00Z", "text": "The education branch of the CGIL union says it will join the CGIL general strike on November 20, citing budget-law cuts of 4,925 teaching posts and 2,049 support staff from 2027/28 and no funds for the contract renewal, Scuola Mag reports. These are the union's claims; no government response was in the report.", "sources": ["scuolamagNov1"] },
-    { "date": "2026-11-02", "phase": "next", "label": "reported", "added": "2026-11-03T17:14:05Z", "text": "The government announced cuts of 350 teaching posts in Emilia‑Romagna, prompting the FLC‑CGIL union to call a strike as the only option; the UIL estimates 70‑80 positions eliminated in the Bologna province and criticises bonuses for private schools.", "sources": ["bk1103171400"], "desk": "backup" },
+    { "date": "2026-11-02", "phase": "next", "label": "reported", "added": "2026-11-03T17:14:05Z", "text": "Italy: la Repubblica (Bologna) reports the government's school budget plan would cut about 350 teaching posts in Emilia-Romagna, and the FLC-CGIL union says a strike is \"the only choice\". The UIL union estimates 70 to 80 fewer posts in Bologna province; the FLC-CGIL also criticises bonuses for private schools.", "sources": ["repBolognaNov2"], "desk": "reviewed" },
     { "date": "2026-11-20", "phase": "next", "label": "pending", "added": "2026-11-03T03:23:55Z", "text": "Turnout and outcome of the CGIL general strike called for November 20, and whether Parliament converts Decree-Law no. 190/2026 into law within its 60-day deadline. Still being checked.", "sources": ["euronewsOct24b", "soleOct24squares", "ilpostOct20decreto", "fattoOct20decreto"] }
   ],
   "claims": [
@@ -157,7 +157,7 @@
     ["Movimento 17 Ottobre", ["openOct19movimento", "avvenireOct19movimento"]],
     ["The October 30 strike", ["studentiOct20sciopero"]],
     ["October 23-24: raids and the fourth Saturday", ["ansaOct23raids", "euronewsOct24", "afpOct24"]],
-    ["October 24: the fourth Saturday unfolds", ["euronewsOct24b", "soleOct24squares", "reutersOct28release", "bk1030214000", "bk1031121400", "lapresseOct30", "scuolamagNov1", "bk1103123400", "bk1103171400"]]
+    ["October 24: the fourth Saturday unfolds", ["euronewsOct24b", "soleOct24squares", "reutersOct28release", "bk1030214000", "bk1031121400", "lapresseOct30", "scuolamagNov1", "bk1103123400", "bk1103171400", "repBolognaNov2"]]
   ],
   "sources": {
     "afpOct16": ["AFP (via The Local Italy)", "https://www.thelocal.it/20261016/italy-braces-for-autumn-of-discontent-as-students-protest"],
@@ -206,7 +206,8 @@
     "lapresseOct30": ["LaPresse", "https://www.lapresse.it/cronaca/2026/10/30/sciopero-generale-cortei-in-tutta-italia-il-viminale-rafforza-la-sicurezza-la-diretta/"],
     "scuolamagNov1": ["Scuola Mag", "https://www.scuolamag.it/dai-sindacati/fracassi-in-legge-di-bilancio-tagli-alla-scuola-statale-e-prebende-per-le-private-il-20-novembre-sciopero/"],
     "bk1103123400": ["indiatoday.in", "https://www.indiatoday.in/amp/opinion/story/italy-anti-vandalism-decree-giorgia-meloni-protest-crackdown-india-lessons-3031328-2026-11-03"],
-    "bk1103171400": ["bologna.repubblica.it", "https://bologna.repubblica.it/cronaca/2026/11/02/news/manovra_scuola_taglio_insegnanti_emilia-romagna_ecco_quanto-425693005/"]
+    "bk1103171400": ["bologna.repubblica.it", "https://bologna.repubblica.it/cronaca/2026/11/02/news/manovra_scuola_taglio_insegnanti_emilia-romagna_ecco_quanto-425693005/"],
+    "repBolognaNov2": ["la Repubblica (Bologna)", "https://bologna.repubblica.it/cronaca/2026/11/02/news/manovra_scuola_taglio_insegnanti_emilia-romagna_ecco_quanto-425693005/"]
   },
   "checkedAt": "2026-11-03T18:26:39Z"
 }
