@@ -16,6 +16,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { ungrounded } from "./grounding.mjs";
+import { realUrl } from "./gnews.mjs";
 import { ask, problems as llmProblems, SECOND_CHECK, GITHUB_PROVIDER } from "./llm.mjs";
 
 const DRY = process.argv.includes("--dry");                  // list what would be read, publish nothing
@@ -33,9 +34,10 @@ const tag = (x, t) => unent((x.match(new RegExp(`<${t}[^>]*>([\\s\\S]*?)</${t}>`
 const get = async (url, ms = 20000) => { const r = await fetch(url, { headers: UA, redirect: "follow", signal: AbortSignal.timeout(ms) }); if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); };
 
 /* Page text: direct, then the free reader service for sites built with scripts. */
+const BLOCKED = /Just a moment\.\.\.|Enable JavaScript and cookies|Attention Required|Access denied|verify you are human|Checking your browser/i;
 async function pageText(url) {
-  try { const html = await get(url); const t = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map(unent).filter((x) => x.length > 40).join("\n"); if (t.length > 300) return t.slice(0, 6000); } catch {}
-  try { const t = (await get(`https://r.jina.ai/${url}`, 30000)).split("\n").map((x) => x.trim()).filter((x) => x.length > 40 && !/^(Title|URL Source|Published Time|Markdown Content):/.test(x)).join("\n"); return t.slice(0, 6000); } catch { return ""; }
+  try { const html = await get(url); const t = (html.match(/<p[\s>][\s\S]*?<\/p>/gi) || []).map(unent).filter((x) => x.length > 40).join("\n"); if (t.length > 300 && !BLOCKED.test(t.slice(0, 500))) return t.slice(0, 6000); } catch {}
+  try { const t = (await get(`https://r.jina.ai/${url}`, 30000)).split("\n").map((x) => x.trim()).filter((x) => x.length > 40 && !/^(Title|URL Source|Published Time|Markdown Content):/.test(x)).join("\n"); return BLOCKED.test(t.slice(0, 500)) ? "" : t.slice(0, 6000); } catch { return ""; }
 }
 
 /* Each source type returns [{url, title, date, text}] (newest first). */
@@ -101,6 +103,59 @@ async function readSource(src) {
     if (!out.length) say(`${src.url}: ${html.length} characters, ${(html.match(/<a[\s>]/gi) || []).length} links, none usable (${unent(html).slice(0, 140)})`);
     return out.slice(0, 12);
   }
+  if (src.type === "x") {   // X (Twitter): find recent posts by several routes, then confirm each one with X's own embed service
+    const h = src.handle, ids = new Set(), routes = [];
+    const grab = (txt, route) => { let n = 0; for (const m of txt.matchAll(new RegExp(`(?:x|twitter|xcancel|nitter)[\\w.]*\\.(?:com|net|org|poast\\.org)/${h}/status(?:es)?/(\\d{15,20})`, "gi"))) { if (!ids.has(m[1])) n++; ids.add(m[1]); } routes.push(`${route} ${n}`); };
+    for (const [route, url] of [["xcancel", `https://xcancel.com/${h}/rss`], ["nitter", `https://nitter.net/${h}/rss`], ["nitter2", `https://nitter.poast.org/${h}/rss`]]) {
+      if (ids.size >= 6) break;
+      try { grab(await get(url, 15000), route); } catch (e) { routes.push(`${route} ${e.message.slice(0, 20)}`); }
+    }
+    if (ids.size < 3) for (const site of ["x.com", "twitter.com"]) {
+      try { grab(await get(`https://www.bing.com/search?q=${encodeURIComponent(`site:${site}/${h}/status`)}&format=rss&filters=${encodeURIComponent('ex1:"ez2"')}`, 20000), `bing:${site}`); } catch (e) { routes.push(`bing ${e.message.slice(0, 20)}`); }
+    }
+    const out = [];
+    for (const id of [...ids].sort((a, b) => (BigInt(b) > BigInt(a) ? 1 : -1)).slice(0, 8)) {
+      const url = `https://x.com/${h}/status/${id}`;
+      try {   // the embed service only answers for real, public posts, and says who wrote them
+        const j = JSON.parse(await get(`https://publish.twitter.com/oembed?url=${encodeURIComponent(`https://twitter.com/${h}/status/${id}`)}&omit_script=1&dnt=true`, 15000));
+        if (!new RegExp(`/${h}$`, "i").test(j.author_url || "")) continue;
+        const p = (j.html.match(/<p[^>]*>([\s\S]*?)<\/p>/) || [])[1] || "";
+        out.push({ url, title: "", date: new Date(Number(BigInt(id) >> 22n) + 1288834974657).toISOString(), text: unent(p.replace(/<a[^>]*>pic\.twitter\.com[^<]*<\/a>/g, "")), video: /pic\.twitter\.com/.test(p) });
+      } catch {}
+    }
+    if (DRY || !out.length) say(`X @${h}: ${routes.join(", ")}; ${out.length} post(s) confirmed by X`);
+    return out;
+  }
+  if (src.type === "gnews") {   // an official website's own pages, found through Google News (works even when the site blocks automated readers)
+    const [gl, hl] = (src.edition || "US:en").split(":");
+    const q = `site:${src.site}${src.query ? ` ${src.query}` : ""} when:3d`;
+    const xml = await get(`https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=${hl}&gl=${gl}&ceid=${gl}:${hl}`);
+    const items = xml.split("<item>").slice(1).map((it) => ({ link: tag(it, "link"), title: tag(it, "title").replace(/\s+-\s+[^-]+$/, ""), date: new Date(tag(it, "pubDate") || 0).toISOString(), text: "" })).slice(0, 8);
+    const out = [];
+    for (const x of items) {
+      const key = `gn:${x.title.slice(0, 120)}`;   // a stable key, so we don't resolve the same link every hour
+      if (seen[key]) { out.push({ ...x, url: x.link, key }); continue; }   // already handled: no need to resolve it again
+      const u = (await realUrl(x.link)) || "";
+      if (u && !u.includes(src.site)) continue;   // must really be on the official site
+      out.push({ ...x, url: u || x.link, key });
+    }
+    if (DRY || !out.length) say(`Google News site:${src.site}: ${items.length} item(s) in the last 3 days`);
+    return out;
+  }
+  if (src.type === "discover") {   // the movement's own website: the social accounts it links to are its verified channels
+    let page = "";
+    try { page += await get(src.url); } catch {}
+    try { page += "\n" + (await get(`https://r.jina.ai/${src.url}`, 40000)); } catch {}
+    const found = [], add = (x) => { if (!found.some((f) => f.type === x.type && (f.handle || f.channelId || f.channel) === (x.handle || x.channelId || x.channel))) found.push(x); };
+    const host = new URL(src.url).hostname.replace(/^www\./, "");
+    const base = { kind: src.kind, match: src.match, verified: `linked from ${host}, its official website` };
+    for (const m of page.matchAll(/youtube\.com\/(?:@([\w.-]{3,})|channel\/(UC[\w-]{22}))/gi)) add({ ...base, type: "youtube", handle: m[1], channelId: m[2], who: `${src.name} (YouTube)` });
+    for (const m of page.matchAll(/(?:\/\/|\b)(?:www\.)?(?:x|twitter)\.com\/(?!intent|share|home|i\/|hashtag|search)(\w{2,15})\b/gi)) add({ ...base, type: "x", handle: m[1], who: `${src.name} (X)` });
+    for (const m of page.matchAll(/t\.me\/(?!share|joinchat|\+)(\w{4,})/gi)) add({ ...base, type: "telegram", channel: m[1], who: `${src.name} (Telegram)` });
+    for (const m of page.matchAll(/bsky\.app\/profile\/([\w.-]+)/gi)) add({ ...base, type: "bluesky", handle: m[1], who: `${src.name} (Bluesky)` });
+    say(`${src.name}: its website links to ${found.map((f) => `${f.type} ${f.handle || f.channelId || f.channel}`).join(", ") || "no readable social accounts"}`);
+    return found;
+  }
   throw new Error(`unknown source type ${src.type}`);
 }
 
@@ -108,11 +163,17 @@ const registry = existsSync("tools/primary_sources.json") ? JSON.parse(readFileS
 const seenPath = "content/primary-seen.json";
 const seen = existsSync(seenPath) ? JSON.parse(readFileSync(seenPath, "utf8")) : {};
 const published = [], report = [], queue = [];
+const mark = (x) => { seen[x.key || x.url] = now; };
 const newestDev = (s) => s.events.filter((e) => e.label !== "pending").reduce((m, e) => (e.date > m ? e.date : m), "");
 
 for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json"))) {
   const s = JSON.parse(readFileSync(`content/stories/${f}`, "utf8"));
-  const sources = registry[s.slug] || [];
+  const sources = [];
+  for (const src of registry[s.slug] || []) {
+    if (src.type !== "discover") { sources.push(src); continue; }
+    try { for (const f of await readSource(src)) if (!sources.concat(registry[s.slug]).some((x) => x.type === f.type && (x.handle || x.channelId || x.channel || "").toLowerCase() === (f.handle || f.channelId || f.channel || "").toLowerCase())) sources.push(f); }
+    catch (e) { report.push(`- ${s.slug}: could not read ${src.url} to find its channels (${String(e.message).slice(0, 60)})`); }
+  }
   if (!sources.length) continue;
   const since = Math.max(Date.now() - 2 * DAY, Date.parse(newestDev(s) + "T00:00:00Z") || 0);
   let added = 0;
@@ -121,18 +182,19 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
     try { items = await readSource(src); } catch (e) { report.push(`- ${s.slug}: ${src.who} (${src.type}) could not be read: ${String(e.message).slice(0, 80)}`); continue; }
     if (!items.length && (DRY || new Date().getUTCHours() === 5)) report.push(`- ${s.slug}: ${src.who} (${src.type}): nothing could be read (empty feed or page)`);
     // First time we read a source: everything already there is old news. Remember it, publish nothing.
-    const first = !seen[`source:${src.type}:${src.url || src.handle}`];
+    const sid = `source:${src.type}:${src.url || src.handle || src.channelId || src.channel || src.site}`;
+    const first = !seen[sid];
     const old = (t) => !t || Date.now() - Date.parse(t) > 7 * DAY;     // refresh weekly only, so routine checks make no commit
-    if (old(seen[`source:${src.type}:${src.url || src.handle}`])) seen[`source:${src.type}:${src.url || src.handle}`] = now;
-    if (first) { for (const x of items) if (x.url) seen[x.url] = now; say(`${s.slug}: ${src.who}: first read, ${items.length} existing item(s) recorded as already seen`); if (!DRY) continue; }
-    for (const x of items) if (x.url && seen[x.url] && old(seen[x.url])) seen[x.url] = now;   // still listed: keep remembering it
-    const fresh = first ? [] : items.filter((x) => x.url && !seen[x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
+    if (old(seen[sid])) seen[sid] = now;
+    if (first) { for (const x of items) if (x.url) mark(x); say(`${s.slug}: ${src.who}: first read, ${items.length} existing item(s) recorded as already seen`); if (!DRY) continue; }
+    for (const x of items) if (x.url && seen[x.key || x.url] && old(seen[x.key || x.url])) mark(x);   // still listed: keep remembering it
+    const fresh = first ? [] : items.filter((x) => x.url && !seen[x.key || x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
     say(`${s.slug}: ${src.who}: ${items.length} item(s), ${fresh.length} new and relevant`);
     if (DRY && src.type === "youtube" && items[0]) { const v = (items[0].url.match(/[?&]v=([\w-]{11})/) || [])[1]; let t = ""; try { t = execSync(`timeout 60 python3 tools/yt_transcript.py ${v} 2>&1`, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }); } catch (e) { t = String(e.stderr || e.message); } say(`   transcript test (${items[0].title.slice(0, 50)}): ${t.trim().slice(0, 160) || "nothing returned"}`); }
     if (DRY) { for (const x of fresh.slice(0, 3)) say(`   ${x.date?.slice(0, 16) || "?"} ${x.title || x.text.slice(0, 80)} ${x.url}`); continue; }
     for (const x of fresh.slice(0, 2)) {
       if (added >= 2) break;
-      seen[x.url] = now;
+      mark(x);
       // A video is judged by what is actually said in it: its transcript (captions, translated to English when possible).
       const vid = x.video && (x.url.match(/[?&]v=([\w-]{11})/) || [])[1];
       if (vid && !x.date) {   // videos read from the channel page carry no date: take the published time from the video page
@@ -141,10 +203,11 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
         if (Date.parse(x.date) <= since) continue;
       }
       if (vid) { const t = sh(`timeout 60 python3 tools/yt_transcript.py ${vid} 2>/dev/null || true`); if (t.length > 100) x.text = `${x.text}\n${t}`.trim(); }
-      if (!x.text || x.text.length < 200) x.text = `${x.text}\n${await pageText(x.url)}`.trim();
-      if (x.text.length < 60) continue;
+      if (src.type !== "x" && (!x.text || x.text.length < 200)) x.text = `${x.text}\n${await pageText(x.url)}`.trim();
+      if (src.type === "gnews" && x.text.length < 60) x.text = `${x.title}. ${x.text}`.trim();   // site blocks readers: its own headline is the statement
+      if (x.text.length < 40) continue;
       const via = src.kind === "official" ? "official" : "social";
-      const where = src.type === "youtube" ? "in a YouTube video" : src.type === "telegram" ? "on Telegram" : src.type === "bluesky" ? "on Bluesky" : via === "official" ? "in a statement" : "on its website";
+      const where = src.type === "youtube" ? "in a YouTube video" : src.type === "x" ? "on X" : src.type === "telegram" ? "on Telegram" : src.type === "bluesky" ? "on Bluesky" : via === "official" ? "in a statement" : "on its website";
       const out = await ask(`You write for a strict, neutral news site. Below is a ${via === "official" ? "statement published by an official body" : "post published by a movement or organisation"}: ${src.who}. It may be in any language; write in English.
 Story: "${s.title}". Return ONLY JSON: {"relevant": true|false, "date": "YYYY-MM-DD", "kind": "own_action"|"claim"|"footage", "text": "..."}
 - relevant: true only if it reports something NEW and specific about this story (not background, not promotion).
@@ -179,7 +242,7 @@ Text: ${x.text.slice(0, 7000)}`, { temperature: 0.1, log: () => {} });
       (Array.isArray(g) ? g[1] : g.keys || g.sources).push(key);
       if (it.kind === "footage" && via === "social") {
         s.ground = s.ground || [];
-        s.ground.push({ date, platform: src.type === "youtube" ? "YouTube" : src.type === "telegram" ? "Telegram" : src.type === "bluesky" ? "Bluesky" : "Website", who: src.who, shows: it.text, label: "alleged", check: `Posted by ${src.who}; ${src.verified}. Not independently verified: the date, place and context of the footage.`, sources: [key], desk: "backup", via });
+        s.ground.push({ date, platform: src.type === "youtube" ? "YouTube" : src.type === "x" ? "X" : src.type === "telegram" ? "Telegram" : src.type === "bluesky" ? "Bluesky" : "Website", who: src.who, shows: it.text, label: "alleged", check: `Posted by ${src.who}; ${src.verified}. Not independently verified: the date, place and context of the footage.`, sources: [key], desk: "backup", via });
       } else {
         s.events.push({ date, phase: s.phases[s.phases.length - 1].id, label, added: now, text: it.text.trim(), sources: [key], desk: "backup", via });
         s.events.sort((a, b) => a.date.localeCompare(b.date));
@@ -193,6 +256,9 @@ Text: ${x.text.slice(0, 7000)}`, { temperature: 0.1, log: () => {} });
   }
 }
 if (DRY) {
+  // Can this server read YouTube transcripts? Test on a public news video, so we know before a movement posts one.
+  let t = ""; try { t = execSync("timeout 90 python3 tools/yt_transcript.py JbT8LXzTNf8 2>&1", { encoding: "utf8" }); } catch (e) { t = String(e.stdout || e.message); }
+  say(`transcript test on a public video: ${t.trim().slice(0, 200) || "nothing returned"}`);
   try { writeFileSync("/tmp/pdry.md", `Primary-source desk — dry run (nothing published)\n\n${[...dryLog, ...report].map((l) => `- ${l.replace(/^- /, "")}`).join("\n")}`);
     const n = sh(`gh api "repos/${REPO}/issues?state=open&per_page=100" --jq '[.[] | select(.title=="Backup desk log")][0].number // empty'`);
     if (n) sh(`gh issue comment ${n} --body-file /tmp/pdry.md`); else console.log("dry run: log issue not found"); } catch (e) { console.log(`dry run: could not post (${String(e.message).slice(0, 150)})`); }
