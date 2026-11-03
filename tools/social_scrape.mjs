@@ -68,18 +68,45 @@ export async function scrape(platform, handle, { count = 8, config = {} } = {}) 
 /* Search X for recent posts about a topic (any account). Returns [{url, date, text, author, authorName, followers, verifiedType, blue}]. */
 export async function searchX(query, count = 25, config = {}) {
   const token = process.env.APIFY_TOKEN; if (!token) throw new Error("no APIFY_TOKEN");
+  // Several ways to ask, because scrapers differ in what search input they accept; the first that returns posts wins.
   const actor = config.actor || DEFAULTS.x.actor;
-  const r = await fetch(`https://api.apify.com/v2/acts/${actor}/run-sync-get-dataset-items?timeout=240&memory=1024`, {
-    method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-    body: JSON.stringify({ searchTerms: [query], maxItems: count, sort: "Latest" }), signal: AbortSignal.timeout(300000),
-  });
-  if (!r.ok) throw new Error(`Apify ${actor}: HTTP ${r.status} ${(await r.text()).slice(0, 120).replace(/\s+/g, " ")}`);
-  const items = await r.json();
-  if (!Array.isArray(items)) throw new Error(`Apify ${actor}: unexpected answer`);
-  return items.filter((it) => it && !it.noResults && !it.error).map((it) => ({
+  const plain = query.replace(/\s+-filter:\S+/g, "").trim();
+  const tries = [
+    [actor, { searchTerms: [query], maxItems: count, sort: "Latest" }],
+    [actor, { startUrls: [`https://x.com/search?q=${encodeURIComponent(plain)}&f=live`], maxItems: count }],
+    ["apidojo~twitter-scraper-lite", { searchTerms: [plain], maxItems: count, sort: "Latest" }],
+  ];
+  let items = [], why = [];
+  for (const [a, input] of tries) {
+    try {
+      const r = await fetch(`https://api.apify.com/v2/acts/${a}/run-sync-get-dataset-items?timeout=240&memory=1024`, {
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify(input), signal: AbortSignal.timeout(300000),
+      });
+      if (!r.ok) { why.push(`${a} ${r.status}`); continue; }
+      const got = await r.json();
+      items = Array.isArray(got) ? got.filter((it) => it && !it.noResults && !it.error && (it.text || it.fullText || it.full_text)) : [];
+      if (items.length) break;
+      why.push(`${a} ${Object.keys(input)[0]}: ${Array.isArray(got) && got[0] ? String(got[0].error || (got[0].noResults ? "no results" : "empty")).slice(0, 40) : "empty"}`);
+    } catch (e) { why.push(`${a} ${String(e.message).slice(0, 30)}`); }
+  }
+  if (!items.length) throw new Error(`no posts (${why.join("; ")})`);
+  return items.map((it) => ({
     url: pick(it, "url", "twitterUrl"), date: iso(pick(it, "createdAt", "created_at")), text: String(pick(it, "fullText", "full_text", "text")),
     author: String(pick(it, "author.userName", "author.username", "user.screen_name")), authorName: String(pick(it, "author.name", "user.name")),
     followers: Number(pick(it, "author.followers", "author.followersCount", "user.followers_count")) || 0,
     verifiedType: String(pick(it, "author.verifiedType", "user.verified_type")), blue: !!pick(it, "author.isBlueVerified", "user.is_blue_verified"),
   }));
+}
+
+/* Instagram's own "related accounts" for a profile (the suggestions a follower sees). Returns [{handle, name, verified}]. */
+export async function igRelated(handle) {
+  const token = process.env.APIFY_TOKEN; if (!token) throw new Error("no APIFY_TOKEN");
+  const r = await fetch(`https://api.apify.com/v2/acts/apify~instagram-scraper/run-sync-get-dataset-items?timeout=240&memory=1024`, {
+    method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ directUrls: [`https://www.instagram.com/${handle}/`], resultsType: "details", resultsLimit: 1 }), signal: AbortSignal.timeout(300000),
+  });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  const d = (await r.json())[0] || {};
+  if (d.error) throw new Error(String(d.error).slice(0, 60));
+  return (d.relatedProfiles || []).map((p) => ({ handle: p.username, name: p.full_name || p.fullName || "", verified: !!(p.is_verified || p.verified) })).filter((p) => p.handle);
 }

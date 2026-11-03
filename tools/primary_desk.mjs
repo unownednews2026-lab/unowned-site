@@ -18,7 +18,7 @@ import { execSync } from "node:child_process";
 import { ungrounded } from "./grounding.mjs";
 import { realUrl } from "./gnews.mjs";
 import { mediaText, youtubeText } from "./media.mjs";
-import { scrape, searchX } from "./social_scrape.mjs";
+import { scrape, searchX, igRelated } from "./social_scrape.mjs";
 import { ask, problems as llmProblems, SECOND_CHECK, GITHUB_PROVIDER, geminiVideo } from "./llm.mjs";
 
 const DRY = process.argv.includes("--dry");                  // list what would be read, publish nothing
@@ -280,6 +280,18 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
     for (const x of items) if (x.url && seen[x.key || x.url] && old(seen[x.key || x.url])) mark(x);   // still listed: keep remembering it
     const fresh = items.filter((x) => x.url && !x.skip && !seen[x.key || x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
     say(`${s.slug}: ${src.who}: ${items.length} item(s), ${fresh.length} new and relevant`);
+    // Instagram's "related accounts" for this profile, once a day: candidates for the editor to verify.
+    if (src.type === "instagram" && process.env.APIFY_TOKEN && (DRY || !seen[`related:${src.handle}`] || Date.now() - Date.parse(seen[`related:${src.handle}`]) > 24 * 36e5)) {
+      seen[`related:${src.handle}`] = now;
+      try {
+        const rel = await igRelated(src.handle);
+        for (const p of rel) {
+          const k = `instagram:${p.handle.toLowerCase()}`, c = (net.counts[k] = net.counts[k] || { n: 0, from: {}, stories: {}, last: "" });
+          c.n += p.verified ? 3 : 1; c.from[`${src.handle} (related accounts)`] = 1; c.stories[s.slug] = 1; c.last = now; c.profile = { name: p.name, verified: p.verified ? "Instagram" : "" };
+        }
+        say(`${s.slug}: Instagram related accounts of @${src.handle}: ${rel.length} (${rel.filter((p) => p.verified).length} verified)`);
+      } catch (e) { say(`${s.slug}: Instagram related accounts of @${src.handle} unavailable (${String(e.message).slice(0, 60)})`); }
+    }
     for (const x of items) for (const m of new Set((x.mentions || []).map((h) => String(h).toLowerCase().replace(/^@/, "")))) {
       if (!m || m === String(src.handle || "").toLowerCase() || seen[`netpost:${x.url}:${m}`]) continue;
       seen[`netpost:${x.url}:${m}`] = now;   // count each post once

@@ -49,7 +49,8 @@ for (const s of stories) {
       editor.push(line); red.push(line);
     }
   }
-  const newestHead = heads.reduce((m, h) => Math.max(m, h.pub), 0), ourLast = items.reduce((m, i) => Math.max(m, i.added), 0);
+  // Behind = a development reported by 2+ outlets (not a single, possibly re-dated, headline) newer than our last update.
+  const newestHead = clusters.filter((c) => c.outlets.size >= 2).reduce((m, c) => Math.max(m, ...c.heads.map((h) => h.pub)), 0), ourLast = items.reduce((m, i) => Math.max(m, i.added), 0);
   if (newestHead && newestHead - ourLast > 3 * H && now - newestHead > H) amber.push(`${s.slug}: BEHIND — newest established-outlet headline ${hhmm(newestHead)}, our last update ${ourLast ? hhmm(ourLast) : "none"}`);
 }
 const lateOnes = latencies.filter((l) => l.lat > 3);

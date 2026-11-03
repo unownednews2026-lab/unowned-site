@@ -49,7 +49,18 @@ const firstSentences = (t, n) => sentences(speakable(t)).slice(0, n).join(" ").t
 /* Our grade, said the way a newsreader would: the grade name, why it got that grade, and who reported it. Varied so it doesn't sound robotic. */
 const outletNames = (s, e) => [...new Set((e.sources || []).map((k) => (s.sources[k] || [])[0]).filter((n) => n && !/\.[a-z]{2,}$/i.test(n)).map((n) => n.replace(/\s*\(.*?\)\s*/g, "").trim()))].slice(0, 2);
 let gradeTurn = 0;
+// Track record of the account a social/official report comes from (content/source-record.json), read next to the grade.
+const SOURCE_RECORD = (() => { try { return JSON.parse(readFileSync("content/source-record.json", "utf8")); } catch { return { items: [], accounts: {} }; } })();
+function trackRecord(e) {
+  const it = (SOURCE_RECORD.items || []).find((x) => (e.sources || []).includes(x.key)); if (!it) return "";
+  const a = (SOURCE_RECORD.accounts || {})[it.account] || {}; const n = (a.upheld || 0) + (a.disproved || 0);
+  return n >= 3 ? ` For context, ${a.upheld} of this account's ${n} earlier reports were later confirmed.` : "";
+}
 function grade(s, e) {
+  const g = gradeLine(s, e);
+  return e.via ? g + trackRecord(e) : g;
+}
+function gradeLine(s, e) {
   const o = outletNames(s, e), t = gradeTurn++ % 2;
   // Their own words: say plainly where it comes from and that no independent outlet has reported it yet.
   if (e.via === "official") return e.label === "alleged" ? "That's the authority's own claim, from its official statement, and we grade it alleged until independent reporting backs it up." : "That comes from their official statement; we grade it reported, and it isn't yet independently confirmed.";
