@@ -200,9 +200,11 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
     const first = !seen[sid];
     const old = (t) => !t || Date.now() - Date.parse(t) > 7 * DAY;     // refresh weekly only, so routine checks make no commit
     if (old(seen[sid])) seen[sid] = now;
-    if (first) { for (const x of items) if (x.url) mark(x); say(`${s.slug}: ${src.who}: first read, ${items.length} existing item(s) recorded as already seen`); if (!DRY) continue; }
+    // First time we read a source: anything undated or older than the story's newest development is old news; remember it.
+    // Posts dated after that still go through every check below, so a new source can't miss recent developments.
+    if (first) { let n = 0; for (const x of items) if (x.url && (!x.date || Date.parse(x.date) <= since)) { mark(x); n++; } say(`${s.slug}: ${src.who}: first read, ${n} older item(s) recorded as already seen`); }
     for (const x of items) if (x.url && seen[x.key || x.url] && old(seen[x.key || x.url])) mark(x);   // still listed: keep remembering it
-    const fresh = first ? [] : items.filter((x) => x.url && !seen[x.key || x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
+    const fresh = items.filter((x) => x.url && !seen[x.key || x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
     say(`${s.slug}: ${src.who}: ${items.length} item(s), ${fresh.length} new and relevant`);
     if (DRY && src.type === "youtube" && items[0]) { const v = (items[0].url.match(/[?&]v=([\w-]{11})/) || [])[1]; let t = ""; try { t = execSync(`timeout 60 python3 tools/yt_transcript.py ${v} 2>&1`, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }); } catch (e) { t = String(e.stderr || e.message); } say(`   transcript test (${items[0].title.slice(0, 50)}): ${t.trim().slice(0, 160) || "nothing returned"}`); }
     if (DRY) { for (const x of fresh.slice(0, 3)) say(`   ${x.date?.slice(0, 16) || "?"} ${x.title || x.text.slice(0, 80)} ${x.url}`); continue; }
