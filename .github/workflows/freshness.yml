@@ -139,7 +139,9 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           CF_AI_TOKEN: ${{ secrets.CF_AI_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
-        run: node tools/primary_desk.mjs ${{ inputs.primary_dry && '--dry' || '' }} || true
+        run: |
+          pip install -q --user youtube-transcript-api==1.2.4 || true
+          node tools/primary_desk.mjs ${{ inputs.primary_dry && '--dry' || '' }} || true
       - name: Pass new reader submissions to the news desk
         if: always()
         continue-on-error: true
