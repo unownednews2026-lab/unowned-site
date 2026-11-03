@@ -37,6 +37,21 @@
       "kind": "official",
       "match": "SIR|Special Intensive Revision|electoral roll|voter list|enumeration|claims and objections",
       "verified": "the Election Commission of India's official X account"
+    },
+    {
+      "type": "x",
+      "handle": "Cockroachisback",
+      "who": "Cockroach Janta Party (\"Cockroach Is Back\" account on X)",
+      "kind": "movement",
+      "verified": "the party's replacement X account after its original was withheld in India, announced by founder Abhijeet Dipke and reported by The Free Press Journal and ThePrint"
+    },
+    {
+      "type": "x",
+      "handle": "abhijeet_dipke",
+      "who": "Abhijeet Dipke, Cockroach Janta Party founder (on X)",
+      "kind": "movement",
+      "match": "Cockroach|CJP|protest|rally|march|students|SIR|vote|youth|police|detain|NEET|paper leak",
+      "verified": "the founder's own X account, as reported by The Free Press Journal"
     }
   ],
   "south-africa-asylum-unrest": [
