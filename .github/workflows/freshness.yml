@@ -17,6 +17,10 @@ on:
         description: "Run the backup desk now even if the Claude desk is running (for testing)"
         type: boolean
         default: false
+      primary_dry:
+        description: "Primary-source desk: only list what it can read, publish nothing"
+        type: boolean
+        default: false
 permissions:
   contents: write
   issues: write
@@ -126,6 +130,16 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           BACKUP_FORCE: ${{ inputs.force_backup }}
         run: node tools/backup_desk.mjs
+      - name: Primary-source desk (official statements and movements' own channels, strictly graded)
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 15
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          CF_AI_TOKEN: ${{ secrets.CF_AI_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tools/primary_desk.mjs ${{ inputs.primary_dry && '--dry' || '' }} || true
       - name: Pass new reader submissions to the news desk
         if: always()
         continue-on-error: true
