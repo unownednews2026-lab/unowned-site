@@ -116,7 +116,7 @@ async function readSource(src) {
         routes.push(`timeline ${n}`); } catch (e) { routes.push(`timeline ${e.message.slice(0, 20)}`); }
       for (const [route, u] of [["reader", `https://r.jina.ai/https://x.com/${h}`], ["reader-tw", `https://r.jina.ai/https://twitter.com/${h}`], ["reader-search", `https://r.jina.ai/https://x.com/search?q=from%3A${h}&f=live`]]) {
         if (ids.size >= 3) break;
-        try { const md = await get(u, 45000); const before = ids.size; grab(md, route); if (ids.size === before && DRY) say(`   ${route} for @${h} returned: ${md.replace(/\s+/g, " ").slice(0, 200)}`); }
+        try { const r = await fetch(u, { headers: { ...UA, "X-Wait-For-Selector": "article a[href*='/status/']", "X-Timeout": "35" }, signal: AbortSignal.timeout(60000) }); const md = await r.text(); const before = ids.size; grab(md, route); if (ids.size === before && DRY) say(`   ${route} for @${h} returned: ${md.replace(/\s+/g, " ").slice(0, 200)}`); }
         catch (e) { routes.push(`${route} ${e.message.slice(0, 20)}`); }
       }
     }
