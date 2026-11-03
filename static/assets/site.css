@@ -321,3 +321,5 @@ details.fold[open] > summary::after { content: " ▴"; }
 .quiet-note { margin: 10px 0 0; padding: 8px 12px; border-left: 3px solid var(--accent); background: var(--surface); color: var(--muted); font-size: 0.9rem; border-radius: 0 8px 8px 0; }
 .quiet-note[hidden] { display: none; }
 .quiet-list { list-style: none; padding: 0; margin: 0; } .quiet-list li { padding: 10px 0; border-bottom: 1px solid var(--rule); } .quiet-list span { color: var(--muted); font-size: .9rem; display: block; }
+
+.via { display: inline-block; font: 500 .72rem/1.4 var(--mono); padding: 1px 6px; margin-left: 6px; border: 1px dashed var(--muted); border-radius: 4px; color: var(--muted); text-transform: uppercase; letter-spacing: .03em; }

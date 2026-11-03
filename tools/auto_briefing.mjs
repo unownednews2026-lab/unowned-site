@@ -51,6 +51,9 @@ const outletNames = (s, e) => [...new Set((e.sources || []).map((k) => (s.source
 let gradeTurn = 0;
 function grade(s, e) {
   const o = outletNames(s, e), t = gradeTurn++ % 2;
+  // Their own words: say plainly where it comes from and that no independent outlet has reported it yet.
+  if (e.via === "official") return e.label === "alleged" ? "That's the authority's own claim, from its official statement, and we grade it alleged until independent reporting backs it up." : "That comes from their official statement; we grade it reported, and it isn't yet independently confirmed.";
+  if (e.via === "social") return e.label === "alleged" ? "That's their own claim, posted on their channel, and we grade it alleged." : "They announced that on their own channel; we grade it reported, not yet independently confirmed.";
   switch (e.label) {
     case "confirmed": return o.length >= 2
       ? (t ? `We grade that confirmed: ${o[0]} and ${o[1]} reported it independently.` : `Our grade: confirmed, with independent reporting from ${o[0]} and ${o[1]}.`)
