@@ -1,0 +1,34 @@
+name: Breaking news scan
+# Every 15 minutes, no AI, no cost: starts the news desk right away when a tracked story has breaking headlines,
+# re-records the briefing when new developments are published, and flags new events to the editor.
+on:
+  schedule:
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+  actions: write
+concurrency:
+  group: breaking
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache/restore@v4
+        with:
+          path: .breaking-state.json
+          key: breaking-state-${{ github.run_id }}
+          restore-keys: breaking-state-
+      - name: Scan
+        run: node tools/breaking.mjs || true
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .breaking-state.json
+          key: breaking-state-${{ github.run_id }}
