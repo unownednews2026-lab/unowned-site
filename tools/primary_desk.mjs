@@ -73,7 +73,10 @@ async function readSource(src) {
     return (j.feed || []).filter((f) => !f.reason).map((f) => ({ url: `https://bsky.app/profile/${src.handle}/post/${f.post.uri.split("/").pop()}`, title: "", date: f.post.record.createdAt, text: f.post.record.text || "", video: !!f.post.embed }));
   }
   if (src.type === "web") {   // a listing page of statements: links whose address matches pathMatch
-    const html = await get(src.url), base = new URL(src.url), seen = new Set(), out = [];
+    let html;   // some government sites refuse cloud servers: then read the page through the free reader service, as HTML
+    try { html = await get(src.url); }
+    catch (e) { const r = await fetch(`https://r.jina.ai/${src.url}`, { headers: { ...UA, "X-Return-Format": "html" }, signal: AbortSignal.timeout(40000) }); if (!r.ok) throw new Error(`${e.message}; reader HTTP ${r.status}`); html = await r.text(); }
+    const base = new URL(src.url), seen = new Set(), out = [];
     for (const m of html.matchAll(/<a[^>]+href="([^"#]+)"[^>]*>([\s\S]*?)<\/a>/gi)) {
       let u; try { u = new URL(m[1], base).href; } catch { continue; }
       const title = unent(m[2]);
