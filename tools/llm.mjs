@@ -114,3 +114,27 @@ export async function checkAll() {
   for (const [k, v] of Object.entries(problems)) if (k.endsWith(":list")) out.push([k, v]);
   return out;
 }
+
+/* Google's Gemini can open a public YouTube video itself (no download, so YouTube's bot checks don't apply).
+   Returns what is said in it, transcribed and translated to English, or "" if no model could do it. */
+export async function geminiVideo(url) {
+  const key = process.env.GEMINI_API_KEY; if (!key) return "";
+  const prompt = "Transcribe what is said in this video. If it is not in English, give an English translation of everything said. Then, on a last line starting 'On screen:', list any visible on-screen text (captions, banners, dates). Report only what is said or shown; add nothing, no commentary.";
+  for (const model of ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-3.8-flash"]) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+          method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+          body: JSON.stringify({ contents: [{ role: "user", parts: [{ fileData: { fileUri: url } }, { text: prompt }] }], generationConfig: { temperature: 0, mediaResolution: "MEDIA_RESOLUTION_LOW" } }),
+          signal: AbortSignal.timeout(180000),
+        });
+        if (r.status === 429 || r.status >= 500) { problems[`${model} (video)`] = r.status; await wait(15000); continue; }
+        if (!r.ok) { problems[`${model} (video)`] = `${r.status} ${(await r.text()).slice(0, 80).replace(/\s+/g, " ")}`; break; }
+        const t = ((await r.json()).candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("").trim();
+        if (t.length > 40) return `[What is said in the video, transcribed by ${model}] ${t}`.slice(0, 8000);
+        break;
+      } catch (e) { problems[`${model} (video)`] = String(e.message).slice(0, 60); }
+    }
+  }
+  return "";
+}
