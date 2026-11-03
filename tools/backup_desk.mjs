@@ -144,9 +144,24 @@ async function realUrl(url) {
   } catch {}
   return null;
 }
+/* When a Google News link can't be resolved, find the same article by its exact headline in Bing News, whose links
+   carry the real address; only a result from the same outlet is accepted. */
+async function findByTitle(title, domain) {
+  if (!title) return null;
+  const clean = title.replace(/\s+-\s+[^-]+$/, "").trim();
+  try {
+    const xml = await (await fetch(`https://www.bing.com/news/search?q=${encodeURIComponent(`"${clean.slice(0, 120)}"`)}&format=rss`, { headers: { "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(20000) })).text();
+    for (const it of xml.split("<item>").slice(1)) {
+      const link = (it.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || "";
+      const u = decodeURIComponent((link.replace(/&amp;/g, "&").match(/[?&]url=([^&]+)/) || [])[1] || link);
+      try { const h = new URL(u).hostname.replace(/^www\./, ""); if (h === domain || h.endsWith("." + domain) || domain.endsWith("." + h)) return u; } catch {}
+    }
+  } catch {}
+  return null;
+}
 async function readArticle(url, domain, title) {
   try {
-    url = await realUrl(url);
+    url = (await realUrl(url)) || (await findByTitle(title, domain));
     if (!url) { readFails.push(`${domain}: link not resolved`); return null; }
     let final = url, text = "", status = 0;
     try {
