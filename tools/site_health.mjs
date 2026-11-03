@@ -12,26 +12,30 @@ const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pip
 const stories = readdirSync("content/stories").filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(`content/stories/${f}`, "utf8")));
 const issue = (prefix) => sh(`gh api "repos/${REPO}/issues?state=open&per_page=100" --jq '[.[] | select(.title|startswith("${prefix}"))][0].number // empty'`);
 
-/* 1. Is the live site current? */
+/* 1. Is the live site current? Compare the time of the site's last build (dist/version.json, written by every build)
+   with the newest commit: if a commit is more than 90 minutes old and the site still hasn't been rebuilt since, publishing
+   is stuck. (Comparing news items was wrong: the live feed deliberately leaves out older-dated items.) */
 try {
-  const repoNewest = stories.flatMap((s) => s.events.filter((e) => e.added && e.label !== "pending").map((e) => e.added)).sort().pop();
-  let liveNewest = "", err = "";
-  for (let i = 0; i < 2 && !liveNewest; i++) {
+  const lastCommit = sh("git log -1 --format=%cI");
+  let built = "", err = "";
+  for (let i = 0; i < 2 && !built; i++) {
     try {
-      const r = await fetch(`${SITE}/live.json?t=${Date.now()}`, { headers: { "User-Agent": "unowned-health" }, signal: AbortSignal.timeout(20000) });
+      const r = await fetch(`${SITE}/version.json?t=${Date.now()}`, { headers: { "User-Agent": "unowned-health" }, signal: AbortSignal.timeout(20000) });
+      if (r.status === 404) { built = "unknown"; break; }
       if (!r.ok) { err = `HTTP ${r.status}`; continue; }
-      liveNewest = (await r.json()).map((x) => x.added).sort().pop() || "";
+      built = (await r.json()).built || "";
     } catch (e) { err = String(e.message || e).slice(0, 80); }
   }
-  const lagH = liveNewest ? (Date.parse(repoNewest) - Date.parse(liveNewest)) / 36e5 : null;
-  const problem = !liveNewest ? `the live site could not be read (${err})` : lagH > 1.5 ? `the live site is ${Math.round(lagH)} hour(s) behind the repository (newest live update ${liveNewest}, newest in the repository ${repoNewest})` : "";
+  const behindMin = built && built !== "unknown" ? (Date.parse(lastCommit) - Date.parse(built)) / 6e4 : 0;
+  const stale = built && built !== "unknown" && behindMin > 0 && Date.now() - Date.parse(lastCommit) > 90 * 6e4;
+  const problem = !built ? `the live site could not be read (${err})` : stale ? `the live site was last built at ${built}, but the newest change (${lastCommit}) is more than 90 minutes old and still not live` : "";
   const open = issue("Site alert");
   if (problem && !open) {
     writeFileSync("/tmp/site.md", `Readers may not be seeing the latest news: ${problem}.\n\nLikely cause: a Cloudflare Pages deployment failed or is stuck. Check the latest deployment of "unowned-site" in Cloudflare (Workers & Pages) and retry it. This issue closes itself once the live site catches up.`);
     sh(`gh issue create --title "Site alert: live site not updating" --body-file /tmp/site.md`);
     console.log(`::warning::Site alert: ${problem}`);
-  } else if (!problem && open) sh(`gh issue close ${open} --comment "The live site has caught up."`);
-  console.log(problem ? `Site alert: ${problem}` : `Live site is current (newest update ${liveNewest}).`);
+  } else if (!problem && open) sh(`gh issue close ${open} --comment "The live site is current."`);
+  console.log(problem ? `Site alert: ${problem}` : `Live site is current (last built ${built}).`);
 } catch (e) { console.log(`live-site check skipped: ${String(e.message).slice(0, 200)}`); }
 
 /* 2. Broken source links, once a day. */

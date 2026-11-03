@@ -40,7 +40,11 @@ function speakable(t) {
     .replace(/\s*\([^)]*\)/g, "")          // drop bracketed asides
     .replace(/\s+/g, " ").trim();
 }
-const sentences = (t) => (t.match(/[^.!?]+[.!?]+["”’]?(?=\s|$)/g) || [t]).map((x) => x.replace(/^["”’\s]+/, "").trim()).filter(Boolean);
+// Split into sentences without breaking at initials or abbreviations ("J.P. Nadda", "U.S.", "Dr. Smith").
+const sentences = (t) => {
+  const safe = t.replace(/\b(?:[A-Z]\.){2,}/g, (m) => m.replace(/\./g, "\u2063")).replace(/\b(Dr|Mr|Mrs|Ms|St|Gov|Gen|Lt|Col|Sgt|Jr|Sr|No|vs|Inc|Corp|Ltd|Mt|Ft|Prof|Rep|Sen)\./g, "$1\u2063");
+  return (safe.match(/[^.!?]+[.!?]+["”’]?(?=\s|$)/g) || [safe]).map((x) => x.replace(/^["”’\s]+/, "").replace(/\u2063/g, ".").trim()).filter(Boolean);
+};
 const firstSentences = (t, n) => sentences(speakable(t)).slice(0, n).join(" ").trim();
 /* Our grade, said the way a newsreader would: the grade name, why it got that grade, and who reported it. Varied so it doesn't sound robotic. */
 const outletNames = (s, e) => [...new Set((e.sources || []).map((k) => (s.sources[k] || [])[0]).filter((n) => n && !/\.[a-z]{2,}$/i.test(n)).map((n) => n.replace(/\s*\(.*?\)\s*/g, "").trim()))].slice(0, 2);
@@ -161,7 +165,7 @@ for (const { s, ev } of picks) {
 }
 // 3. Quiet stories: nothing new, so the latest report, dated and graded.
 if (quiet.length) {
-  script.push(picks.length ? "Also on our watch, with no new developments in the last three days." : "Here are the latest reports on the stories we follow.");
+  script.push(picks.length ? "Also on our watch, with no new developments in recent days." : "Here are the latest reports on the stories we follow.");
   for (const { s, ev } of quiet) script.push(`${region(s)}. The latest report, from ${WEEKDAYS[new Date(ev[0].date + "T12:00:00Z").getUTCDay()]}, ${spokenDate(ev[0].date)}: ${headline(ev[0])} ${grade(s, ev[0])}`.trim());
   script.push("We'll bring you updates on those as soon as they become available.");
 }
