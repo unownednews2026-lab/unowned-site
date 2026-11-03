@@ -262,7 +262,7 @@ Text: ${x.text.slice(0, 7000)}`, { temperature: 0.1, log: () => {} });
       (Array.isArray(g) ? g[1] : g.keys || g.sources).push(key);
       if (it.kind === "footage" && via === "social") {
         s.ground = s.ground || [];
-        s.ground.push({ date, platform: src.type === "youtube" ? "YouTube" : src.type === "x" ? "X" : src.type === "telegram" ? "Telegram" : src.type === "bluesky" ? "Bluesky" : "Website", who: src.who, shows: it.text, label: "alleged", check: `Posted by ${src.who}; ${src.verified}. Not independently verified: the date, place and context of the footage.`, sources: [key], desk: "backup", via });
+        s.ground.push({ date, added: now, platform: src.type === "youtube" ? "YouTube" : src.type === "x" ? "X" : src.type === "telegram" ? "Telegram" : src.type === "bluesky" ? "Bluesky" : "Website", who: src.who, shows: it.text, label: "alleged", check: `Posted by ${src.who}; ${src.verified}. Not independently verified: the date, place and context of the footage.`, sources: [key], desk: "backup", via });
       } else {
         s.events.push({ date, phase: s.phases[s.phases.length - 1].id, label, added: now, text: it.text.trim(), sources: [key], desk: "backup", via });
         s.events.sort((a, b) => a.date.localeCompare(b.date));
