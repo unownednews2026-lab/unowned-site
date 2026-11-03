@@ -52,6 +52,38 @@
       "kind": "movement",
       "match": "Cockroach|CJP|protest|rally|march|students|SIR|vote|youth|police|detain|NEET|paper leak",
       "verified": "the founder's own X account, as reported by The Free Press Journal"
+    },
+    {
+      "type": "x",
+      "handle": "INCIndia",
+      "who": "Indian National Congress (on X)",
+      "kind": "movement",
+      "match": "Cockroach|CJP|protest|rally|march|dharna|students|SIR|vote chori|voter|electoral roll|Election Commission|youth|police|detain|NEET|paper leak|Jantar Mantar|INDIA bloc",
+      "verified": "the Congress party's official X account, linked from inc.in"
+    },
+    {
+      "type": "instagram",
+      "handle": "incindia",
+      "who": "Indian National Congress (on Instagram)",
+      "kind": "movement",
+      "match": "Cockroach|CJP|protest|rally|march|dharna|students|SIR|vote chori|voter|electoral roll|Election Commission|youth|police|detain|NEET|paper leak|Jantar Mantar|INDIA bloc",
+      "verified": "the Congress party's official Instagram account, linked from inc.in"
+    },
+    {
+      "type": "x",
+      "handle": "RahulGandhi",
+      "who": "Rahul Gandhi, Leader of the Opposition (on X)",
+      "kind": "movement",
+      "match": "Cockroach|CJP|protest|rally|march|dharna|students|SIR|vote chori|voter|electoral roll|Election Commission|youth|police|detain|NEET|paper leak|Jantar Mantar|INDIA bloc",
+      "verified": "the opposition leader's official X account"
+    },
+    {
+      "type": "discover",
+      "url": "https://www.inc.in",
+      "name": "Indian National Congress",
+      "kind": "movement",
+      "match": "Cockroach|CJP|protest|rally|march|dharna|students|SIR|vote chori|voter|electoral roll|Election Commission|youth|police|detain|NEET|paper leak|Jantar Mantar|INDIA bloc",
+      "note": "social accounts linked from the party's official website"
     }
   ],
   "south-africa-asylum-unrest": [

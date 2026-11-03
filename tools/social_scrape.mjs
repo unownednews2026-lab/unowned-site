@@ -16,15 +16,20 @@ const iso = (d) => { if (!d) return ""; const t = typeof d === "number" ? (d < 1
 function normalise(platform, h, it) {
   if (platform === "x") {
     const author = String(pick(it, "author.userName", "author.username", "user.screen_name", "username")).toLowerCase();
-    if (author && author !== h.toLowerCase()) return null;   // retweets of other accounts
-    if (it.isRetweet || it.retweeted_status) return null;
+    const id = pick(it, "id", "id_str");
+    // Who this post points to (network discovery): accounts it mentions, quotes or reposts.
+    const mentions = [...(pick(it, "entities.user_mentions") || []).map((m) => m.screen_name || m.username),
+      pick(it, "quote.author.userName", "quoted_tweet.author.userName", "quotedStatus.author.userName"),
+      pick(it, "retweet.author.userName", "retweeted_tweet.author.userName", "retweetedStatus.author.userName")].filter(Boolean);
+    const repost = it.isRetweet || it.retweeted_status || (author && author !== h.toLowerCase());
+    if (repost) return { url: `https://x.com/${h}/status/${id}`, date: iso(pick(it, "createdAt", "created_at")), text: "", skip: true, mentions: [...mentions, author].filter(Boolean), media: [] };
     const media = [];
     for (const m of pick(it, "extendedEntities.media", "media", "entities.media") || []) {
       const vids = (m.video_info?.variants || []).filter((v) => /mp4/.test(v.content_type || "")).sort((a, b) => (a.bitrate || 0) - (b.bitrate || 0));
       if (vids.length) media.push({ type: "video", url: vids[Math.min(1, vids.length - 1)].url });   // a modest quality is enough to transcribe
       else if (m.media_url_https || m.url) media.push({ type: "image", url: m.media_url_https || m.url });
     }
-    return { url: pick(it, "url", "twitterUrl") || `https://x.com/${h}/status/${pick(it, "id", "id_str")}`, title: "", date: iso(pick(it, "createdAt", "created_at")), text: String(pick(it, "fullText", "full_text", "text")), video: media.some((m) => m.type === "video"), media };
+    return { url: pick(it, "url", "twitterUrl") || `https://x.com/${h}/status/${id}`, title: "", date: iso(pick(it, "createdAt", "created_at")), text: String(pick(it, "fullText", "full_text", "text")), video: media.some((m) => m.type === "video"), media, mentions };
   }
   if (platform === "instagram") {
     const owner = String(pick(it, "ownerUsername", "owner.username")).toLowerCase();
@@ -32,13 +37,14 @@ function normalise(platform, h, it) {
     const media = [];
     if (it.videoUrl) media.push({ type: "video", url: it.videoUrl });
     else for (const u of (it.images && it.images.length ? it.images : [it.displayUrl]).filter(Boolean).slice(0, 3)) media.push({ type: "image", url: u });
-    return { url: pick(it, "url") || (it.shortCode ? `https://www.instagram.com/p/${it.shortCode}/` : ""), title: "", date: iso(pick(it, "timestamp", "takenAt")), text: String(pick(it, "caption")), video: !!it.videoUrl, media };
+    const mentions = [...(it.mentions || []), ...(it.taggedUsers || []).map((u) => u.username), ...(it.coauthorProducers || []).map((u) => u.username)].filter(Boolean);
+    return { url: pick(it, "url") || (it.shortCode ? `https://www.instagram.com/p/${it.shortCode}/` : ""), title: "", date: iso(pick(it, "timestamp", "takenAt")), text: String(pick(it, "caption")), video: !!it.videoUrl, media, mentions };
   }
   if (platform === "tiktok") {
     const owner = String(pick(it, "authorMeta.name", "author.uniqueId")).toLowerCase();
     if (owner && owner !== h.toLowerCase()) return null;
     const vid = (it.mediaUrls || [])[0] || pick(it, "videoMeta.downloadAddr", "video.downloadAddr");
-    return { url: pick(it, "webVideoUrl", "url"), title: "", date: iso(pick(it, "createTimeISO", "createTime")), text: String(pick(it, "text", "desc")), video: true, media: vid ? [{ type: "video", url: vid }] : [] };
+    return { url: pick(it, "webVideoUrl", "url"), title: "", date: iso(pick(it, "createTimeISO", "createTime")), text: String(pick(it, "text", "desc")), video: true, media: vid ? [{ type: "video", url: vid }] : [], mentions: (it.mentions || []).map((m) => String(m).replace(/^@/, "")) };
   }
   return null;
 }

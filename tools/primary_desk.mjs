@@ -147,7 +147,8 @@ async function readSource(src) {
           const v = (m.video_info?.variants || []).filter((x) => /mp4/.test(x.content_type || "")).sort((a, b) => (a.bitrate || 0) - (b.bitrate || 0));
           return v.length ? { type: "video", url: v[Math.min(1, v.length - 1)].url } : { type: "image", url: m.media_url_https };
         }).filter((m) => m.url);
-        out.push({ url, title: "", date, text: unent(j.text || "").replace(/https:\/\/t\.co\/\w+$/, "").trim(), video: media.some((m) => m.type === "video"), media });
+        const mentions = [...(j.entities?.user_mentions || []).map((m) => m.screen_name), j.quoted_tweet?.user?.screen_name].filter(Boolean);
+        out.push({ url, title: "", date, text: unent(j.text || "").replace(/https:\/\/t\.co\/\w+$/, "").trim(), video: media.some((m) => m.type === "video"), media, mentions });
         continue;
       } catch {}
       try {
@@ -206,6 +207,16 @@ async function readSource(src) {
 }
 
 const registry = existsSync("tools/primary_sources.json") ? JSON.parse(readFileSync("tools/primary_sources.json", "utf8")) : {};
+// Accounts verified by the editor through network discovery (content/network-sources.json, {story slug: [source, ...]}).
+const network = existsSync("content/network-sources.json") ? JSON.parse(readFileSync("content/network-sources.json", "utf8")) : {};
+for (const [slug, list] of Object.entries(network)) if (!slug.startsWith("_") && Array.isArray(list)) registry[slug] = [...(registry[slug] || []), ...list.map((x) => ({ ...x, network: true }))];
+// Track record of every account we publish from (content/source-record.json; resolved by tools/track_record.mjs).
+const recordPath = "content/source-record.json";
+const record = existsSync(recordPath) ? JSON.parse(readFileSync(recordPath, "utf8")) : { items: [] };
+const trackRecord = (acct) => { const r = (record.accounts || {})[acct] || {}; return { upheld: r.upheld || 0, resolved: (r.upheld || 0) + (r.disproved || 0) }; };
+// Accounts the ones we follow keep reposting, mentioning or tagging (for network discovery).
+const netPath = "content/network.json";
+const net = existsSync(netPath) ? JSON.parse(readFileSync(netPath, "utf8")) : { counts: {}, proposed: {}, ignored: {} };
 const seenPath = "content/primary-seen.json";
 const seen = existsSync(seenPath) ? JSON.parse(readFileSync(seenPath, "utf8")) : {};
 const published = [], report = [], queue = [];
@@ -236,8 +247,14 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
     // Posts dated after that still go through every check below, so a new source can't miss recent developments.
     if (first) { let n = 0; for (const x of items) if (x.url && (!x.date || Date.parse(x.date) <= since)) { mark(x); n++; } say(`${s.slug}: ${src.who}: first read, ${n} older item(s) recorded as already seen`); }
     for (const x of items) if (x.url && seen[x.key || x.url] && old(seen[x.key || x.url])) mark(x);   // still listed: keep remembering it
-    const fresh = items.filter((x) => x.url && !seen[x.key || x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
+    const fresh = items.filter((x) => x.url && !x.skip && !seen[x.key || x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
     say(`${s.slug}: ${src.who}: ${items.length} item(s), ${fresh.length} new and relevant`);
+    for (const x of items) for (const m of new Set((x.mentions || []).map((h) => String(h).toLowerCase().replace(/^@/, "")))) {
+      if (!m || m === String(src.handle || "").toLowerCase() || seen[`netpost:${x.url}:${m}`]) continue;
+      seen[`netpost:${x.url}:${m}`] = now;   // count each post once
+      const k = `${src.type}:${m}`, c = (net.counts[k] = net.counts[k] || { n: 0, from: {}, stories: {}, last: "" });
+      c.n++; c.from[src.handle || src.who] = (c.from[src.handle || src.who] || 0) + 1; c.stories[s.slug] = 1; c.last = now;
+    }
     if (DRY && src.type === "youtube" && items[0]) { const v = (items[0].url.match(/[?&]v=([\w-]{11})/) || [])[1]; let t = ""; try { t = execSync(`timeout 60 python3 tools/yt_transcript.py ${v} 2>&1`, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }); } catch (e) { t = String(e.stderr || e.message); } say(`   transcript test (${items[0].title.slice(0, 50)}): ${t.trim().slice(0, 160) || "nothing returned"}`); }
     if (DRY) { for (const x of fresh.slice(0, 3)) say(`   ${x.date?.slice(0, 16) || "?"} ${x.title || x.text.slice(0, 80)} ${x.url}`); continue; }
     for (const x of fresh.slice(0, 2)) {
@@ -263,11 +280,12 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
       const via = src.kind === "official" ? "official" : "social";
       const where = src.type === "youtube" ? "in a YouTube video" : src.type === "instagram" ? (x.video ? "in a video on Instagram" : "on Instagram") : src.type === "tiktok" ? "in a TikTok video" : src.type === "x" ? (x.video ? "in a video on X" : "on X") : src.type === "telegram" ? "on Telegram" : src.type === "bluesky" ? "on Bluesky" : via === "official" ? "in a statement" : "on its website";
       const out = await ask(`You write for a strict, neutral news site. Below is a ${via === "official" ? "statement published by an official body" : "post published by a movement or organisation"}: ${src.who}. It may be in any language; write in English.
-Story: "${s.title}". Return ONLY JSON: {"relevant": true|false, "date": "YYYY-MM-DD", "kind": "own_action"|"claim"|"footage", "text": "..."}
+Story: "${s.title}". Today is ${now.slice(0, 10)}. Return ONLY JSON: {"relevant": true|false, "date": "YYYY-MM-DD", "kind": "own_action"|"claim"|"footage", "eventDate": "YYYY-MM-DD or empty", "text": "..."}
 - relevant: true only if it reports something NEW and specific about this story (not background, not promotion).
 - kind: "own_action" = the publisher announces or describes its OWN decision, action or plan; "claim" = it says something about others, accuses anyone, or gives figures about events; "footage" = mainly photos/video of an event.
 - text: one or two neutral sentences, at most 60 words, saying WHO said it and WHERE, e.g. "${src.who.replace(/\s*\(.*\)$/, "")} said ${where} that …". Never state their claims as fact. No names of private people. No graphic detail.
 - date: the day of the statement or event.
+- eventDate: ONLY if the post announces or calls for a FUTURE event (a march, protest, strike, rally, sit-in, hearing, vote) on a specific date stated in it: that date. Otherwise "". Then write the text as "<who> said <where> that it will hold <what> in <place> on <date>".
 - If the text contains a video transcript, report what the speaker actually says in it (attributed: "said in a YouTube video"), never what the title or description promises.
 
 Title: ${x.title}
@@ -283,18 +301,27 @@ Text: ${x.text.slice(0, 7000)}`, { temperature: 0.1, log: () => {} });
       if (SENSITIVE.test(it.text) || SENSITIVE.test(x.title)) { queue.push(`**${s.slug}** — from ${src.who} (${via}), sensitive, needs the editor: "${it.text}"\n  Source: ${x.url}`); report.push(`- ${s.slug}: sent to the editor (sensitive): "${it.text.slice(0, 70)}…"`); continue; }
       // The grade, decided in code. Own announcements are "reported" (we can confirm they said it, from their own channel);
       // anything about others is "alleged". Never "confirmed" from a single primary source.
-      const label = it.kind === "own_action" && !CLAIMWORDS.test(it.text) ? "reported" : "alleged";
-      const date = /^\d{4}-\d{2}-\d{2}$/.test(it.date || "") && it.date <= now.slice(0, 10) ? it.date : (x.date || now).slice(0, 10);
+      let label = it.kind === "own_action" && !CLAIMWORDS.test(it.text) ? "reported" : "alleged";
+      let date = /^\d{4}-\d{2}-\d{2}$/.test(it.date || "") && it.date <= now.slice(0, 10) ? it.date : (x.date || now).slice(0, 10);
+      // An announced FUTURE event (e.g. a protest called for Sunday) goes on the timeline as "pending", dated on the day it is
+      // due, so readers know before it happens. After that day the editor and the freshness guard replace it with what happened.
+      const future = /^\d{4}-\d{2}-\d{2}$/.test(it.eventDate || "") && it.eventDate > now.slice(0, 10) && it.eventDate <= new Date(Date.now() + 60 * DAY).toISOString().slice(0, 10);
+      // Track record: an account whose earlier reports were often proved wrong goes to the editor first.
+      const acct = `${src.type}:${(src.handle || src.channel || src.site || src.url || src.who).toLowerCase()}`;
+      const rec = trackRecord(acct);
+      if (rec.resolved >= 4 && rec.upheld / rec.resolved < 0.5) { queue.push(`**${s.slug}** — from ${src.who}, whose track record is weak (${rec.upheld} of ${rec.resolved} earlier reports upheld); needs the editor: "${it.text}"\n  Source: ${x.url}`); report.push(`- ${s.slug}: sent to the editor (weak track record): "${it.text.slice(0, 70)}…"`); continue; }
       // Only genuinely new statements: never older than 3 days, never older than the story's newest development minus a day.
       const floor = new Date(Math.max(Date.now() - 3 * DAY, (Date.parse(newestDev(s) + "T00:00:00Z") || 0) - DAY)).toISOString().slice(0, 10);
       const urlDate = (x.url.match(/(\d{1,2})-(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*-(20\d\d)/i) || []);
       const fromUrl = urlDate.length ? new Date(`${urlDate[2]} ${urlDate[1]} ${urlDate[3]} UTC`).toISOString().slice(0, 10) : "";
       if (date < floor || (fromUrl && fromUrl < floor)) { report.push(`- ${s.slug}: ${src.who}: skipped, not new (dated ${fromUrl || date}): ${(x.title || x.url).slice(0, 70)}`); continue; }
+      if (future) { label = "pending"; date = it.eventDate; }
       const key = `pr${now.replace(/\D/g, "").slice(4, 12)}${published.length}`;
+      record.items.push({ account: acct, who: src.who, story: s.slug, key, label, date, added: now });
       s.sources[key] = [`${src.who}${via === "official" ? "" : ""}`, x.url];
       const g = s.sourceGroups[s.sourceGroups.length - 1];
       (Array.isArray(g) ? g[1] : g.keys || g.sources).push(key);
-      if (it.kind === "footage" && via === "social") {
+      if (it.kind === "footage" && via === "social" && !future) {
         s.ground = s.ground || [];
         s.ground.push({ date, added: now, platform: src.type === "youtube" ? "YouTube" : src.type === "instagram" ? "Instagram" : src.type === "tiktok" ? "TikTok" : src.type === "x" ? "X" : src.type === "telegram" ? "Telegram" : src.type === "bluesky" ? "Bluesky" : "Website", who: src.who, shows: it.text, label: "alleged", check: `Posted by ${src.who}; ${src.verified}. Not independently verified: the date, place and context of the footage.`, sources: [key], desk: "backup", via });
       } else {
@@ -331,6 +358,8 @@ if (DRY) {
     if (n) sh(`gh issue comment ${n} --body-file /tmp/pdry.md`); else console.log("dry run: log issue not found"); } catch (e) { console.log(`dry run: could not post (${String(e.message).slice(0, 150)})`); }
   process.exit(0);
 }
+writeFileSync(recordPath, JSON.stringify(record, null, 1));
+writeFileSync(netPath, JSON.stringify(net, null, 1));
 writeFileSync(seenPath, JSON.stringify(Object.fromEntries(Object.entries(seen).filter(([, t]) => Date.now() - Date.parse(t) < 30 * DAY)), null, 2));
 
 if (queue.length) try {
@@ -339,13 +368,13 @@ if (queue.length) try {
   if (q) sh(`gh issue comment ${q} --body-file /tmp/pqueue.md`);
 } catch {}
 
-if (!sh("git status --porcelain content/stories content/primary-seen.json")) { say("nothing new"); process.exit(0); }
+if (!sh("git status --porcelain content/stories content/primary-seen.json content/source-record.json content/network.json")) { say("nothing new"); process.exit(0); }
 if (published.length) {
   const build = sh("node build.mjs 2>&1 || true");
   if (/LABEL CHECK: \d+ item/.test(build) || /Error/.test(build)) { say("build check failed; not publishing"); process.exit(0); }
 }
 sh(`git config user.name "Unowned" && git config user.email "Unownednews2026@gmail.com"`);
-sh(`git add content/stories content/primary-seen.json ${published.length ? "review-packets" : ""} && git commit -q -m "${published.length ? `Primary sources: ${[...new Set(published)].join(", ")}` : "Primary sources checked"} — ${now}"`);
+sh(`git add content/stories content/primary-seen.json content/source-record.json content/network.json ${published.length ? "review-packets" : ""} && git commit -q -m "${published.length ? `Primary sources: ${[...new Set(published)].join(", ")}` : "Primary sources checked"} — ${now}"`);
 for (let i = 0; i < 3; i++) {
   try { sh("git pull -q --rebase origin main && git push -q origin HEAD:main"); break; }
   catch (e) { if (i === 2) { say(`push failed: ${String(e.message).slice(0, 200)}`); process.exit(0); } await new Promise((r) => setTimeout(r, 10000)); }

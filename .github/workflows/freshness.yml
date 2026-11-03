@@ -142,6 +142,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           pip install -q --user youtube-transcript-api==1.2.4 yt-dlp || true
+          node tools/track_record.mjs || true
           node tools/primary_desk.mjs ${{ inputs.primary_dry && '--dry' || '' }} || true
       - name: Pass new reader submissions to the news desk
         if: always()
