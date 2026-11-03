@@ -47,8 +47,8 @@ if (hour >= 8) {
     const b = JSON.parse(readFileSync(json, "utf8"));
     const gen = Date.parse(b.generated || 0), cutoff = new Date(Date.now() - 2 * DAY).toISOString().slice(0, 10);
     const fresh = readdirSync("content/stories").filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(`content/stories/${f}`, "utf8")))
-      .filter((s) => s.events.some((e) => e.label !== "pending" && e.desk !== "backup" && e.date >= cutoff && e.added && Date.parse(e.added) > gen));
-    if (fresh.length && Date.now() - gen > 3 * 36e5) issues.push(`new developments since it was written (${fresh.map((s) => s.region || s.slug).join(", ")})`);
+      .filter((s) => [...s.events, ...(s.ground || [])].some((e) => e.label !== "pending" && e.date >= cutoff && e.added && Date.parse(e.added) > gen));   // automated items count too: they have passed two fact-checks
+    if (fresh.length && Date.now() - gen > 1.5 * 36e5) issues.push(`new developments since it was written (${fresh.map((s) => s.region || s.slug).join(", ")})`);
   }
   if (issues.length) rerun("briefing-audio.yml", `Briefing: ${issues.join("; ")}`);
   else if (hour >= 9) {
