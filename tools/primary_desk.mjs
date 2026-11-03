@@ -52,8 +52,22 @@ async function readSource(src) {
     let id = src.channelId;
     if (!id) { const html = await get(`https://www.youtube.com/@${src.handle}`); id = (html.match(/"channelId":"(UC[\w-]{22})"/) || html.match(/channel\/(UC[\w-]{22})/) || [])[1]; }
     if (!id) throw new Error("channel id not found");
-    const xml = await get(`https://www.youtube.com/feeds/videos.xml?channel_id=${id}`);
-    return xml.split("<entry>").slice(1).map((it) => ({ url: (it.match(/<link rel="alternate" href="([^"]+)"/) || [])[1], title: tag(it, "title"), date: tag(it, "published"), text: tag(it, "media:description"), video: true }));
+    let list = [];
+    try {
+      const xml = await get(`https://www.youtube.com/feeds/videos.xml?channel_id=${id}`);
+      list = xml.split("<entry>").slice(1).map((it) => ({ url: (it.match(/<link rel="alternate" href="([^"]+)"/) || [])[1], title: tag(it, "title"), date: tag(it, "published"), text: tag(it, "media:description"), video: true }));
+    } catch (e) { say(`YouTube feed for ${src.handle} (${id}) could not be read: ${e.message}`); }
+    if (!list.length && src.handle) {   // feed empty or refused: read the channel's videos page through the reader service
+      try {
+        const md = await get(`https://r.jina.ai/https://www.youtube.com/@${src.handle}/videos`, 40000), seenIds = new Set();
+        for (const m of md.matchAll(/\[([^\]]{10,200})\]\((https:\/\/www\.youtube\.com\/watch\?v=([\w-]{11}))[^)]*\)/g)) {
+          if (seenIds.has(m[3])) continue; seenIds.add(m[3]);
+          list.push({ url: m[2], title: unent(m[1]).replace(/^!?Image \d+:?\s*/, ""), date: "", text: "", video: true });
+        }
+        say(`YouTube ${src.handle}: feed (channel ${id}) was empty; ${list.length} video(s) from the channel page`);
+      } catch (e) { say(`YouTube ${src.handle}: channel page could not be read either (${e.message})`); }
+    }
+    return list.slice(0, 12);
   }
   if (src.type === "sitemap") {
     const xml = await get(src.url);
@@ -112,29 +126,39 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
     for (const x of items) if (x.url && seen[x.url] && old(seen[x.url])) seen[x.url] = now;   // still listed: keep remembering it
     const fresh = first ? [] : items.filter((x) => x.url && !seen[x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
     say(`${s.slug}: ${src.who}: ${items.length} item(s), ${fresh.length} new and relevant`);
+    if (DRY && src.type === "youtube" && items[0]) { const v = (items[0].url.match(/[?&]v=([\w-]{11})/) || [])[1]; let t = ""; try { t = execSync(`timeout 60 python3 tools/yt_transcript.py ${v} 2>&1`, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }); } catch (e) { t = String(e.stderr || e.message); } say(`   transcript test (${items[0].title.slice(0, 50)}): ${t.trim().slice(0, 160) || "nothing returned"}`); }
     if (DRY) { for (const x of fresh.slice(0, 3)) say(`   ${x.date?.slice(0, 16) || "?"} ${x.title || x.text.slice(0, 80)} ${x.url}`); continue; }
     for (const x of fresh.slice(0, 2)) {
       if (added >= 2) break;
       seen[x.url] = now;
+      // A video is judged by what is actually said in it: its transcript (captions, translated to English when possible).
+      const vid = x.video && (x.url.match(/[?&]v=([\w-]{11})/) || [])[1];
+      if (vid && !x.date) {   // videos read from the channel page carry no date: take the published time from the video page
+        try { const md = await get(`https://r.jina.ai/${x.url}`, 40000); const d = (md.match(/^Published Time:\s*(\S+)/m) || md.match(/"uploadDate":"([^"]+)"/) || [])[1]; if (d && !isNaN(Date.parse(d))) x.date = new Date(d).toISOString(); } catch {}
+        if (!x.date) { report.push(`- ${s.slug}: ${src.who}: skipped a video with no readable date (${x.url})`); continue; }
+        if (Date.parse(x.date) <= since) continue;
+      }
+      if (vid) { const t = sh(`timeout 60 python3 tools/yt_transcript.py ${vid} 2>/dev/null || true`); if (t.length > 100) x.text = `${x.text}\n${t}`.trim(); }
       if (!x.text || x.text.length < 200) x.text = `${x.text}\n${await pageText(x.url)}`.trim();
       if (x.text.length < 60) continue;
       const via = src.kind === "official" ? "official" : "social";
-      const where = src.type === "youtube" ? "on YouTube" : src.type === "telegram" ? "on Telegram" : src.type === "bluesky" ? "on Bluesky" : via === "official" ? "in a statement" : "on its website";
+      const where = src.type === "youtube" ? "in a YouTube video" : src.type === "telegram" ? "on Telegram" : src.type === "bluesky" ? "on Bluesky" : via === "official" ? "in a statement" : "on its website";
       const out = await ask(`You write for a strict, neutral news site. Below is a ${via === "official" ? "statement published by an official body" : "post published by a movement or organisation"}: ${src.who}. It may be in any language; write in English.
 Story: "${s.title}". Return ONLY JSON: {"relevant": true|false, "date": "YYYY-MM-DD", "kind": "own_action"|"claim"|"footage", "text": "..."}
 - relevant: true only if it reports something NEW and specific about this story (not background, not promotion).
 - kind: "own_action" = the publisher announces or describes its OWN decision, action or plan; "claim" = it says something about others, accuses anyone, or gives figures about events; "footage" = mainly photos/video of an event.
 - text: one or two neutral sentences, at most 60 words, saying WHO said it and WHERE, e.g. "${src.who.replace(/\s*\(.*\)$/, "")} said ${where} that …". Never state their claims as fact. No names of private people. No graphic detail.
 - date: the day of the statement or event.
+- If the text contains a video transcript, report what the speaker actually says in it (attributed: "said in a YouTube video"), never what the title or description promises.
 
 Title: ${x.title}
 Published: ${x.date || "unknown"}
-Text: ${x.text.slice(0, 4000)}`, { temperature: 0.1, log: () => {} });
+Text: ${x.text.slice(0, 7000)}`, { temperature: 0.1, log: () => {} });
       let it = {}; try { it = JSON.parse(out.slice(out.indexOf("{"), out.lastIndexOf("}") + 1)); } catch {}
       if (it.relevant !== true || !it.text) { report.push(`- ${s.slug}: ${src.who}: not relevant or unreadable (${(x.title || x.url).slice(0, 70)})`); continue; }
       const miss = ungrounded(it.text, [{ title: x.title, text: x.text, domain: src.who }], `${s.title} ${s.region || ""} ${src.who} said statement YouTube Telegram Bluesky website`);
       if (miss.length) { report.push(`- ${s.slug}: ${src.who}: skipped "${it.text.slice(0, 70)}…" (${miss.slice(0, 2).join("; ")})`); continue; }
-      const chk = await ask(`Independent fact-check. Source (${src.who}):\n${x.title}\n${x.text.slice(0, 4000)}\n\nProposed item: "${it.text}"\n\nIs every fact in the item stated in the source, attributed to ${src.who} (not presented as established fact), and dated correctly? Answer ONLY JSON {"ok": true|false, "reason": "..."}`, { temperature: 0, prefer: SECOND_CHECK, log: () => {} });
+      const chk = await ask(`Independent fact-check. Source (${src.who}):\n${x.title}\n${x.text.slice(0, 7000)}\n\nProposed item: "${it.text}"\n\nIs every fact in the item stated in the source, attributed to ${src.who} (not presented as established fact), and dated correctly? Answer ONLY JSON {"ok": true|false, "reason": "..."}`, { temperature: 0, prefer: SECOND_CHECK, log: () => {} });
       let v = {}; try { v = JSON.parse(chk.slice(chk.indexOf("{"), chk.lastIndexOf("}") + 1)); } catch {}
       if (v.ok !== true) { report.push(`- ${s.slug}: ${src.who}: skipped "${it.text.slice(0, 70)}…" (fact-check: ${String(v.reason || "no clear yes").slice(0, 100)})`); continue; }
       if (SENSITIVE.test(it.text) || SENSITIVE.test(x.title)) { queue.push(`**${s.slug}** — from ${src.who} (${via}), sensitive, needs the editor: "${it.text}"\n  Source: ${x.url}`); report.push(`- ${s.slug}: sent to the editor (sensitive): "${it.text.slice(0, 70)}…"`); continue; }
