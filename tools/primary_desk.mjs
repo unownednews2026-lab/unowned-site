@@ -119,7 +119,7 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
   for (const src of sources) {
     let items = [];
     try { items = await readSource(src); } catch (e) { report.push(`- ${s.slug}: ${src.who} (${src.type}) could not be read: ${String(e.message).slice(0, 80)}`); continue; }
-    if (!items.length) report.push(`- ${s.slug}: ${src.who} (${src.type}): nothing could be read (empty feed or page)`);
+    if (!items.length && (DRY || new Date().getUTCHours() === 5)) report.push(`- ${s.slug}: ${src.who} (${src.type}): nothing could be read (empty feed or page)`);
     // First time we read a source: everything already there is old news. Remember it, publish nothing.
     const first = !seen[`source:${src.type}:${src.url || src.handle}`];
     const old = (t) => !t || Date.now() - Date.parse(t) > 7 * DAY;     // refresh weekly only, so routine checks make no commit

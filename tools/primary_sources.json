@@ -1,13 +1,38 @@
 {
   "cockroach-movement": [
-    {"type": "rss", "url": "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3", "who": "Press Information Bureau (Government of India)", "kind": "official", "match": "Election Commission|electoral roll|voter list|Special Intensive Revision|\\bSIR\\b|Cockroach|protest|NEET", "verified": "the Government of India's official press office"},
-    {"type": "youtube", "handle": "CockroachJantaParty", "who": "Cockroach Janta Party (official YouTube)", "kind": "movement", "verified": "the channel is linked from the party's own website, cockroachjantaparty.co"},
-    {"type": "sitemap", "url": "https://cockroachjantaparty.co/app/sitemap.xml", "pathMatch": "/news", "who": "Cockroach Janta Party (official website)", "kind": "movement", "verified": "the party's own website"}
+    {
+      "type": "rss",
+      "url": "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3",
+      "who": "Press Information Bureau (Government of India)",
+      "kind": "official",
+      "match": "Election Commission|electoral roll|voter list|Special Intensive Revision|\\bSIR\\b|Cockroach|protest|NEET",
+      "verified": "the Government of India's official press office"
+    },
+    {
+      "type": "youtube",
+      "handle": "CockroachJantaParty",
+      "who": "Cockroach Janta Party (official YouTube)",
+      "kind": "movement",
+      "verified": "the channel is linked from the party's own website, cockroachjantaparty.co"
+    },
+    {
+      "type": "sitemap",
+      "url": "https://cockroachjantaparty.co/app/sitemap.xml",
+      "pathMatch": "/news",
+      "who": "Cockroach Janta Party (official website)",
+      "kind": "movement",
+      "verified": "the party's own website"
+    }
   ],
   "south-africa-asylum-unrest": [
-    {"type": "web", "url": "https://www.gov.za/source-department/department-home-affairs", "pathMatch": "/news/media-statements/", "who": "Department of Home Affairs (South African government)", "kind": "official", "match": "asylum|refugee|Durban|migrant|immigra|directive|March and March|Constitutional Court", "verified": "published on gov.za, the South African government's official website"}
-  ],
-  "france-school-protests": [
-    {"type": "web", "url": "https://www.education.gouv.fr/presse", "who": "French Ministry of National Education", "kind": "official", "match": "lycée|lycéen|blocage|mobilisation|grève|manifest|élèves|postes|budget|Parcoursup|sécurité", "verified": "published on education.gouv.fr, the ministry's official website"}
+    {
+      "type": "web",
+      "url": "https://www.gov.za/source-department/department-home-affairs",
+      "pathMatch": "/news/media-statements/",
+      "who": "Department of Home Affairs (South African government)",
+      "kind": "official",
+      "match": "asylum|refugee|Durban|migrant|immigra|directive|March and March|Constitutional Court",
+      "verified": "published on gov.za, the South African government's official website"
+    }
   ]
 }
