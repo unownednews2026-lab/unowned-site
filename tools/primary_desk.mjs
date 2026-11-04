@@ -184,6 +184,8 @@ async function readSource(src) {
   }
   if (src.type === "instagram" || src.type === "tiktok") {   // free routes first; the paid scraper only as a capped last resort
     let posts = [], route = "", why = "";
+    const failKey = `${src.type}fail:${src.handle.toLowerCase()}`;
+    if (seen[failKey] && Date.now() - Date.parse(seen[failKey]) < 6 * 36e5 && !DRY) return [];   // failed recently: retry in 6 hours
     try {
       const r = src.type === "instagram" ? await instagramFree(src.handle) : await tiktokFree(src.handle);
       posts = r.posts; route = r.route;
@@ -199,6 +201,7 @@ async function readSource(src) {
       posts = posts.filter((p) => p.date);
     } catch (e) { why = String(e.message).slice(0, 160); }
     if (!posts.length) { const paid = await scrapeEvery(src, src.type, src.handle).catch((e) => { why += `; paid: ${String(e.message).slice(0, 60)}`; return []; }); if (paid.length) { posts = paid; route = "paid scraper"; } }
+    if (!posts.length) seen[failKey] = now; else delete seen[failKey];
     if (DRY || !posts.length) say(`${src.type} @${src.handle}: ${posts.length} post(s)${route ? ` via ${route}` : ""}${!posts.length && why ? ` (${why})` : ""}`);
     return posts;
   }
@@ -223,7 +226,9 @@ async function readSource(src) {
     let page = "";
     try { page += await get(src.url); } catch {}
     try { page += "\n" + (await get(`https://r.jina.ai/${src.url}`, 40000)); } catch {}
-    const found = [], add = (x) => { if (!found.some((f) => f.type === x.type && (f.handle || f.channelId || f.channel) === (x.handle || x.channelId || x.channel))) found.push(x); };
+    // Not accounts: link paths that look like handles (x.com/articles, instagram.com/legal, …).
+    const JUNK = /^(articles?|widgets?|legal|privacy|terms|tos|help|about|explore|share|intent|home|hashtag|search|settings|login|signup|accounts?|developers?|business|ads|en_us|en|fr|de|it|p|reel|reels|stories|tv|watch|channel|user|c|i|status|embed|plugins|sharer|dialog)$/i;
+    const found = [], add = (x) => { const id = String(x.handle || x.channelId || x.channel || ""); if (!id || JUNK.test(id)) return; if (!found.some((f) => f.type === x.type && String(f.handle || f.channelId || f.channel || "").toLowerCase() === id.toLowerCase())) found.push(x); };
     const host = new URL(src.url).hostname.replace(/^www\./, "");
     const base = { kind: src.kind, match: src.match, verified: `linked from ${host}, its official website` };
     for (const m of page.matchAll(/youtube\.com\/(?:@([\w.-]{3,})|channel\/(UC[\w-]{22}))/gi)) add({ ...base, type: "youtube", handle: m[1], channelId: m[2], who: `${src.name} (YouTube)` });
