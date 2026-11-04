@@ -133,7 +133,7 @@ jobs:
       - name: Primary-source desk (official statements and movements' own channels, strictly graded)
         if: always()
         continue-on-error: true
-        timeout-minutes: 25
+        timeout-minutes: 35
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
