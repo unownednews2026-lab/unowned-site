@@ -1,0 +1,20 @@
+{
+  "story": "france-school-protests",
+  "added": "2026-11-04T15:45:39Z",
+  "label": "alleged",
+  "via": "social",
+  "kind": "claim",
+  "text": "The FSU teachers' union stated on Bluesky that the general secretary of the Italian trade union FLC CGIL expressed support for the November 5 mobilization and announced that Italian students and education personnel will mobilize on November 20 to defend public education.",
+  "sources": [
+    {
+      "key": "pr110415450",
+      "outlet": "FSU teachers' union (Bluesky)",
+      "url": "https://bsky.app/profile/fsu-nationale.bsky.social/post/3mziogyrvmh2t",
+      "platform": "bluesky",
+      "verified": "linked from fsu.fr, its official website",
+      "published": "2026-11-04T15:33:30.637045442Z",
+      "media": [],
+      "articleText": "✊Gianna Fracassi, secrétaire générale de la FLC CGIL italienne nous exprime son soutien pour la mobilisation du 5/11\nEn Italie, étudiant-es et personnels de l’éducation et de la recherche seront mobilisé-es ensemble le 20/11 pour défendre l'enseignement public face au projet destructeur de G. Meloni"
+    }
+  ]
+}
