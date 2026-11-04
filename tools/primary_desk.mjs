@@ -136,24 +136,22 @@ async function readSource(src) {
   if (src.type === "x") {   // X (Twitter): find recent posts by several routes, then confirm each one with X's own embed service
     const h = src.handle, ids = new Set(), routes = [];
     const grab = (txt, route) => { let n = 0; for (const m of txt.matchAll(new RegExp(`(?:x|twitter|xcancel|nitter)[\\w.]*\\.(?:com|net|org|poast\\.org)/${h}/status(?:es)?/(\\d{15,20})`, "gi"))) { if (!ids.has(m[1])) n++; ids.add(m[1]); } routes.push(`${route} ${n}`); };
-    for (const [route, url] of [["xcancel", `https://xcancel.com/${h}/rss`], ["nitter", `https://nitter.net/${h}/rss`], ["nitter2", `https://nitter.poast.org/${h}/rss`]]) {
-      if (ids.size >= 6) break;
-      try { grab(await get(url, 15000), route); } catch (e) { routes.push(`${route} ${e.message.slice(0, 20)}`); }
-    }
-    if (ids.size < 3) {   // the public embedded-timeline service, and the reader service
-      try { const html = await get(`https://syndication.twitter.com/srv/timeline-profile/screen-name/${h}`, 20000); let n = 0;
-        if (new RegExp(`"screen_name":"${h}"`, "i").test(html)) for (const m of html.matchAll(/"id_str":"(\d{15,20})"/g)) { if (!ids.has(m[1])) n++; ids.add(m[1]); }
-        routes.push(`timeline ${n}`); } catch (e) { routes.push(`timeline ${e.message.slice(0, 20)}`); }
-      for (const [route, u] of [["reader", `https://r.jina.ai/https://x.com/${h}`], ["reader-tw", `https://r.jina.ai/https://twitter.com/${h}`], ["reader-search", `https://r.jina.ai/https://x.com/search?q=from%3A${h}&f=live`]]) {
-        if (ids.size >= 3) break;
-        try { const r = await fetch(u, { headers: { ...UA, "X-Wait-For-Selector": "article a[href*='/status/']", "X-Timeout": "35" }, signal: AbortSignal.timeout(60000) }); const md = await r.text(); const before = ids.size; grab(md, route); if (ids.size === before && DRY) say(`   ${route} for @${h} returned: ${md.replace(/\s+/g, " ").slice(0, 200)}`); }
-        catch (e) { routes.push(`${route} ${e.message.slice(0, 20)}`); }
-      }
-    }
-    if (ids.size < 3) { try { const f = await xIdsFree(h); for (const i of f.ids) ids.add(i); routes.push(...f.routes); } catch (e) { routes.push(`free routes ${String(e.message).slice(0, 30)}`); } }
-    if (ids.size < 3) for (const site of ["x.com", "twitter.com"]) {
-      try { grab(await get(`https://www.bing.com/search?q=${encodeURIComponent(`site:${site}/${h}/status`)}&format=rss&filters=${encodeURIComponent('ex1:"ez2"')}`, 20000), `bing:${site}`); } catch (e) { routes.push(`bing ${e.message.slice(0, 20)}`); }
-    }
+    // Routes, fastest first. The route that last worked for this account is tried first; dead routes were removed.
+    const tryRoute = {
+      reader: async () => { const r = await fetch(`https://r.jina.ai/https://x.com/${h}`, { headers: { ...UA, "X-Wait-For-Selector": "article a[href*='/status/']", "X-Timeout": "25" }, signal: AbortSignal.timeout(45000) }); grab(await r.text(), "reader"); },
+      timeline: async () => { const html = await get(`https://syndication.twitter.com/srv/timeline-profile/screen-name/${h}`, 15000); let n = 0; if (new RegExp(`"screen_name":"${h}"`, "i").test(html)) for (const m of html.matchAll(/"id_str":"(\d{15,20})"/g)) { if (!ids.has(m[1])) n++; ids.add(m[1]); } routes.push(`timeline ${n}`); },
+      free: async () => { const f = await xIdsFree(h); for (const i of f.ids) ids.add(i); routes.push(...f.routes); },
+    };
+    // (stored as a timestamp per route, because remembered entries are kept for 30 days by date)
+    const setWorked = (r) => { for (const k of ["reader", "timeline", "free", "paid"]) delete seen[`xroute:${h}:${k}`]; seen[`xroute:${h}:${r}`] = now; };
+    const worked = ["paid", "reader", "timeline", "free"].find((r) => seen[`xroute:${h}:${r}`]);
+    const order = [...new Set([...(worked && tryRoute[worked] ? [worked] : []), "reader", "timeline", "free"])];
+    // An account whose posts only the paid scraper can see: skip the slow free routes except once every 6 hours.
+    const skipFree = worked === "paid" && seen[`xfree:${h}`] && Date.now() - Date.parse(seen[`xfree:${h}`]) < 6 * 36e5;
+    if (!skipFree) {
+      seen[`xfree:${h}`] = now;
+      for (const r of order) { if (ids.size >= 3) break; const before = ids.size; try { await tryRoute[r](); } catch (e) { routes.push(`${r} ${String(e.message).slice(0, 20)}`); } if (ids.size > before) { setWorked(r); break; } }
+    } else routes.push("free routes skipped (only the paid scraper sees this account)");
     const out = [];
     for (const id of [...ids].sort((a, b) => (BigInt(b) > BigInt(a) ? 1 : -1)).slice(0, 8)) {
       const url = `https://x.com/${h}/status/${id}`;
@@ -179,7 +177,7 @@ async function readSource(src) {
     }
     // X hides some accounts' posts from readers who aren't signed in: then use the signed-in scraping service.
     if (!out.length && (await apifyAllowed())) {
-      try { const got = await scrapeEvery(src, "x", h); out.push(...got); routes.push(`scraper ${got.length}`); } catch (e) { routes.push(`scraper: ${String(e.message).slice(0, 80)}`); }
+      try { const got = await scrapeEvery(src, "x", h); out.push(...got); routes.push(`scraper ${got.length}`); if (got.length) setWorked("paid"); } catch (e) { routes.push(`scraper: ${String(e.message).slice(0, 80)}`); }
     }
     if (DRY || !out.length) say(`X @${h}: ${routes.join(", ")}; ${out.length} post(s) confirmed by X`);
     return out;
@@ -220,6 +218,7 @@ async function readSource(src) {
     if (DRY || !out.length) say(`Google News site:${src.site}: ${items.length} item(s) in the last 3 days`);
     return out;
   }
+  if (src.type === "discover" && discovered[src.url] && Date.now() - Date.parse(discovered[src.url].at) < 24 * 36e5 && !DRY) return discovered[src.url].found;
   if (src.type === "discover") {   // the movement's own website: the social accounts it links to are its verified channels
     let page = "";
     try { page += await get(src.url); } catch {}
@@ -233,6 +232,7 @@ async function readSource(src) {
     for (const m of page.matchAll(/instagram\.com\/(?!p\/|reel\/|explore|accounts|stories)([\w.]{2,30})/gi)) add({ ...base, type: "instagram", handle: m[1].replace(/\.$/, ""), who: `${src.name} (Instagram)` });
     for (const m of page.matchAll(/tiktok\.com\/@([\w.]{2,30})/gi)) add({ ...base, type: "tiktok", handle: m[1], who: `${src.name} (TikTok)` });
     for (const m of page.matchAll(/bsky\.app\/profile\/([\w.-]+)/gi)) add({ ...base, type: "bluesky", handle: m[1], who: `${src.name} (Bluesky)` });
+    if (found.length) discovered[src.url] = { at: now, found };
     say(`${src.name}: its website links to ${found.map((f) => `${f.type} ${f.handle || f.channelId || f.channel}`).join(", ") || "no readable social accounts"}`);
     return found;
   }
@@ -250,6 +250,8 @@ const trackRecord = (acct) => { const r = (record.accounts || {})[acct] || {}; r
 // Accounts the ones we follow keep reposting, mentioning or tagging (for network discovery).
 const netPath = "content/network.json";
 const net = existsSync(netPath) ? JSON.parse(readFileSync(netPath, "utf8")) : { counts: {}, proposed: {}, ignored: {} };
+const discPath = "content/discovered-accounts.json";   // accounts found on official websites, refreshed daily
+const discovered = existsSync(discPath) ? JSON.parse(readFileSync(discPath, "utf8")) : {};
 const seenPath = "content/primary-seen.json";
 const seen = existsSync(seenPath) ? JSON.parse(readFileSync(seenPath, "utf8")) : {};
 const published = [], report = [], queue = [];
@@ -454,6 +456,7 @@ if (DRY) {
 }
 writeFileSync(recordPath, JSON.stringify(record, null, 1));
 writeFileSync(netPath, JSON.stringify(net, null, 1));
+writeFileSync(discPath, JSON.stringify(discovered, null, 1));
 writeFileSync(seenPath, JSON.stringify(Object.fromEntries(Object.entries(seen).filter(([, t]) => Date.now() - Date.parse(t) < 30 * DAY)), null, 2));
 
 if (queue.length) try {
@@ -462,13 +465,13 @@ if (queue.length) try {
   if (q) sh(`gh issue comment ${q} --body-file /tmp/pqueue.md`);
 } catch {}
 
-if (!sh("git status --porcelain content/stories content/primary-seen.json content/source-record.json content/network.json")) { say("nothing new"); process.exit(0); }
+if (!sh("git status --porcelain content/stories content/primary-seen.json content/source-record.json content/network.json content/discovered-accounts.json")) { say("nothing new"); process.exit(0); }
 if (published.length) {
   const build = sh("node build.mjs 2>&1 || true");
   if (/LABEL CHECK: \d+ item/.test(build) || /Error/.test(build)) { say("build check failed; not publishing"); process.exit(0); }
 }
 sh(`git config user.name "Unowned" && git config user.email "Unownednews2026@gmail.com"`);
-sh(`git add content/stories content/primary-seen.json content/source-record.json content/network.json ${published.length ? "review-packets" : ""} && git commit -q -m "${published.length ? `Primary sources: ${[...new Set(published)].join(", ")}` : "Primary sources checked"} — ${now}"`);
+sh(`git add content/stories content/primary-seen.json content/source-record.json content/network.json content/discovered-accounts.json ${published.length ? "review-packets" : ""} && git commit -q -m "${published.length ? `Primary sources: ${[...new Set(published)].join(", ")}` : "Primary sources checked"} — ${now}"`);
 for (let i = 0; i < 3; i++) {
   try { sh("git pull -q --rebase origin main && git push -q origin HEAD:main"); break; }
   catch (e) { if (i === 2) { say(`push failed: ${String(e.message).slice(0, 200)}`); process.exit(0); } await new Promise((r) => setTimeout(r, 10000)); }
