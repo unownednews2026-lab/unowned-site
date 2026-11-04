@@ -37,7 +37,16 @@ export async function instagramFree(h) {
       why.push(`api: no posts`);
     } catch (e) { why.push(`api ${e.message}`); }
   }
-  // 2. Public Instagram viewer sites, read through the reader service.
+  // 2. Recent post links from search results, each read through Instagram's public embed page (no login).
+  try {
+    const html = await get(`https://html.duckduckgo.com/html/?q=${encodeURIComponent(`site:instagram.com/p ${h}`)}&df=w`);
+    const codes = [...new Set([...html.matchAll(/instagram\.com(?:%2F|\/)(?:p|reel)(?:%2F|\/)([\w-]{6,})/g)].map((m) => m[1]))].slice(0, 6);
+    const posts = [];
+    for (const c of codes) { const d = await instagramPost(`https://www.instagram.com/p/${c}/`); if (d && d.date && (!d.owner || d.owner.toLowerCase() === h.toLowerCase())) posts.push({ url: `https://www.instagram.com/p/${c}/`, title: "", date: d.date, text: d.text, video: d.media.some((m) => m.type === "video"), media: d.media, mentions: tags(d.text), owner: h }); }
+    if (posts.length) return { posts: posts.sort((a, b) => b.date.localeCompare(a.date)), route: "search + embed", related: [] };
+    why.push(`search + embed: ${codes.length} link(s), none readable`);
+  } catch (e) { why.push(`search + embed ${e.message}`); }
+  // 3. Public Instagram viewer sites, read through the reader service.
   for (const [name, url, re] of [
     ["imginn", `https://imginn.com/${h}/`, /href="\/p\/([\w-]{5,})\/?"[\s\S]{0,1500}?(?:alt="([^"]*)")?/g],
     ["picuki", `https://www.picuki.com/profile/${h}`, /href="https:\/\/www\.picuki\.com\/media\/(\d+)"[\s\S]{0,1500}?(?:alt="([^"]*)")?/g],
@@ -65,7 +74,8 @@ export async function instagramPost(url) {
     const ts = (html.match(/"taken_at_timestamp":(\d+)/) || html.match(/datetime="([^"]+)"/) || [])[1];
     const video = (html.match(/"video_url":"([^"]+)"/) || [])[1];
     const img = (html.match(/class="EmbeddedMediaImage"[^>]*src="([^"]+)"/) || [])[1];
-    return { text: caption.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(), date: ts ? iso(/^\d+$/.test(ts) ? Number(ts) : ts) : "", media: video ? [{ type: "video", url: JSON.parse(`"${video}"`) }] : img ? [{ type: "image", url: img.replace(/&amp;/g, "&") }] : [] };
+    const owner = (html.match(/class="UsernameText"[^>]*>([^<]+)</) || html.match(/"owner":\{[^}]*"username":"([^"]+)"/) || [])[1] || "";
+    return { owner, text: caption.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(), date: ts ? iso(/^\d+$/.test(ts) ? Number(ts) : ts) : "", media: video ? [{ type: "video", url: JSON.parse(`"${video}"`) }] : img ? [{ type: "image", url: img.replace(/&amp;/g, "&") }] : [] };
   } catch { return null; }
 }
 
