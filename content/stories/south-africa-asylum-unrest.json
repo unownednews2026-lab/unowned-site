@@ -10,8 +10,8 @@
   "kicker": "Story tracker · South Africa",
   "dek": "Riots in Durban and Soweto after a court ruling on asylum, the army deployment and arrests that followed, and the competing claims over what the ruling means and who is behind the violence.",
   "status": "Ongoing",
-  "updated": "2026-11-02",
-  "updatedAt": "2026-11-04T03:22:41Z",
+  "updated": "2026-11-04",
+  "updatedAt": "2026-11-04T06:23:29Z",
   "summary": [
     "On July 7, 2026, South Africa's Constitutional Court struck down rules that barred people from applying for asylum if they had entered the country irregularly, had no asylum transit visa or missed a reporting deadline. On September 28 the Home Affairs department told refugee offices to accept in-person applications. The move came after months of protests by anti-migrant groups, which had demanded that undocumented foreigners leave.",
     "In early October anti-migrant groups, including March and March, protested at refugee offices. On October 8 protests in Soweto and Durban turned violent: police say 24 vehicles were torched, and foreign-owned shops were looted. Home Affairs withdrew the directive on October 9, saying its offices had been overwhelmed, but violence continued in Durban and the army was deployed there on October 10. Officials say 30 people were arrested in the first days, and court cases are under way.",
@@ -75,6 +75,7 @@
     { "date": "2026-10-23", "phase": "response", "label": "reported", "added": "2026-10-24T06:30:00Z", "text": "Police arrest five men, aged 19 to 46, outside the Home Affairs offices on Che Guevara Road in Umbilo as persons of interest in the murder, attempted murder and assault cases linked to the unrest, Netshiunda says, IOL reports.", "sources": ["iolOct24plunges"] },
     { "date": "2026-10-30", "phase": "response", "label": "reported", "added": "2026-11-02T20:05:00Z", "text": "A Durban court lets the anti-migrant group March and March keep demonstrating but only between 9am and 3pm, without weapons or face coverings and without damaging property, according to AFP copy carried by 24 News HD. Acting Police Minister Firoz Cachalia had asked for restrictions, citing police intelligence of an alleged plot to burn the Berea refugee reception office; the group's lawyer said the aim was \"to silence the people\".", "sources": ["afpOct30court"] },
     { "date": "2026-11-03", "phase": "response", "label": "reported", "added": "2026-11-04T03:22:41Z", "text": "South African police warn that no marches will be permitted on election day, November 4, and KwaZulu-Natal officers are put on extended shifts, IOL and SABC News report, days after a Durban court limited the anti-migrant group March and March to daytime demonstrations.", "sources": ["iolNov2", "sabcNov3"] },
+    { "date": "2026-11-04", "phase": "response", "label": "alleged", "added": "2026-11-04T06:23:29Z", "text": "South African Government said on X that asylum seekers and refugees are not allowed to vote, citing refugee regulations and the Electoral Act.", "sources": ["pr110406230"], "desk": "backup", "via": "official" },
     { "date": "2026-11-10", "phase": "response", "label": "pending", "added": "2026-11-04T03:22:41Z", "text": "The new asylum appointment system Home Affairs said would be in place by November 10, and the Durban court matter on March and March demonstrations. Still being checked.", "sources": ["iolNov2"] }
   ],
   "claims": [
@@ -128,7 +129,7 @@
   "sourceGroups": [
     ["The ruling and the directive", ["ajJul2", "irishJul1", "mgOct9", "dmOct13", "ewnOct7", "sanewsImc"]],
     ["The riots and the police response", ["apOct8", "ajOct8", "afpOct9", "africanInsiderOct9", "dmOct9", "ewnOct9", "timesliveOct10", "anaLive", "dmOct11"]],
-    ["Latest", ["xinhuaOct11", "thisdayOct12", "groundupOct13", "iolOct13", "timesliveOct15", "citizenOct15", "iolOct17", "timesliveOct12", "ewnOct13", "iolOct20anc", "dmOct22kill", "brieflyOct13ethiopians", "iolOct23bail", "timesliveOct23iec", "iolOct24plunges", "afpOct30court", "iolNov2", "sabcNov3"]]
+    ["Latest", ["xinhuaOct11", "thisdayOct12", "groundupOct13", "iolOct13", "timesliveOct15", "citizenOct15", "iolOct17", "timesliveOct12", "ewnOct13", "iolOct20anc", "dmOct22kill", "brieflyOct13ethiopians", "iolOct23bail", "timesliveOct23iec", "iolOct24plunges", "afpOct30court", "iolNov2", "sabcNov3", "pr110406230"]]
   ],
   "sources": {
     "ajJul2": ["Al Jazeera", "https://aljazeera.com/news/2026/7/2/more-than-900-arrested-during-south-africas-antimigrant-protests"],
@@ -163,7 +164,8 @@
     "iolOct24plunges": ["IOL (Sunday Tribune)", "https://iol.co.za/news/south-africa/kwazulu-natal/2026-10-24-durban-plunges-murder-looting-and-ransacked-businesses-as-violent-anti-immigration-protests-escalate/"],
     "afpOct30court": ["24 News HD (AFP)", "https://www.24newshd.tv/30-Oct-2026/south-african-court-sets-limits-anti-migrant-demonstration"],
     "iolNov2": ["IOL", "https://iol.co.za/news/south-africa/2026-11-02-you-march-you-commit-a-crime-police-issue-stern-warning-ahead-of-local-government-elections/"],
-    "sabcNov3": ["SABC News", "https://www.sabcnews.com/sabcnews/no-marches-permitted-on-election-day-makoba/"]
+    "sabcNov3": ["SABC News", "https://www.sabcnews.com/sabcnews/no-marches-permitted-on-election-day-makoba/"],
+    "pr110406230": ["South African Government (X)", "https://x.com/GovernmentZA/status/2117859432579432871"]
   },
   "checkedAt": "2026-11-04T03:28:59Z"
 }
