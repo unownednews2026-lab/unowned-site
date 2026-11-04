@@ -19,7 +19,8 @@
    "label": "alleged",
    "date": "2026-11-04",
    "added": "2026-11-04T05:47:31Z",
-   "status": "open"
+   "status": "removed",
+   "resolvedAt": "2026-11-04T11:52:00.734Z"
   },
   {
    "account": "x:governmentza",
@@ -46,9 +47,9 @@
    "who": "Cockroach Janta Party (\"Cockroach Is Back\" account on X)",
    "upheld": 0,
    "disproved": 0,
-   "removed": 0,
+   "removed": 1,
    "unconfirmed": 0,
-   "open": 1,
+   "open": 0,
    "pending": 0
   },
   "x:governmentza": {
