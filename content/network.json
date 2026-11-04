@@ -984,6 +984,297 @@
     "south-africa-asylum-unrest": 1
    },
    "last": "2026-11-04T10:49:55Z"
+  },
+  "instagram:cfdt_officiel": {
+   "n": 1,
+   "from": {
+    "cgt_confederation": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:force_ouvriere.fr": {
+   "n": 1,
+   "from": {
+    "cgt_confederation": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:syndicatcftc": {
+   "n": 1,
+   "from": {
+    "cgt_confederation": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:union_solidaires": {
+   "n": 1,
+   "from": {
+    "cgt_confederation": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:federationsyndicaleunitaire": {
+   "n": 1,
+   "from": {
+    "cgt_confederation": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:sophie_binet_cgt": {
+   "n": 2,
+   "from": {
+    "cgt_confederation": 2
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:education_gouv": {
+   "n": 2,
+   "from": {
+    "gouvernementfr": 2
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:eenfance": {
+   "n": 1,
+   "from": {
+    "gouvernementfr": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:etudiantgouv": {
+   "n": 1,
+   "from": {
+    "gouvernementfr": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:jeunes.gouv": {
+   "n": 2,
+   "from": {
+    "gouvernementfr": 2
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:sante_gouv": {
+   "n": 3,
+   "from": {
+    "gouvernementfr": 3
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:culture_gouv": {
+   "n": 1,
+   "from": {
+    "gouvernementfr": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:drogues_gouv": {
+   "n": 1,
+   "from": {
+    "gouvernementfr": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:solidarites_gouv": {
+   "n": 1,
+   "from": {
+    "gouvernementfr": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:jujulagygy": {
+   "n": 1,
+   "from": {
+    "gouvernementfr": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:egalite_gouv": {
+   "n": 1,
+   "from": {
+    "gouvernementfr": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:bundesbauministerium": {
+   "n": 1,
+   "from": {
+    "bundesregierung": 1
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:digitalministerium": {
+   "n": 2,
+   "from": {
+    "bundesregierung": 1,
+    "bundeskanzler": 1
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:2_jaemyung": {
+   "n": 1,
+   "from": {
+    "bundeskanzler": 1
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:yasmin_fahimi": {
+   "n": 1,
+   "from": {
+    "dgb.gewerkschaftsbund": 1
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:giorgiameloni": {
+   "n": 1,
+   "from": {
+    "palazzo_chigi": 1
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:sasha_colautti": {
+   "n": 1,
+   "from": {
+    "unionesindacaledibase": 1
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:categoriaoperaiausb": {
+   "n": 2,
+   "from": {
+    "unionesindacaledibase": 2
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:rete_iside": {
+   "n": 1,
+   "from": {
+    "unionesindacaledibase": 1
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:usbfederazioneroma": {
+   "n": 2,
+   "from": {
+    "unionesindacaledibase": 2
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:usbferroviecampania": {
+   "n": 1,
+   "from": {
+    "unionesindacaledibase": 1
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:fds_nazionale": {
+   "n": 1,
+   "from": {
+    "unionesindacaledibase": 1
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:usbferrovie": {
+   "n": 1,
+   "from": {
+    "unionesindacaledibase": 1
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
+  },
+  "instagram:premijersrbije": {
+   "n": 2,
+   "from": {
+    "vlada.republike.srbije": 2
+   },
+   "stories": {
+    "serbia-student-movement": 1
+   },
+   "last": "2026-11-04T14:06:16Z"
   }
  },
  "proposed": {
