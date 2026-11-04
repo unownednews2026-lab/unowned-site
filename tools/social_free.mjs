@@ -26,8 +26,31 @@ function igFromApi(j, h) {
       mentions: [...tags(text), ...(n.edge_media_to_tagged_user?.edges || []).map((e) => e.node?.user?.username)].filter(Boolean), owner: h };
   });
 }
+/* Instagram's official Graph API, "Business Discovery": free, and not blocked. Our own professional Instagram account
+   (IG_USER_ID) reads the recent public posts of another professional account (governments, parties, unions and
+   movements almost always are). Needs the IG_GRAPH_TOKEN and IG_USER_ID secrets. */
+export async function instagramGraph(h) {
+  const token = process.env.IG_GRAPH_TOKEN, me = process.env.IG_USER_ID;
+  if (!token || !me) throw new Error("no IG_GRAPH_TOKEN/IG_USER_ID");
+  const fields = `business_discovery.username(${h}){username,name,followers_count,media.limit(8){caption,media_type,media_url,permalink,timestamp,children{media_type,media_url}}}`;
+  const r = await fetch(`https://graph.facebook.com/v21.0/${me}?fields=${encodeURIComponent(fields)}&access_token=${encodeURIComponent(token)}`, { signal: AbortSignal.timeout(30000) });
+  const j = await r.json();
+  if (j.error) throw new Error(`graph: ${String(j.error.message || j.error.type).slice(0, 90)}`);
+  const media = j.business_discovery?.media?.data || [];
+  return media.map((m) => {
+    const parts = m.media_type === "CAROUSEL_ALBUM" ? (m.children?.data || []) : [m];
+    const med = parts.slice(0, 3).map((c) => ({ type: c.media_type === "VIDEO" ? "video" : "image", url: c.media_url })).filter((x) => x.url);
+    return { url: m.permalink, title: "", date: iso(m.timestamp), text: m.caption || "", video: med.some((x) => x.type === "video"), media: med, mentions: tags(m.caption), owner: h };
+  });
+}
+
 export async function instagramFree(h) {
   const why = [];
+  // 0. The official Graph API, when our professional account is connected.
+  if (process.env.IG_GRAPH_TOKEN) {
+    try { const posts = await instagramGraph(h); if (posts.length) return { posts, route: "Instagram Graph API", related: [] }; why.push("graph: no posts"); }
+    catch (e) { why.push(e.message); }
+  }
   // 1. Instagram's own public profile endpoint (the one its website uses), without logging in.
   for (const [base, headers] of [["https://i.instagram.com", { "User-Agent": MOBILE, "x-ig-app-id": "936619743392459" }], ["https://www.instagram.com", { "x-ig-app-id": "936619743392459", "X-Requested-With": "XMLHttpRequest", Referer: `https://www.instagram.com/${h}/` }]]) {
     try {

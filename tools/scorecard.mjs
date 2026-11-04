@@ -92,6 +92,16 @@ const lastEditor = log2.filter((c) => /— editor:/.test(c.body)).map((c) => Dat
 if (!lastEditor || now - lastEditor > 9 * H) red.push(`STOPPED — Editor (Sonnet): last run ${lastEditor ? hhmm(lastEditor) : "not found"} (expected every 4 hours, 8 at night)`);
 else green.push(`Editor: last run ${Math.round((now - lastEditor) / 6e4)} min ago`);
 
+/* Instagram official API: its token can expire. The desk records failures in the desk log; flag them here. */
+try {
+  const blog = issues.find((i) => i.title === "Backup desk log");
+  if (blog) {
+    const cs = JSON.parse(sh(`gh api "repos/${REPO}/issues/${blog.number}/comments?per_page=100&page=$(( ($(gh api repos/${REPO}/issues/${blog.number} --jq .comments) + 99) / 100 ))"`) || "[]");
+    const bad = cs.filter((c) => now - Date.parse(c.created_at) < 6 * H && /graph: (Error validating access token|.*expired|.*Invalid OAuth)/i.test(c.body));
+    if (bad.length) red.push("STOPPED — Instagram official API: the access token has expired or is invalid; renew IG_GRAPH_TOKEN");
+  }
+} catch {}
+
 /* Report: one issue; comment (emails the founder) when it turns red */
 const status = red.length ? "red" : amber.length ? "amber" : "green";
 const title = `Quality scorecard: ${status === "green" ? "all good" : `${red.length} urgent, ${amber.length} to watch`}`;
