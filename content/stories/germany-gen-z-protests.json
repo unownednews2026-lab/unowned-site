@@ -11,7 +11,7 @@
   "dek": "A new youth initiative, Gen Z regelt, brought tens of thousands of young people onto the streets of more than 30 German cities over education, living costs, climate and conscription. Most marches were peaceful; night-time violence in several cities, and who caused it, is now the political fight.",
   "status": "Ongoing",
   "updated": "2026-11-04",
-  "updatedAt": "2026-11-04T12:27:20Z",
+  "updatedAt": "2026-11-04T13:53:45Z",
   "summary": [
     "Gen Z regelt, roughly \"Gen Z sorts it out\", is a newly founded youth initiative that planned its first nationwide protest for more than three weeks, citing the French high-school movement as a parallel, Anadolu reports. Its demands include more money for education, health care, addiction treatment and psychotherapy, affordable living costs, stronger climate action, limits on surveillance and no compulsory military service. More than 150,000 people registered to take part in over 30 cities.",
     "On Saturday, October 31, the daytime marches were largely peaceful. Police counted about 5,000 people at Berlin's Brandenburg Gate and up to 8,000 in Frankfurt; organisers put nationwide turnout at 100,000 to 120,000, below their projections. After nightfall violence broke out in Frankfurt, Cologne, Hamburg and Berlin: in Frankfurt, shops were damaged and looted and Hesse's interior minister said 54 people were arrested and more than 100 officers injured.",
@@ -31,6 +31,7 @@
     { "date": "2026-10-31", "phase": "oct31", "label": "confirmed", "added": "2026-11-02T20:00:00Z", "hot": true, "text": "After nightfall, violence breaks out in Frankfurt, Cologne, Hamburg and Berlin; in Frankfurt shops are looted, police use water cannon and protesters throw Molotov cocktails, Bloomberg reports. Hesse's interior minister Roman Poseck says 54 people were arrested and more than 100 officers injured in Frankfurt, The Local reports.", "sources": ["bloombergNov2", "thelocalNov2"] },
     { "date": "2026-10-31", "phase": "oct31", "label": "reported", "added": "2026-11-02T20:00:00Z", "text": "In Berlin, police make almost 60 arrests away from the main rally, for property damage, assault and weapons offences, Bloomberg reports; Berlin's unrest was linked to a separate demonstration, \"Gen Z hat genug!\", from which Gen Z regelt had distanced itself, The Local reports.", "sources": ["bloombergNov2", "thelocalNov2"] },
     { "date": "2026-10-31", "phase": "after", "label": "reported", "added": "2026-11-04T12:27:20Z", "text": "Telegraph India reported that the “Gen Z steht auf” initiative called for demonstrations in 21 German cities, naming Berlin, Hamburg, Cologne, Dortmund and Düsseldorf among them. The protests were reported to have taken place on October 31.", "sources": ["bk1104122700"], "desk": "backup" },
+    { "date": "2026-10-31", "phase": "after", "label": "reported", "added": "2026-11-04T13:53:45Z", "text": "According to local reports, a resident in Düsseldorf stayed indoors on October 31 after hearing news of an emergency declaration during Gen Z protests. Additionally, demonstrations swept several European cities over the weekend amid anger regarding living costs and public services.", "sources": ["bk1104135300"], "desk": "backup" },
     { "date": "2026-11-01", "phase": "after", "label": "disputed", "added": "2026-11-02T20:00:00Z", "milestone": "Blame dispute", "text": "Federal interior minister Alexander Dobrindt blames \"violent left-wing groups\" and \"troublemakers from the migrant community\", and Hesse's Poseck says the troublemakers were predominantly of migrant background; Frankfurt police say the vast majority demonstrated peacefully, and a fact check finds most Frankfurt arrestees lived in Hesse or nearby states, The Local reports.", "sources": ["thelocalNov2"] },
     { "date": "2026-11-02", "phase": "after", "label": "reported", "added": "2026-11-02T20:00:00Z", "text": "Germany's Education Minister Karin Prien calls the concerns of the young people who marched in more than 30 cities on October 31 \"legitimate and extremely relevant\" and promises more dialogue, and SPD politicians call for a national education summit; these are proposals, not policy changes so far, The Local reports.", "sources": ["thelocalNov2"] },
     { "date": "2026-11-14", "phase": "after", "label": "pending", "added": "2026-11-02T20:00:00Z", "text": "Gen Z regelt plans another countrywide protest on November 14, according to Bloomberg, and to join an international youth strike on November 20, according to The Local and Anadolu. Still being checked.", "sources": ["bloombergNov2", "thelocalNov2", "aaOct30"] }
@@ -78,7 +79,7 @@
   ],
   "corrections": [],
   "sourceGroups": [
-    ["The protests and their aftermath", ["aaOct30", "euronewsOct31", "bloombergNov2", "thelocalNov2", "bk1103023200", "bk1103170000", "bk1103233600", "bk1104073300", "bk1104093800", "bk1104103800", "bk1104122700"]]
+    ["The protests and their aftermath", ["aaOct30", "euronewsOct31", "bloombergNov2", "thelocalNov2", "bk1103023200", "bk1103170000", "bk1103233600", "bk1104073300", "bk1104093800", "bk1104103800", "bk1104122700", "bk1104135300"]]
   ],
   "sources": {
     "aaOct30": ["Anadolu", "https://www.aa.com.tr/en/europe/who-are-germany-s-gen-z-protesters-and-what-do-they-want/4106155"],
@@ -91,7 +92,8 @@
     "bk1104073300": ["telegraphindia.com", "https://www.telegraphindia.com/amp/west-bengal/kolkata/calcuttans-encounter-an-unfamiliar-face-of-europe-gen-z-protests-reshape-streets-prnt/cid/2187744"],
     "bk1104093800": ["telegraphindia.com", "https://www.telegraphindia.com/amp/west-bengal/kolkata/calcuttans-encounter-an-unfamiliar-face-of-europe-gen-z-protests-reshape-streets-prnt/cid/2187744"],
     "bk1104103800": ["firstpost.com", "https://www.firstpost.com/vantage/cyclone-murasu-brings-120-kmph-winds-and-batters-the-coast-of-andhra-pradesh-vantage-shots-vd2277986/amp/"],
-    "bk1104122700": ["telegraphindia.com", "https://www.telegraphindia.com/amp/west-bengal/kolkata/calcuttans-encounter-an-unfamiliar-face-of-europe-gen-z-protests-reshape-streets-prnt/cid/2187744"]
+    "bk1104122700": ["telegraphindia.com", "https://www.telegraphindia.com/amp/west-bengal/kolkata/calcuttans-encounter-an-unfamiliar-face-of-europe-gen-z-protests-reshape-streets-prnt/cid/2187744"],
+    "bk1104135300": ["telegraphindia.com", "https://www.telegraphindia.com/amp/west-bengal/kolkata/calcuttans-encounter-an-unfamiliar-face-of-europe-gen-z-protests-reshape-streets-prnt/cid/2187744"]
   },
   "checkedAt": "2026-11-04T11:38:41Z"
 }
