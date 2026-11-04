@@ -835,14 +835,15 @@
    "last": "2026-11-04T03:34:24Z"
   },
   "x:news24tvchannel": {
-   "n": 1,
+   "n": 2,
    "from": {
-    "Cockroachisback": 1
+    "Cockroachisback": 1,
+    "abhijeet_dipke": 1
    },
    "stories": {
     "cockroach-movement": 1
    },
-   "last": "2026-11-04T05:47:31Z"
+   "last": "2026-11-04T09:48:26Z"
   },
   "x:ani": {
    "n": 1,
