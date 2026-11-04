@@ -9,6 +9,128 @@
     "cockroach-movement": 1
    },
    "last": "2026-11-03T23:25:57Z"
+  },
+  "x:belindkellici": {
+   "n": 1,
+   "from": {
+    "pdshqiperi": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "x:louise_pn93": {
+   "n": 1,
+   "from": {
+    "lacgtcommunique": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "x:seblecornu": {
+   "n": 1,
+   "from": {
+    "gouvernementfr": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "x:bundeskanzler": {
+   "n": 4,
+   "from": {
+    "RegSprecher": 4
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "x:igbce": {
+   "n": 1,
+   "from": {
+    "dgb_news": 1
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "x:gdppresse": {
+   "n": 1,
+   "from": {
+    "dgb_news": 1
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "x:sz": {
+   "n": 1,
+   "from": {
+    "dgb_news": 1
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "tiktok:abdulchahin": {
+   "n": 1,
+   "from": {
+    "dgb_gewerkschaftsbund": 1
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "x:giorgiameloni": {
+   "n": 2,
+   "from": {
+    "Palazzo_Chigi": 1,
+    "predsednikrs": 1
+   },
+   "stories": {
+    "italy-student-protests": 1,
+    "serbia-student-movement": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "x:antonio_tajani": {
+   "n": 1,
+   "from": {
+    "Palazzo_Chigi": 1
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "x:matteosalvinimi": {
+   "n": 1,
+   "from": {
+    "Palazzo_Chigi": 1
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
+  },
+  "x:gretathunberg": {
+   "n": 1,
+   "from": {
+    "usbsindacato": 1
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T00:44:32Z"
   }
  },
  "proposed": {},
