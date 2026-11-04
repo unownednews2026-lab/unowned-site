@@ -833,6 +833,46 @@
     "italy-student-protests": 1
    },
    "last": "2026-11-04T03:34:24Z"
+  },
+  "x:news24tvchannel": {
+   "n": 1,
+   "from": {
+    "Cockroachisback": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T05:47:31Z"
+  },
+  "x:ani": {
+   "n": 1,
+   "from": {
+    "Cockroachisback": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T05:47:31Z"
+  },
+  "x:narendramodi": {
+   "n": 1,
+   "from": {
+    "Cockroachisback": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T05:47:31Z"
+  },
+  "x:amitshah": {
+   "n": 1,
+   "from": {
+    "Cockroachisback": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T05:47:31Z"
   }
  },
  "proposed": {},
