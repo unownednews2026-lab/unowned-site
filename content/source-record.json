@@ -8,7 +8,8 @@
    "label": "pending",
    "date": "2026-11-05",
    "added": "2026-11-04T00:44:32Z",
-   "status": "pending"
+   "status": "removed",
+   "resolvedAt": "2026-11-04T03:34:24.781Z"
   }
  ],
  "accounts": {
@@ -16,10 +17,10 @@
    "who": "CGT union (X)",
    "upheld": 0,
    "disproved": 0,
-   "removed": 0,
+   "removed": 1,
    "unconfirmed": 0,
    "open": 0,
-   "pending": 1
+   "pending": 0
   }
  }
 }

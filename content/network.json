@@ -91,16 +91,16 @@
    "last": "2026-11-04T00:44:32Z"
   },
   "x:giorgiameloni": {
-   "n": 3,
+   "n": 4,
    "from": {
-    "Palazzo_Chigi": 1,
+    "Palazzo_Chigi": 2,
     "predsednikrs": 2
    },
    "stories": {
     "italy-student-protests": 1,
     "serbia-student-movement": 1
    },
-   "last": "2026-11-04T02:00:18Z"
+   "last": "2026-11-04T03:34:24Z"
   },
   "x:antonio_tajani": {
    "n": 1,
@@ -123,14 +123,14 @@
    "last": "2026-11-04T00:44:32Z"
   },
   "x:gretathunberg": {
-   "n": 1,
+   "n": 2,
    "from": {
-    "usbsindacato": 1
+    "usbsindacato": 2
    },
    "stories": {
     "italy-student-protests": 1
    },
-   "last": "2026-11-04T00:44:32Z"
+   "last": "2026-11-04T03:34:24Z"
   },
   "instagram:taulantballaps": {
    "n": 3,
@@ -823,6 +823,16 @@
     "cockroach-movement": 1
    },
    "last": "2026-11-04T02:36:48Z"
+  },
+  "x:franceskalbs": {
+   "n": 1,
+   "from": {
+    "usbsindacato": 1
+   },
+   "stories": {
+    "italy-student-protests": 1
+   },
+   "last": "2026-11-04T03:34:24Z"
   }
  },
  "proposed": {},
