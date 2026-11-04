@@ -19,6 +19,7 @@ import { ungrounded } from "./grounding.mjs";
 import { realUrl } from "./gnews.mjs";
 import { mediaText, youtubeText } from "./media.mjs";
 import { scrape, searchX, igRelated } from "./social_scrape.mjs";
+import { instagramFree, instagramPost, tiktokFree, xIdsFree, blueskySearch } from "./social_free.mjs";
 import { ask, problems as llmProblems, SECOND_CHECK, GITHUB_PROVIDER, geminiVideo } from "./llm.mjs";
 
 const DRY = process.argv.includes("--dry");                  // list what would be read, publish nothing
@@ -33,7 +34,7 @@ const SENSITIVE = /\b(killed|dead|death|deaths|died|dies|murder\w*|rape\w*|sexua
 const CLAIMWORDS = /\b(accus\w*|alleg\w*|blam\w*|claim\w*|fraud|rigg\w*|theft|chori|lie|lies|lied|conspiracy|illegal|unconstitutional|crackdown|brutal\w*|attack\w*|violat\w*|stole|stolen|fake|false)\b/i;
 const unent = (s) => String(s || "").replace(/<!\[CDATA\[|\]\]>/g, "").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;|&#039;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 const tag = (x, t) => unent((x.match(new RegExp(`<${t}[^>]*>([\\s\\S]*?)</${t}>`)) || [])[1]);
-const get = async (url, ms = 20000) => { const r = await fetch(url, { headers: UA, redirect: "follow", signal: AbortSignal.timeout(ms) }); if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); };
+const get = async (url, ms = 20000, extra = {}) => { const r = await fetch(url, { headers: { ...UA, ...extra }, redirect: "follow", signal: AbortSignal.timeout(ms) }); if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); };
 
 /* Page text: direct, then the free reader service for sites built with scripts. */
 const BLOCKED = /Just a moment\.\.\.|Enable JavaScript and cookies|Attention Required|Access denied|verify you are human|Checking your browser/i;
@@ -43,7 +44,22 @@ async function pageText(url) {
 }
 
 /* The scraping service costs money per post, so each account is scraped at most every few hours (default 3). */
+/* Keep the paid scraper inside its free monthly credit: stop using it once this month's usage reaches APIFY_MAX_USD
+   (default $4.50 of the free $5). The free routes are always tried first. */
+let apifyBudget = null;
+async function apifyAllowed() {
+  if (!process.env.APIFY_TOKEN) return false;
+  if (apifyBudget === null) {
+    try {
+      const j = JSON.parse(await get("https://api.apify.com/v2/users/me/limits", 15000, { Authorization: `Bearer ${process.env.APIFY_TOKEN}` }));
+      const used = j.data?.current?.monthlyUsageUsd ?? 0, cap = Number(process.env.APIFY_MAX_USD || 4.5);
+      apifyBudget = used < cap; say(`paid scraper: $${Number(used).toFixed(2)} used this month (cap $${cap})${apifyBudget ? "" : " — cap reached, free routes only"}`);
+    } catch (e) { apifyBudget = false; say(`paid scraper: could not check this month's usage (${String(e.message).slice(0, 40)}), so it is not used`); }
+  }
+  return apifyBudget;
+}
 async function scrapeEvery(src, platform, handle) {
+  if (!(await apifyAllowed())) return [];
   // Cost control (the scraper charges per post): X every 3 h; Instagram/TikTok every 6 h; accounts found automatically
   // on official websites every 8 h. Breaking news is still caught within minutes by the news scanners.
   const k = `scraped:${platform}:${handle}`, hours = src.everyHours || (src.discovered ? 8 : platform === "x" ? 3 : 6);
@@ -134,6 +150,7 @@ async function readSource(src) {
         catch (e) { routes.push(`${route} ${e.message.slice(0, 20)}`); }
       }
     }
+    if (ids.size < 3) { try { const f = await xIdsFree(h); for (const i of f.ids) ids.add(i); routes.push(...f.routes); } catch (e) { routes.push(`free routes ${String(e.message).slice(0, 30)}`); } }
     if (ids.size < 3) for (const site of ["x.com", "twitter.com"]) {
       try { grab(await get(`https://www.bing.com/search?q=${encodeURIComponent(`site:${site}/${h}/status`)}&format=rss&filters=${encodeURIComponent('ex1:"ez2"')}`, 20000), `bing:${site}`); } catch (e) { routes.push(`bing ${e.message.slice(0, 20)}`); }
     }
@@ -161,17 +178,31 @@ async function readSource(src) {
       } catch {}
     }
     // X hides some accounts' posts from readers who aren't signed in: then use the signed-in scraping service.
-    if (!out.length && process.env.APIFY_TOKEN) {
+    if (!out.length && (await apifyAllowed())) {
       try { const got = await scrapeEvery(src, "x", h); out.push(...got); routes.push(`scraper ${got.length}`); } catch (e) { routes.push(`scraper: ${String(e.message).slice(0, 80)}`); }
     }
     if (DRY || !out.length) say(`X @${h}: ${routes.join(", ")}; ${out.length} post(s) confirmed by X`);
     return out;
   }
-  if (src.type === "instagram" || src.type === "tiktok") {   // only through the signed-in scraping service
-    if (!process.env.APIFY_TOKEN) { if (DRY || new Date().getUTCHours() === 5) say(`${src.type} @${src.handle}: needs the APIFY_TOKEN secret to be read`); return []; }
-    const got = await scrapeEvery(src, src.type, src.handle);
-    if (DRY) say(`${src.type} @${src.handle}: ${got.length} post(s) from the scraper`);
-    return got;
+  if (src.type === "instagram" || src.type === "tiktok") {   // free routes first; the paid scraper only as a capped last resort
+    let posts = [], route = "", why = "";
+    try {
+      const r = src.type === "instagram" ? await instagramFree(src.handle) : await tiktokFree(src.handle);
+      posts = r.posts; route = r.route;
+      for (const p of r.related || []) {   // Instagram's own "related accounts": candidates for the editor
+        const k = `instagram:${p.handle.toLowerCase()}`, c = (net.counts[k] = net.counts[k] || { n: 0, from: {}, stories: {}, last: "" });
+        if (!seen[`relseen:${src.handle}:${k}`]) { seen[`relseen:${src.handle}:${k}`] = now; c.n += p.verified ? 3 : 1; }
+        c.from[`${src.handle} (related accounts)`] = 1; c.stories[src.story || "?"] = 1; c.last = now; c.profile = { name: p.name, verified: p.verified ? "Instagram" : "" };
+      }
+      for (const p of posts.filter((p) => p.needsDate).slice(0, 6)) {   // posts found without a date: read the post itself
+        const d = src.type === "instagram" ? await instagramPost(p.url) : null;
+        if (d) { p.date = d.date; p.text = d.text || p.text; p.media = d.media.length ? d.media : p.media; p.video = p.media.some((m) => m.type === "video"); }
+      }
+      posts = posts.filter((p) => p.date);
+    } catch (e) { why = String(e.message).slice(0, 160); }
+    if (!posts.length) { const paid = await scrapeEvery(src, src.type, src.handle).catch((e) => { why += `; paid: ${String(e.message).slice(0, 60)}`; return []; }); if (paid.length) { posts = paid; route = "paid scraper"; } }
+    if (DRY || !posts.length) say(`${src.type} @${src.handle}: ${posts.length} post(s)${route ? ` via ${route}` : ""}${!posts.length && why ? ` (${why})` : ""}`);
+    return posts;
   }
   if (src.type === "gnews") {   // an official website's own pages, found through Google News (works even when the site blocks automated readers)
     const [gl, hl] = (src.edition || "US:en").split(":");
@@ -231,12 +262,23 @@ const newestDev = (s) => s.events.filter((e) => e.label !== "pending").reduce((m
    Nothing they post is published until the editor has verified the account. */
 const watchTerms = existsSync("tools/watch.json") ? JSON.parse(readFileSync("tools/watch.json", "utf8")) : {};
 async function topicDiscovery(s) {
-  if (!process.env.APIFY_TOKEN) return;
   const w = watchTerms[s.slug]; if (!w) return;
   const k = `topic:${s.slug}`;
   if (!DRY && seen[k] && Date.now() - Date.parse(seen[k]) < 4 * 36e5) return;
   seen[k] = now;
   const q = (typeof w === "string" ? w : w.en).replace(/\bwhen:\S+/g, "").trim();
+  // Free: Bluesky's public search. Accounts that post about the story repeatedly become candidates for the editor.
+  try {
+    const plain = q.replace(/["()]/g, " ").split(/\s+OR\s+/i)[0].trim();
+    const posts = await blueskySearch(plain, 30);
+    const by = {}; for (const p of posts) if (p.handle) by[p.handle] = (by[p.handle] || 0) + 1;
+    for (const [h, n] of Object.entries(by)) {
+      const k = `bluesky:${h.toLowerCase()}`, c = (net.counts[k] = net.counts[k] || { n: 0, from: {}, stories: {}, last: "" });
+      c.n += n; c.from["topic search (Bluesky)"] = (c.from["topic search (Bluesky)"] || 0) + n; c.stories[s.slug] = 1; c.last = now;
+    }
+    say(`${s.slug}: topic search on Bluesky found ${posts.length} post(s) from ${Object.keys(by).length} account(s)`);
+  } catch (e) { say(`${s.slug}: topic search on Bluesky unavailable (${String(e.message).slice(0, 50)})`); }
+  if (!(await apifyAllowed())) return;
   try {
     const items = await searchX(`${q} -filter:replies`, 25, (registry._scrapers || {}).x || {});
     let n = 0;
@@ -265,6 +307,7 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
     catch (e) { report.push(`- ${s.slug}: could not read ${src.url} to find its channels (${String(e.message).slice(0, 60)})`); }
   }
   if (!sources.length) continue;
+  for (const src of sources) src.story = s.slug;
   const since = Math.max(Date.now() - 2 * DAY, Date.parse(newestDev(s) + "T00:00:00Z") || 0);
   let added = 0;
   for (const src of sources) {
@@ -283,7 +326,7 @@ for (const f of readdirSync("content/stories").filter((x) => x.endsWith(".json")
     const fresh = items.filter((x) => x.url && !x.skip && !seen[x.key || x.url] && (!x.date || Date.parse(x.date) > since) && (!src.match || new RegExp(src.match, "i").test(`${x.title} ${x.text}`)));
     say(`${s.slug}: ${src.who}: ${items.length} item(s), ${fresh.length} new and relevant`);
     // Instagram's "related accounts" for this profile, once a day: candidates for the editor to verify.
-    if (src.type === "instagram" && process.env.APIFY_TOKEN && (DRY || !seen[`related:${src.handle}`] || Date.now() - Date.parse(seen[`related:${src.handle}`]) > 24 * 36e5)) {
+    if (src.type === "instagram" && !(src.relatedFree) && (await apifyAllowed()) && (DRY || !seen[`related:${src.handle}`] || Date.now() - Date.parse(seen[`related:${src.handle}`]) > 24 * 36e5)) {
       seen[`related:${src.handle}`] = now;
       try {
         const rel = await igRelated(src.handle);
@@ -398,6 +441,10 @@ if (DRY) {
   const vt = await mediaText([{ type: "video", url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" }], (m) => say(`   ${m}`));
   say(`video file test: ${vt ? vt.replace(/\s+/g, " ").slice(0, 200) : `failed (${Object.entries(llmProblems).filter(([k]) => /video|whisper/.test(k)).map(([k, v]) => `${k} ${v}`).join("; ") || "no answer"})`}`);
   say(`scraping service: ${process.env.APIFY_TOKEN ? "APIFY_TOKEN is set" : "APIFY_TOKEN not set yet (X fallback, Instagram and TikTok wait for it)"}`);
+  for (const [name, fn] of [["Instagram free route (@incindia)", () => instagramFree("incindia")], ["TikTok free route (@nbcnews)", () => tiktokFree("nbcnews")], ["X free id routes (@Cockroachisback)", async () => { const r = await xIdsFree("Cockroachisback"); return { route: r.routes.join(", "), posts: r.ids }; }]]) {
+    try { const r = await fn(); say(`${name}: ${r.posts.length} post(s) via ${r.route}${r.posts[0]?.date ? `, newest ${r.posts[0].date.slice(0, 16)}` : ""}${r.posts[0]?.media?.length ? `, media: ${r.posts[0].media.map((m) => m.type).join("+")}` : ""}`); }
+    catch (e) { say(`${name}: failed (${String(e.message).slice(0, 160)})`); }
+  }
   const g = await geminiVideo("https://www.youtube.com/watch?v=JbT8LXzTNf8");
   say(`transcript test on a public video (Gemini watching it): ${g ? g.slice(0, 220) : `failed (${Object.entries(llmProblems).filter(([k]) => k.includes("video")).map(([k, v]) => `${k} ${v}`).join("; ") || "no answer"})`}`);
   try { writeFileSync("/tmp/pdry.md", `Primary-source desk — dry run (nothing published)\n\n${[...dryLog, ...report].map((l) => `- ${l.replace(/^- /, "")}`).join("\n")}`);
