@@ -1,0 +1,8 @@
+{"story": "cockroach-movement", "note": "Scorecard: two contempt developments reported by outlets on Nov 3-4", "ops": [
+ {"op": "add_source", "key": "fpjNov3contempt", "name": "Free Press Journal", "url": "https://www.freepressjournal.in/mumbai/criminal-contempt-plea-against-cjp-co-convenor-saurav-das-advocate-seeks-maharashtra-ags-consent-over-x-post"},
+ {"op": "add_source", "key": "etvNov4contempt", "name": "ETV Bharat", "url": "https://www.etvbharat.com/en/bharat/delhi-govt-standing-council-gives-consent-for-criminal-contempt-proceedings-against-cjp-legal-head-enn26110406876"},
+ {"op": "add_event", "event": {"date": "2026-11-03", "phase": "s2", "label": "reported", "added": "2026-11-04T18:38:44Z", "text": "An advocate asked Maharashtra's Advocate General for consent to bring criminal contempt proceedings against a Cockroach Janta Party co-convenor over a November 3 post on X about judges hearing a Bombay High Court case, saying it attacked judicial integrity, the Free Press Journal reports. No response from the CJP was reported.", "sources": ["fpjNov3contempt"]}},
+ {"op": "add_event", "event": {"date": "2026-11-04", "phase": "s2", "label": "reported", "added": "2026-11-04T18:38:44Z", "text": "Delhi government counsel gave consent for criminal contempt proceedings against the Cockroach Janta Party's legal head over posts alleging a Saket court judge acted on outside orders, calling his view prima facie; the Delhi High Court will decide whether the case goes ahead, ETV Bharat reports.", "sources": ["etvNov4contempt"]}},
+ {"op": "set", "field": "updatedAt", "value": "2026-11-04T18:38:44Z"},
+ {"op": "set", "field": "updated", "value": "2026-11-04"}
+]}
