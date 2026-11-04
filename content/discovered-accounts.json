@@ -1,0 +1,498 @@
+{
+ "https://kryeministria.al": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "official",
+    "match": "student|studen|protest|Tiran|universit|police|polici|arrest|Rama|Veliaj|opozit|opposition",
+    "verified": "linked from kryeministria.al, its official website",
+    "type": "x",
+    "handle": "ediramaal",
+    "who": "Office of the Prime Minister of Albania (X)"
+   },
+   {
+    "kind": "official",
+    "match": "student|studen|protest|Tiran|universit|police|polici|arrest|Rama|Veliaj|opozit|opposition",
+    "verified": "linked from kryeministria.al, its official website",
+    "type": "instagram",
+    "handle": "ediramaal",
+    "who": "Office of the Prime Minister of Albania (Instagram)"
+   }
+  ]
+ },
+ "https://ps.al": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "movement",
+    "match": "student|studen|protest|Tiran|universit|police|polici|arrest|Rama|Veliaj|opozit|opposition",
+    "verified": "linked from ps.al, its official website",
+    "type": "youtube",
+    "handle": "ps.albania",
+    "who": "Socialist Party of Albania (YouTube)"
+   },
+   {
+    "kind": "movement",
+    "match": "student|studen|protest|Tiran|universit|police|polici|arrest|Rama|Veliaj|opozit|opposition",
+    "verified": "linked from ps.al, its official website",
+    "type": "x",
+    "handle": "ps_shqiperi",
+    "who": "Socialist Party of Albania (X)"
+   },
+   {
+    "kind": "movement",
+    "match": "student|studen|protest|Tiran|universit|police|polici|arrest|Rama|Veliaj|opozit|opposition",
+    "verified": "linked from ps.al, its official website",
+    "type": "x",
+    "handle": "psocialiste",
+    "who": "Socialist Party of Albania (X)"
+   },
+   {
+    "kind": "movement",
+    "match": "student|studen|protest|Tiran|universit|police|polici|arrest|Rama|Veliaj|opozit|opposition",
+    "verified": "linked from ps.al, its official website",
+    "type": "instagram",
+    "handle": "partiasocialisteshqiperise",
+    "who": "Socialist Party of Albania (Instagram)"
+   }
+  ]
+ },
+ "https://pd.al": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "movement",
+    "match": "student|studen|protest|Tiran|universit|police|polici|arrest|Rama|Veliaj|opozit|opposition",
+    "verified": "linked from pd.al, its official website",
+    "type": "youtube",
+    "handle": "pdshqiperi",
+    "who": "Democratic Party of Albania (YouTube)"
+   },
+   {
+    "kind": "movement",
+    "match": "student|studen|protest|Tiran|universit|police|polici|arrest|Rama|Veliaj|opozit|opposition",
+    "verified": "linked from pd.al, its official website",
+    "type": "x",
+    "handle": "pdshqiperi",
+    "who": "Democratic Party of Albania (X)"
+   },
+   {
+    "kind": "movement",
+    "match": "student|studen|protest|Tiran|universit|police|polici|arrest|Rama|Veliaj|opozit|opposition",
+    "verified": "linked from pd.al, its official website",
+    "type": "instagram",
+    "handle": "PDShqiperi",
+    "who": "Democratic Party of Albania (Instagram)"
+   },
+   {
+    "kind": "movement",
+    "match": "student|studen|protest|Tiran|universit|police|polici|arrest|Rama|Veliaj|opozit|opposition",
+    "verified": "linked from pd.al, its official website",
+    "type": "tiktok",
+    "handle": "pdshqiperi",
+    "who": "Democratic Party of Albania (TikTok)"
+   }
+  ]
+ },
+ "https://www.pm.gc.ca/en": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "official",
+    "match": "Pacific Link|pipeline|First Nation|Bill C-5|Building Canada|major project|tanker|coast|consultation",
+    "verified": "linked from pm.gc.ca, its official website",
+    "type": "youtube",
+    "handle": "CanadianPM",
+    "who": "Prime Minister of Canada (YouTube)"
+   },
+   {
+    "kind": "official",
+    "match": "Pacific Link|pipeline|First Nation|Bill C-5|Building Canada|major project|tanker|coast|consultation",
+    "verified": "linked from pm.gc.ca, its official website",
+    "type": "x",
+    "handle": "CanadianPM",
+    "who": "Prime Minister of Canada (X)"
+   },
+   {
+    "kind": "official",
+    "match": "Pacific Link|pipeline|First Nation|Bill C-5|Building Canada|major project|tanker|coast|consultation",
+    "verified": "linked from pm.gc.ca, its official website",
+    "type": "instagram",
+    "handle": "canadianpm",
+    "who": "Prime Minister of Canada (Instagram)"
+   }
+  ]
+ },
+ "https://coastalfirstnations.ca": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "movement",
+    "match": "Pacific Link|pipeline|First Nation|Bill C-5|Building Canada|major project|tanker|coast|consultation",
+    "verified": "linked from coastalfirstnations.ca, its official website",
+    "type": "youtube",
+    "handle": "CFNGBI",
+    "who": "Coastal First Nations (YouTube)"
+   },
+   {
+    "kind": "movement",
+    "match": "Pacific Link|pipeline|First Nation|Bill C-5|Building Canada|major project|tanker|coast|consultation",
+    "verified": "linked from coastalfirstnations.ca, its official website",
+    "type": "instagram",
+    "handle": "coastalfirstnations",
+    "who": "Coastal First Nations (Instagram)"
+   }
+  ]
+ },
+ "https://cockroachjantaparty.co": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "movement",
+    "verified": "linked from cockroachjantaparty.co, its official website",
+    "type": "youtube",
+    "handle": "CockroachJantaParty",
+    "who": "Cockroach Janta Party (YouTube)"
+   },
+   {
+    "kind": "movement",
+    "verified": "linked from cockroachjantaparty.co, its official website",
+    "type": "instagram",
+    "handle": "cockroach_party.official",
+    "who": "Cockroach Janta Party (Instagram)"
+   }
+  ]
+ },
+ "https://www.inc.in": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "movement",
+    "match": "Cockroach|CJP|protest|rally|march|dharna|students|SIR|vote chori|voter|electoral roll|Election Commission|youth|police|detain|NEET|paper leak|Jantar Mantar|INDIA bloc",
+    "verified": "linked from inc.in, its official website",
+    "type": "x",
+    "handle": "INCIndia",
+    "who": "Indian National Congress (X)"
+   },
+   {
+    "kind": "movement",
+    "match": "Cockroach|CJP|protest|rally|march|dharna|students|SIR|vote chori|voter|electoral roll|Election Commission|youth|police|detain|NEET|paper leak|Jantar Mantar|INDIA bloc",
+    "verified": "linked from inc.in, its official website",
+    "type": "instagram",
+    "handle": "incindia",
+    "who": "Indian National Congress (Instagram)"
+   }
+  ]
+ },
+ "https://www.cgt.fr": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "movement",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from cgt.fr, its official website",
+    "type": "x",
+    "handle": "lacgtcommunique",
+    "who": "CGT union (X)"
+   },
+   {
+    "kind": "movement",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from cgt.fr, its official website",
+    "type": "telegram",
+    "channel": "cgt_medias",
+    "who": "CGT union (Telegram)"
+   },
+   {
+    "kind": "movement",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from cgt.fr, its official website",
+    "type": "instagram",
+    "handle": "cgt_confederation",
+    "who": "CGT union (Instagram)"
+   }
+  ]
+ },
+ "https://fsu.fr": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "movement",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from fsu.fr, its official website",
+    "type": "youtube",
+    "handle": "federationsyndicaleunitaire",
+    "who": "FSU teachers' union (YouTube)"
+   },
+   {
+    "kind": "movement",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from fsu.fr, its official website",
+    "type": "instagram",
+    "handle": "federationsyndicaleunitaire",
+    "who": "FSU teachers' union (Instagram)"
+   },
+   {
+    "kind": "movement",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from fsu.fr, its official website",
+    "type": "bluesky",
+    "handle": "fsu-nationale.bsky.social",
+    "who": "FSU teachers' union (Bluesky)"
+   }
+  ]
+ },
+ "https://unef.fr": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "movement",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from unef.fr, its official website",
+    "type": "x",
+    "handle": "UNEF",
+    "who": "UNEF student union (X)"
+   },
+   {
+    "kind": "movement",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from unef.fr, its official website",
+    "type": "instagram",
+    "handle": "unef_",
+    "who": "UNEF student union (Instagram)"
+   }
+  ]
+ },
+ "https://www.gouvernement.fr": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "official",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from gouvernement.fr, its official website",
+    "type": "youtube",
+    "handle": "gouvernementfr",
+    "who": "French Government (YouTube)"
+   },
+   {
+    "kind": "official",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from gouvernement.fr, its official website",
+    "type": "x",
+    "handle": "gouvernementfr",
+    "who": "French Government (X)"
+   },
+   {
+    "kind": "official",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from gouvernement.fr, its official website",
+    "type": "instagram",
+    "handle": "gouvernementfr",
+    "who": "French Government (Instagram)"
+   },
+   {
+    "kind": "official",
+    "match": "lycée|lycéen|blocage|blocus|mobilisation|grève|manifest|élèves|étudiant|éducation|budget|5 novembre",
+    "verified": "linked from gouvernement.fr, its official website",
+    "type": "tiktok",
+    "handle": "gouvernementfr",
+    "who": "French Government (TikTok)"
+   }
+  ]
+ },
+ "https://www.bundesregierung.de": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "official",
+    "match": "Gen Z|Jugend|junge|Protest|Demo|Wehrdienst|Wehrpflicht|Bildung|Schul|Streik",
+    "verified": "linked from bundesregierung.de, its official website",
+    "type": "x",
+    "handle": "RegSprecher",
+    "who": "Federal Government of Germany (X)"
+   },
+   {
+    "kind": "official",
+    "match": "Gen Z|Jugend|junge|Protest|Demo|Wehrdienst|Wehrpflicht|Bildung|Schul|Streik",
+    "verified": "linked from bundesregierung.de, its official website",
+    "type": "x",
+    "handle": "bundeskanzler",
+    "who": "Federal Government of Germany (X)"
+   },
+   {
+    "kind": "official",
+    "match": "Gen Z|Jugend|junge|Protest|Demo|Wehrdienst|Wehrpflicht|Bildung|Schul|Streik",
+    "verified": "linked from bundesregierung.de, its official website",
+    "type": "instagram",
+    "handle": "bundesregierung",
+    "who": "Federal Government of Germany (Instagram)"
+   },
+   {
+    "kind": "official",
+    "match": "Gen Z|Jugend|junge|Protest|Demo|Wehrdienst|Wehrpflicht|Bildung|Schul|Streik",
+    "verified": "linked from bundesregierung.de, its official website",
+    "type": "instagram",
+    "handle": "bundeskanzler",
+    "who": "Federal Government of Germany (Instagram)"
+   },
+   {
+    "kind": "official",
+    "match": "Gen Z|Jugend|junge|Protest|Demo|Wehrdienst|Wehrpflicht|Bildung|Schul|Streik",
+    "verified": "linked from bundesregierung.de, its official website",
+    "type": "tiktok",
+    "handle": "Bundeskanzler",
+    "who": "Federal Government of Germany (TikTok)"
+   }
+  ]
+ },
+ "https://www.dgb.de": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "movement",
+    "match": "Gen Z|Jugend|junge|Protest|Demo|Wehrdienst|Wehrpflicht|Bildung|Schul|Streik",
+    "verified": "linked from dgb.de, its official website",
+    "type": "x",
+    "handle": "dgb_news",
+    "who": "DGB trade union confederation (X)"
+   },
+   {
+    "kind": "movement",
+    "match": "Gen Z|Jugend|junge|Protest|Demo|Wehrdienst|Wehrpflicht|Bildung|Schul|Streik",
+    "verified": "linked from dgb.de, its official website",
+    "type": "instagram",
+    "handle": "dgb.gewerkschaftsbund",
+    "who": "DGB trade union confederation (Instagram)"
+   },
+   {
+    "kind": "movement",
+    "match": "Gen Z|Jugend|junge|Protest|Demo|Wehrdienst|Wehrpflicht|Bildung|Schul|Streik",
+    "verified": "linked from dgb.de, its official website",
+    "type": "tiktok",
+    "handle": "dgb_gewerkschaftsbund",
+    "who": "DGB trade union confederation (TikTok)"
+   }
+  ]
+ },
+ "https://www.governo.it": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "official",
+    "match": "student|scuol|sciopero|manifest|corteo|piazza|scontri|universit|Meloni|precari",
+    "verified": "linked from governo.it, its official website",
+    "type": "x",
+    "handle": "Palazzo_Chigi",
+    "who": "Italian Government (X)"
+   },
+   {
+    "kind": "official",
+    "match": "student|scuol|sciopero|manifest|corteo|piazza|scontri|universit|Meloni|precari",
+    "verified": "linked from governo.it, its official website",
+    "type": "instagram",
+    "handle": "palazzo_chigi",
+    "who": "Italian Government (Instagram)"
+   }
+  ]
+ },
+ "https://www.usb.it": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "movement",
+    "match": "student|scuol|sciopero|manifest|corteo|piazza|scontri|universit|Meloni|precari",
+    "verified": "linked from usb.it, its official website",
+    "type": "x",
+    "handle": "usbsindacato",
+    "who": "USB union (X)"
+   },
+   {
+    "kind": "movement",
+    "match": "student|scuol|sciopero|manifest|corteo|piazza|scontri|universit|Meloni|precari",
+    "verified": "linked from usb.it, its official website",
+    "type": "telegram",
+    "channel": "usb_notizie",
+    "who": "USB union (Telegram)"
+   },
+   {
+    "kind": "movement",
+    "match": "student|scuol|sciopero|manifest|corteo|piazza|scontri|universit|Meloni|precari",
+    "verified": "linked from usb.it, its official website",
+    "type": "instagram",
+    "handle": "unionesindacaledibase",
+    "who": "USB union (Instagram)"
+   }
+  ]
+ },
+ "https://www.srbija.gov.rs": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "official",
+    "match": "student|Novi Sad|nadstreš|canopy|blokad|izbor|election|vlad|protest",
+    "verified": "linked from srbija.gov.rs, its official website",
+    "type": "x",
+    "handle": "SerbianGov",
+    "who": "Government of Serbia (X)"
+   },
+   {
+    "kind": "official",
+    "match": "student|Novi Sad|nadstreš|canopy|blokad|izbor|election|vlad|protest",
+    "verified": "linked from srbija.gov.rs, its official website",
+    "type": "instagram",
+    "handle": "vlada.republike.srbije",
+    "who": "Government of Serbia (Instagram)"
+   }
+  ]
+ },
+ "https://www.predsednik.rs": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "official",
+    "match": "student|Novi Sad|nadstreš|canopy|blokad|izbor|election|vlad|protest",
+    "verified": "linked from predsednik.rs, its official website",
+    "type": "x",
+    "handle": "predsednikrs",
+    "who": "President of Serbia (X)"
+   },
+   {
+    "kind": "official",
+    "match": "student|Novi Sad|nadstreš|canopy|blokad|izbor|election|vlad|protest",
+    "verified": "linked from predsednik.rs, its official website",
+    "type": "instagram",
+    "handle": "buducnostsrbijeav",
+    "who": "President of Serbia (Instagram)"
+   }
+  ]
+ },
+ "https://www.gov.za": {
+  "at": "2026-11-04T02:00:18Z",
+  "found": [
+   {
+    "kind": "official",
+    "match": "asylum|refugee|Durban|migrant|immigra|foreign national|Lindela|deport|Constitutional Court|xenophob",
+    "verified": "linked from gov.za, its official website",
+    "type": "youtube",
+    "channelId": "UCeGklnZgV21ag34t1_4G4dg",
+    "who": "South African Government (YouTube)"
+   },
+   {
+    "kind": "official",
+    "match": "asylum|refugee|Durban|migrant|immigra|foreign national|Lindela|deport|Constitutional Court|xenophob",
+    "verified": "linked from gov.za, its official website",
+    "type": "x",
+    "handle": "GovernmentZA",
+    "who": "South African Government (X)"
+   },
+   {
+    "kind": "official",
+    "match": "asylum|refugee|Durban|migrant|immigra|foreign national|Lindela|deport|Constitutional Court|xenophob",
+    "verified": "linked from gov.za, its official website",
+    "type": "instagram",
+    "handle": "governmentza",
+    "who": "South African Government (Instagram)"
+   }
+  ]
+ }
+}

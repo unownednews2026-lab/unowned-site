@@ -7,8 +7,19 @@
    "key": "pr110400440",
    "label": "pending",
    "date": "2026-11-05",
-   "added": "2026-11-04T00:44:32Z"
+   "added": "2026-11-04T00:44:32Z",
+   "status": "pending"
   }
  ],
- "accounts": {}
+ "accounts": {
+  "x:lacgtcommunique": {
+   "who": "CGT union (X)",
+   "upheld": 0,
+   "disproved": 0,
+   "removed": 0,
+   "unconfirmed": 0,
+   "open": 0,
+   "pending": 1
+  }
+ }
 }

@@ -91,16 +91,16 @@
    "last": "2026-11-04T00:44:32Z"
   },
   "x:giorgiameloni": {
-   "n": 2,
+   "n": 3,
    "from": {
     "Palazzo_Chigi": 1,
-    "predsednikrs": 1
+    "predsednikrs": 2
    },
    "stories": {
     "italy-student-protests": 1,
     "serbia-student-movement": 1
    },
-   "last": "2026-11-04T00:44:32Z"
+   "last": "2026-11-04T02:00:18Z"
   },
   "x:antonio_tajani": {
    "n": 1,
@@ -131,6 +131,688 @@
     "italy-student-protests": 1
    },
    "last": "2026-11-04T00:44:32Z"
+  },
+  "instagram:taulantballaps": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Taulant Balla",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:gresasalihu1": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Gresa Salihu",
+    "verified": ""
+   }
+  },
+  "instagram:ndreupjerin": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Pjerin Ndreu",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:nflamur": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Flamur Noka",
+    "verified": ""
+   }
+  },
+  "instagram:pirro_vengu": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Pirro Vengu",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:arlind.qori": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Arlind Qori",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:blendi.gonxhja": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Blendi Gonxhja",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:andithaqi": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Andi Thaqi",
+    "verified": ""
+   }
+  },
+  "instagram:m.bregu": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Majlinda Bregu",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:arbesagash": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Arbesa Gashi",
+    "verified": ""
+   }
+  },
+  "instagram:laertivasili": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Laerti Vasili",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:jorida.tabaku": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Jorida Tabaku",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:erion_isai": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Erion Isai",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:mirelakumbaro": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Mirela Kumbaro",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:bled_mane": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Bledi Mane",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:adriatiklapaj": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Adriatik Lapaj",
+    "verified": ""
+   }
+  },
+  "instagram:robert_ndrenika": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Robert Ndrenika",
+    "verified": ""
+   }
+  },
+  "instagram:belindaballuku": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Belinda Balluku",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:topallijozefina": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Jozefina Topalli",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:blerinagjylameti": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Blerina Gjylameti",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:ilva_tare": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Ilva Tare",
+    "verified": ""
+   }
+  },
+  "instagram:ballist.morina": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Ballist Morina",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:neomalsore": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Marjana Koçeku",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:eviskushi": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "EVIS KUSHI",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:usembassytirana": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "U.S. Embassy Tirana",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:bidoardit": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Ardit Bido",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:eraaberishaaa": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Era Berisha",
+    "verified": ""
+   }
+  },
+  "instagram:endripriftiofficial": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Endrit Prifti",
+    "verified": ""
+   }
+  },
+  "instagram:el_gaucho_tirana": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "El Gaucho Tirana",
+    "verified": ""
+   }
+  },
+  "instagram:betinjuma": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Beti Njuma",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:sokolballareal": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Sokol Balla",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:rudinaxhunga": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Rudina Xhunga",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:the.maid.pastrim": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "The Maid Pastrim",
+    "verified": ""
+   }
+  },
+  "instagram:ilirmeta.faqjazyrtare": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Ilir Meta",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:endrishabani": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Endrit Shabani",
+    "verified": ""
+   }
+  },
+  "instagram:ben.blushi": {
+   "n": 3,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Ben Blushi",
+    "verified": "Instagram"
+   }
+  },
+  "instagram:bashkiatirane": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Bashkia Tiranë",
+    "verified": ""
+   }
+  },
+  "instagram:tringaisa": {
+   "n": 1,
+   "from": {
+    "ediramaal (related accounts)": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z",
+   "profile": {
+    "name": "Tringa Isa",
+    "verified": ""
+   }
+  },
+  "tiktok:klevis_balliu": {
+   "n": 1,
+   "from": {
+    "pdshqiperi": 1
+   },
+   "stories": {
+    "albania-student-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:ceompelections": {
+   "n": 4,
+   "from": {
+    "ECISVEEP": 4
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:electionvellore": {
+   "n": 1,
+   "from": {
+    "ECISVEEP": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:aajtak": {
+   "n": 1,
+   "from": {
+    "abhijeet_dipke": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:rajnathsingh": {
+   "n": 1,
+   "from": {
+    "RahulGandhi": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:nitin_gadkari": {
+   "n": 1,
+   "from": {
+    "RahulGandhi": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:chouhanshivraj": {
+   "n": 1,
+   "from": {
+    "RahulGandhi": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:myogiadityanath": {
+   "n": 1,
+   "from": {
+    "RahulGandhi": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:jeunesmacron": {
+   "n": 1,
+   "from": {
+    "UNEF": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:jeunesenmarche": {
+   "n": 1,
+   "from": {
+    "UNEF": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "tiktok:jujulagygy": {
+   "n": 1,
+   "from": {
+    "gouvernementfr": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "tiktok:lerefuge": {
+   "n": 1,
+   "from": {
+    "gouvernementfr": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:zelenskyyua": {
+   "n": 2,
+   "from": {
+    "bundeskanzler": 2
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "tiktok:eko": {
+   "n": 1,
+   "from": {
+    "dgb_gewerkschaftsbund": 1
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
+  },
+  "x:alsisiofficial": {
+   "n": 1,
+   "from": {
+    "predsednikrs": 1
+   },
+   "stories": {
+    "serbia-student-movement": 1
+   },
+   "last": "2026-11-04T02:00:18Z"
   }
  },
  "proposed": {},
