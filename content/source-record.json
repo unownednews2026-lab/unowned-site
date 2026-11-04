@@ -28,7 +28,8 @@
    "key": "pr110406230",
    "label": "alleged",
    "date": "2026-11-04",
-   "added": "2026-11-04T06:23:29Z"
+   "added": "2026-11-04T06:23:29Z",
+   "status": "open"
   }
  ],
  "accounts": {
@@ -43,6 +44,15 @@
   },
   "x:cockroachisback": {
    "who": "Cockroach Janta Party (\"Cockroach Is Back\" account on X)",
+   "upheld": 0,
+   "disproved": 0,
+   "removed": 0,
+   "unconfirmed": 0,
+   "open": 1,
+   "pending": 0
+  },
+  "x:governmentza": {
+   "who": "South African Government (X)",
    "upheld": 0,
    "disproved": 0,
    "removed": 0,
