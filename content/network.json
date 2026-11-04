@@ -815,14 +815,14 @@
    "last": "2026-11-04T02:00:18Z"
   },
   "x:rahulgandhi": {
-   "n": 1,
+   "n": 2,
    "from": {
-    "INCIndia": 1
+    "INCIndia": 2
    },
    "stories": {
     "cockroach-movement": 1
    },
-   "last": "2026-11-04T02:36:48Z"
+   "last": "2026-11-04T08:06:54Z"
   },
   "x:franceskalbs": {
    "n": 1,
@@ -873,6 +873,66 @@
     "cockroach-movement": 1
    },
    "last": "2026-11-04T05:47:31Z"
+  },
+  "x:ashutoshranka": {
+   "n": 1,
+   "from": {
+    "abhijeet_dipke": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T08:06:54Z"
+  },
+  "x:shreyabasu003": {
+   "n": 1,
+   "from": {
+    "abhijeet_dipke": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T08:06:54Z"
+  },
+  "x:kharge": {
+   "n": 1,
+   "from": {
+    "INCIndia": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T08:06:54Z"
+  },
+  "instagram:kumari.selja": {
+   "n": 1,
+   "from": {
+    "incindia": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T08:06:54Z"
+  },
+  "instagram:incuttarakhand": {
+   "n": 1,
+   "from": {
+    "incindia": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T08:06:54Z"
+  },
+  "instagram:incmp": {
+   "n": 1,
+   "from": {
+    "incindia": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-04T08:06:54Z"
   }
  },
  "proposed": {
