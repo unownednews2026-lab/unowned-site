@@ -69,7 +69,10 @@ export async function instagramFree(h) {
 export async function instagramPost(url) {
   const code = (url.match(/\/p\/([\w-]+)/) || [])[1]; if (!code) return null;
   try {
-    const html = await get(`https://www.instagram.com/p/${code}/embed/captioned/`, {}, 20000);
+    // Instagram refuses cloud servers, so if the direct read fails, read the embed page through the reader service.
+    let html = "";
+    try { html = await get(`https://www.instagram.com/p/${code}/embed/captioned/`, {}, 20000); } catch {}
+    if (!/Caption|taken_at|EmbeddedMedia/.test(html)) html = await reader(`https://www.instagram.com/p/${code}/embed/captioned/`);
     const caption = (html.match(/class="Caption"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || "";
     const ts = (html.match(/"taken_at_timestamp":(\d+)/) || html.match(/datetime="([^"]+)"/) || [])[1];
     const video = (html.match(/"video_url":"([^"]+)"/) || [])[1];
