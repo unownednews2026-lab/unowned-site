@@ -202,6 +202,7 @@ async function readSource(src) {
     } catch (e) { why = String(e.message).slice(0, 160); }
     if (!posts.length) { const paid = await scrapeEvery(src, src.type, src.handle).catch((e) => { why += `; paid: ${String(e.message).slice(0, 60)}`; return []; }); if (paid.length) { posts = paid; route = "paid scraper"; } }
     if (!posts.length) seen[failKey] = now; else delete seen[failKey];
+    if (/graph: /.test(why)) report.push(`- ${src.story}: Instagram official API failed for @${src.handle}: ${(why.match(/graph: [^;]*/) || [""])[0]}`);
     if (DRY || !posts.length) say(`${src.type} @${src.handle}: ${posts.length} post(s)${route ? ` via ${route}` : ""}${!posts.length && why ? ` (${why})` : ""}`);
     return posts;
   }
