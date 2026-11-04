@@ -1,4 +1,14 @@
 {
- "items": [],
+ "items": [
+  {
+   "account": "x:lacgtcommunique",
+   "who": "CGT union (X)",
+   "story": "france-school-protests",
+   "key": "pr110400440",
+   "label": "pending",
+   "date": "2026-11-05",
+   "added": "2026-11-04T00:44:32Z"
+  }
+ ],
  "accounts": {}
 }
