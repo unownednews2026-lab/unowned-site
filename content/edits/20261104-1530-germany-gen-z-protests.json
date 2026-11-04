@@ -1,0 +1,3 @@
+{"story":"germany-gen-z-protests","note":"Review: removed two desk items resting on a Kolkata feature (different initiative, conflicting city count, anecdote)","ops":[
+{"op":"remove_event","find":"Telegraph India reported that the “Gen Z steht auf” initiative"},
+{"op":"remove_event","find":"a resident in Düsseldorf stayed indoors on October 31"}]}
