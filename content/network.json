@@ -1355,6 +1355,26 @@
     "cockroach-movement": 1
    },
    "last": "2026-11-05T09:48:02Z"
+  },
+  "x:ceochhattisgarh": {
+   "n": 2,
+   "from": {
+    "ECISVEEP": 2
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-05T11:44:14Z"
+  },
+  "x:ceojharkhand": {
+   "n": 1,
+   "from": {
+    "ECISVEEP": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-05T11:44:14Z"
   }
  },
  "proposed": {
