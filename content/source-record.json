@@ -101,6 +101,15 @@
    "date": "2026-11-16",
    "added": "2026-11-05T16:57:56Z",
    "status": "pending"
+  },
+  {
+   "account": "telegram:cgt_medias",
+   "who": "CGT union (Telegram)",
+   "story": "france-school-protests",
+   "key": "pr110518310",
+   "label": "alleged",
+   "date": "2026-11-05",
+   "added": "2026-11-05T18:31:14Z"
   }
  ],
  "accounts": {
