@@ -79,7 +79,8 @@
    "key": "pr110512460",
    "label": "alleged",
    "date": "2026-11-05",
-   "added": "2026-11-05T12:46:15Z"
+   "added": "2026-11-05T12:46:15Z",
+   "status": "open"
   }
  ],
  "accounts": {
@@ -116,7 +117,7 @@
    "disproved": 0,
    "removed": 0,
    "unconfirmed": 0,
-   "open": 3,
+   "open": 4,
    "pending": 0
   },
   "instagram:pdshqiperi": {
