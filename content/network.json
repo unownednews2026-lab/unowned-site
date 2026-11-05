@@ -936,14 +936,14 @@
    "last": "2026-11-04T08:06:54Z"
   },
   "x:tnelectionsceo": {
-   "n": 1,
+   "n": 4,
    "from": {
-    "ECISVEEP": 1
+    "ECISVEEP": 4
    },
    "stories": {
     "cockroach-movement": 1
    },
-   "last": "2026-11-04T10:49:55Z"
+   "last": "2026-11-05T04:49:26Z"
   },
   "x:dceastsinghbhum": {
    "n": 1,
@@ -1305,6 +1305,46 @@
     "cockroach-movement": 1
    },
    "last": "2026-11-05T00:26:22Z"
+  },
+  "x:kgielection": {
+   "n": 1,
+   "from": {
+    "ECISVEEP": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-05T04:49:26Z"
+  },
+  "x:deo_cuddalore": {
+   "n": 1,
+   "from": {
+    "ECISVEEP": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-05T04:49:26Z"
+  },
+  "x:chengalpattudeo": {
+   "n": 1,
+   "from": {
+    "ECISVEEP": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-05T04:49:26Z"
+  },
+  "x:pawankhera": {
+   "n": 1,
+   "from": {
+    "RahulGandhi": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-05T04:49:26Z"
   }
  },
  "proposed": {

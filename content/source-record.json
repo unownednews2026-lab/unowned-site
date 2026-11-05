@@ -49,7 +49,8 @@
    "key": "pr110503380",
    "label": "alleged",
    "date": "2026-11-04",
-   "added": "2026-11-05T03:38:39Z"
+   "added": "2026-11-05T03:38:39Z",
+   "status": "open"
   }
  ],
  "accounts": {
@@ -82,6 +83,15 @@
   },
   "bluesky:fsu-nationale.bsky.social": {
    "who": "FSU teachers' union (Bluesky)",
+   "upheld": 0,
+   "disproved": 0,
+   "removed": 0,
+   "unconfirmed": 0,
+   "open": 1,
+   "pending": 0
+  },
+  "instagram:pdshqiperi": {
+   "who": "Democratic Party of Albania (Instagram)",
    "upheld": 0,
    "disproved": 0,
    "removed": 0,
