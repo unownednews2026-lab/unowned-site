@@ -1036,14 +1036,14 @@
    "last": "2026-11-04T14:06:16Z"
   },
   "instagram:sophie_binet_cgt": {
-   "n": 2,
+   "n": 3,
    "from": {
-    "cgt_confederation": 2
+    "cgt_confederation": 3
    },
    "stories": {
     "france-school-protests": 1
    },
-   "last": "2026-11-04T14:06:16Z"
+   "last": "2026-11-05T16:57:56Z"
   },
   "instagram:education_gouv": {
    "n": 2,
@@ -1247,14 +1247,14 @@
    "last": "2026-11-04T14:06:16Z"
   },
   "instagram:fds_nazionale": {
-   "n": 1,
+   "n": 2,
    "from": {
-    "unionesindacaledibase": 1
+    "unionesindacaledibase": 2
    },
    "stories": {
     "italy-student-protests": 1
    },
-   "last": "2026-11-04T14:06:16Z"
+   "last": "2026-11-05T16:57:56Z"
   },
   "instagram:usbferrovie": {
    "n": 1,
@@ -1287,14 +1287,14 @@
    "last": "2026-11-04T16:37:53Z"
   },
   "x:odishaceo": {
-   "n": 2,
+   "n": 4,
    "from": {
-    "ECISVEEP": 2
+    "ECISVEEP": 4
    },
    "stories": {
     "cockroach-movement": 1
    },
-   "last": "2026-11-05T05:54:01Z"
+   "last": "2026-11-05T16:57:56Z"
   },
   "instagram:supriyashrinate": {
    "n": 1,
@@ -1367,14 +1367,14 @@
    "last": "2026-11-05T11:44:14Z"
   },
   "x:ceojharkhand": {
-   "n": 1,
+   "n": 2,
    "from": {
-    "ECISVEEP": 1
+    "ECISVEEP": 2
    },
    "stories": {
     "cockroach-movement": 1
    },
-   "last": "2026-11-05T11:44:14Z"
+   "last": "2026-11-05T16:57:56Z"
   },
   "x:anja_piel": {
    "n": 1,
@@ -1465,6 +1465,66 @@
     "cockroach-movement": 1
    },
    "last": "2026-11-05T15:04:20Z"
+  },
+  "x:hpelection": {
+   "n": 1,
+   "from": {
+    "ECISVEEP": 1
+   },
+   "stories": {
+    "cockroach-movement": 1
+   },
+   "last": "2026-11-05T16:57:56Z"
+  },
+  "instagram:cgilnazionale": {
+   "n": 1,
+   "from": {
+    "cgt_confederation": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-05T16:57:56Z"
+  },
+  "instagram:syndicatfgtb": {
+   "n": 1,
+   "from": {
+    "cgt_confederation": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-05T16:57:56Z"
+  },
+  "instagram:comisionesobreras": {
+   "n": 1,
+   "from": {
+    "cgt_confederation": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-05T16:57:56Z"
+  },
+  "instagram:cgtp.portugal": {
+   "n": 1,
+   "from": {
+    "cgt_confederation": 1
+   },
+   "stories": {
+    "france-school-protests": 1
+   },
+   "last": "2026-11-05T16:57:56Z"
+  },
+  "instagram:bundesgesundheitsministerium": {
+   "n": 1,
+   "from": {
+    "bundesregierung": 1
+   },
+   "stories": {
+    "germany-gen-z-protests": 1
+   },
+   "last": "2026-11-05T16:57:56Z"
   }
  },
  "proposed": {

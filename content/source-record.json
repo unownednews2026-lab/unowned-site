@@ -81,6 +81,24 @@
    "date": "2026-11-05",
    "added": "2026-11-05T12:46:15Z",
    "status": "open"
+  },
+  {
+   "account": "instagram:federationsyndicaleunitaire",
+   "who": "FSU teachers' union (Instagram)",
+   "story": "france-school-protests",
+   "key": "pr110516570",
+   "label": "alleged",
+   "date": "2026-11-05",
+   "added": "2026-11-05T16:57:56Z"
+  },
+  {
+   "account": "instagram:unionesindacaledibase",
+   "who": "USB union (Instagram)",
+   "story": "italy-student-protests",
+   "key": "pr110516571",
+   "label": "pending",
+   "date": "2026-11-16",
+   "added": "2026-11-05T16:57:56Z"
   }
  ],
  "accounts": {
