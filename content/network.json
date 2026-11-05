@@ -815,14 +815,14 @@
    "last": "2026-11-04T02:00:18Z"
   },
   "x:rahulgandhi": {
-   "n": 2,
+   "n": 3,
    "from": {
-    "INCIndia": 2
+    "INCIndia": 3
    },
    "stories": {
     "cockroach-movement": 1
    },
-   "last": "2026-11-04T08:06:54Z"
+   "last": "2026-11-05T18:54:53Z"
   },
   "x:franceskalbs": {
    "n": 1,
@@ -1525,6 +1525,36 @@
     "germany-gen-z-protests": 1
    },
    "last": "2026-11-05T16:57:56Z"
+  },
+  "instagram:canadaremembers": {
+   "n": 1,
+   "from": {
+    "canadianpm": 1
+   },
+   "stories": {
+    "canada-pacific-link-pipeline": 1
+   },
+   "last": "2026-11-05T18:54:53Z"
+  },
+  "instagram:canwarmuseum": {
+   "n": 1,
+   "from": {
+    "canadianpm": 1
+   },
+   "stories": {
+    "canada-pacific-link-pipeline": 1
+   },
+   "last": "2026-11-05T18:54:53Z"
+  },
+  "instagram:libraryarchives": {
+   "n": 1,
+   "from": {
+    "canadianpm": 1
+   },
+   "stories": {
+    "canada-pacific-link-pipeline": 1
+   },
+   "last": "2026-11-05T18:54:53Z"
   }
  },
  "proposed": {

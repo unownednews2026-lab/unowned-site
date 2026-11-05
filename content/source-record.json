@@ -109,7 +109,8 @@
    "key": "pr110518310",
    "label": "alleged",
    "date": "2026-11-05",
-   "added": "2026-11-05T18:31:14Z"
+   "added": "2026-11-05T18:31:14Z",
+   "status": "open"
   }
  ],
  "accounts": {
@@ -175,6 +176,15 @@
    "unconfirmed": 0,
    "open": 0,
    "pending": 1
+  },
+  "telegram:cgt_medias": {
+   "who": "CGT union (Telegram)",
+   "upheld": 0,
+   "disproved": 0,
+   "removed": 0,
+   "unconfirmed": 0,
+   "open": 1,
+   "pending": 0
   }
  }
 }
