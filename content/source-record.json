@@ -89,7 +89,8 @@
    "key": "pr110516570",
    "label": "alleged",
    "date": "2026-11-05",
-   "added": "2026-11-05T16:57:56Z"
+   "added": "2026-11-05T16:57:56Z",
+   "status": "open"
   },
   {
    "account": "instagram:unionesindacaledibase",
@@ -98,7 +99,8 @@
    "key": "pr110516571",
    "label": "pending",
    "date": "2026-11-16",
-   "added": "2026-11-05T16:57:56Z"
+   "added": "2026-11-05T16:57:56Z",
+   "status": "pending"
   }
  ],
  "accounts": {
@@ -146,6 +148,24 @@
    "unconfirmed": 0,
    "open": 1,
    "pending": 0
+  },
+  "instagram:federationsyndicaleunitaire": {
+   "who": "FSU teachers' union (Instagram)",
+   "upheld": 0,
+   "disproved": 0,
+   "removed": 0,
+   "unconfirmed": 0,
+   "open": 1,
+   "pending": 0
+  },
+  "instagram:unionesindacaledibase": {
+   "who": "USB union (Instagram)",
+   "upheld": 0,
+   "disproved": 0,
+   "removed": 0,
+   "unconfirmed": 0,
+   "open": 0,
+   "pending": 1
   }
  }
 }
