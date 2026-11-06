@@ -19,6 +19,17 @@ export default {
     if (age(h.lastChecked) > 5) problems.push(`No desk has checked for news for ${Math.round(age(h.lastChecked))} hours: the hourly desks are not running (check GitHub Actions billing and the Claude plan).`);
     const stale = Object.entries(h.stories || {}).filter(([, s]) => age(s.lastNew) > 36).map(([k, s]) => `${k} (${Math.round(age(s.lastNew))}h)`);
     if (stale.length) problems.push(`No new item for 36+ hours: ${stale.join(", ")}`);
+    // The editor (a Claude task) logs a comment on issue #2 every run. If the newest log is 12+ hours old it has stopped
+    // (usually the Claude plan's usage limit). Needs the repository to be public; skipped quietly while it is private.
+    try {
+      const repo = env.REPO || "unownednews2026-lab/unowned-site";
+      const r = await fetch(`https://api.github.com/repos/${repo}/issues/comments?sort=created&direction=desc&per_page=100`, { headers: { "User-Agent": "unowned-watchdog", Accept: "application/vnd.github+json" } });
+      if (r.ok) {
+        const logs = (await r.json()).filter((c) => /\/issues\/2$/.test(c.issue_url) && /editor:/i.test(c.body || ""));
+        const newest = logs.length ? logs[0].created_at : "";
+        if (!newest || age(newest) > 12) problems.push(`The editor has not logged a run for ${newest ? Math.round(age(newest)) + " hours" : "a long time"} (usually the Claude plan's usage limit). Unreviewed items are waiting.`);
+      }
+    } catch (_) { /* GitHub unreachable: the other checks still run */ }
     if (!problems.length) return;
     // At most one alert per 6 hours for the same kind of problem.
     const key = problems.map((p) => p.slice(0, 20)).join("|");

@@ -13,6 +13,7 @@ Everything that keeps the site fresh depends on three things. Each can stop on i
 ## Rules the desk follows (tested in `test/`)
 - The stalest story runs first, so a busy story can never starve quiet ones.
 - A story with no new item for 12 hours gets an attributed headline item if two different established outlets cover it. The editor rewrites these when it runs.
+- The outside alarm also alerts when the editor has logged nothing on issue #2 for 12 hours (works once the repository is public).
 - Review packets keep short excerpts only (this repository is public).
 
 ## Never
