@@ -427,6 +427,13 @@ function build() {
   write("live.json", JSON.stringify(stories.flatMap((st) => st.events.filter((e) => e.added && e.label !== "pending" && e.date === newestEvent(st) && Date.parse(e.date + "T23:59:59Z") > Date.now() - 4 * 864e5).map((e) => ({ story: st.slug, storyTitle: st.title, id: e.id, label: e.label, added: e.added, text: sentenceOne(e.text) }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)).slice(0, 30)));
   /* "Since your last visit": every published item added in the last 14 days, read once per page by catchup.js. */
   const since = new Date(Date.now() - 14 * 864e5).toISOString().slice(0, 19) + "Z";
+  // Health file for the outside watchdog (tools/watchdog-worker.js, runs on Cloudflare, independent of GitHub and Claude).
+  write("health.json", JSON.stringify({
+    built: new Date().toISOString(),
+    lastChecked: stories.map((st) => st.checkedAt || st.updatedAt || "").sort().pop() || "",
+    lastNew: stories.flatMap((st) => st.events.map((e) => e.added || "")).sort().pop() || "",
+    stories: Object.fromEntries(stories.map((st) => [st.slug, { lastNew: st.events.map((e) => e.added || "").sort().pop() || "", checked: st.checkedAt || st.updatedAt || "" }])),
+  }));
   write("updates.json", JSON.stringify({ since, items: stories.flatMap((st) => st.events.filter((e) => e.added && e.added >= since && e.label !== "pending").map((e) => ({ story: st.slug, id: e.id, label: e.label, added: e.added, date: e.date, text: sentenceOne(e.text) }))).sort((a, b) => b.added.localeCompare(a.added) || b.id.localeCompare(a.id)) }));
   const regions = [...new Set(byUpdate.map(({ st }) => st.region))];
   // "Live updates": the newest developments by the date they happened (an old event added late is not "live").
