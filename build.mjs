@@ -74,7 +74,7 @@ function why(S, label, keys, where) {
 const newestEvent = (st) => st.events.filter((e) => e.label !== "pending").reduce((m, e) => (e.date > m ? e.date : m), "");
 const latestDev = (st) => newestEvent(st) ? `<span class="latest-dev">Latest development: <strong>${long(newestEvent(st))}</strong></span>` : "";
 // Honest about quiet stories: judged by the date of the newest development, not by when the page was last edited.
-const quietNote = (st) => { const d = newestEvent(st); const old = d && Date.now() - Date.parse(d + "T23:59:59Z") > 2 * 864e5; return old ? `<p class="quiet-note">No new developments reported since ${long(d)}: these are the latest reports. We check for news every hour and will update as soon as there is something new.</p>` : ""; };
+const quietNote = (st) => { const d = newestEvent(st); const old = d && Date.now() - Date.parse(d + "T23:59:59Z") > 2 * 864e5; return old ? `<p class="quiet-note">No new developments reported since ${long(d)}: these are the latest reports. <span class="hourly-claim" data-checked="${st.checkedAt || st.updatedAt || ""}">We check for news every hour and will update as soon as there is something new.</span></p>` : ""; };
 const checkedNote = (st) => st.checkedAt && st.checkedAt > (st.updatedAt || "") ? `<span class="checked">Checked for news <time class="ago" datetime="${st.checkedAt}">${long(st.checkedAt.slice(0, 10))}</time></span>` : "";
 const newestAdded = (st) => st.events.reduce((m, e) => (e.added && e.added > m ? e.added : m), st.updatedAt || "");
 // First sentence, without breaking at abbreviations such as "B.C.", "U.S.", "Dr." or "no. 190".
@@ -410,7 +410,7 @@ function build() {
   // the newsdesk keeps checking it and it returns to the top as soon as there is news.
   const isQuiet = (st) => { const d = newestEvent(st); const soon = st.events.some((e) => e.label === "pending" && Date.parse(e.date) >= Date.now() - 864e5 && Date.parse(e.date) <= Date.now() + 10 * 864e5); return d && Date.now() - Date.parse(d + "T23:59:59Z") > 10 * 864e5 && !soon; };
   const quietOnes = byUpdate.filter(({ st }) => isQuiet(st));
-  const quietHtml = quietOnes.length ? `<section aria-labelledby="h-quiet"><div class="section-head"><h2 id="h-quiet">Quiet for now</h2><p>No new developments for 10 days or more. We still check these every hour and bring them back as soon as there is news.</p></div><ul class="quiet-list">${quietOnes.map(({ st }) => `<li><a href="/${st.slug}/"><strong>${esc(st.title)}</strong> <span>Latest development: ${long(newestEvent(st))}</span></a></li>`).join("")}</ul></section>` : "";
+  const quietHtml = quietOnes.length ? `<section aria-labelledby="h-quiet"><div class="section-head"><h2 id="h-quiet">Quiet for now</h2><p>No new developments for 10 days or more. <span class="hourly-claim" data-checked="${stories.map((s) => s.checkedAt || s.updatedAt || "").sort().pop() || ""}">We still check these every hour and bring them back as soon as there is news.</span></p></div><ul class="quiet-list">${quietOnes.map(({ st }) => `<li><a href="/${st.slug}/"><strong>${esc(st.title)}</strong> <span>Latest development: ${long(newestEvent(st))}</span></a></li>`).join("")}</ul></section>` : "";
   const cards = byUpdate.filter(({ st }) => !isQuiet(st)).map(({ st, latest }, i) => `<li class="trend" data-story="${st.slug}" data-order="${i}">
     <span class="rank" aria-hidden="true">${i + 1}</span>
     <div class="trend-body">

@@ -26,6 +26,22 @@
       if (!isNaN(t)) el.hidden = Date.now() - t < 864e5;   // only after a full day without a new development
     });
   }
-  run(); quiet();
-  setInterval(function () { run(); quiet(); }, 60000);
+  /* "We check for news every hour" must never be shown when checks have stopped. The checks refresh the page's check time
+     at least every 2-3 hours; if the last one is older than 5 hours, say so plainly instead of repeating the promise. */
+  function claims() {
+    document.querySelectorAll(".hourly-claim[data-checked]").forEach(function (el) {
+      var t = Date.parse(el.getAttribute("data-checked"));
+      if (isNaN(t)) return;
+      if (Date.now() - t > 5 * 36e5) {
+        if (!el.hasAttribute("data-orig")) el.setAttribute("data-orig", el.textContent);
+        var abs = new Date(t).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+        el.textContent = "Our last check for news was " + abs + ". Our checks are running behind, so there may be news we have not added yet.";
+        el.classList.add("behind");
+      } else if (el.hasAttribute("data-orig")) {
+        el.textContent = el.getAttribute("data-orig"); el.classList.remove("behind");
+      }
+    });
+  }
+  run(); quiet(); claims();
+  setInterval(function () { run(); quiet(); claims(); }, 60000);
 })();

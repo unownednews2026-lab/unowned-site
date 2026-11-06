@@ -356,9 +356,9 @@ try {
     }
 } catch {}
 
-/* Every story was checked for news this run, so refresh "Checked for news" (only every 4 hours, to keep rebuilds low). */
+/* Every story was checked for news this run, so refresh "Checked for news" (every 2 hours: the site and the watchdog treat 5+ hours without a check as a problem). */
 const newestCheck = stories.map(({ f }) => JSON.parse(readFileSync(`content/stories/${f}`, "utf8"))).flatMap((s) => [s.updatedAt, s.checkedAt]).filter(Boolean).sort().pop() || "";
-const stamp = published.length || Date.now() - Date.parse(newestCheck) > 4 * 36e5;
+const stamp = published.length || Date.now() - Date.parse(newestCheck) > 2 * 36e5;
 if (stamp) for (const { f } of stories) {
   const s = JSON.parse(readFileSync(`content/stories/${f}`, "utf8"));
   if (published.includes(s.slug)) continue;
