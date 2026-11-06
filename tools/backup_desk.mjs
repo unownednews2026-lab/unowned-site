@@ -41,7 +41,10 @@ for (const x of stories) {
   const h = await headlinesSince(x.s).catch(() => []);
   if (h.length) hot.push({ ...x, h });
 }
-hot.sort((a, b) => b.h.length - a.h.length);
+// Stalest story first (not the one with the most headlines): otherwise the busiest story takes every run and the quiet
+// ones fall days behind (Nov 2-5: Germany, Serbia, Canada and South Africa were skipped while France ran every hour).
+const lastNew = (s) => s.events.map((e) => e.added || e.date).filter(Boolean).sort().pop() || "";
+hot.sort((a, b) => lastNew(a.s).localeCompare(lastNew(b.s)) || b.h.length - a.h.length);
 if (!hot.length) say("no fresh headlines for any story");
 
 const modelsUsed = llmUsed;
@@ -166,7 +169,7 @@ async function articlesFor(q, s) {
   return out;
 }
 
-for (const { f, s, h } of hot.slice(0, 3)) {
+for (const { f, s, h } of hot.slice(0, 4)) {
   const newest = [...s.events].sort((a, b) => b.date.localeCompare(a.date))[0];
   const recent = [...s.events].sort((a, b) => (b.added || b.date).localeCompare(a.added || a.date)).slice(0, 6);
   const arts = await articles(s, h);
@@ -302,16 +305,18 @@ Proposed item: "${it.text}"`, { temperature: 0, prefer: SECOND_CHECK, log: say }
 
 /* Safety net: a story with fresh headlines from established outlets but no update for 8+ hours gets a short,
    attributed headline item ("<Outlet> reports: ..."), so real news never waits more than a day. The Claude desk rewrites it later. */
-// Off by default (Nov 1): the editor removed most headline-only items as too thin to verify, and its five daily runs
-// now catch up stories that fall behind. Set HEADLINE_FALLBACK=1 to switch it back on.
-for (const { f, h } of process.env.HEADLINE_FALLBACK ? hot : []) {
+// On by default again (Nov 5): switching it off on Nov 1 left nothing to catch a story when the editor (a Claude task)
+// hit the plan's usage limit, and stories sat for days. To keep items from being thin it now needs TWO different
+// established outlets with headlines on the same story. The editor rewrites these when it runs. HEADLINE_FALLBACK=0 turns it off.
+for (const { f, h } of process.env.HEADLINE_FALLBACK === "0" ? [] : hot) {
   const s = JSON.parse(readFileSync(`content/stories/${f}`, "utf8"));
-  if (published.includes(s.slug) || Date.now() - Date.parse(s.updatedAt || s.updated) < 8 * 36e5) continue;
+  if (published.includes(s.slug) || Date.now() - Date.parse(lastNew(s) || s.updatedAt || s.updated) < 12 * 36e5) continue;
   // The headline must mention the story itself, not just the country (e.g. an airport-delay headline is not about asylum unrest).
   const wv2 = JSON.parse(readFileSync("tools/watch.json", "utf8"))[s.slug];
   const watchWords = ((typeof wv2 === "object" && wv2 ? `${wv2.en} ${wv2.local || ""}` : wv2) || s.title).toLowerCase().split(/[^a-zà-ÿ0-9]+/).filter((w) => w.length >= 4 && !(s.region || "").toLowerCase().includes(w) && !["south", "africa", "india", "italy", "france", "canada", "albania"].includes(w));
   const onTopic = (title) => watchWords.some((w) => title.toLowerCase().includes(w.slice(0, Math.max(5, w.length - 2))));
-  const pick = (h || []).find((x) => onTopic(x.title) && x.domain && trusted(x.domain) && !/^(opinion|comment|editorial|analysis|letters?|column|explainer|podcast)\b|\b(opinion|editorial)\s*[:|]/i.test(x.title) && x.link && x.title && !UNSAFE.test(x.title) && !s.events.some((e) => overlap(e.text, x.title) > 0.5));
+  const usable = (h || []).filter((x) => onTopic(x.title) && x.domain && trusted(x.domain) && !/^(opinion|comment|editorial|analysis|letters?|column|explainer|podcast)\b|\b(opinion|editorial)\s*[:|]/i.test(x.title) && x.link && x.title && !UNSAFE.test(x.title) && !s.events.some((e) => overlap(e.text, x.title) > 0.5));
+  const pick = new Set(usable.map((x) => x.domain.replace(/^www\./, ""))).size >= 2 ? usable[0] : null;   // two different established outlets
   if (!pick) { report.push(`- ${s.slug}: no update for 20+ hours, but no headline from an established outlet to use`); continue; }
   const headline = pick.title.replace(/\s+-\s+[^-]+$/, "").trim();            // Google News adds " - Outlet" at the end
   const outlet = pick.outlet || pick.domain;
