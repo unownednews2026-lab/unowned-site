@@ -1,0 +1,20 @@
+{
+  "story": "france-school-protests",
+  "added": "2026-11-05T12:46:15Z",
+  "label": "alleged",
+  "via": "social",
+  "kind": "claim",
+  "text": "FSU teachers' union said on Bluesky that mobilisation is rising on 5 November, with a majority strike in colleges and high schools demanding better salaries and public services.",
+  "sources": [
+    {
+      "key": "pr110512460",
+      "outlet": "FSU teachers' union (Bluesky)",
+      "url": "https://bsky.app/profile/fsu-nationale.bsky.social/post/3mzkuvzv3m62l",
+      "platform": "bluesky",
+      "verified": "linked from fsu.fr, its official website",
+      "published": "2026-11-05T12:34:37.031622777Z",
+      "media": [],
+      "articleText": "✊ La mobilisation monte d'un cran ce #5novembre ! ✊\n📢 #Grève majoritaire dans les collèges-lycées, très suivie dans le 1er degré et la Fonction publique : toutes et tous mobilisé·es pour nos #salaires et les #servicespublics !"
+    }
+  ]
+}

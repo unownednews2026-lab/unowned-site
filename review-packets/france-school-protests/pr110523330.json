@@ -1,0 +1,29 @@
+{
+  "story": "france-school-protests",
+  "added": "2026-11-05T23:33:00Z",
+  "label": "reported",
+  "via": "social",
+  "kind": "own_action",
+  "text": "The FSU teachers' union said in a statement on Bluesky that nearly 1.6 million demonstrators marched in France and called for continued mobilization and further strikes following clashes and government inaction on wages and public services.",
+  "sources": [
+    {
+      "key": "pr110523330",
+      "outlet": "FSU teachers' union (Bluesky)",
+      "url": "https://bsky.app/profile/fsu-nationale.bsky.social/post/3mzlwuvlsjm2b",
+      "platform": "bluesky",
+      "verified": "linked from fsu.fr, its official website",
+      "published": "2026-11-05T22:42:26.383495032Z",
+      "media": [
+        {
+          "type": "image",
+          "url": "https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:5vc2mxnal4qipklojkqisjs5/bafkreiaujhdr27rkqle4ialejd3ntddrn7fkupkkbfig6gxhcbgbpeggqu"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:5vc2mxnal4qipklojkqisjs5/bafkreigdwhh7evqrywz5dkayboylrirrhb6fmdc4hkfjylvasiied74vk4"
+        }
+      ],
+      "articleText": "Communiqué de la FSU\nLa mobilisation monte d’un cran : le gouvernement doit répondre !\n▶️ https://fsu.fr/communique-la-mobilisation-monte-dun-cran-le-gouvernement-doit-repondre/\n\n[Text and content of the image] **French text:**\n\nCommuniqué de presse\nLa mobilisation monte d'un cran : le gouvernement doit répondre !\n\nPrès de 1,6 million de manifestant·es ont défilé aujourd'hui en France dans des cortèges massifs, pacifiques et déterminés. La FSU salue le fort engagement des agent·es de la fonction publique dans la grève pour obtenir l’augmentation de leurs salaires et des moyens pour les services publics.\n\nLe moment que nous vivons est historique. Le message est très clair : il faut une rupture nette avec les politiques conduites depuis 10 ans, il faut répondre d’urgence à la colère sociale et aux revendications. La présence massive dans les manifestations dit aussi que la dérive autoritaire du gouvernement et les attaques portées aux libertés d’expression et de manifestation doivent cesser.\n\nLa FSU dénonce avec force la violente répression contre des cortèges pacifiques notamment à Toulouse et Lyon, and adresse tout son soutien aux manifestant·es et militant·es blessé·es.\n\nLes réponses apportées par le gouvernement en matière de moyens pour les services publics et d’accès à l'enseignement supérieur sont très loin des revendications d’une jeunesse qui n'exige que le droit légitime d’étudier, de choisir sa formation et de se dessiner un avenir.\n\nAucune annonce n’a été faite sur les salaires. Le premier ministre a annoncé une réunion lundi avec les organisations syndicales représentatives du privé et le patronat. Les organisations de la fonction publique, comme les organisations de jeunesse, sont exclues. C'est inacceptable.\n\n***\n\n**English translation:**\n\nPress release\nThe"
+    }
+  ]
+}

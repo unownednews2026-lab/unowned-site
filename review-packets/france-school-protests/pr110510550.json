@@ -1,0 +1,20 @@
+{
+  "story": "france-school-protests",
+  "added": "2026-11-05T10:55:50Z",
+  "label": "alleged",
+  "via": "social",
+  "kind": "claim",
+  "text": "FSU teachers' union said on Bluesky that the strike was majority in collèges and lycées on 5 November.",
+  "sources": [
+    {
+      "key": "pr110510550",
+      "outlet": "FSU teachers' union (Bluesky)",
+      "url": "https://bsky.app/profile/fsu-nationale.bsky.social/post/3mzkn3iiyu22j",
+      "platform": "bluesky",
+      "verified": "linked from fsu.fr, its official website",
+      "published": "2026-11-05T10:14:30.536Z",
+      "media": [],
+      "articleText": "✊ La #grève est majoritaire dans les #collèges et #lycées ce #5novembre ! ✊\nWarning: This page maybe not yet fully loaded, consider explicitly specify a timeout.\n✊ La #grève est majoritaire dans les #collèges et #lycées ce #5novembre ! ✊ [contains quote post or other embedded content]\nLearn more about Bluesky at bsky.social and atproto.com."
+    }
+  ]
+}

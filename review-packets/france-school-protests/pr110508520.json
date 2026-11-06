@@ -1,0 +1,25 @@
+{
+  "story": "france-school-protests",
+  "added": "2026-11-05T08:52:20Z",
+  "label": "alleged",
+  "via": "social",
+  "kind": "claim",
+  "text": "FSU teachers' union said on Bluesky that it reminded the minister why it was on strike on 5 November across France, citing salary and public‑service funding concerns.",
+  "sources": [
+    {
+      "key": "pr110508520",
+      "outlet": "FSU teachers' union (Bluesky)",
+      "url": "https://bsky.app/profile/fsu-nationale.bsky.social/post/3mzkhplldfk2b",
+      "platform": "bluesky",
+      "verified": "linked from fsu.fr, its official website",
+      "published": "2026-11-05T08:38:22.248793497Z",
+      "media": [
+        {
+          "type": "image",
+          "url": "https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:5vc2mxnal4qipklojkqisjs5/bafkreia2lyyy4gb4gnkfz3cembpprqreatzi6jjw37cdoax2inbprs43k4"
+        }
+      ],
+      "articleText": "🎤 Hier, nous avons rappelé au ministre pourquoi nous étions en #grève ce #5novembre partout en France : pour nos #salaires et des moyens pour les #servicespublics !\n🔗 L'intégralité de notre déclaration au CSA-MEN d'hier ➡️ https://fsu.fr/declarations-de-la-fsu-au-csa-men-du-4-novembre-2026/\n\n[Text and content of the image] **Original Text:**\n“Le gouvernement continue d’ignorer les graves conséquences du déclassement salarial, et donc social, avéré et documenté, de nos professions.”\nDéclaration de la FSU\nau Comité social d'administration ministériel de l'éducation nationale (CSA-MEN)\ndu 4 novembre 2026\nU.\nF.S.U.\n\n**English Translation:**\n\"The government continues to ignore the serious consequences of the proven and documented wage, and therefore social, decline of our professions.\"\nStatement by the FSU\nto the ministerial social administration committee of national education (CSA-MEN)\ndated November 4, 2026\nU.\nF.S.U.\n\nShows: An informational graphic featuring a quote regarding wage and social decline, attributed to the FSU union.\n(read by gemini-flash-lite-latest)"
+    }
+  ]
+}

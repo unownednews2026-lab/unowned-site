@@ -1,0 +1,20 @@
+{
+  "story": "france-school-protests",
+  "added": "2026-11-04T00:44:32Z",
+  "label": "pending",
+  "via": "social",
+  "kind": "claim",
+  "text": "CGT union said on X that the number of strike calls for Thursday 5 November had exceeded 1,140, indicating actions across public and private sectors.",
+  "sources": [
+    {
+      "key": "pr110400440",
+      "outlet": "CGT union (X)",
+      "url": "https://x.com/lacgtcommunique/status/2117679240627847374",
+      "platform": "x",
+      "verified": "linked from cgt.fr, its official website",
+      "published": "2026-11-03T18:04:10.200Z",
+      "media": [],
+      "articleText": "🚨 Le compteur des appels à la grève pour jeudi 5 novembre vient de dépasser les 1140 appels recensés via les organisations de la CGT Ça bouge partout, dans le public comme dans le privé !"
+    }
+  ]
+}

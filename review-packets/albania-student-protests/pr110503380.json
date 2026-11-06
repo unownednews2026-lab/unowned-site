@@ -1,0 +1,25 @@
+{
+  "story": "albania-student-protests",
+  "added": "2026-11-05T03:38:39Z",
+  "label": "alleged",
+  "via": "social",
+  "kind": "claim",
+  "text": "Democratic Party of Albania said in an Instagram post that it is ready for protests and calls for Prime Minister Rama to be imprisoned.",
+  "sources": [
+    {
+      "key": "pr110503380",
+      "outlet": "Democratic Party of Albania (Instagram)",
+      "url": "https://www.instagram.com/p/DfVThwQAnGd/",
+      "platform": "instagram",
+      "verified": "linked from pd.al, its official website",
+      "published": "2026-11-04T20:28:59.000Z",
+      "media": [
+        {
+          "type": "video",
+          "url": "https://scontent-ams2-1.cdninstagram.com/o1/v/t2/f2/m86/AQOSlzkHwjHNQyCxiKFyUjxwFcVJ6B7Q_hmo993YVzdToB7E3xlvgYWnpQXarnZHypaXPBlBzlaqO3vfq7Yq0BVtDBHvkx2k8d_V5n0.mp4?_nc_cat=105&_nc_sid=5e9851&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_ohc=pwCjd5IQFyEQ7kNvwFWhp9L&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6NDQ3NDE5MjA4OTUxMzAzNSwiYXNzZXRfYWdlX2RheXMiOjAsInZpX3VzZWNhc2VfaWQiOjEwMDk5LCJkdXJhdGlvbl9zIjoyMywidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=bd12b2c582f52731&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8wNUIxQkY4NTBCOTU0RjVCODYyQTgxREYwQUZERkM1OF92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyL0YxNEI5QjRFQzQ5MzRGNDE5NDcyOEVEQUIyQTY0NDRGX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaW8bfioNDyDxUCKAJDMywXQDfMzMzMzM0YEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=Eq7EpoaDyR6eRoMKxp-vKw&_nc_zt=28&_nc_ss=73980&oh=00_AQS0DcD3uhAhnK7Ejo9JPeMYzGpGFsdOwcHjcud7deKkXw&oe=6AEDD0BE"
+        }
+      ],
+      "articleText": "Për përmbytjet, për zjarret, për hallet e qytetarëve mungojnë. Për protestën, janë në gatishmëri!\n\n[What is said in the video] - Për hallet e shqiptarëve (For the problems of Albanians)\n- Për hallin e Ramës (For Rama's problem)\n- Rama në burg! (Rama in prison!)\n\nOn screen:\n- Për hallet e shqiptarëve\n- Për hallin e Ramës\n- Rama në burg!\n(read by gemini-flash-lite-latest)"
+    }
+  ]
+}
