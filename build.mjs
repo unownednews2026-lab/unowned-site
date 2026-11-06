@@ -74,7 +74,7 @@ function why(S, label, keys, where) {
 const newestEvent = (st) => st.events.filter((e) => e.label !== "pending").reduce((m, e) => (e.date > m ? e.date : m), "");
 const latestDev = (st) => newestEvent(st) ? `<span class="latest-dev">Latest development: <strong>${long(newestEvent(st))}</strong></span>` : "";
 // Honest about quiet stories: judged by the date of the newest development, not by when the page was last edited.
-const quietNote = (st) => { const d = newestEvent(st); const old = d && Date.now() - Date.parse(d + "T23:59:59Z") > 2 * 864e5; return old ? `<p class="quiet-note">No new developments reported since ${long(d)}: these are the latest reports. <span class="hourly-claim" data-checked="${st.checkedAt || st.updatedAt || ""}">We check for news every hour and will update as soon as there is something new.</span></p>` : ""; };
+const quietNote = (st) => { const d = newestEvent(st); const old = d && Date.now() - Date.parse(d + "T23:59:59Z") > 2 * 864e5; return old ? `<p class="quiet-note">We have added nothing new since ${long(d)}: these are the latest reports we have verified. <span class="hourly-claim" data-checked="${st.checkedAt || st.updatedAt || ""}">We check for news every hour and will update as soon as there is something new.</span></p>` : ""; };
 const checkedNote = (st) => st.checkedAt && st.checkedAt > (st.updatedAt || "") ? `<span class="checked">Checked for news <time class="ago" datetime="${st.checkedAt}">${long(st.checkedAt.slice(0, 10))}</time></span>` : "";
 const newestAdded = (st) => st.events.reduce((m, e) => (e.added && e.added > m ? e.added : m), st.updatedAt || "");
 // First sentence, without breaking at abbreviations such as "B.C.", "U.S.", "Dr." or "no. 190".
