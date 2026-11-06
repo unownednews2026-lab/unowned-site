@@ -428,7 +428,7 @@ Text: ${x.text.slice(0, 7000)}`, { temperature: 0.1, log: () => {} });
       }
       // Review packet for the editor: the post exactly as read, with its transcript and image text.
       mkdirSync(`review-packets/${s.slug}`, { recursive: true });
-      writeFileSync(`review-packets/${s.slug}/${key}.json`, JSON.stringify({ story: s.slug, added: now, label, via, kind: it.kind, text: it.text.trim(), sources: [{ key, outlet: src.who, url: x.url, platform: src.type, verified: src.verified, published: x.date, media: x.media || [], articleText: x.text }] }, null, 2));
+      writeFileSync(`review-packets/${s.slug}/${key}.json`, JSON.stringify({ story: s.slug, added: now, label, via, kind: it.kind, text: it.text.trim(), sources: [{ key, outlet: src.who, url: x.url, platform: src.type, verified: src.verified, published: x.date, media: x.media || [], articleText: String(x.text || "").slice(0, 1800) }] }, null, 2));
       s.updated = now.slice(0, 10); s.updatedAt = now;
       writeFileSync(`content/stories/${f}`, JSON.stringify(s, null, 2));
       sh(`node tools/fmt.js content/stories/${f}`);

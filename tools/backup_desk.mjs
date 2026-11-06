@@ -291,7 +291,7 @@ Proposed item: "${it.text}"`, { temperature: 0, prefer: SECOND_CHECK, log: say }
     // Review packet for the Claude editor: the item plus the full text of the articles it rests on, so the editor can check it
     // without searching or re-fetching (saves Claude usage). Kept in the private repository only; never published on the site.
     mkdirSync(`review-packets/${s.slug}`, { recursive: true });
-    writeFileSync(`review-packets/${s.slug}/${keys[0]}.json`, JSON.stringify({ story: s.slug, added: now, label, text: it.text.trim(), sources: cited.map((a, i) => ({ key: keys[i], outlet: a.domain, url: a.url, title: a.title, articleText: a.text })) }, null, 2));
+    writeFileSync(`review-packets/${s.slug}/${keys[0]}.json`, JSON.stringify({ story: s.slug, added: now, label, text: it.text.trim(), sources: cited.map((a, i) => ({ key: keys[i], outlet: a.domain, url: a.url, title: a.title, articleText: String(a.text || "").slice(0, 900) })) }, null, 2));
     added.push({ label, text: it.text.trim(), cited });
   }
   if (!added.length) continue;
