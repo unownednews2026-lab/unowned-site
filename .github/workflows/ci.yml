@@ -1,0 +1,29 @@
+name: CI
+# Runs only when code changes (not on the desks' hourly content commits): syntax check, unit tests, and a full site build.
+on:
+  push:
+    branches: [main]
+    paths: ["tools/**", "build.mjs", "test/**", ".github/workflows/**", "package.json"]
+  pull_request:
+    paths: ["tools/**", "build.mjs", "test/**", ".github/workflows/**", "package.json"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Syntax check every tool
+        run: for f in tools/*.mjs tools/*.js build.mjs; do node --check "$f" || exit 1; done
+      - name: Unit tests
+        run: node --test test/*.test.mjs
+      - name: Build the site (fails on label or story errors)
+        run: |
+          npm ci --silent || npm install --silent
+          node build.mjs | tee /tmp/build.txt
+          ! grep -E "LABEL CHECK: [1-9][0-9]* item" /tmp/build.txt
+          test -s dist/health.json

@@ -8,6 +8,7 @@ import { readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync } from "nod
 import { execSync } from "node:child_process";
 import { headlinesSince } from "./signals.mjs";
 import { ungrounded } from "./grounding.mjs";
+import { lastNew, stalestFirst, corroborated } from "./desk_select.mjs";
 const readFails = [];   // why articles could not be read, for the run log
 import { ask, used as llmUsed, problems as llmProblems, GITHUB_PROVIDER, SECOND_CHECK } from "./llm.mjs";
 
@@ -43,8 +44,7 @@ for (const x of stories) {
 }
 // Stalest story first (not the one with the most headlines): otherwise the busiest story takes every run and the quiet
 // ones fall days behind (Nov 2-5: Germany, Serbia, Canada and South Africa were skipped while France ran every hour).
-const lastNew = (s) => s.events.map((e) => e.added || e.date).filter(Boolean).sort().pop() || "";
-hot.sort((a, b) => lastNew(a.s).localeCompare(lastNew(b.s)) || b.h.length - a.h.length);
+hot.splice(0, hot.length, ...stalestFirst(hot));
 if (!hot.length) say("no fresh headlines for any story");
 
 const modelsUsed = llmUsed;
@@ -316,7 +316,7 @@ for (const { f, h } of process.env.HEADLINE_FALLBACK === "0" ? [] : hot) {
   const watchWords = ((typeof wv2 === "object" && wv2 ? `${wv2.en} ${wv2.local || ""}` : wv2) || s.title).toLowerCase().split(/[^a-zà-ÿ0-9]+/).filter((w) => w.length >= 4 && !(s.region || "").toLowerCase().includes(w) && !["south", "africa", "india", "italy", "france", "canada", "albania"].includes(w));
   const onTopic = (title) => watchWords.some((w) => title.toLowerCase().includes(w.slice(0, Math.max(5, w.length - 2))));
   const usable = (h || []).filter((x) => onTopic(x.title) && x.domain && trusted(x.domain) && !/^(opinion|comment|editorial|analysis|letters?|column|explainer|podcast)\b|\b(opinion|editorial)\s*[:|]/i.test(x.title) && x.link && x.title && !UNSAFE.test(x.title) && !s.events.some((e) => overlap(e.text, x.title) > 0.5));
-  const pick = new Set(usable.map((x) => x.domain.replace(/^www\./, ""))).size >= 2 ? usable[0] : null;   // two different established outlets
+  const pick = corroborated(usable) ? usable[0] : null;   // two different established outlets
   if (!pick) { report.push(`- ${s.slug}: no update for 20+ hours, but no headline from an established outlet to use`); continue; }
   const headline = pick.title.replace(/\s+-\s+[^-]+$/, "").trim();            // Google News adds " - Outlet" at the end
   const outlet = pick.outlet || pick.domain;
