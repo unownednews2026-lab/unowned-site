@@ -37,14 +37,17 @@ function speakable(t) {
     .replace(/\bB\.C\./g, "British Columbia").replace(/\bGov\. /g, "Governor ").replace(/\bno\. (?=\d)/gi, "number ")
     .replace(/\bSt\. /g, "Saint ").replace(/\bDr /g, "Doctor ").replace(/\bvs?\. /g, "versus ").replace(/\be\.g\. /g, "for example ")
     .replace(/\b(\d+)\/(\d{4})\b/g, "$1 of $2")   // "190/2026" -> "190 of 2026"
+    .replace(/\b([ap])\.m\./gi, (_, a) => a.toUpperCase() + "M")
     .replace(/\s*\([^)]*\)/g, "")          // drop bracketed asides
     .replace(/\s+/g, " ").trim();
 }
 // Split into sentences without breaking at initials or abbreviations ("J.P. Nadda", "U.S.", "Dr. Smith").
 const sentences = (t) => {
-  const safe = t.replace(/\b(?:[A-Z]\.){2,}/g, (m) => m.replace(/\./g, "\u2063")).replace(/\b(Dr|Mr|Mrs|Ms|St|Gov|Gen|Lt|Col|Sgt|Jr|Sr|No|vs|Inc|Corp|Ltd|Mt|Ft|Prof|Rep|Sen)\./g, "$1\u2063");
-  return (safe.match(/[^.!?]+[.!?]+["”’]?(?=\s|$)/g) || [safe]).map((x) => x.replace(/^["”’\s]+/, "").replace(/\u2063/g, ".").trim()).filter(Boolean);
+  const safe = t.replace(/(\d)\.(?=\d)/g, "$1\u2063").replace(/(\d\s?(?:m|bn|k))\.(?=\s[a-z])/g, "$1\u2063").replace(/\b(?:[A-Z]\.){2,}/g, (m) => m.replace(/\./g, "\u2063")).replace(/\b(Dr|Mr|Mrs|Ms|St|Gov|Gen|Lt|Col|Sgt|Jr|Sr|No|vs|Inc|Corp|Ltd|Mt|Ft|Prof|Rep|Sen)\./g, "$1\u2063");
+  return (safe.match(/[^.!?]+(?:[.!?]+["”’]?(?=\s|$)|$)/g) || [safe]).map((x) => x.replace(/^["”’\s]+/, "").replace(/\u2063/g, ".").trim()).filter(Boolean);
 };
+// Shorten at a comma that leaves a whole clause (8+ words), never right after a list-opening word.
+const trim = (p, max) => { if (p.split(/\s+/).length <= max) return p; const cuts = [...p.matchAll(/, /g)].map((m) => p.slice(0, m.index)).filter((c) => { const n = c.split(/\s+/).length; return n >= 8 && n <= max; }); return cuts.length ? cuts.pop() : p; };
 const firstSentences = (t, n) => sentences(speakable(t)).slice(0, n).join(" ").trim();
 /* Our grade, said the way a newsreader would: the grade name, why it got that grade, and who reported it. Varied so it doesn't sound robotic. */
 const outletNames = (s, e) => [...new Set((e.sources || []).map((k) => (s.sources[k] || [])[0]).filter((n) => n && !/\.[a-z]{2,}$/i.test(n)).map((n) => n.replace(/\s*\(.*?\)\s*/g, "").trim()))].slice(0, 2);
@@ -173,7 +176,7 @@ for (const { s, ev } of picks) {
   if (next) {
     said.add(next);
     let p = firstSentences(next.text, 1).split(";")[0].replace(/[.;:]\s*$/, "").replace(/\s*Still being checked$/i, "");
-    if (p.split(/\s+/).length > 22) p = p.split(", ")[0];
+    p = trim(p, 22);
     parts.push(`Coming up: ${p}.`);
   }
   script.push(parts.filter(Boolean).join(" "));
@@ -189,7 +192,7 @@ const ahead = stories.map((s) => ({ s })).flatMap(({ s }) => upcoming(s).slice(0
   .sort((a, b) => a.e.date.localeCompare(b.e.date)).slice(0, 4);
 if (ahead.length) script.push("Coming up in the days ahead. " + ahead.map(({ s, e }) => {
   let p = firstSentences(e.text, 1).split(";")[0].replace(/[.;:]\s*$/, "");
-  if (p.split(/\s+/).length > 16) p = p.split(", ")[0];
+  p = trim(p, 16);
   return `${WEEKDAYS[new Date(e.date + "T12:00:00Z").getUTCDay()]}, ${spokenDate(e.date)}, ${region(s)}: ${p}.`;
 }).join(" "));
 script.push(`That's the Unowned briefing for ${dayLine}. Full timelines, and every source, are at unowned news dot com. Thanks for listening.`);
