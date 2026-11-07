@@ -1,4 +1,0 @@
-{"story":"germany-gen-z-protests","note":"Sweep: federal student council plans its own Berlin demonstration (ZDFheute, Oct 29)","ops":[
-{"op":"add_source","key":"zdfOct29","name":"ZDFheute","url":"https://www.zdfheute.de/politik/deutschland/proteste-jugendliche-schuelerkonferenz-gen-z-100.html"},
-{"op":"add_event","event":{"date":"2026-10-29","phase":"after","label":"reported","added":"2026-11-06T15:25:00Z","text":"Germany's federal student council (Bundesschülerkonferenz) distanced itself from the \"Gen Z regelt\" protests, citing unclear organisational structures, and announced its own demonstration in Berlin for November 20, ZDFheute reports. The council said it is organising it with a civil-society alliance, and that the teachers' union GEW, the federal parents' council and Fridays for Future had reportedly agreed to take part.","sources":["zdfOct29"]}}
-]}

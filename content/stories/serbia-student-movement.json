@@ -10,8 +10,8 @@
   "kicker": "Story tracker · Serbia",
   "dek": "Two years after a station canopy collapse in Novi Sad killed 16 people, the student-led movement it sparked has won Serbia's snap election, ending 14 years of rule by Aleksandar Vučić's party. What the students now demand, and what happens to the investigations.",
   "status": "Ongoing",
-  "updated": "2026-11-02",
-  "updatedAt": "2026-11-04T03:22:41Z",
+  "updated": "2026-11-07",
+  "updatedAt": "2026-11-07T18:52:26Z",
   "summary": [
     "On November 1, 2024, a concrete canopy at the newly renovated railway station in Novi Sad, Serbia's second-largest city, collapsed at 11:52 a.m., killing 16 people, according to AP and AFP. Many Serbians blamed corruption and negligence in state infrastructure projects, and university students led some of the country's largest protests since 2000. Thirteen people, including former construction minister Goran Vesić, were charged, but no trial has started, and the European Public Prosecutor's Office is investigating possible misuse of EU funds in the renovation.",
     "President Aleksandar Vučić called a snap parliamentary election in September 2026. In the October 25 vote, with turnout of nearly 70 percent, the highest since 1992, the Student List defeated his Serbian Progressive Party (SNS), which had governed for 14 years. Vučić conceded on election night; a CeSID-Ipsos projection gave the students 138 of 250 seats and the SNS 104, enough for the Student List to govern alone.",
@@ -31,6 +31,8 @@
     { "date": "2026-11-01", "phase": "after", "label": "alleged", "added": "2026-11-02T20:00:00Z", "text": "Prosecutors order the 48-hour detention of Marko Kričak, head of the criminal police, and another senior officer on suspicion of abuse of office linked to a murder investigation, AP reports. Kričak is accused of orchestrating violence during the student protests and of threatening a student; he denies the allegations.", "sources": ["apNov1"] },
     { "date": "2026-11-01", "phase": "after", "label": "reported", "added": "2026-11-04T03:22:41Z", "text": "Belgrade's chief prosecutor says there is a well-founded suspicion that Kričak and another senior police officer abused their positions in a May 2026 murder investigation, and grounds to suspect Kričak abused a person on police premises, BBC News in Serbian reports.", "sources": ["danasNov3"] },
     { "date": "2026-11-02", "phase": "after", "label": "reported", "added": "2026-11-04T03:22:41Z", "text": "Serbia's Supreme Public Prosecutor's Office orders the Belgrade prosecutors to act on student complaints against criminal police chief Marko Kričak over an August 2025 incident in a Government of Serbia garage, which had gone more than a year without result, Vreme reports. The paper says Kričak, detained on November 1, was still in custody on November 3.", "sources": ["vremeNov3"] },
+    { "date": "2026-11-05", "phase": "after", "label": "reported", "added": "2026-11-07T18:52:26Z", "text": "Serbia's Republic Electoral Commission announced final results of the October 25 parliamentary election on November 5: the Student List won 140 of 250 seats, President Vučić's list 103, and minority lists seven, with turnout about 68.8%, Xinhua reports. The outgoing speaker must convene the new parliament within 30 days, and a prime minister nominee needs a majority to form a government.", "sources": ["xinhuaNov6"] },
+    { "date": "2026-11-05", "phase": "after", "label": "reported", "added": "2026-11-07T18:52:26Z", "text": "Student List candidate Dejan Šoškić, an economist, said he would consider the prime minister's post if the students propose him, and that parliament will very likely meet within a month, Vreme reports from an interview with Newsmax Balkans. No candidate has been named by the list.", "sources": ["vremeNov5"] },
     { "date": "2026-11-30", "phase": "after", "label": "pending", "added": "2026-11-02T20:00:00Z", "text": "Formation of the new government and the choice of prime minister, the outcome of the Kričak detention, and whether the stalled canopy prosecution and the EU funds investigation move forward. Still being checked.", "sources": ["apNov1", "abcOct26"] }
   ],
   "claims": [
@@ -66,15 +68,14 @@
     "seats": { "type": "bar", "title": "Projected seats, October 25 election (250-seat parliament)", "rows": [["Student List", 138], ["Serbian Progressive Party", 104], ["Minority parties", 8]], "max": 150, "unit": " seats", "caption": "Source: CeSID-Ipsos projection, as reported by Reuters. Final official results may differ.", "aria": "Projected seats: Student List 138, Serbian Progressive Party 104, minority parties 8" }
   },
   "gaps": [
-    "Final official election results and seat allocation",
-    "Who will be prime minister, and when the new government will be formed",
+    "Who will be prime minister, and when the new government will be formed: the Student List has not named a nominee",
     "The outcome of Marko Kričak's detention and any charges",
     "Whether the stalled canopy prosecution goes to trial",
-    "Whether Kričak's 48-hour detention was extended or he was charged: not clear in the reports found as of November 4"
+    "Whether Kričak's 48-hour detention was extended or he was charged: not clear in the reports found as of November 5"
   ],
   "corrections": [],
   "sourceGroups": [
-    ["Election and anniversary", ["abcOct26", "euronewsOct25", "apNov1", "afpNov2", "vremeNov3", "danasNov3"]]
+    ["Election and anniversary", ["abcOct26", "euronewsOct25", "apNov1", "afpNov2", "vremeNov3", "danasNov3", "xinhuaNov6", "vremeNov5"]]
   ],
   "sources": {
     "apNov1": ["AP (via WKMG)", "https://www.clickorlando.com/news/2026/11/01/serbia-marks-the-second-anniversary-of-a-train-station-tragedy-that-fueled-student-protests/"],
@@ -82,7 +83,9 @@
     "abcOct26": ["Reuters (via ABC News)", "https://www.abc.net.au/news/2026-10-26/serbia-election-vucic-defeat-student-protest/107307808"],
     "euronewsOct25": ["Euronews", "https://www.euronews.com/2026/10/25/vucic-concedes-defeat-in-pivotal-serbian-elections-says-student-movement-has-won"],
     "vremeNov3": ["Vreme", "https://vreme.com/vesti/vrhovno-javno-tuzilastvo-postupanje-studenati-marko-kricak/"],
-    "danasNov3": ["Danas (BBC News na srpskom)", "https://www.danas.rs/bbc-news-serbian/slucaj-senjak-marku-kricku-odredjen-pritvor-od-48-sati/"]
+    "danasNov3": ["Danas (BBC News na srpskom)", "https://www.danas.rs/bbc-news-serbian/slucaj-senjak-marku-kricku-odredjen-pritvor-od-48-sati/"],
+    "xinhuaNov6": ["Xinhua", "https://english.news.cn/europe/20261106/62857c250c2d4aaab47b20846d5a518c/c.html"],
+    "vremeNov5": ["Vreme", "https://vreme.com/en/vesti/dejan-soskic-premijer-studentska-lista-formiranje-vlade/"]
   },
   "checkedAt": "2026-11-05T23:25:40Z"
 }
